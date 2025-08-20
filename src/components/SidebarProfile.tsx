@@ -26,7 +26,7 @@ export const SidebarProfile: React.FC = () => {
   ];
 
   const handleEmailCopy = () => {
-    navigator.clipboard.writeText("[tu.email@ejemplo.com]");
+    navigator.clipboard.writeText("alvarolangadev@gmail.com");
     setEmailCopied(true);
     setTimeout(() => setEmailCopied(false), 2000);
   };
@@ -70,18 +70,18 @@ export const SidebarProfile: React.FC = () => {
 
           {/* Name */}
           <h1 className="text-white font-bold text-[24px] md:text-[28px] leading-[28px] md:leading-[34px] mb-2 tracking-[-0.5px]">
-            [Tu Nombre Completo]
+            Álvaro Langa
           </h1>
           
           {/* Job Title */}
           <p className="text-white/60 text-[14px] md:text-[15px] font-medium mb-4 md:mb-6 tracking-wide">
-            [Tu Título Profesional]
+            Software Developer
           </p>
 
           {/* Location */}
           <div className="flex items-center gap-2 text-white/50 text-[13px] md:text-[14px] mb-6 md:mb-8">
             <MapPin size={14} className="text-white/40 md:w-4 md:h-4" />
-            <span>[Tu Ciudad, Tu País]</span>
+            <span>Madrid, Spain</span>
           </div>
 
           {/* CV Download Button */}
@@ -123,7 +123,7 @@ export const SidebarProfile: React.FC = () => {
                   <path d="m22 7-10 5L2 7"/>
                 </svg>
               </div>
-              <span className="truncate">[tu.email@ejemplo.com]</span>
+              <span className="truncate">alvarolangadev@gmail.com</span>
             </span>
             <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
               <Copy size={14} className="text-white/50 md:w-4 md:h-4" />

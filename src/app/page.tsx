@@ -35,12 +35,12 @@ export default function Home() {
         {/* Desktop Layout */}
         <div className="hidden lg:flex">
           {/* Sidebar Profile - Desktop */}
-          <div className="fixed left-4 top-20 w-[280px] h-[calc(100vh-6rem)] overflow-y-auto">
+          <div className="fixed left-30 top-30 w-[280px] h-[calc(100vh-6rem)] overflow-y-auto">
             <SidebarProfile />
           </div>
           
           {/* Main content area - Desktop */}
-          <div className="flex-1 flex justify-center px-[300px]">
+          <div className="flex-1 flex justify-center  px-[300px]">
             <div className="w-full max-w-4xl">
               <AnimatedSections active={activeTab} />
             </div>
