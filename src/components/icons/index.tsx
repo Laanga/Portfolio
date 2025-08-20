@@ -123,3 +123,51 @@ export const MessageCircle: React.FC<IconProps> = ({ className = "", size = 16 }
     <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
   </svg>
 );
+
+export const Instagram: React.FC<IconProps> = ({ className = "", size = 16 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <path d="m16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+  </svg>
+);
+
+export const ProductHunt: React.FC<IconProps> = ({ className = "", size = 16 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+  >
+    <path d="M13.337 9h-2.838v3h2.838c.828 0 1.5-.672 1.5-1.5S14.165 9 13.337 9z" />
+    <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1.337 12h-2.838v3H8.5V7h4.837C15.597 7 17.5 8.903 17.5 11.25c0 2.347-1.903 4.25-4.163 4.25z" />
+  </svg>
+);
+
+export const Copy: React.FC<IconProps> = ({ className = "", size = 16 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+  </svg>
+);
