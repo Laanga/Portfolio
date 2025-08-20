@@ -3,76 +3,102 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { 
+  LinkedIn, 
+  GitHub, 
+  Twitter,
+  MessageCircle,
+  Download,
+  MapPin,
+  Mail
+} from "./icons";
 
 export const SidebarProfile: React.FC = () => {
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLAnchorElement>, href: string) => {
-    if (event.key !== "Enter" && event.key !== " ") return;
-    event.preventDefault();
-    window.open(href, "_blank", "noopener,noreferrer");
-  };
+  const socialLinks = [
+    { icon: LinkedIn, href: "https://linkedin.com/in/your-profile", label: "LinkedIn" },
+    { icon: GitHub, href: "https://github.com/your-username", label: "GitHub" },
+    { icon: Twitter, href: "https://x.com/your-handle", label: "X" },
+    { icon: MessageCircle, href: "https://t.me/your-username", label: "Telegram" },
+  ];
 
   return (
-    <aside className="md:sticky md:top-6">
+    <aside className="lg:sticky lg:top-8 space-y-6">
+      {/* Profile Card */}
       <motion.div
         initial={{ opacity: 0, y: 10, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="rounded-[18px] border border-foreground/15 bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/60 p-6"
+        className="rounded-[20px] bg-black/60 backdrop-blur-sm border border-white/10 p-6 w-full max-w-[280px]"
       >
         <div className="flex flex-col items-center text-center">
-          <div className="h-28 w-28 rounded-full overflow-hidden border border-foreground/15 shadow-sm">
-            <Image src="/vercel.svg" alt="Avatar" width={96} height={96} className="object-cover" />
-          </div>
-          <h1 className="mt-4 text-[28px] font-bold tracking-tight">Tu Nombre</h1>
-          <p className="text-[13px] text-foreground/70">Front‑End Developer</p>
-
-          <div className="mt-3 inline-flex items-center gap-2 text-[12px] text-foreground/70">
-            <span>📍</span>
-            <span>Ciudad, País</span>
-          </div>
-
-          <div className="mt-4 flex gap-3">
-            <a
-              href="mailto:tuemail@ejemplo.com"
-              aria-label="Enviar email"
-              tabIndex={0}
-              className="h-9 px-3 inline-flex items-center justify-center rounded-md border border-foreground/20 hover:border-foreground/40 transition-colors text-[13px]"
-            >
-              Email
-            </a>
-            <a
-              href="/cv.pdf"
-              aria-label="Descargar CV"
-              tabIndex={0}
-              className="h-9 px-3 inline-flex items-center justify-center rounded-md bg-foreground text-background hover:opacity-90 transition-opacity text-[13px]"
-            >
-              Descargar CV
-            </a>
+          {/* Profile Picture */}
+          <div className="w-[120px] h-[120px] rounded-full overflow-hidden border border-white/10 mb-4">
+            <Image 
+              src="/profile-photo.jpg" 
+              alt="Profile picture" 
+              width={120} 
+              height={120} 
+              className="w-full h-full object-cover bg-gray-800" 
+            />
           </div>
 
-          <div className="mt-6 w-full">
-            <p className="text-[13px] font-medium mb-2">Sígueme</p>
-            <div className="flex items-center gap-3">
-              {[
-                { label: "LinkedIn", href: "https://www.linkedin.com/" },
-                { label: "GitHub", href: "https://github.com/" },
-                { label: "X", href: "https://x.com/" },
-              ].map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  aria-label={`Abrir ${item.label}`}
-                  tabIndex={0}
-                  onKeyDown={(e) => handleKeyDown(e, item.href)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="h-9 px-3 rounded-md border border-foreground/20 hover:border-foreground/40 transition-colors text-[12px]"
-                >
-                  {item.label}
-                </a>
-              ))}
-            </div>
+          {/* Name and Title */}
+          <h1 className="text-[24px] font-bold text-white mb-1 leading-tight">
+            Your Name<br />Here
+          </h1>
+          <p className="text-white/60 text-[13px] mb-4">Your Job Title</p>
+
+          {/* Location */}
+          <div className="flex items-center gap-1.5 text-white/60 text-[13px] mb-6">
+            <MapPin size={14} />
+            <span>Your City, Country</span>
           </div>
+
+          {/* CV Download Button */}
+          <button className="w-full h-10 px-4 bg-white text-black hover:bg-white/90 rounded-lg text-[13px] font-medium transition-all duration-200 flex items-center justify-center gap-2">
+            <Download size={14} />
+            <span>Download CV</span>
+          </button>
+        </div>
+      </motion.div>
+
+      {/* Follow Me Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 10, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.4, ease: "easeOut", delay: 0.1 }}
+        className="w-full max-w-[280px]"
+      >
+        <div className="mb-4">
+          <p className="text-white text-[14px] font-medium">Follow me</p>
+        </div>
+
+        {/* Email Button */}
+        <div className="mb-4">
+          <button className="w-full h-12 px-4 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/30 rounded-lg text-white text-[13px] font-medium transition-all duration-200 flex items-center justify-center gap-2">
+            <Mail size={16} />
+            <span>your.email@example.com</span>
+          </button>
+        </div>
+
+        {/* Social Links Grid */}
+        <div className="grid grid-cols-2 gap-3">
+          {socialLinks.map((social, index) => {
+            const IconComponent = social.icon;
+            return (
+              <a
+                key={index}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-12 px-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg text-white/70 hover:text-white text-[12px] transition-all duration-200 flex items-center justify-center gap-2"
+                aria-label={social.label}
+              >
+                <IconComponent size={18} />
+                <span className="font-medium">{social.label}</span>
+              </a>
+            );
+          })}
         </div>
       </motion.div>
     </aside>
@@ -80,5 +106,3 @@ export const SidebarProfile: React.FC = () => {
 };
 
 export default SidebarProfile;
-
-

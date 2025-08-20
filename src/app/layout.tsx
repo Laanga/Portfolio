@@ -16,8 +16,8 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mi Portafolio — Front‑End Developer",
-  description: "Proyectos y experiencia en React, Next.js, TypeScript y UI/UX.",
+  title: "Your Name — Your Professional Title",
+  description: "Portfolio showcasing projects and experience in your field.",
 };
 
 export default function RootLayout({
@@ -26,9 +26,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="en">
       <body
-        className={`${spaceGrotesk.variable} ${jetbrains.variable} antialiased`}
+        className={`${spaceGrotesk.variable} ${jetbrains.variable} antialiased bg-black text-white`}
       >
         <BackgroundStars />
         {children}

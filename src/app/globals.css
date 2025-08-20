@@ -1,30 +1,92 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000000;
+  --foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.1);
+  --border-hover: rgba(255, 255, 255, 0.2);
+  --muted: rgba(255, 255, 255, 0.7);
+  --muted-dark: rgba(255, 255, 255, 0.5);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+  --color-muted: var(--muted);
+  --color-muted-dark: var(--muted-dark);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000000;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
 html:focus-within {
   scroll-behavior: smooth;
+}
+
+/* Movimiento fluido circular continuo */
+@keyframes smoothOrbit {
+  0% { 
+    transform: translate(0px, 0px) scale(1);
+    opacity: var(--star-opacity);
+  }
+  25% { 
+    transform: translate(15px, -15px) scale(1.05);
+    opacity: calc(var(--star-opacity) * 0.8);
+  }
+  50% { 
+    transform: translate(0px, -20px) scale(0.95);
+    opacity: calc(var(--star-opacity) * 1.2);
+  }
+  75% { 
+    transform: translate(-15px, -15px) scale(1.02);
+    opacity: var(--star-opacity);
+  }
+  100% { 
+    transform: translate(0px, 0px) scale(1);
+    opacity: calc(var(--star-opacity) * 0.9);
+  }
+}
+
+/* Movimiento horizontal fluido continuo */
+@keyframes smoothDrift {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(30px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+/* Movimiento vertical fluido continuo */
+@keyframes smoothFloat {
+  0% {
+    transform: translateY(0px);
+  }
+  33% {
+    transform: translateY(-10px);
+  }
+  66% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.star-moving {
+  animation: 
+    smoothOrbit infinite ease-in-out,
+    smoothDrift infinite ease-in-out,
+    smoothFloat infinite ease-in-out;
+  --star-opacity: 1;
 }
