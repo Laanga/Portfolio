@@ -11,21 +11,39 @@ export default function Home() {
   return (
     <div className="font-sans min-h-screen bg-transparent relative">
       {/* Navigation tabs */}
-      <div className="sticky top-6 z-40 flex justify-center px-4">
+      <div className="sticky top-4 md:top-6 z-40 flex justify-center px-4">
         <SectionTabs activeTab={activeTab} onChange={setActiveTab} />
       </div>
       
-      {/* Main content con separación amplia */}
-      <main className="mx-auto max-w-[1400px] px-16 mt-12 pb-12 relative z-10">
-        <div className="flex gap-24 lg:gap-32 xl:gap-40">
-          {/* Sidebar Profile - Más hacia la izquierda - CON SCROLL */}
-          <div className="w-full max-w-[320px] flex-shrink-0">
+      {/* Main content */}
+      <main className="relative z-10 mt-6 md:mt-8">
+        {/* Mobile Layout */}
+        <div className="block lg:hidden">
+          <div className="px-4 space-y-8">
+            {/* Profile Section - Mobile */}
+            <div className="w-full">
+              <SidebarProfile />
+            </div>
+            
+            {/* Main content - Mobile */}
+            <div className="w-full">
+              <AnimatedSections active={activeTab} />
+            </div>
+          </div>
+        </div>
+        
+        {/* Desktop Layout */}
+        <div className="hidden lg:flex">
+          {/* Sidebar Profile - Desktop */}
+          <div className="fixed left-4 top-20 w-[280px] h-[calc(100vh-6rem)] overflow-y-auto">
             <SidebarProfile />
           </div>
           
-          {/* Main content area - Más hacia la derecha */}
-          <div className="flex-1 max-w-[800px]">
-            <AnimatedSections active={activeTab} />
+          {/* Main content area - Desktop */}
+          <div className="flex-1 flex justify-center px-[300px]">
+            <div className="w-full max-w-4xl">
+              <AnimatedSections active={activeTab} />
+            </div>
           </div>
         </div>
       </main>

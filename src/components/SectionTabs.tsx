@@ -27,26 +27,26 @@ export const SectionTabs: React.FC<SectionTabsProps> = ({ activeTab, onChange })
 
   return (
     <div className="mx-auto max-w-none px-0">
-      <div className="relative inline-flex rounded-full border border-white/10 p-1 bg-black/40 backdrop-blur-sm supports-[backdrop-filter]:bg-black/40">
+      <div className="relative inline-flex rounded-2xl border border-white/10 p-1 bg-black/40 backdrop-blur-sm">
         <div className="flex gap-0 relative">
           <AnimatePresence initial={false}>
             {tabs.map((tab) => (
               <button
                 key={tab.key}
                 type="button"
-                className="relative z-10 rounded-full px-4 py-2 text-[13px] font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 transition-colors"
+                className="relative z-10 rounded-xl px-3 md:px-6 py-2 md:py-3 text-[12px] md:text-[14px] font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 transition-colors min-w-[70px] md:min-w-[100px]"
                 aria-pressed={activeTab === tab.key}
                 aria-label={`Show ${tab.label} section`}
                 tabIndex={0}
                 onClick={() => handleClick(tab.key)}
                 onKeyDown={(e) => handleKeyDown(e, tab.key)}
               >
-                <span className={activeTab === tab.key ? "text-black" : "text-white/70 hover:text-white/90"}>{tab.label}</span>
+                <span className={activeTab === tab.key ? "text-white" : "text-white/60 hover:text-white/80"}>{tab.label}</span>
                 {activeTab === tab.key && (
                   <motion.span
                     layoutId="active-pill"
-                    className="absolute inset-0 -z-10 rounded-full bg-white"
-                    transition={{ type: "spring", stiffness: 500, damping: 40 }}
+                    className="absolute inset-0 -z-10 rounded-xl bg-white/10 backdrop-blur-sm"
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
               </button>

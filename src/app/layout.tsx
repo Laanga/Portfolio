@@ -16,8 +16,8 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Your Name — Your Professional Title",
-  description: "Portfolio showcasing projects and experience in your field.",
+  title: "Álvaro-Langa-PortfolioDev ",
+  description: " ",
 };
 
 export default function RootLayout({
