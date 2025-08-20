@@ -5,40 +5,40 @@ import { motion } from "framer-motion";
 
 export const About: React.FC = () => {
   const professionalSkills = [
-    "Add your skills here",
-    "Another skill", 
-    "Your expertise",
-    "Technical knowledge",
-    "Professional ability",
-    "Your strength",
-    "Another competency",
-    "Final skill example"
+    "Desarrollo Frontend (React, Vue, Angular)",
+    "Desarrollo Backend (Node.js, Python, Java)",
+    "Bases de datos (MySQL, MongoDB, PostgreSQL)",
+    "Metodologías ágiles (Scrum, Kanban)",
+    "Control de versiones (Git, GitHub)",
+    "Testing y debugging",
+    "APIs REST y GraphQL",
+    "Deployment y DevOps básico"
   ];
 
   const additionalSkills = [
-    "Additional skill 1",
-    "Additional skill 2", 
-    "More expertise",
-    "Professional skill",
-    "Your capability",
-    "Another ability",
-    "Technical skill",
-    "Last skill example"
+    "Diseño UI/UX con Figma",
+    "Gestión de proyectos", 
+    "Comunicación efectiva",
+    "Trabajo en equipo",
+    "Resolución de problemas",
+    "Aprendizaje autodidacta",
+    "Mentoring y liderazgo",
+    "Análisis de datos básico"
   ];
 
   const techStack = [
-    { name: "Technology 1", icon: "🔧" },
-    { name: "Technology 2", icon: "⚡" },
-    { name: "Technology 3", icon: "🚀" },
-    { name: "Technology 4", icon: "💻" },
-    { name: "Technology 5", icon: "🛠️" },
-    { name: "Technology 6", icon: "📱" },
-    { name: "Technology 7", icon: "🌐" },
-    { name: "Technology 8", icon: "🔥" },
-    { name: "Technology 9", icon: "💡" },
-    { name: "Technology 10", icon: "📊" },
-    { name: "Technology 11", icon: "🎯" },
-    { name: "Technology 12", icon: "⭐" }
+    { name: "React", icon: "⚛️" },
+    { name: "TypeScript", icon: "📘" },
+    { name: "Node.js", icon: "🟢" },
+    { name: "Python", icon: "🐍" },
+    { name: "MongoDB", icon: "🍃" },
+    { name: "Git", icon: "📝" },
+    { name: "Docker", icon: "🐳" },
+    { name: "AWS", icon: "☁️" },
+    { name: "Figma", icon: "🎨" },
+    { name: "VS Code", icon: "💻" },
+    { name: "Postman", icon: "📮" },
+    { name: "Slack", icon: "💬" }
   ];
 
   return (
@@ -55,17 +55,15 @@ export const About: React.FC = () => {
         {/* Description paragraphs */}
         <div className="space-y-4 mb-8 text-white/80 leading-relaxed">
           <p>
-            Write your professional introduction here. Describe your role, experience, 
-            and what makes you unique. Talk about your background, the projects you've 
-            worked on, and the impact you've made. This is where you tell your story 
-            and connect with your audience.
+            Soy un desarrollador apasionado con [X años] de experiencia en el desarrollo 
+            de aplicaciones web modernas. Me especializo en tecnologías frontend y backend, 
+            creando soluciones eficientes y escalables.
           </p>
           
           <p>
-            Add a second paragraph to elaborate on your experience, achievements, 
-            or specific areas of expertise. You can mention technologies you work with, 
-            methodologies you follow, or any notable accomplishments that showcase 
-            your professional growth and capabilities.
+            Mi enfoque se centra en escribir código limpio, implementar las mejores prácticas 
+            y colaborar efectivamente en equipos ágiles. Siempre busco aprender nuevas 
+            tecnologías y mantenerme actualizado con las tendencias del desarrollo.
           </p>
         </div>
 

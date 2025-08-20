@@ -6,6 +6,8 @@ import Hero from "./Hero";
 import Projects from "./Projects";
 import About from "./About";
 import Footer from "./Footer";
+import Experience from "./Experience";
+import Education from "./Education";
 import PlaceholderSection from "./PlaceholderSection";
 
 export type SectionKey = "about" | "experience" | "education" | "projects";
@@ -37,9 +39,9 @@ const variants = {
 export const AnimatedSections: React.FC<AnimatedSectionsProps> = ({ active }) => {
   const renderSection = () => {
     if (active === "about") return <About />;
-    if (active === "experience") return <PlaceholderSection title="Experience" description="Add your work experience, positions held, and professional achievements here." />;
-    if (active === "education") return <PlaceholderSection title="Education" description="Add your educational background, degrees, certifications, and relevant courses here." />;
-    if (active === "projects") return <PlaceholderSection title="Projects" description="Showcase your best projects with descriptions, technologies used, and links to demos or repositories." />;
+    if (active === "experience") return <Experience />;
+    if (active === "education") return <Education />;
+    if (active === "projects") return <Projects />;
     return <Footer />;
   };
 

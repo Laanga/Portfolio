@@ -26,7 +26,7 @@ export const SidebarProfile: React.FC = () => {
   ];
 
   const handleEmailCopy = () => {
-    navigator.clipboard.writeText("your.email@gmail.com");
+    navigator.clipboard.writeText("[tu.email@ejemplo.com]");
     setEmailCopied(true);
     setTimeout(() => setEmailCopied(false), 2000);
   };
@@ -38,17 +38,17 @@ export const SidebarProfile: React.FC = () => {
         initial={{ opacity: 0, y: 20, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-        className="relative rounded-[24px] bg-black/80 backdrop-blur-xl border border-white/10 p-8 w-full"
+        className="relative rounded-[24px] bg-black/20 backdrop-blur-md border border-white/20 p-8 w-full"
         style={{
-          background: "linear-gradient(145deg, rgba(0,0,0,0.85) 0%, rgba(20,20,20,0.85) 100%)",
-          boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05)"
+          background: "linear-gradient(145deg, rgba(0,0,0,0.25) 0%, rgba(20,20,20,0.35) 100%)",
+          boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)"
         }}
       >
         {/* Subtle glow effect */}
         <div 
-          className="absolute inset-0 rounded-[24px] opacity-30"
+          className="absolute inset-0 rounded-[24px] opacity-40"
           style={{
-            background: "radial-gradient(circle at 50% 0%, rgba(255,255,255,0.03) 0%, transparent 70%)"
+            background: "radial-gradient(circle at 50% 0%, rgba(255,255,255,0.08) 0%, transparent 70%)"
           }}
         />
         
@@ -57,7 +57,7 @@ export const SidebarProfile: React.FC = () => {
           <div className="relative w-[140px] h-[140px] mb-6">
             <div className="w-full h-full rounded-full overflow-hidden border-2 border-white/15 bg-gray-800/50">
               <Image 
-                src="/profile-photo.jpg" 
+                src="/avatar.jpg" 
                 alt="Profile picture" 
                 width={140} 
                 height={140} 
@@ -70,18 +70,18 @@ export const SidebarProfile: React.FC = () => {
 
           {/* Name */}
           <h1 className="text-white font-bold text-[28px] leading-[34px] mb-2 tracking-[-0.5px]">
-            Álvaro Langa
+            [Tu Nombre Completo]
           </h1>
           
           {/* Job Title */}
           <p className="text-white/60 text-[15px] font-medium mb-6 tracking-wide">
-            Software Developer
+            [Tu Título Profesional]
           </p>
 
           {/* Location */}
           <div className="flex items-center gap-2 text-white/50 text-[14px] mb-8">
             <MapPin size={16} className="text-white/40" />
-            <span>Madrid, Spain</span>
+            <span>[Tu Ciudad, Tu País]</span>
           </div>
 
           {/* CV Download Button */}
@@ -101,7 +101,7 @@ export const SidebarProfile: React.FC = () => {
       >
         {/* Section Title */}
         <div className="mb-6">
-          <h2 className="text-white text-[18px] font-semibold tracking-[-0.2px]">
+          <h2 className="text-white text-[25px] font-bold tracking-[-0.2px] text-center">
             Follow me
           </h2>
         </div>
@@ -110,7 +110,7 @@ export const SidebarProfile: React.FC = () => {
         <div className="mb-6">
           <button 
             onClick={handleEmailCopy}
-            className="group w-full h-[52px] px-5 bg-white/8 hover:bg-white/12 border border-white/15 hover:border-white/25 rounded-[16px] text-white text-[14px] font-medium transition-all duration-300 flex items-center justify-between hover:scale-[1.01] active:scale-[0.99]"
+            className="group w-full h-[52px] px-5 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-white/30 rounded-[16px] text-white text-[14px] font-medium transition-all duration-300 flex items-center justify-between hover:scale-[1.01] active:scale-[0.99]"
             style={{
               backdropFilter: "blur(10px)",
               boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.05)"
@@ -123,7 +123,7 @@ export const SidebarProfile: React.FC = () => {
                   <path d="m22 7-10 5L2 7"/>
                 </svg>
               </div>
-              <span>alvarolanga04dev@gmail.com</span>
+              <span>[tu.email@ejemplo.com]</span>
             </span>
             <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
               <Copy size={16} className="text-white/50" />

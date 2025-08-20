@@ -15,16 +15,18 @@ export default function Home() {
         <SectionTabs activeTab={activeTab} onChange={setActiveTab} />
       </div>
       
-      {/* Main content */}
-      <main className="mx-auto max-w-7xl px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 mt-12 pb-12 relative z-10">
-        {/* Sidebar Profile */}
-        <div className="lg:col-span-4 xl:col-span-3">
-          <SidebarProfile />
-        </div>
-        
-        {/* Main content area */}
-        <div className="lg:col-span-8 xl:col-span-9">
-          <AnimatedSections active={activeTab} />
+      {/* Main content con separación amplia */}
+      <main className="mx-auto max-w-[1400px] px-16 mt-12 pb-12 relative z-10">
+        <div className="flex gap-24 lg:gap-32 xl:gap-40">
+          {/* Sidebar Profile - Más hacia la izquierda - CON SCROLL */}
+          <div className="w-full max-w-[320px] flex-shrink-0">
+            <SidebarProfile />
+          </div>
+          
+          {/* Main content area - Más hacia la derecha */}
+          <div className="flex-1 max-w-[800px]">
+            <AnimatedSections active={activeTab} />
+          </div>
         </div>
       </main>
     </div>
