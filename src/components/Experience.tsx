@@ -50,7 +50,7 @@ const Experience: React.FC = () => {
               <div className="space-y-3">
                 {exp.achievements.map((achievement, achIndex) => (
                   <div key={achIndex} className="flex items-start gap-3 text-white/80">
-                    <span className="text-white/40 mt-1.5">•</span>
+                    <span className="text-white/40 mt-1.6">•</span>
                     <span className="text-[13px] md:text-[14px] leading-relaxed">{achievement}</span>
                   </div>
                 ))}
