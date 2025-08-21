@@ -12,24 +12,23 @@ import {
   FaDocker,
   FaAws
 } from "react-icons/fa";
-import { SiJavascript, SiMongodb } from "react-icons/si";
+import { SiJavascript, SiMysql } from "react-icons/si";
 
 
 
 export const About: React.FC = () => {
   const professionalSkills = [
-    "Desarrollo Frontend (React, Vue, Angular)",
-    "Desarrollo Backend (Node.js, Python, Java)",
-    "Bases de datos (MySQL, MongoDB, PostgreSQL)",
+    "Desarrollo Frontend",
+    "Desarrollo Backend",
+    "Bases de datos",
     "Metodologías ágiles (Scrum, Kanban)",
-    "Control de versiones (Git, GitHub)",
+    "Control de versiones",
     "Testing y debugging",
     "APIs REST y GraphQL",
     "Deployment y DevOps básico"
   ];
 
   const additionalSkills = [
-    "Diseño UI/UX con Figma",
     "Gestión de proyectos",
     "Comunicación efectiva",
     "Trabajo en equipo",
@@ -46,7 +45,7 @@ export const About: React.FC = () => {
   { name: "PHP", icon: <FaPhp style={{ color: '#FFFFFF' }} /> },
   { name: "Node.js", icon: <FaNodeJs style={{ color: '#FFFFFF' }} /> },
   { name: "Python", icon: <FaPython style={{ color: '#FFFFFF' }} /> },
-  { name: "MongoDB", icon: <SiMongodb style={{ color: '#FFFFFF' }} /> },
+  { name: "MySQL", icon: <SiMysql style={{ color: '#FFFFFF' }} /> },
   { name: "GitHub", icon: <FaGithub style={{ color: '#FFFFFF' }} /> },
   { name: "Docker", icon: <FaDocker style={{ color: '#FFFFFF' }} /> },
   { name: "AWS", icon: <FaAws style={{ color: '#FFFFFF' }} /> },
@@ -67,7 +66,7 @@ export const About: React.FC = () => {
         {/* Description paragraphs */}
         <div className="space-y-4 mb-6 md:mb-8 text-white/80 leading-relaxed">
           <p>
-            Soy un desarrollador apasionado con [X años] de experiencia en el desarrollo
+            Soy un desarrollador apasionado con 1 año de experiencia en el desarrollo
             de aplicaciones web modernas. Me especializo en tecnologías frontend y backend,
             creando soluciones eficientes y escalables.
           </p>
