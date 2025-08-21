@@ -14,20 +14,19 @@ interface ProjectItem {
 }
 
 const Projects: React.FC = () => {
-  // Reemplaza con tus proyectos reales
   const projects: ProjectItem[] = [
     {
-      title: "E-Commerce Platform",
-      description: "Plataforma completa de comercio electrónico con carrito de compras, pagos integrados y panel de administración.",
+      title: "GridRush",
+      description: "Aplicación web para gestión de Torneos y carreras de karting. Permite crear torneos, gestionar participantes y realizar seguimiento de carreras.",
       status: "Completado",
       statusColor: "green",
-      technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-      visitLink: "https://tuproyecto1.com",
+      technologies: ["React", "Node.js", "SQLite", "Firebase"],
+      visitLink: "https://github.com/Laanga/GridRush",
       size: "normal"
     },
     {
       title: "Task Management App", 
-      description: "Aplicación web para gestión de tareas con funcionalidades de colaboración en tiempo real y notificaciones.",
+      description: "Aplicación web para gestión de Torneos y carreras de karting",
       status: "En desarrollo",
       statusColor: "yellow",
       technologies: ["Vue.js", "Firebase", "Tailwind", "PWA"],
@@ -56,7 +55,7 @@ const Projects: React.FC = () => {
           href={project.visitLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="absolute top-3 right-3 md:top-4 md:right-4 flex items-center gap-1 px-2.5 py-1.5 md:px-3 md:py-1.5 bg-black/60 backdrop-blur-sm border border-white/20 rounded-md text-white text-xs md:text-sm hover:bg-black/70 transition-all cursor-pointer"
+          className="absolute top-3 right-3 md:top-4 md:right-4 flex items-center gap-1 px-2.5 py-1.5 md:px-3 md:py-1.5 bg-black/60 backdrop-blur-sm border border-white/20 rounded-md text-white text-xs md:text-sm hover:bg-black/70 transition-all cursor-pointer z-[4]"
         >
           <span className="text-blue-400">↗</span>
           <span>Visit</span>

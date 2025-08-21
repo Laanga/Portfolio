@@ -21,11 +21,11 @@ export const About: React.FC = () => {
     "Desarrollo Frontend",
     "Desarrollo Backend",
     "Bases de datos",
-    "Metodologías ágiles (Scrum, Kanban)",
+    "Metodologías ágiles",
     "Control de versiones",
     "Testing y debugging",
-    "APIs REST y GraphQL",
-    "Deployment y DevOps básico"
+    "APIs",
+    "Deployment básico"
   ];
 
   const additionalSkills = [
@@ -34,8 +34,7 @@ export const About: React.FC = () => {
     "Trabajo en equipo",
     "Resolución de problemas",
     "Aprendizaje autodidacta",
-    "Mentoring y liderazgo",
-    "Análisis de datos básico"
+    "Mentoring y liderazgo"
   ];
 
  const techStack = [
@@ -86,7 +85,7 @@ export const About: React.FC = () => {
             <div className="space-y-3">
               {professionalSkills.map((skill, index) => (
                 <div key={index} className="flex items-start gap-3 text-white/80">
-                  <span className="text-white/40 mt-1.5">•</span>
+                  <span className="text-white/40 mt-1.6">•</span>
                   <span className="text-[13px] md:text-[14px] leading-relaxed">{skill}</span>
                 </div>
               ))}
@@ -95,7 +94,7 @@ export const About: React.FC = () => {
             <div className="space-y-3">
               {additionalSkills.map((skill, index) => (
                 <div key={index} className="flex items-start gap-3 text-white/80">
-                  <span className="text-white/40 mt-1.5">•</span>
+                  <span className="text-white/40 mt-1.6">•</span>
                   <span className="text-[13px] md:text-[14px] leading-relaxed">{skill}</span>
                 </div>
               ))}
