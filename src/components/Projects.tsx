@@ -11,6 +11,7 @@ interface ProjectItem {
   technologies: string[];
   visitLink: string;
   size: "normal" | "large";
+  image: string;
 }
 
 const Projects: React.FC = () => {
@@ -22,25 +23,8 @@ const Projects: React.FC = () => {
       statusColor: "green",
       technologies: ["React", "Node.js", "SQLite", "Firebase"],
       visitLink: "https://github.com/Laanga/GridRush",
-      size: "normal"
-    },
-    {
-      title: "Task Management App", 
-      description: "Aplicación web para gestión de Torneos y carreras de karting",
-      status: "En desarrollo",
-      statusColor: "yellow",
-      technologies: ["Vue.js", "Firebase", "Tailwind", "PWA"],
-      visitLink: "https://tuproyecto2.com",
-      size: "normal"
-    },
-    {
-      title: "Weather Dashboard",
-      description: "Dashboard interactivo del clima con gráficos, pronósticos extendidos y geolocalización automática.",
-      status: "Completado",
-      statusColor: "green", 
-      technologies: ["React", "Chart.js", "Weather API", "Vercel"],
-      visitLink: "https://tuproyecto3.com",
-      size: "large"
+      size: "normal",
+      image: "/images/kart.png"
     }
   ];
 
@@ -49,7 +33,13 @@ const Projects: React.FC = () => {
       className={`relative bg-black/40 backdrop-blur-sm border border-white/10 rounded-xl md:rounded-2xl overflow-hidden p-0`}
     >
       {/* Imagen superior */}
-      <div className={`relative ${isMobile ? 'h-[150px]' : 'h-[180px] md:h-[200px]'} bg-gradient-to-br from-gray-800/50 to-gray-900/50 border-b border-white/10`}>
+      <div className={`relative ${isMobile ? 'h-[150px]' : 'h-[180px] md:h-[200px]'} bg-gradient-to-br from-gray-800/50 to-gray-900/50 border-b border-white/10 overflow-hidden`}>
+        {/* Project Image */}
+        <img
+          src={project.image}
+          alt={`${project.title} preview`}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
         {/* Visit button */}
         <a 
           href={project.visitLink}
@@ -60,15 +50,6 @@ const Projects: React.FC = () => {
           <span className="text-blue-400">↗</span>
           <span>Visit</span>
         </a>
-        
-        {/* Mock content */}
-        <div className="absolute inset-3 md:inset-4 bg-black/30 rounded-lg flex flex-col justify-center p-3 md:p-4">
-          <div className="space-y-2">
-            <div className="h-1.5 md:h-2 bg-white/20 rounded w-3/4"></div>
-            <div className="h-1.5 md:h-2 bg-white/15 rounded w-1/2"></div>
-            <div className="h-1 bg-white/10 rounded w-2/3"></div>
-          </div>
-        </div>
       </div>
       
       {/* Contenido inferior */}

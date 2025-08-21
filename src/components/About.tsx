@@ -25,7 +25,6 @@ export const About: React.FC = () => {
     "Control de versiones",
     "Testing y debugging",
     "APIs",
-    "Deployment básico"
   ];
 
   const additionalSkills = [
@@ -34,7 +33,8 @@ export const About: React.FC = () => {
     "Trabajo en equipo",
     "Resolución de problemas",
     "Aprendizaje autodidacta",
-    "Mentoring y liderazgo"
+    "Mentoring y liderazgo",
+       "Deployment básico"
   ];
 
  const techStack = [
