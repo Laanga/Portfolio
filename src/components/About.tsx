@@ -17,7 +17,7 @@ export const About: React.FC = () => {
 
   const additionalSkills = [
     "Diseño UI/UX con Figma",
-    "Gestión de proyectos", 
+    "Gestión de proyectos",
     "Comunicación efectiva",
     "Trabajo en equipo",
     "Resolución de problemas",
@@ -41,6 +41,7 @@ export const About: React.FC = () => {
     { name: "Slack", icon: "💬" }
   ];
 
+
   return (
     <section className="py-0 pr-0 md:pr-4">
       <motion.div
@@ -51,18 +52,18 @@ export const About: React.FC = () => {
       >
         {/* Main heading */}
         <h1 className="text-[36px] md:text-[48px] font-bold mb-6 md:mb-8 leading-tight">About Me</h1>
-        
+
         {/* Description paragraphs */}
         <div className="space-y-4 mb-6 md:mb-8 text-white/80 leading-relaxed">
           <p>
-            Soy un desarrollador apasionado con [X años] de experiencia en el desarrollo 
-            de aplicaciones web modernas. Me especializo en tecnologías frontend y backend, 
+            Soy un desarrollador apasionado con [X años] de experiencia en el desarrollo
+            de aplicaciones web modernas. Me especializo en tecnologías frontend y backend,
             creando soluciones eficientes y escalables.
           </p>
-          
+
           <p>
-            Mi enfoque se centra en escribir código limpio, implementar las mejores prácticas 
-            y colaborar efectivamente en equipos ágiles. Siempre busco aprender nuevas 
+            Mi enfoque se centra en escribir código limpio, implementar las mejores prácticas
+            y colaborar efectivamente en equipos ágiles. Siempre busco aprender nuevas
             tecnologías y mantenerme actualizado con las tendencias del desarrollo.
           </p>
         </div>
@@ -70,7 +71,7 @@ export const About: React.FC = () => {
         {/* Professional Skills Section */}
         <div className="mb-6 md:mb-8">
           <h2 className="text-[20px] md:text-[24px] font-bold mb-4 md:mb-6 text-white">Professional Skills</h2>
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
             <div className="space-y-3">
               {professionalSkills.map((skill, index) => (
@@ -80,7 +81,7 @@ export const About: React.FC = () => {
                 </div>
               ))}
             </div>
-            
+
             <div className="space-y-3">
               {additionalSkills.map((skill, index) => (
                 <div key={index} className="flex items-start gap-3 text-white/80">
@@ -95,12 +96,12 @@ export const About: React.FC = () => {
         {/* Stack Section */}
         <div>
           <h2 className="text-[20px] md:text-[24px] font-bold mb-4 md:mb-6 text-white">Stack</h2>
-          
+
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 md:gap-4">
             {techStack.map((tech, index) => (
-              <div 
-                key={index} 
-                className="flex flex-col items-center justify-center p-3 md:p-4 bg-white/5 border border-white/10 rounded-lg md:rounded-xl hover:bg-white/10 hover:border-white/20 transition-all duration-200"
+              <div
+                key={index}
+                className="flex flex-col items-center justify-center p-2 cursor-pointer transition-transform duration-200 hover:scale-130"
               >
                 <div className="text-xl md:text-2xl mb-1 md:mb-2">{tech.icon}</div>
                 <span className="text-[10px] md:text-[12px] text-white/70 text-center font-medium">
