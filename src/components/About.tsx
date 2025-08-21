@@ -2,6 +2,19 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import {
+  FaReact,
+  FaJava,
+  FaPhp,
+  FaNodeJs,
+  FaPython,
+  FaGithub,
+  FaDocker,
+  FaAws
+} from "react-icons/fa";
+import { SiJavascript, SiMongodb } from "react-icons/si";
+
+
 
 export const About: React.FC = () => {
   const professionalSkills = [
@@ -26,20 +39,18 @@ export const About: React.FC = () => {
     "Análisis de datos básico"
   ];
 
-  const techStack = [
-    { name: "React", icon: "⚛️" },
-    { name: "TypeScript", icon: "📘" },
-    { name: "Node.js", icon: "🟢" },
-    { name: "Python", icon: "🐍" },
-    { name: "MongoDB", icon: "🍃" },
-    { name: "Git", icon: "📝" },
-    { name: "Docker", icon: "🐳" },
-    { name: "AWS", icon: "☁️" },
-    { name: "Figma", icon: "🎨" },
-    { name: "VS Code", icon: "💻" },
-    { name: "Postman", icon: "📮" },
-    { name: "Slack", icon: "💬" }
-  ];
+ const techStack = [
+  { name: "React", icon: <FaReact style={{ color: '#FFFFFF' }} /> },
+  { name: "JavaScript", icon: <SiJavascript style={{ color: '#FFFFFF' }} /> },
+  { name: "Java", icon: <FaJava style={{ color: '#FFFFFF' }} /> },
+  { name: "PHP", icon: <FaPhp style={{ color: '#FFFFFF' }} /> },
+  { name: "Node.js", icon: <FaNodeJs style={{ color: '#FFFFFF' }} /> },
+  { name: "Python", icon: <FaPython style={{ color: '#FFFFFF' }} /> },
+  { name: "MongoDB", icon: <SiMongodb style={{ color: '#FFFFFF' }} /> },
+  { name: "GitHub", icon: <FaGithub style={{ color: '#FFFFFF' }} /> },
+  { name: "Docker", icon: <FaDocker style={{ color: '#FFFFFF' }} /> },
+  { name: "AWS", icon: <FaAws style={{ color: '#FFFFFF' }} /> },
+];
 
 
   return (
@@ -97,7 +108,7 @@ export const About: React.FC = () => {
         <div>
           <h2 className="text-[20px] md:text-[24px] font-bold mb-4 md:mb-6 text-white">Stack</h2>
 
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 md:gap-4">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-4">
             {techStack.map((tech, index) => (
               <div
                 key={index}
