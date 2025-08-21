@@ -18,9 +18,9 @@ const Education: React.FC = () => {
     {
       type: "degree",
       icon: "🏛️",
-      title: "Ingeniería en Sistemas / Informática",
-      institution: "Universidad Tecnológica",
-      date: "2018 - 2022"
+      title: "Grado Superior Desarrollo de Aplicaciones Web",
+      institution: "I.E.S GASPAR MELCHOR DE JOVELLANOS",
+      date: "2023 - 2025"
     },
     // Certifications
     {
@@ -81,10 +81,10 @@ const Education: React.FC = () => {
               {/* Content */}
               <div>
                 <h3 className="text-white font-medium text-[14px] md:text-[16px] mb-1">
-                  {item.institution}
+                  {item.title}
                 </h3>
                 <p className="text-white/70 text-[13px] md:text-[14px] mb-1">
-                  {item.title} • {item.date}
+                  {item.institution} • {item.date}
                 </p>
               </div>
             </div>

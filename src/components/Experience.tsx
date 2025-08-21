@@ -11,39 +11,16 @@ interface ExperienceItem {
 }
 
 const Experience: React.FC = () => {
-  // Reemplaza con tu información real
   const experiences: ExperienceItem[] = [
     {
-      title: "Senior Full Stack Developer",
-      company: "Tech Company - Ene 2022 - Presente",
+      title: "Software Developer",
+      company: "Neural.ONE - Marzo 2025 - Presente",
       period: "",
       achievements: [
-        "Lideré el desarrollo de una aplicación web que incrementó la eficiencia del equipo en 40%",
-        "Implementé arquitectura de microservicios reduciendo el tiempo de carga en 60%",
-        "Mentoré a 3 desarrolladores junior y facilité su integración al equipo",
-        "Colaboré con equipos de diseño y producto para entregar 15+ features"
-      ]
-    },
-    {
-      title: "Frontend Developer",
-      company: "StartUp Inc - Mar 2020 - Dic 2021",
-      period: "",
-      achievements: [
-        "Desarrollé interfaces de usuario responsive usando React y TypeScript",
-        "Optimicé el rendimiento web logrando un score de 95+ en Lighthouse",
-        "Integré APIs REST y GraphQL para conectar frontend con backend",
-        "Implementé testing unitario aumentando la cobertura de código al 85%"
-      ]
-    },
-    {
-      title: "Junior Developer",
-      company: "Digital Agency - Jun 2019 - Feb 2020",
-      period: "",
-      achievements: [
-        "Contribuí en el desarrollo de 10+ sitios web corporativos",
-        "Aprendí y apliqué mejores prácticas de HTML, CSS y JavaScript",
-        "Colaboré en proyectos utilizando metodologías ágiles (Scrum)",
-        "Participé en code reviews y sesiones de pair programming"
+        "Trafficking: Asociación de códigos de seguimiento para medición precisa de campañas y recolección de datos",
+        "Desarrollo Creativo: Programación de anuncios interactivos y banners publicitarios usando HTML, CSS y JavaScript",
+        "Desarrollo Web: Creación de landing pages y aplicaciones web de alto rendimiento con tecnologías modernas como React + Node.js",
+        "Desarrollo y Automatización: Actualmente expandiendo habilidades técnicas aprendiendo Python, ya que es la base de nuestra principal herramienta de trafficking, para entender y optimizar flujos de trabajo futuros"
       ]
     }
   ];
