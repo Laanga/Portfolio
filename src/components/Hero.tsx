@@ -1,7 +1,11 @@
+"use client";
+
 import React from "react";
 import { MotionDiv, MotionH1 } from "../lib/motion";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export const Hero: React.FC = () => {
+  const { t } = useLanguage();
   return (
     <section id="inicio" className="relative pt-8 pb-8">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -13,7 +17,7 @@ export const Hero: React.FC = () => {
               transition={{ duration: 0.35 }}
               className="text-4xl sm:text-5xl font-bold tracking-tight"
             >
-              Construyo experiencias web limpias, rápidas y accesibles
+              {t.hero.title}
             </MotionH1>
             <MotionDiv
               initial={{ opacity: 0, y: 6 }}
@@ -21,8 +25,7 @@ export const Hero: React.FC = () => {
               transition={{ duration: 0.4, delay: 0.05 }}
               className="mt-4 text-base sm:text-lg text-foreground/70 max-w-2xl"
             >
-              Desarrollador Front‑End especializado en React, Next.js y UI modernas.
-              Inspirado por interfaces minimalistas, tipografía fuerte y animaciones sutiles.
+              {t.hero.description}
             </MotionDiv>
             <div className="mt-8 flex gap-4">
               <a
@@ -31,7 +34,7 @@ export const Hero: React.FC = () => {
                 tabIndex={0}
                 className="inline-flex items-center justify-center h-11 px-5 rounded-md bg-foreground text-background hover:opacity-90 transition-opacity"
               >
-                Ver proyectos
+                {t.hero.viewProjects}
               </a>
               <a
                 href="#contacto"
@@ -39,7 +42,7 @@ export const Hero: React.FC = () => {
                 tabIndex={0}
                 className="inline-flex items-center justify-center h-11 px-5 rounded-md border border-foreground/20 hover:border-foreground/40 transition-colors"
               >
-                Contacto
+                {t.hero.contact}
               </a>
             </div>
           </div>

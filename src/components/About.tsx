@@ -13,29 +13,12 @@ import {
   FaAws
 } from "react-icons/fa";
 import { SiJavascript, SiMysql } from "react-icons/si";
+import { useLanguage } from "../i18n/LanguageContext";
 
 
 
 export const About: React.FC = () => {
-  const professionalSkills = [
-    "Desarrollo Frontend",
-    "Desarrollo Backend",
-    "Bases de datos",
-    "Metodologías ágiles",
-    "Control de versiones",
-    "Testing y debugging",
-    "APIs",
-  ];
-
-  const additionalSkills = [
-    "Gestión de proyectos",
-    "Comunicación efectiva",
-    "Trabajo en equipo",
-    "Resolución de problemas",
-    "Aprendizaje autodidacta",
-    "Mentoring y liderazgo",
-       "Deployment básico"
-  ];
+  const { t } = useLanguage();
 
  const techStack = [
   { name: "React", icon: <FaReact style={{ color: '#FFFFFF' }} /> },
@@ -60,30 +43,26 @@ export const About: React.FC = () => {
         className="text-white"
       >
         {/* Main heading */}
-        <h1 className="text-[36px] md:text-[48px] font-bold mb-6 md:mb-8 leading-tight">About Me</h1>
+        <h1 className="text-[36px] md:text-[48px] font-bold mb-6 md:mb-8 leading-tight">{t.about.title}</h1>
 
         {/* Description paragraphs */}
         <div className="space-y-4 mb-6 md:mb-8 text-white/80 leading-relaxed">
           <p>
-            Soy un desarrollador apasionado con 1 año de experiencia en el desarrollo
-            de aplicaciones web modernas. Me especializo en tecnologías frontend y backend,
-            creando soluciones eficientes y escalables.
+            {t.about.description1}
           </p>
 
           <p>
-            Mi enfoque se centra en escribir código limpio, implementar las mejores prácticas
-            y colaborar efectivamente en equipos ágiles. Siempre busco aprender nuevas
-            tecnologías y mantenerme actualizado con las tendencias del desarrollo.
+            {t.about.description2}
           </p>
         </div>
 
         {/* Professional Skills Section */}
         <div className="mb-6 md:mb-8">
-          <h2 className="text-[20px] md:text-[24px] font-bold mb-4 md:mb-6 text-white">Professional Skills</h2>
+          <h2 className="text-[20px] md:text-[24px] font-bold mb-4 md:mb-6 text-white">{t.about.professionalSkillsTitle}</h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
             <div className="space-y-3">
-              {professionalSkills.map((skill, index) => (
+              {t.about.professionalSkills.map((skill, index) => (
                 <div key={index} className="flex items-start gap-3 text-white/80">
                   <span className="text-white/40 mt-1.6">•</span>
                   <span className="text-[13px] md:text-[14px] leading-relaxed">{skill}</span>
@@ -92,7 +71,7 @@ export const About: React.FC = () => {
             </div>
 
             <div className="space-y-3">
-              {additionalSkills.map((skill, index) => (
+              {t.about.additionalSkills.map((skill, index) => (
                 <div key={index} className="flex items-start gap-3 text-white/80">
                   <span className="text-white/40 mt-1.6">•</span>
                   <span className="text-[13px] md:text-[14px] leading-relaxed">{skill}</span>
@@ -104,7 +83,7 @@ export const About: React.FC = () => {
 
         {/* Stack Section */}
         <div>
-          <h2 className="text-[20px] md:text-[24px] font-bold mb-4 md:mb-6 text-white">Stack</h2>
+          <h2 className="text-[20px] md:text-[24px] font-bold mb-4 md:mb-6 text-white">{t.about.stackTitle}</h2>
 
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-4">
             {techStack.map((tech, index) => (

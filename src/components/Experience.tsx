@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "../i18n/LanguageContext";
 
 interface ExperienceItem {
   title: string;
@@ -11,19 +12,7 @@ interface ExperienceItem {
 }
 
 const Experience: React.FC = () => {
-  const experiences: ExperienceItem[] = [
-    {
-      title: "Software Developer",
-      company: "Neural.ONE - Marzo 2025 - Presente",
-      period: "",
-      achievements: [
-        "Trafficking: Asociación de códigos de seguimiento para medición precisa de campañas y recolección de datos",
-        "Desarrollo Creativo: Programación de anuncios interactivos y banners publicitarios usando HTML, CSS y JavaScript",
-        "Desarrollo Web: Creación de landing pages y aplicaciones web de alto rendimiento con tecnologías modernas como React + Node.js",
-        "Desarrollo y Automatización: Actualmente expandiendo habilidades técnicas aprendiendo Python, ya que es la base de nuestra principal herramienta de trafficking, para entender y optimizar flujos de trabajo futuros"
-      ]
-    }
-  ];
+  const { t } = useLanguage();
 
   return (
     <section className="py-0 pr-0 md:pr-4">
@@ -34,11 +23,11 @@ const Experience: React.FC = () => {
         className="text-white"
       >
         {/* Main heading */}
-        <h1 className="text-[36px] md:text-[48px] font-bold mb-6 md:mb-8 leading-tight">Experience</h1>
+        <h1 className="text-[36px] md:text-[48px] font-bold mb-6 md:mb-8 leading-tight">{t.experience.title}</h1>
         
         {/* Experience items */}
         <div className="space-y-6 md:space-y-8">
-          {experiences.map((exp, index) => (
+          {t.experience.experiences.map((exp, index) => (
             <div key={index} className="mb-6 md:mb-8">
               {/* Job title */}
               <h2 className="text-[20px] md:text-[24px] font-bold mb-2 text-white">{exp.title}</h2>
