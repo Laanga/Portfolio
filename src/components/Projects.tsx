@@ -2,6 +2,8 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "../i18n/LanguageContext";
+
 
 interface ProjectItem {
   title: string;
@@ -15,15 +17,17 @@ interface ProjectItem {
 }
 
 const Projects: React.FC = () => {
+  const { t } = useLanguage();
+
   const projects: ProjectItem[] = [
     {
-      title: "GridRush",
-      description: "Aplicación web para gestión de Torneos y carreras de karting. Permite crear torneos, gestionar participantes y realizar seguimiento de carreras.",
-      status: "Completado",
-      statusColor: "green",
+      title: t.projects.projectsList[0].title,
+      description: t.projects.projectsList[0].description,
+      status: t.projects.status[t.projects.projectsList[0].status as keyof typeof t.projects.status],
+      statusColor: "green" as const,
       technologies: ["React", "Node.js", "SQLite", "Firebase"],
       visitLink: "https://github.com/Laanga/GridRush",
-      size: "normal",
+      size: "normal" as const,
       image: "/images/kart.png"
     }
   ];
@@ -48,7 +52,7 @@ const Projects: React.FC = () => {
           className="absolute top-3 right-3 md:top-4 md:right-4 flex items-center gap-1 px-2.5 py-1.5 md:px-3 md:py-1.5 bg-black/60 backdrop-blur-sm border border-white/20 rounded-md text-white text-xs md:text-sm hover:bg-black/70 transition-all cursor-pointer z-[4]"
         >
           <span className="text-blue-400">↗</span>
-          <span>Visit</span>
+          <span>{t.projects.visitButton}</span>
         </a>
       </div>
       
@@ -93,7 +97,7 @@ const Projects: React.FC = () => {
         className="text-white"
       >
         {/* Main heading */}
-        <h1 className="text-[36px] md:text-[48px] font-bold mb-6 md:mb-8 leading-tight">Projects</h1>
+        <h1 className="text-[36px] md:text-[48px] font-bold mb-6 md:mb-8 leading-tight">{t.projects.title}</h1>
         
         {/* Mobile Layout - Una columna */}
         <div className="block md:hidden space-y-4">

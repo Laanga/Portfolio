@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "../i18n/LanguageContext";
 
 type TabKey = "about" | "experience" | "education" | "projects";
 
@@ -11,11 +12,13 @@ type SectionTabsProps = {
 };
 
 export const SectionTabs: React.FC<SectionTabsProps> = ({ activeTab, onChange }) => {
+  const { t } = useLanguage();
+  
   const tabs: { key: TabKey; label: string }[] = [
-    { key: "about", label: "About" },
-    { key: "experience", label: "Experience" },
-    { key: "education", label: "Education" },
-    { key: "projects", label: "Projects" },
+    { key: "about", label: t.navigation.about },
+    { key: "experience", label: t.navigation.experience },
+    { key: "education", label: t.navigation.education },
+    { key: "projects", label: t.navigation.projects },
   ];
 
   const handleClick = (key: TabKey) => onChange(key);

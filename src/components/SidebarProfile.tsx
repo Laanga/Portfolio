@@ -9,8 +9,10 @@ import {
   Download,
   MapPin,
 } from "./icons";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export const SidebarProfile: React.FC = () => {
+  const { t } = useLanguage();
   const socialLinks = [
     { icon: LinkedIn, href: "https://www.linkedin.com/in/%C3%A1lvaro-langa-dev/", label: "LinkedIn" },
     { icon: GitHub, href: "https://github.com/Laanga", label: "GitHub" },
@@ -60,13 +62,13 @@ export const SidebarProfile: React.FC = () => {
 
           {/* Job Title */}
           <p className="text-white/60 text-[14px] md:text-[15px] font-medium mb-4 md:mb-6 tracking-wide">
-            Software Developer
+            {t.profile.jobTitle}
           </p>
 
           {/* Location */}
           <div className="flex items-center gap-2 text-white/50 text-[13px] md:text-[14px] mb-6 md:mb-8">
             <MapPin size={14} className="text-white/40 md:w-4 md:h-4" />
-            <span>Madrid, Spain</span>
+            <span>{t.profile.location}</span>
           </div>
 
           {/* CV Download Button */}
@@ -78,7 +80,7 @@ export const SidebarProfile: React.FC = () => {
             className="w-full h-[44px] md:h-[48px] px-4 md:px-6 bg-white hover:bg-white/95 text-black rounded-[10px] md:rounded-[12px] text-[13px] md:text-[14px] font-semibold transition-all duration-300 flex items-center justify-center gap-2.5 hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl"
           >
             <Download size={14} className="md:w-4 md:h-4" />
-            <span>Download CV</span>
+            <span>{t.profile.downloadCV}</span>
           </a>
         </div>
       </motion.div>
@@ -93,14 +95,14 @@ export const SidebarProfile: React.FC = () => {
         {/* Section Title */}
         <div className="mb-4 md:mb-6">
           <h2 className="text-white text-[20px] md:text-[25px] font-bold tracking-[-0.2px] text-center">
-            Follow me
+            {t.profile.followMe}
           </h2>
         </div>
 
         {/* Email Button */}
         <div className="mb-4 md:mb-6">
           <a
-            href="mailto:alvarolangadev@gmail.com"
+            href={`mailto:${t.profile.email}`}
             className="group w-full h-[48px] md:h-[52px] px-4 md:px-5 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-white/30 rounded-[14px] md:rounded-[16px] text-white text-[13px] md:text-[14px] font-medium transition-all duration-300 flex items-center justify-start hover:scale-[1.01] active:scale-[0.99]"
             style={{
               backdropFilter: "blur(10px)",
@@ -114,7 +116,7 @@ export const SidebarProfile: React.FC = () => {
                   <path d="m22 7-10 5L2 7" />
                 </svg>
               </div>
-              <span className="truncate">alvarolangadev@gmail.com</span>
+              <span className="truncate">{t.profile.email}</span>
             </span>
           </a>
         </div>

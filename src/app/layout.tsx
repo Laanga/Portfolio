@@ -1,7 +1,12 @@
-import type { Metadata } from "next";
+"use client";
+
+import React from "react";
 import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import BackgroundStars from "../components/BackgroundStars";
+import { LanguageProvider } from "../i18n/LanguageContext";
+import LanguageSwitcher from "../components/LanguageSwitcher";
+import { useDocumentLanguage } from "../i18n/useDocumentLanguage";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-geist-sans",
@@ -15,10 +20,17 @@ const jetbrains = JetBrains_Mono({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Álvaro-Langa-PortfolioDev ",
-  description: " ",
-};
+function LayoutContent({ children }: { children: React.ReactNode }) {
+  useDocumentLanguage();
+  
+  return (
+    <>
+      <BackgroundStars />
+      <LanguageSwitcher />
+      {children}
+    </>
+  );
+}
 
 export default function RootLayout({
   children,
@@ -26,12 +38,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es">
+      <head>
+        <title>Álvaro Langa - Portfolio Dev</title>
+        <meta name="description" content="Portfolio profesional de Álvaro Langa - Desarrollador Software especializado en React, Next.js y tecnologías modernas." />
+      </head>
       <body
         className={`${spaceGrotesk.variable} ${jetbrains.variable} antialiased bg-black text-white`}
       >
-        <BackgroundStars />
-        {children}
+        <LanguageProvider>
+          <LayoutContent>{children}</LayoutContent>
+        </LanguageProvider>
       </body>
     </html>
   );
