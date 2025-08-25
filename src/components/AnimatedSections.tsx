@@ -2,13 +2,10 @@
 
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Hero from "./Hero";
 import Projects from "./Projects";
 import About from "./About";
-import Footer from "./Footer";
 import Experience from "./Experience";
 import Education from "./Education";
-import PlaceholderSection from "./PlaceholderSection";
 
 export type SectionKey = "about" | "experience" | "education" | "projects";
 
@@ -42,7 +39,6 @@ export const AnimatedSections: React.FC<AnimatedSectionsProps> = ({ active }) =>
     if (active === "experience") return <Experience />;
     if (active === "education") return <Education />;
     if (active === "projects") return <Projects />;
-    return <Footer />;
   };
 
   return (
