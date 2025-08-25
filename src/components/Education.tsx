@@ -49,6 +49,8 @@ const Education: React.FC = () => {
         </div>
 
         {/* Certifications Section */}
+        {/* Follow Me Section */}
+        {/*
         <div>
           <h2 className="text-[20px] md:text-[24px] font-bold mb-4 md:mb-6 text-white">{t.education.certificationsTitle}</h2>
           
@@ -56,6 +58,7 @@ const Education: React.FC = () => {
             {t.education.certifications.map((item, index) => (
               <div key={index} className="flex items-start gap-3 md:gap-4">
                 {/* Icon - diferentes según el tipo */}
+                {/*
                 <div className="text-xl md:text-2xl mt-1">
                   {index === 0 ? "🎓" : 
                    index === 1 ? "📊" : 
@@ -63,7 +66,9 @@ const Education: React.FC = () => {
                    "💼"}
                 </div>
                 
+                
                 {/* Content */}
+                {/*
                 <div>
                   <h3 className="text-white font-medium text-[14px] md:text-[16px] mb-1">
                     {item.title} • {item.institution}
@@ -75,7 +80,7 @@ const Education: React.FC = () => {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
       </motion.div>
     </section>
   );

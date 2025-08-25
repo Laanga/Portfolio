@@ -103,7 +103,7 @@ export const SidebarProfile: React.FC = () => {
         <div className="mb-4 md:mb-6">
           <a
             href={`mailto:${t.profile.email}`}
-            className="group w-full h-[48px] md:h-[52px] px-4 md:px-5 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-white/30 rounded-[14px] md:rounded-[16px] text-white text-[13px] md:text-[14px] font-medium transition-all duration-300 flex items-center justify-start hover:scale-[1.01] active:scale-[0.99]"
+            className="group w-full h-[48px] md:h-[52px] px-4 md:px-5 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-white/30 rounded-[14px] md:rounded-[16px] text-white text-[13px] md:text-[14px] font-medium transition-all duration-300 flex items-center justify-start active:scale-[0.99]"
             style={{
               backdropFilter: "blur(10px)",
               boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.05)"
