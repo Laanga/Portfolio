@@ -53,7 +53,7 @@ export const AnimatedSections: React.FC<AnimatedSectionsProps> = ({ active }) =>
           initial="enter"
           animate="center"
           exit="exit"
-          variants={variants}
+          variants={variants as any}
           className="w-full"
         >
           {renderSection()}
