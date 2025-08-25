@@ -105,6 +105,11 @@ export const es = {
         title: "GridRush",
         description: "Aplicación web para gestión de Torneos y carreras de karting. Permite crear torneos, gestionar participantes y realizar seguimiento de carreras.",
         status: "completed"
+      },
+      {
+        title: "ProyectoF1",
+        description: "ProyectoF1 es una aplicación web que permite consultar datos históricos de la Fórmula 1, incluyendo pilotos, carreras, campeonatos de pilotos y constructores. Actualmente, se pueden ver detalles de la temporada 2005 y otras ediciones.",
+        status: "completed"
       }
     ]
   },
@@ -242,6 +247,11 @@ export const en = {
       {
         title: "GridRush",
         description: "Web application for managing karting tournaments and races. Allows creating tournaments, managing participants, and tracking races.",
+        status: "completed"
+      },
+      {
+        title: "ProyectoF1",
+        description: "ProjectF1 is a web application that allows you to view historical data from Formula 1, including drivers, races, drivers' and constructors' championships. Currently, you can view details from the 2005 season and beyond.",
         status: "completed"
       }
     ]
