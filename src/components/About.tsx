@@ -43,7 +43,7 @@ export const About: React.FC = () => {
         className="text-white"
       >
         {/* Main heading */}
-        <h1 className="text-[36px] md:text-[48px] font-bold mb-6 md:mb-8 leading-tight">{t.about.title}</h1>
+        <h1 className="text-[36px] md:text-[48px] font-bold mb-6 md:mb-8 leading-tight ">{t.about.title}</h1>
 
         {/* Description paragraphs */}
         <div className="space-y-4 mb-6 md:mb-8 text-white/80 leading-relaxed">
