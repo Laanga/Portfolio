@@ -43,95 +43,111 @@ const Projects: React.FC = () => {
   ];
 
   const ProjectCard = ({ project, index, isMobile = false }: { project: ProjectItem, index: number, isMobile?: boolean }) => (
-    <div
-      className={`relative bg-black/40 backdrop-blur-sm border border-white/10 rounded-xl md:rounded-2xl overflow-hidden p-0`}
+    <motion.div
+      initial={{ opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.23, 1, 0.32, 1] }}
+      className={`group relative bg-white/[0.06] backdrop-blur-2xl border border-white/[0.1] hover:border-white/[0.2] rounded-3xl overflow-hidden transition-all duration-700 hover:scale-[1.02] active:scale-[0.98] cursor-pointer`}
+      style={{
+        background: "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)",
+        boxShadow: "0 20px 40px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06)"
+      }}
     >
       {/* Imagen superior */}
-      <div className={`relative ${isMobile ? 'h-[150px]' : 'h-[180px] md:h-[200px]'} bg-gradient-to-br from-gray-800/50 to-gray-900/50 border-b border-white/10 overflow-hidden`}>
+      <div className={`relative ${isMobile ? 'h-[160px]' : 'h-[200px] md:h-[220px]'} bg-gradient-to-br from-gray-800/30 to-gray-900/30 overflow-hidden`}>
         {/* Project Image */}
         <img
           src={project.image}
           alt={`${project.title} preview`}
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
         />
+        
+        {/* Overlay gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+        
         {/* Visit button */}
         <a 
           href={project.visitLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="absolute top-3 right-3 md:top-4 md:right-4 flex items-center gap-1 px-2.5 py-1.5 md:px-3 md:py-1.5 bg-black/60 backdrop-blur-sm border border-white/20 rounded-md text-white text-xs md:text-sm hover:bg-black/70 transition-all cursor-pointer z-[4]"
+          className="absolute top-4 right-4 md:top-6 md:right-6 flex items-center gap-2 px-4 py-2 md:px-5 md:py-2.5 bg-white/90 hover:bg-white text-black rounded-2xl text-[12px] md:text-[14px] font-bold hover:scale-105 active:scale-95 transition-all duration-300 z-[4]"
+          style={{
+            boxShadow: "0 8px 20px rgba(255,255,255,0.15), 0 2px 6px rgba(255,255,255,0.1)"
+          }}
         >
-          <span className="text-blue-400">↗</span>
+          <span>↗</span>
           <span>{t.projects.visitButton}</span>
         </a>
       </div>
       
       {/* Contenido inferior */}
-      <div className="p-4 md:p-6">
+      <div className="p-6 md:p-8">
         {/* Título y status */}
-        <div className="flex items-start justify-between gap-3 mb-3">
-          <h3 className="text-[16px] md:text-[20px] font-bold text-white">{project.title}</h3>
-          <span className={`px-2 py-0.5 md:px-2.5 md:py-1 rounded-full text-[10px] md:text-[11px] font-medium ${
-            project.statusColor === 'green' ? 'bg-green-500 text-black' : 'bg-yellow-400 text-black'
-          }`}>
+        <div className="flex items-start justify-between gap-4 mb-4">
+          <h3 className="text-[18px] md:text-[22px] font-bold text-white tracking-[-0.3px] font-mono">{project.title}</h3>
+          <span className={`px-3 py-1.5 md:px-4 md:py-2 rounded-full text-[11px] md:text-[12px] font-bold tracking-wide ${
+            project.statusColor === 'green' 
+              ? 'bg-green-400/90 text-green-900' 
+              : 'bg-yellow-400/90 text-yellow-900'
+          }`}
+               style={{
+                 boxShadow: "0 4px 12px rgba(0,0,0,0.1)"
+               }}>
             {project.status}
           </span>
         </div>
         
         {/* Descripción */}
-        <p className="text-white/70 text-[12px] md:text-[13px] leading-relaxed mb-3 md:mb-4">
+        <p className="text-white/75 text-[14px] md:text-[15px] leading-relaxed mb-6 font-medium tracking-[0.1px]">
           {project.description}
         </p>
         
         {/* Technologies */}
-        <div className="flex flex-wrap gap-1.5 md:gap-2">
+        <div className="flex flex-wrap gap-2 md:gap-3">
           {project.technologies.map((tech, techIndex) => (
-            <span 
+            <motion.span 
               key={techIndex}
-              className="px-2 py-0.5 md:px-2.5 md:py-1 bg-white/10 rounded-md text-white/80 text-[10px] md:text-[11px] font-medium border border-white/20"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: (index * 0.1) + (techIndex * 0.05) }}
+              className="px-3 py-1.5 md:px-4 md:py-2 bg-white/[0.08] hover:bg-white/[0.12] rounded-xl text-white/80 hover:text-white text-[11px] md:text-[12px] font-semibold border border-white/[0.08] hover:border-white/[0.15] backdrop-blur-sm transition-all duration-300 hover:scale-105"
+              style={{
+                boxShadow: "0 2px 8px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.03)"
+              }}
             >
               {tech}
-            </span>
+            </motion.span>
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 
   return (
-    <section className="py-0 pr-0 md:pr-4">
+    <section className="py-0 pr-0 md:pr-4 space-y-8 md:space-y-12">
       <motion.div
-        initial={{ opacity: 0, y: 6 }}
+        initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.35 }}
+        transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
         className="text-white"
       >
         {/* Main heading */}
-        <h1 className="text-[36px] md:text-[48px] font-bold mb-6 md:mb-8 leading-tight">{t.projects.title}</h1>
+        <h1 className="text-[40px] md:text-[52px] font-bold mb-10 md:mb-14 leading-tight tracking-[-1px] font-mono">{t.projects.title}</h1>
         
         {/* Mobile Layout - Una columna */}
-        <div className="block md:hidden space-y-4">
+        <div className="block md:hidden space-y-6">
           {projects.map((project, index) => (
             <ProjectCard key={index} project={project} index={index} isMobile={true} />
           ))}
         </div>
         
-        {/* Desktop Layout - Como el diseño original */}
-        <div className="hidden md:block space-y-6">
-          {/* Primera fila - 2 proyectos lado a lado */}
-          <div className="grid grid-cols-2 gap-6">
-            {projects.slice(0, 2).map((project, index) => (
+        {/* Desktop Layout - Grid moderno */}
+        <div className="hidden md:block space-y-8">
+          {/* Grid de proyectos */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10">
+            {projects.map((project, index) => (
               <ProjectCard key={index} project={project} index={index} />
             ))}
-          </div>
-          
-          {/* Segunda fila - 1 proyecto centrado */}
-          <div className="flex justify-center">
-            <div className="w-1/2">
-              {projects.slice(2).map((project, index) => (
-                <ProjectCard key={index + 2} project={project} index={index + 2} />
-              ))}
-            </div>
           </div>
         </div>
       </motion.div>

@@ -11,20 +11,20 @@ export default function Home() {
   return (
     <div className="font-sans min-h-screen bg-transparent relative">
       {/* NAVIGATION TABS  */}
-      <header className="sticky top-4 md:top-6 z-40 flex justify-center px-4">
+      <header className="sticky top-6 md:top-8 z-40 flex justify-center px-4 md:px-6">
         <SectionTabs activeTab={activeTab} onChange={setActiveTab} />
       </header>
       
       {/* MAIN CONTENT */}
-      <main className="relative z-10 mt-6 md:mt-8 px-4 lg:px-0">
+      <main className="relative z-10 mt-8 md:mt-12 px-4 md:px-6 lg:px-8">
         
         {/* CONTENEDOR PRINCIPAL */}
-        <div className="lg:flex lg:justify-between lg:max-w-7xl lg:mx-auto lg:gap-20">
+        <div className="lg:flex lg:justify-between lg:max-w-[1400px] lg:mx-auto lg:gap-12 xl:gap-16">
           
           {/* SIDEBAR PROFILE */}
           <aside className="
-            w-full mb-8 lg:w-[280px] 
-            lg:mb-0 lg:sticky lg:top-[120px] lg:h-fit lg:flex-shrink-0
+            w-full mb-10 md:mb-12 lg:w-[360px] 
+            lg:mb-0 lg:sticky lg:top-[140px] lg:h-fit lg:flex-shrink-0
           ">
             <SidebarProfile />
           </aside>
@@ -33,7 +33,7 @@ export default function Home() {
           <section className="
             w-full lg:flex-1 lg:min-w-0
           ">
-            <div className="max-w-4xl lg:max-w-none">
+            <div className="max-w-5xl lg:max-w-none">
               <AnimatedSections active={activeTab} />
             </div>
           </section>

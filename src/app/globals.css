@@ -1,16 +1,46 @@
 @import "tailwindcss";
 
-/* 🎨 VARIABLES PRINCIPALES - Solo las necesarias */
+/* 🎨 VARIABLES iOS - Inspiradas en el diseño de Apple */
 :root {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  
+  /* iOS Color Palette */
+  --ios-bg-primary: #000000;
+  --ios-bg-secondary: rgba(255, 255, 255, 0.06);
+  --ios-bg-tertiary: rgba(255, 255, 255, 0.04);
+  --ios-border-primary: rgba(255, 255, 255, 0.12);
+  --ios-border-secondary: rgba(255, 255, 255, 0.08);
+  --ios-text-primary: #ffffff;
+  --ios-text-secondary: rgba(255, 255, 255, 0.75);
+  --ios-text-tertiary: rgba(255, 255, 255, 0.60);
+  
+  /* iOS Blur Effects */
+  --ios-blur-light: blur(20px);
+  --ios-blur-heavy: blur(40px);
+  
+  /* iOS Shadows */
+  --ios-shadow-small: 0 4px 20px rgba(0, 0, 0, 0.15);
+  --ios-shadow-medium: 0 12px 32px rgba(0, 0, 0, 0.2);
+  --ios-shadow-large: 0 20px 40px rgba(0, 0, 0, 0.25);
+  
+  /* iOS Border Radius */
+  --ios-radius-small: 12px;
+  --ios-radius-medium: 20px;
+  --ios-radius-large: 24px;
+  --ios-radius-xlarge: 32px;
 }
 
 /* 🌐 CONFIGURACIÓN BASE */
 body {
-  background: #000000;
-  color: #ffffff;
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  background: var(--ios-bg-primary);
+  color: var(--ios-text-primary);
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  font-feature-settings: "cv01", "cv03", "cv04", "cv11";
+  font-variant-ligatures: contextual;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html:focus-within {
@@ -59,9 +89,50 @@ html:focus-within {
   -webkit-backface-visibility: hidden;
 }
 
+/* 🍎 ESTILOS iOS ADICIONALES */
+.ios-glassmorphism {
+  background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.ios-card-hover:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.ios-button {
+  background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.9) 100%);
+  box-shadow: 0 8px 20px rgba(255,255,255,0.15), 0 2px 6px rgba(255,255,255,0.1);
+  border-radius: 16px;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.ios-button:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 30px rgba(255,255,255,0.2), 0 4px 12px rgba(255,255,255,0.15);
+}
+
+.ios-button:active {
+  transform: scale(0.97);
+}
+
 /* Smooth scrolling optimizado */
 @supports (scroll-behavior: smooth) {
   html {
     scroll-behavior: smooth;
   }
+}
+
+/* iOS-style selection colors */
+::selection {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+::-moz-selection {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
 }

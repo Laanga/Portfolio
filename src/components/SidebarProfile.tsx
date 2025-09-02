@@ -19,56 +19,59 @@ export const SidebarProfile: React.FC = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center space-y-4 md:space-y-6 w-full max-w-[320px] mx-auto lg:mx-0">
+    <div className="flex flex-col items-center space-y-6 md:space-y-8 w-full max-w-[340px] mx-auto lg:mx-0">
       {/* Profile Card */}
       <motion.div
         initial={{ opacity: 0, y: 20, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-        className="relative rounded-[20px] md:rounded-[24px] bg-black/20 backdrop-blur-md border border-white/20 p-6 md:p-8 w-full"
+        transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+        className="relative rounded-3xl md:rounded-[32px] bg-white/[0.08] backdrop-blur-2xl border border-white/[0.15] p-8 md:p-10 w-full overflow-hidden"
         style={{
-          background: "linear-gradient(145deg, rgba(0,0,0,0.25) 0%, rgba(20,20,20,0.35) 100%)",
-          boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)"
+          background: "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%)",
+          boxShadow: "0 32px 64px -12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.08)"
         }}
       >
-        {/* Subtle glow effect */}
+        {/* iOS-style subtle inner glow */}
         <div
-          className="absolute inset-0 rounded-[20px] md:rounded-[24px] opacity-40"
+          className="absolute inset-0 rounded-3xl md:rounded-[32px] opacity-60"
           style={{
-            background: "radial-gradient(circle at 50% 0%, rgba(255,255,255,0.08) 0%, transparent 70%)"
+            background: "radial-gradient(circle at 50% 20%, rgba(255,255,255,0.06) 0%, transparent 60%)"
           }}
         />
 
         <div className="relative flex flex-col items-center text-center">
           {/* Profile Picture */}
-          <div className="relative w-[120px] md:w-[140px] h-[120px] md:h-[140px] mb-4 md:mb-6">
-            <div className="w-full h-full rounded-full overflow-hidden border-2 border-white/15 bg-gray-800/50">
+          <div className="relative w-[140px] md:w-[160px] h-[140px] md:h-[160px] mb-6 md:mb-8">
+            <div className="w-full h-full rounded-full overflow-hidden bg-white/5 ring-1 ring-white/10"
+                 style={{
+                   boxShadow: "0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)"
+                 }}>
               <Image
                 src="/avatar.jpg"
                 alt="Profile picture"
-                width={140}
-                height={140}
-                className="w-full h-full object-cover"
+                width={160}
+                height={160}
+                className="w-full h-full object-cover scale-105"
               />
             </div>
-            {/* Subtle ring around profile */}
-            <div className="absolute inset-0 rounded-full border border-white/5" />
+            {/* iOS-style outer ring */}
+            <div className="absolute inset-0 rounded-full ring-1 ring-white/[0.03]" />
           </div>
 
           {/* Name */}
-          <h1 className="text-white font-bold text-[24px] md:text-[28px] leading-[28px] md:leading-[34px] mb-2 tracking-[-0.5px]">
+          <h1 className="text-white font-bold text-[28px] md:text-[32px] leading-[32px] md:leading-[38px] mb-3 tracking-[-0.8px] font-mono">
             Álvaro Langa
           </h1>
 
           {/* Job Title */}
-          <p className="text-white/60 text-[14px] md:text-[15px] font-medium mb-4 md:mb-6 tracking-wide">
+          <p className="text-white/70 text-[15px] md:text-[16px] font-medium mb-6 md:mb-8 tracking-[0.2px]">
             {t.profile.jobTitle}
           </p>
 
           {/* Location */}
-          <div className="flex items-center gap-2 text-white/50 text-[13px] md:text-[14px] mb-6 md:mb-8">
-            <MapPin size={14} className="text-white/40 md:w-4 md:h-4" />
-            <span>{t.profile.location}</span>
+          <div className="flex items-center gap-2.5 text-white/60 text-[14px] md:text-[15px] mb-8 md:mb-10 px-3 py-1.5 rounded-full bg-white/[0.06]">
+            <MapPin size={16} className="text-white/50 md:w-[18px] md:h-[18px]" />
+            <span className="font-medium">{t.profile.location}</span>
           </div>
 
           {/* CV Download Button */}
@@ -77,9 +80,12 @@ export const SidebarProfile: React.FC = () => {
             download="CV-Álvaro-Langa.pdf" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="w-full h-[44px] md:h-[48px] px-4 md:px-6 bg-white hover:bg-white/95 text-black rounded-[10px] md:rounded-[12px] text-[13px] md:text-[14px] font-semibold transition-all duration-300 flex items-center justify-center gap-2.5 hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl"
+            className="w-full h-[52px] md:h-[56px] px-6 md:px-8 bg-white hover:bg-white/95 text-black rounded-2xl text-[15px] md:text-[16px] font-semibold transition-all duration-500 flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-[0.97] hover:shadow-2xl active:shadow-lg"
+            style={{
+              boxShadow: "0 12px 32px rgba(255,255,255,0.15), 0 2px 8px rgba(255,255,255,0.1)"
+            }}
           >
-            <Download size={14} className="md:w-4 md:h-4" />
+            <Download size={16} className="md:w-[18px] md:h-[18px]" />
             <span>{t.profile.downloadCV}</span>
           </a>
         </div>
@@ -89,40 +95,39 @@ export const SidebarProfile: React.FC = () => {
       <motion.div
         initial={{ opacity: 0, y: 20, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1], delay: 0.1 }}
-        className="w-full"
+        transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1], delay: 0.2 }}
+        className="w-full space-y-6"
       >
         {/* Section Title */}
-        <div className="mb-4 md:mb-6">
-          <h2 className="text-white text-[20px] md:text-[25px] font-bold tracking-[-0.2px] text-center">
+        <div className="mb-6 md:mb-8">
+          <h2 className="text-white text-[22px] md:text-[26px] font-bold tracking-[-0.6px] text-center font-mono">
             {t.profile.followMe}
           </h2>
         </div>
 
         {/* Email Button */}
-        <div className="mb-4 md:mb-6">
+        <div className="mb-6 md:mb-8">
           <a
             href={`mailto:${t.profile.email}`}
-            className="group w-full h-[48px] md:h-[52px] px-4 md:px-5 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-white/30 rounded-[14px] md:rounded-[16px] text-white text-[13px] md:text-[14px] font-medium transition-all duration-300 flex items-center justify-start active:scale-[0.99]"
+            className="group w-full h-[56px] md:h-[60px] px-6 md:px-7 bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.12] hover:border-white/[0.2] rounded-2xl text-white text-[15px] md:text-[16px] font-medium transition-all duration-500 flex items-center justify-start active:scale-[0.98] backdrop-blur-xl"
             style={{
-              backdropFilter: "blur(10px)",
-              boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.05)"
+              boxShadow: "0 8px 32px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06)"
             }}
           >
-            <span className="flex items-center gap-3">
-              <div className="text-white/60">
-                <svg width="16" height="16" className="md:w-[18px] md:h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <span className="flex items-center gap-4 w-full">
+              <div className="text-white/60 group-hover:text-white/80 transition-colors duration-300 flex-shrink-0">
+                <svg width="18" height="18" className="md:w-[20px] md:h-[20px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <rect width="20" height="16" x="2" y="4" rx="2" />
                   <path d="m22 7-10 5L2 7" />
                 </svg>
               </div>
-              <span className="truncate">{t.profile.email}</span>
+              <span className="truncate font-medium tracking-[0.1px]">{t.profile.email}</span>
             </span>
           </a>
         </div>
 
-        {/* Social Icons in a single row */}
-        <div className="flex items-center justify-center gap-3 md:gap-4">
+        {/* Social Icons */}
+        <div className="flex items-center justify-center gap-4 md:gap-6">
           {socialLinks.map((social, index) => {
             const IconComponent = social.icon;
             return (
@@ -133,11 +138,14 @@ export const SidebarProfile: React.FC = () => {
                 rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.2 + index * 0.05 }}
-                className="group w-10 h-10 md:w-12 md:h-12 flex items-center justify-center text-white/60 hover:text-white transition-all duration-300 hover:scale-110 active:scale-95"
+                transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+                className="group w-14 h-14 md:w-16 md:h-16 flex items-center justify-center text-white/60 hover:text-white transition-all duration-500 hover:scale-105 active:scale-95 rounded-2xl bg-white/[0.06] hover:bg-white/[0.1] border border-white/[0.08] hover:border-white/[0.15] backdrop-blur-lg"
                 aria-label={social.label}
+                style={{
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.04)"
+                }}
               >
-                <IconComponent size={20} className="md:w-6 md:h-6 transition-transform duration-200" />
+                <IconComponent size={22} className="md:w-6 md:h-6 transition-transform duration-300 group-hover:scale-110" />
               </motion.a>
             );
           })}
