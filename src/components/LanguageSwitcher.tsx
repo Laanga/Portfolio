@@ -7,7 +7,7 @@ const LanguageSwitcher: React.FC = () => {
   const { language, setLanguage } = useLanguage();
 
   return (
-    <div className="fixed top-4 right-4 z-50">
+    <div className="fixed bottom-4 right-4 md:top-4 md:bottom-auto z-50">
       <div className="flex items-center gap-1 bg-black/40 backdrop-blur-sm border border-white/10 rounded-lg p-1">
         <button
           onClick={() => setLanguage('es')}
