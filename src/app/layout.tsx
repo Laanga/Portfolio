@@ -7,6 +7,7 @@ import BackgroundStars from "../components/BackgroundStars";
 import { LanguageProvider } from "../i18n/LanguageContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import { useDocumentLanguage } from "../i18n/useDocumentLanguage";
+import { Analytics } from "@vercel/analytics/next"
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-geist-sans",
@@ -28,6 +29,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
       <BackgroundStars />
       <LanguageSwitcher />
       {children}
+      <Analytics />
     </>
   );
 }
