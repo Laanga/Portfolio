@@ -107,8 +107,8 @@ export const es = {
         status: "completed"
       },
       {
-        title: "ProyectoF1",
-        description: "ProyectoF1 es una aplicación web que permite consultar datos históricos de la Fórmula 1, incluyendo pilotos, carreras, campeonatos de pilotos y constructores. Actualmente, se pueden ver detalles de la temporada 2005 y otras ediciones.",
+        title: "F1 Data",
+        description: "F1 Data es una web hecha con React y Vite para explorar la temporada de F1: clasificaciones de pilotos y equipos, calendario de carreras y estadísticas con gráficos interactivos. UI moderna con Tailwind, GSAP y Framer Motion, y datos desde OpenF1 y Ergast.",
         status: "completed"
       }
     ]
@@ -250,8 +250,8 @@ export const en = {
         status: "completed"
       },
       {
-        title: "ProyectoF1",
-        description: "ProjectF1 is a web application that allows you to view historical data from Formula 1, including drivers, races, drivers' and constructors' championships. Currently, you can view details from the 2005 season and beyond.",
+        title: "F1 Data",
+        description: "F1 Data is a web app built with React and Vite to explore the F1 season: driver and team standings, race calendar, and statistics with interactive charts. Modern UI with Tailwind, GSAP, and Framer Motion, and data from OpenF1 and Ergast.",
         status: "completed"
       }
     ]

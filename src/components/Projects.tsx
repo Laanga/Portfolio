@@ -21,6 +21,16 @@ const Projects: React.FC = () => {
 
   const projects: ProjectItem[] = [
     {
+      title: t.projects.projectsList[1].title,
+      description: t.projects.projectsList[1].description,
+      status: t.projects.status[t.projects.projectsList[1].status as keyof typeof t.projects.status],
+      statusColor: "green" as const,
+      technologies: ["React", "Vite", "Tailwind", "GSAP", "Framer Motion"],
+      visitLink: "https://f1-data-explorer.vercel.app/",
+      size: "normal" as const,
+      image: "/images/f1.png"
+    },
+    {
       title: t.projects.projectsList[0].title,
       description: t.projects.projectsList[0].description,
       status: t.projects.status[t.projects.projectsList[0].status as keyof typeof t.projects.status],
@@ -29,16 +39,6 @@ const Projects: React.FC = () => {
       visitLink: "https://github.com/Laanga/GridRush",
       size: "normal" as const,
       image: "/images/kart.png"
-    },
-    {
-      title: t.projects.projectsList[1].title,
-      description: t.projects.projectsList[1].description,
-      status: t.projects.status[t.projects.projectsList[1].status as keyof typeof t.projects.status],
-      statusColor: "green" as const,
-      technologies: ["React", "Node.js", "SQLite"],
-      visitLink: "https://github.com/Laanga/ProyectoF1",
-      size: "normal" as const,
-      image: "/images/f1.png"
     }
   ];
 
