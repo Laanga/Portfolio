@@ -44,7 +44,7 @@ export const SidebarProfile: React.FC = () => {
           <div className="relative w-[120px] md:w-[140px] h-[120px] md:h-[140px] mb-4 md:mb-6">
             <div className="w-full h-full rounded-full overflow-hidden border-2 border-white/15 bg-gray-800/50">
               <Image
-                src="/avatar.jpg"
+                src="/avatar2.jpeg"
                 alt="Profile picture"
                 width={140}
                 height={140}
