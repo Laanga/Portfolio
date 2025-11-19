@@ -7,7 +7,7 @@ import * as random from "maath/random/dist/maath-random.cjs";
 import { Group, Vector3, Quaternion, Euler } from "three";
 
 const Stars = (props: any) => {
-    const ref = useRef<any>();
+    const ref = useRef<any>(null);
 
     const sphere = useMemo(() => {
         return random.inSphere(new Float32Array(15000), { radius: 8 });
@@ -192,7 +192,7 @@ const Rocket = () => {
 };
 
 const GeometricShape = ({ position, size, color, speed = 0.01 }: { position: [number, number, number], size: number, color: string, speed?: number }) => {
-    const ref = useRef<any>();
+    const ref = useRef<any>(null);
     const { mouse, viewport } = useThree();
 
     // Store initial position for orbital movement
