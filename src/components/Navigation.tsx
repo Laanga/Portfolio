@@ -133,17 +133,17 @@ const Navigation: React.FC = () => {
         ref={navRef}
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       >
-        <div className={`max-w-2xl mx-auto px-4 transition-all duration-300 ${scrolled ? "mt-2" : "mt-3"}`}>
+        <div className={`max-w-xl mx-auto px-4 transition-all duration-300 ${scrolled ? "mt-2" : "mt-3"}`}>
           <div className="relative">
             {/* Apple-style pill navbar */}
             <div className="relative bg-black/40 backdrop-blur-xl border border-white/10 rounded-full shadow-lg">
-              <div className="flex items-center justify-between px-4 py-1">
+              <div className="flex items-center justify-between px-5 py-2">
                 {/* Logo - Compact */}
                 <div
                   className="relative cursor-pointer hover:scale-105 active:scale-95 transition-transform flex-shrink-0"
                   onClick={() => scrollToSection("hero")}
                 >
-                  <div className="w-6 h-6 rounded-full overflow-hidden border border-white/20 bg-black/20">
+                  <div className="w-7 h-7 rounded-full overflow-hidden border border-white/20 bg-black/20">
                     <img
                       src="/icon_portfolio.jpg"
                       alt="Logo"
@@ -158,7 +158,7 @@ const Navigation: React.FC = () => {
                     <button
                       key={item.id}
                       onClick={() => scrollToSection(item.id)}
-                      className={`relative px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${activeSection === item.id
+                      className={`relative px-3.5 py-2 rounded-full text-base font-medium transition-all duration-200 ${activeSection === item.id
                         ? "text-white bg-white/15"
                         : "text-white/70 hover:text-white hover:bg-white/5"
                         }`}
