@@ -47,7 +47,8 @@ export const es = {
     experiences: [
       {
         title: "Desarrollador de Software",
-        company: "Neural.ONE - Marzo 2025 - Presente",
+        company: "Neural.ONE",
+        period: "Marzo 2025 - Presente",
         achievements: [
           "Trafficking: Asociación de códigos de seguimiento para medición precisa de campañas y recolección de datos",
           "Desarrollo Creativo: Programación de anuncios interactivos y banners publicitarios usando HTML, CSS y JavaScript",
@@ -190,7 +191,8 @@ export const en = {
     experiences: [
       {
         title: "Software Developer",
-        company: "Neural.ONE - March 2025 - Present",
+        company: "Neural.ONE",
+        period: "March 2025 - Present",
         achievements: [
           "Trafficking: Association of tracking codes for accurate campaign measurement and data collection",
           "Creative Development: Programming interactive ads and advertising banners using HTML, CSS, and JavaScript",
