@@ -3,7 +3,8 @@
 import React from "react";
 import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import BackgroundStars from "../components/BackgroundStars";
+import ThreeBackground from "../components/ThreeBackground";
+import ScrollProgress from "../components/ScrollProgress";
 import { LanguageProvider } from "../i18n/LanguageContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import { useDocumentLanguage } from "../i18n/useDocumentLanguage";
@@ -23,10 +24,11 @@ const jetbrains = JetBrains_Mono({
 
 function LayoutContent({ children }: { children: React.ReactNode }) {
   useDocumentLanguage();
-  
+
   return (
     <>
-      <BackgroundStars />
+      <ThreeBackground />
+      <ScrollProgress />
       <LanguageSwitcher />
       {children}
       <Analytics />
