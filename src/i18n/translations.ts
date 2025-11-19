@@ -17,7 +17,7 @@ export const es = {
   // About section
   about: {
     title: "Sobre mí",
-    description1: "Soy un desarrollador apasionado con 1 año de experiencia en el desarrollo de aplicaciones web modernas. Me especializo en tecnologías frontend y backend, creando soluciones eficientes y escalables.",
+    description1: "Soy un desarrollador apasionado con 2 año de experiencia en el desarrollo de aplicaciones web modernas. Me especializo en tecnologías frontend y backend, creando soluciones eficientes y escalables.",
     description2: "Mi enfoque se centra en escribir código limpio, implementar las mejores prácticas y colaborar efectivamente en equipos ágiles. Siempre busco aprender nuevas tecnologías y mantenerme actualizado con las tendencias del desarrollo.",
     professionalSkillsTitle: "Habilidades Profesionales",
     stackTitle: "Stack Tecnológico",
@@ -160,7 +160,7 @@ export const en = {
   // About section
   about: {
     title: "About Me",
-    description1: "I am a passionate developer with 1 year of experience in modern web application development. I specialize in frontend and backend technologies, creating efficient and scalable solutions.",
+    description1: "I am a passionate developer with 2 year of experience in modern web application development. I specialize in frontend and backend technologies, creating efficient and scalable solutions.",
     description2: "My approach focuses on writing clean code, implementing best practices, and collaborating effectively in agile teams. I always seek to learn new technologies and stay updated with development trends.",
     professionalSkillsTitle: "Professional Skills",
     stackTitle: "Tech Stack",
