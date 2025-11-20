@@ -67,23 +67,7 @@ const HeroSection: React.FC = () => {
         "-=0.6"
       );
 
-      // Scroll Indicator
-      tl.fromTo(".scroll-indicator",
-        { y: -20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8 },
-        "-=0.4"
-      );
-
       // Continuous Animations
-
-      // Scroll Indicator Bounce
-      gsap.to(".scroll-indicator", {
-        y: 10,
-        duration: 1.5,
-        repeat: -1,
-        yoyo: true,
-        ease: "power1.inOut",
-      });
 
       // Background Orbs Animation
       gsap.to(".orb-1", {
@@ -264,15 +248,6 @@ const HeroSection: React.FC = () => {
               </a>
             );
           })}
-        </div>
-
-        <div className="scroll-indicator absolute bottom-8 left-1/2 transform -translate-x-1/2">
-          <div className="flex flex-col items-center gap-2 text-white/40">
-            <span className="text-xs">Scroll</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M12 5v14M19 12l-7 7-7-7" />
-            </svg>
-          </div>
         </div>
       </div>
     </section>

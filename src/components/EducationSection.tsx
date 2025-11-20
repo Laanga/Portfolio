@@ -65,7 +65,7 @@ const EducationSection: React.FC = () => {
       ref={sectionRef}
       className="py-12 md:py-16 px-4 relative"
     >
-      <div className="max-w-4xl mx-auto w-full">
+      <div className="max-w-4xl mx-auto w-full backdrop-blur-md bg-black/20 rounded-3xl p-8 md:p-12 border border-white/10">
         <h2
           ref={titleRef}
           className="text-3xl md:text-4xl font-bold text-white mb-10 md:mb-12 text-center"
