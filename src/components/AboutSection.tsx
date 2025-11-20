@@ -120,7 +120,7 @@ const AboutSection: React.FC = () => {
       ref={sectionRef}
       className="py-12 md:py-16 px-4 relative"
     >
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-5xl mx-auto backdrop-blur-md bg-black/20 rounded-3xl p-8 md:p-12 border border-white/10">
         <h2
           ref={titleRef}
           className="text-3xl md:text-4xl font-bold text-white mb-8 md:mb-10 text-center"
