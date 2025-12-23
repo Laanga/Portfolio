@@ -152,8 +152,8 @@ const HeroSection: React.FC = () => {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 mb-8 md:mb-10">
           <a
             ref={btnRef1}
-            href="/CV-Alvaro-Langa.pdf"
-            download="CV-Álvaro-Langa.pdf"
+            href="/CV-Alvaro-Langa-2.0.pdf"
+            download="CV-Álvaro-Langa-2.0.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="hero-btn group w-full sm:w-auto px-6 md:px-8 py-3 md:py-3.5 bg-white hover:bg-white/90 text-black rounded-xl text-sm md:text-base font-semibold transition-all duration-300 flex items-center justify-center gap-2.5 md:gap-3 shadow-xl opacity-0 translate-y-4"
