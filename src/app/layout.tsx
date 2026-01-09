@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import SectionBackgrounds from "../components/SectionBackgrounds";
@@ -8,6 +8,7 @@ import PremiumBackground from "../components/PremiumBackground";
 import CustomCursor from "../components/CustomCursor";
 import ScrollProgress from "../components/ScrollProgress";
 import SmoothScroll from "../components/SmoothScroll";
+import LoadingScreen from "../components/LoadingScreen";
 import { LanguageProvider } from "../i18n/LanguageContext";
 import { useDocumentLanguage } from "../i18n/useDocumentLanguage";
 import { Analytics } from "@vercel/analytics/next";
@@ -25,18 +26,24 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 function LayoutContent({ children }: { children: React.ReactNode }) {
+  const [isLoading, setIsLoading] = useState(true);
   useDocumentLanguage();
 
   return (
-    <SmoothScroll>
-      <SectionBackgrounds />
-      <PremiumBackground />
-      <CustomCursor />
-      <ScrollProgress />
-      <div className="noise" />
-      {children}
-      <Analytics />
-    </SmoothScroll>
+    <>
+      {isLoading && (
+        <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />
+      )}
+      <SmoothScroll>
+        <SectionBackgrounds />
+        <PremiumBackground />
+        <CustomCursor />
+        <ScrollProgress />
+        <div className="noise" />
+        {children}
+        <Analytics />
+      </SmoothScroll>
+    </>
   );
 }
 
@@ -49,9 +56,9 @@ export default function RootLayout({
     <html lang="es">
       <head>
         <title>Álvaro Langa — Software Developer</title>
-        <meta 
-          name="description" 
-          content="Portfolio de Álvaro Langa - Desarrollador Software especializado en React, Next.js y tecnologías modernas." 
+        <meta
+          name="description"
+          content="Portfolio de Álvaro Langa - Desarrollador Software especializado en React, Next.js y tecnologías modernas."
         />
         <link rel="icon" href="/favicon-transparent.svg" type="image/svg+xml" />
       </head>
@@ -63,3 +70,4 @@ export default function RootLayout({
     </html>
   );
 }
+
