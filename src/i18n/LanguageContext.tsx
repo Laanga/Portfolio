@@ -5,7 +5,7 @@ import { es, en, Language, TranslationKeys } from './translations';
 
 interface LanguageContextType {
   language: Language;
-  t: TranslationKeys;
+  t: typeof es | typeof en;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
