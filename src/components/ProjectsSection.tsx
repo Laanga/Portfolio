@@ -9,165 +9,188 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-interface ProjectItem {
-  title: string;
-  description: string;
-  status: string;
-  statusColor: "green" | "yellow";
-  technologies: string[];
-  visitLink: string;
-  image: string;
-}
-
 const ProjectsSection: React.FC = () => {
   const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
 
-  const projects: ProjectItem[] = [
+  const projects = [
     {
       title: t.projects.projectsList[1].title,
       description: t.projects.projectsList[1].description,
-      status: t.projects.status[t.projects.projectsList[1].status as keyof typeof t.projects.status],
-      statusColor: "green" as const,
-      technologies: ["React", "Vite", "Tailwind", "GSAP", "Framer Motion"],
-      visitLink: "https://f1-data-explorer.vercel.app/",
-      image: "/images/f1.png"
+      tech: "React · Vite · Tailwind · GSAP",
+      link: "https://f1-data-explorer.vercel.app/",
+      image: "/images/f1.png",
     },
     {
       title: t.projects.projectsList[0].title,
       description: t.projects.projectsList[0].description,
-      status: t.projects.status[t.projects.projectsList[0].status as keyof typeof t.projects.status],
-      statusColor: "green" as const,
-      technologies: ["React", "Node.js", "SQLite", "Firebase"],
-      visitLink: "https://github.com/Laanga/GridRush",
-      image: "/images/kart.png"
+      tech: "React · Node.js · SQLite · Firebase",
+      link: "https://github.com/Laanga/GridRush",
+      image: "/images/kart.png",
     }
   ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Title Animation
-      gsap.from(titleRef.current, {
-        scrollTrigger: {
-          trigger: titleRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        },
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        ease: "power3.out",
+      // Label - empieza antes
+      gsap.fromTo(".proj-label", 
+        { x: -100, opacity: 0 },
+        {
+          x: 0, opacity: 1, duration: 1,
+          ease: "power3.out",
+          scrollTrigger: { 
+            trigger: ".proj-label", 
+            start: "top 100%",
+            toggleActions: "restart none restart none"
+          }
+        }
+      );
+
+      // Título
+      gsap.fromTo(".proj-title-wrap",
+        { clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)" },
+        {
+          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+          duration: 1.4,
+          ease: "power4.inOut",
+          scrollTrigger: { 
+            trigger: ".proj-title-wrap", 
+            start: "top 100%",
+            toggleActions: "restart none restart none"
+          }
+        }
+      );
+
+      // Proyectos
+      gsap.utils.toArray<HTMLElement>(".project-card").forEach((card) => {
+        const overlay = card.querySelector(".image-overlay");
+        const img = card.querySelector(".project-img");
+        const content = card.querySelector(".project-content");
+
+        if (overlay) {
+          gsap.fromTo(overlay,
+            { scaleX: 1 },
+            {
+              scaleX: 0,
+              duration: 1.6,
+              ease: "power4.inOut",
+              scrollTrigger: { 
+                trigger: card, 
+                start: "top 100%",
+                toggleActions: "restart none restart none"
+              }
+            }
+          );
+        }
+
+        if (img) {
+          gsap.fromTo(img,
+            { scale: 1.4 },
+            {
+              scale: 1,
+              duration: 1.8,
+              ease: "power3.out",
+              scrollTrigger: { 
+                trigger: card, 
+                start: "top 100%",
+                toggleActions: "restart none restart none"
+              }
+            }
+          );
+        }
+
+        if (content) {
+          gsap.fromTo(content,
+            { y: 60, opacity: 0 },
+            {
+              y: 0, opacity: 1, duration: 1,
+              delay: 0.3,
+              ease: "power3.out",
+              scrollTrigger: { 
+                trigger: card, 
+                start: "top 95%",
+                toggleActions: "restart none restart none"
+              }
+            }
+          );
+        }
       });
 
-      // Projects Animation
-      const cards = gsap.utils.toArray(".project-card");
-      cards.forEach((card: any, index) => {
-        gsap.from(card, {
-          scrollTrigger: {
-            trigger: card,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
-          },
-          opacity: 0,
-          y: 50,
-          duration: 0.8,
-          delay: index * 0.2,
-          ease: "power2.out",
-        });
-      });
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section
-      id="projects"
-      ref={sectionRef}
-      className="py-12 md:py-16 px-4 relative"
-    >
-      <div className="max-w-6xl mx-auto backdrop-blur-md bg-black/20 rounded-3xl p-8 md:p-12 border border-white/10">
-        <h2
-          ref={titleRef}
-          className="text-3xl md:text-4xl font-bold text-white mb-10 md:mb-12 text-center"
-        >
-          {t.projects.title}
-        </h2>
+    <section id="projects" ref={sectionRef} className="section relative overflow-hidden">
+      <div className="orb w-[600px] h-[600px] bottom-0 -right-[200px]" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              className="project-card group relative bg-black/30 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:border-white/20 transition-all duration-300 hover:-translate-y-2"
-            >
+      <div className="container relative z-10">
+        <div className="proj-label flex items-center gap-4 mb-6">
+          <span className="text-mono">03</span>
+          <span className="w-12 h-px bg-white/20" />
+          <span className="text-mono text-white/40">{t.projects.title}</span>
+        </div>
+        
+        <div className="proj-title-wrap mb-20">
+          <h2 className="text-heading">
+            Proyectos destacados
+          </h2>
+        </div>
 
-              {/* Card content */}
-              <div className="relative bg-black/40 rounded-2xl overflow-hidden">
-                {/* Image section with enhanced effects */}
-                <div className="relative h-[220px] md:h-[240px] bg-gradient-to-br from-gray-900/80 to-black/80 border-b border-white/10 overflow-hidden">
-                  <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-110">
-                    <img
-                      src={project.image}
-                      alt={`${project.title} preview`}
-                      className="w-full h-full object-cover opacity-90"
-                    />
-                  </div>
-
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-50 group-hover:opacity-70 transition-opacity duration-300" />
-
-                  {/* Visit button */}
-                  <a
-                    href={project.visitLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="absolute top-3 right-3 md:top-4 md:right-4 flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 bg-black/70 backdrop-blur-md border border-white/20 rounded-lg text-white text-xs md:text-sm hover:bg-black/80 transition-all z-10 group-hover:scale-110"
-                  >
-                    <span className="text-white/80">↗</span>
-                    <span>{t.projects.visitButton}</span>
-                  </a>
-
-                  {/* Status badge */}
-                  <span
-                    className={`absolute top-3 left-3 md:top-4 md:left-4 px-2.5 md:px-3 py-0.5 md:py-1 rounded-full text-[10px] md:text-xs font-semibold ${project.statusColor === 'green'
-                      ? 'bg-green-500 text-black'
-                      : 'bg-yellow-400 text-black'
-                      }`}
-                  >
-                    {project.status}
+        <div className="space-y-28">
+          {projects.map((project, i) => (
+            <article key={i} className="project-card group">
+              <a 
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block relative aspect-[16/9] md:aspect-[21/9] overflow-hidden rounded-lg mb-8"
+              >
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="project-img w-full h-full object-cover"
+                />
+                
+                <div className="image-overlay absolute inset-0 bg-[#050505] origin-right z-10" />
+                
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 z-20 flex items-end justify-between p-6 md:p-8">
+                  <span className="text-white text-sm font-medium">
+                    {project.title}
+                  </span>
+                  <span className="flex items-center gap-2 text-white/70 text-sm">
+                    Ver proyecto
+                    <svg 
+                      width="18" 
+                      height="18" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      strokeWidth="2"
+                      className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
+                    >
+                      <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                    </svg>
                   </span>
                 </div>
+              </a>
 
-                {/* Content section */}
-                <div className="p-6 md:p-7">
-                  <h3 className="text-xl md:text-2xl font-bold text-white mb-3 group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:via-purple-400 group-hover:to-pink-400 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
-                    {project.title}
-                  </h3>
-
-                  <p className="text-white/70 text-sm md:text-base leading-relaxed mb-5">
-                    {project.description}
-                  </p>
-
-                  {/* Tech stack tags */}
-                  <div className="flex flex-wrap gap-1.5 md:gap-2">
-                    {project.technologies.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-2.5 md:px-3 py-1 md:py-1.5 bg-white/10 rounded-lg text-white/80 text-[10px] md:text-xs font-medium border border-white/20 hover:bg-white/20 transition-all duration-200 hover:scale-105"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+              <div className="project-content max-w-2xl">
+                <h3 className="text-title text-white mb-3">
+                  {project.title}
+                </h3>
+                <p className="text-sm text-white/45 leading-relaxed mb-4">
+                  {project.description}
+                </p>
+                <span className="text-mono text-xs text-white/30">
+                  {project.tech}
+                </span>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>
-
-      <div className="absolute top-1/2 right-0 w-96 h-96 bg-pink-500/5 rounded-full blur-3xl pointer-events-none" />
     </section>
   );
 };

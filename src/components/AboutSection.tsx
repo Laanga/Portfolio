@@ -4,16 +4,9 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
-  FaReact,
-  FaJava,
-  FaPhp,
-  FaNodeJs,
-  FaPython,
-  FaGithub,
-  FaDocker,
-  FaAws
+  FaReact, FaJava, FaNodeJs, FaPython, FaGithub, FaDocker, FaAws
 } from "react-icons/fa";
-import { SiJavascript, SiMysql } from "react-icons/si";
+import { SiTypescript, SiMysql, SiTailwindcss } from "react-icons/si";
 import { useLanguage } from "../i18n/LanguageContext";
 
 if (typeof window !== "undefined") {
@@ -23,176 +16,188 @@ if (typeof window !== "undefined") {
 const AboutSection: React.FC = () => {
   const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
 
   const techStack = [
-    { name: "React", icon: <FaReact style={{ color: '#61DAFB' }} /> },
-    { name: "JavaScript", icon: <SiJavascript style={{ color: '#F7DF1E' }} /> },
-    { name: "Java", icon: <FaJava style={{ color: '#007396' }} /> },
-    { name: "PHP", icon: <FaPhp style={{ color: '#777BB4' }} /> },
-    { name: "Node.js", icon: <FaNodeJs style={{ color: '#339933' }} /> },
-    { name: "Python", icon: <FaPython style={{ color: '#3776AB' }} /> },
-    { name: "MySQL", icon: <SiMysql style={{ color: '#4479A1' }} /> },
-    { name: "GitHub", icon: <FaGithub style={{ color: '#FFFFFF' }} /> },
-    { name: "Docker", icon: <FaDocker style={{ color: '#2496ED' }} /> },
-    { name: "AWS", icon: <FaAws style={{ color: '#FF9900' }} /> },
+    { name: "React", icon: FaReact },
+    { name: "TypeScript", icon: SiTypescript },
+    { name: "Node.js", icon: FaNodeJs },
+    { name: "Python", icon: FaPython },
+    { name: "Java", icon: FaJava },
+    { name: "MySQL", icon: SiMysql },
+    { name: "Tailwind", icon: SiTailwindcss },
+    { name: "Docker", icon: FaDocker },
+    { name: "AWS", icon: FaAws },
+    { name: "GitHub", icon: FaGithub },
   ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Title Animation
-      gsap.fromTo(titleRef.current,
-        { opacity: 0, y: 50 },
+      // Label - empieza antes de ser visible
+      gsap.fromTo(".about-label", 
+        { x: -100, opacity: 0 },
         {
-          opacity: 1,
-          y: 0,
-          duration: 1,
+          x: 0, opacity: 1, duration: 1,
           ease: "power3.out",
-          scrollTrigger: {
-            trigger: titleRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
+          scrollTrigger: { 
+            trigger: ".about-label", 
+            start: "top 95%",
+            toggleActions: "restart none restart none"
           }
         }
       );
 
-      // Paragraphs Animation
-      gsap.fromTo(".about-paragraph",
-        { opacity: 0, y: 30 },
+      // Título - empieza muy pronto
+      gsap.fromTo(".about-title-wrap", 
+        { clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)" },
         {
-          opacity: 1,
-          y: 0,
-          stagger: 0.2,
-          duration: 0.8,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".about-paragraph",
-            start: "top 85%",
-            toggleActions: "play none none reverse",
+          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+          duration: 1.4,
+          ease: "power4.inOut",
+          scrollTrigger: { 
+            trigger: ".about-title-wrap", 
+            start: "top 100%",
+            toggleActions: "restart none restart none"
           }
         }
       );
 
-      // Skills Animation
-      const skillItems = gsap.utils.toArray(".skill-item");
-      gsap.fromTo(skillItems,
-        { opacity: 0, x: -20 },
+      // Párrafos
+      gsap.fromTo(".about-text",
+        { y: 80, opacity: 0 },
         {
-          opacity: 1,
-          x: 0,
-          stagger: 0.05,
-          duration: 0.6,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".skill-item", // Use the first item or container as trigger? Better to use batch or just the first one if they are grouped.
-            start: "top 90%",
-            toggleActions: "play none none reverse",
+          y: 0, opacity: 1, duration: 1.2, stagger: 0.2,
+          ease: "power3.out",
+          scrollTrigger: { 
+            trigger: ".about-text", 
+            start: "top 100%",
+            toggleActions: "restart none restart none"
           }
         }
       );
 
-      // Tech Stack Animation
-      const techItems = gsap.utils.toArray(".tech-item");
-      gsap.fromTo(techItems,
-        { opacity: 0, y: 20, scale: 0.8 },
+      // Skills
+      gsap.fromTo(".skill-item",
+        { x: 50, opacity: 0 },
         {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          stagger: 0.05,
-          duration: 0.6,
+          x: 0, opacity: 1, duration: 0.8, stagger: 0.1,
+          ease: "power3.out",
+          scrollTrigger: { 
+            trigger: ".skills-list", 
+            start: "top 100%",
+            toggleActions: "restart none restart none"
+          }
+        }
+      );
+
+      // Tech stack
+      gsap.fromTo(".tech-icon",
+        { y: 60, opacity: 0, scale: 0.5, rotation: -10 },
+        {
+          y: 0, opacity: 1, scale: 1, rotation: 0, 
+          duration: 0.8, stagger: 0.08,
           ease: "back.out(1.7)",
-          scrollTrigger: {
-            trigger: ".tech-item",
-            start: "top 90%",
-            toggleActions: "play none none reverse",
+          scrollTrigger: { 
+            trigger: ".tech-list", 
+            start: "top 100%",
+            toggleActions: "restart none restart none"
           }
         }
       );
+
+      // Línea decorativa
+      gsap.fromTo(".about-line",
+        { scaleX: 0 },
+        {
+          scaleX: 1, duration: 1.5,
+          ease: "power3.inOut",
+          scrollTrigger: { 
+            trigger: ".about-line", 
+            start: "top 100%",
+            toggleActions: "restart none restart none"
+          }
+        }
+      );
+
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section
-      id="about"
-      ref={sectionRef}
-      className="py-12 md:py-16 px-4 relative"
-    >
-      <div className="max-w-5xl mx-auto backdrop-blur-md bg-black/20 rounded-3xl p-8 md:p-12 border border-white/10">
-        <h2
-          ref={titleRef}
-          className="text-3xl md:text-4xl font-bold text-white mb-8 md:mb-10 text-center"
-        >
-          {t.about.title}
-        </h2>
+    <section id="about" ref={sectionRef} className="section relative overflow-hidden">
+      <div className="orb w-[500px] h-[500px] top-0 -right-[200px]" />
+      <div className="absolute top-1/2 left-0 w-[1px] h-32 bg-gradient-to-b from-transparent via-white/10 to-transparent" />
 
-        <div className="space-y-4 mb-10 md:mb-12 text-white/80 leading-relaxed max-w-3xl mx-auto">
-          <p className="about-paragraph text-sm md:text-base">
-            {t.about.description1}
-          </p>
-          <p className="about-paragraph text-sm md:text-base">
-            {t.about.description2}
-          </p>
+      <div className="container relative z-10">
+        <div className="about-label flex items-center gap-4 mb-6">
+          <span className="text-mono">01</span>
+          <span className="w-12 h-px bg-white/20" />
+          <span className="text-mono text-white/40">{t.about.title}</span>
+        </div>
+        
+        <div className="about-title-wrap mb-20">
+          <h2 className="text-heading max-w-3xl">
+            {t.about.description1.split('.')[0]}.
+          </h2>
         </div>
 
-        <div className="mb-10 md:mb-12">
-          <h3 className="text-xl md:text-2xl font-bold mb-6 md:mb-8 text-white text-center">
-            {t.about.professionalSkillsTitle}
-          </h3>
+        <div className="grid lg:grid-cols-5 gap-16 lg:gap-20">
+          <div className="lg:col-span-3 space-y-8">
+            <p className="about-text text-body-lg">{t.about.description1}</p>
+            <p className="about-text text-body-lg">{t.about.description2}</p>
+            <div className="about-line h-px w-full bg-gradient-to-r from-white/15 via-white/5 to-transparent origin-left" />
+          </div>
 
-          <div className="grid grid-cols-2 gap-3 md:gap-4 max-w-4xl mx-auto">
-            {t.about.professionalSkills.map((skill, index) => (
-              <div
-                key={`prof-${index}`}
-                className="skill-item flex items-center gap-2 p-2 md:p-3 bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition-all duration-300 hover:translate-x-1"
-              >
-                <span className="text-blue-400 flex-shrink-0 text-xs">✓</span>
-                <span className="text-xs text-white/80 leading-tight">
-                  {skill}
-                </span>
-              </div>
-            ))}
-            {t.about.additionalSkills.map((skill, index) => (
-              <div
-                key={`add-${index}`}
-                className="skill-item flex items-center gap-2 p-2 md:p-3 bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition-all duration-300 hover:translate-x-1"
-              >
-                <span className="text-purple-400 flex-shrink-0 text-xs">✓</span>
-                <span className="text-xs text-white/80 leading-tight">
-                  {skill}
-                </span>
-              </div>
-            ))}
+          <div className="lg:col-span-2">
+            <h3 className="text-mono mb-8 flex items-center gap-3">
+              <span className="w-2 h-2 rounded-full bg-white/50" />
+              {t.about.professionalSkillsTitle}
+            </h3>
+            <ul className="skills-list space-y-4">
+              {t.about.professionalSkills.map((skill, i) => (
+                <li 
+                  key={i} 
+                  className="skill-item group flex items-center gap-4 text-white/50 hover:text-white transition-all duration-300"
+                >
+                  <span className="w-6 h-px bg-white/20 group-hover:w-10 group-hover:bg-white/50 transition-all duration-300" />
+                  <span className="text-sm">{skill}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
-        <div>
-          <h3 className="text-xl md:text-2xl font-bold mb-6 md:mb-8 text-white text-center">
+        <div className="mt-32 pt-16 border-t border-white/5">
+          <h3 className="text-mono mb-12 flex items-center gap-3">
+            <span className="w-2 h-2 rounded-full bg-white/50" />
             {t.about.stackTitle}
           </h3>
-
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-5 gap-4 md:gap-5 max-w-4xl mx-auto">
-            {techStack.map((tech, index) => (
-              <div
-                key={index}
-                className="tech-item flex flex-col items-center justify-center p-4 md:p-5 bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 hover:border-white/20 cursor-pointer transition-all duration-300 hover:scale-110 hover:-translate-y-2 group"
-              >
-                <div className="text-2xl md:text-3xl mb-2 md:mb-3 group-hover:scale-110 transition-transform duration-300">
-                  {tech.icon}
+          
+          <div className="tech-list grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-8 gap-y-10">
+            {techStack.map((tech, i) => {
+              const Icon = tech.icon;
+              return (
+                <div
+                  key={i}
+                  className="tech-icon group flex items-center gap-3 cursor-default"
+                >
+                  <div className="relative">
+                    <Icon 
+                      className="text-2xl md:text-3xl text-white/40 group-hover:text-white transition-all duration-500 group-hover:scale-110" 
+                    />
+                    <div 
+                      className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 bg-white/10"
+                    />
+                  </div>
+                  <span className="text-sm text-white/30 group-hover:text-white/70 transition-colors duration-300">
+                    {tech.name}
+                  </span>
                 </div>
-                <span className="text-[10px] md:text-xs text-white/70 text-center font-medium group-hover:text-white transition-colors">
-                  {tech.name}
-                </span>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
-
-      <div className="absolute top-1/4 right-0 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 left-0 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />
     </section>
   );
 };

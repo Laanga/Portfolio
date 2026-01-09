@@ -1,129 +1,101 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import gsap from "gsap";
 import { useLanguage } from "../i18n/LanguageContext";
+import { LenisContext } from "./SmoothScroll";
 
 const Navigation: React.FC = () => {
   const { t } = useLanguage();
-  const [activeSection, setActiveSection] = useState<string>("hero");
+  const lenis = useContext(LenisContext);
+  const [activeSection, setActiveSection] = useState("hero");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [visible, setVisible] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const navRef = useRef<HTMLElement>(null);
-  const mobileMenuRef = useRef<HTMLDivElement>(null);
-  const mobileMenuOverlayRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   const navItems = [
-    { id: "hero", label: t.navigation.about },
-    { id: "about", label: t.navigation.about },
-    { id: "experience", label: t.navigation.experience },
-    { id: "projects", label: t.navigation.projects },
-    { id: "education", label: t.navigation.education },
+    { id: "about", label: t.navigation.about, num: "01" },
+    { id: "experience", label: t.navigation.experience, num: "02" },
+    { id: "projects", label: t.navigation.projects, num: "03" },
+    { id: "education", label: t.navigation.education, num: "04" },
   ];
 
-  // Scroll Logic
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setScrolled(currentScrollY > 50);
+      const y = window.scrollY;
+      setIsScrolled(y > 50);
+      setIsVisible(y < lastScrollY || y < 100);
+      setLastScrollY(y);
 
-      // Auto-hide logic
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setVisible(false); // Scrolling down
-      } else {
-        setVisible(true); // Scrolling up
-      }
-
-      setLastScrollY(currentScrollY);
-
-      // Active section logic
-      const sections = navItems.map(item => item.id);
-      const scrollPosition = window.scrollY + 200;
-
-      for (const sectionId of sections) {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(sectionId);
+      const offset = 200;
+      for (const item of navItems) {
+        const el = document.getElementById(item.id);
+        if (el) {
+          const { offsetTop, offsetHeight } = el;
+          if (y + offset >= offsetTop && y + offset < offsetTop + offsetHeight) {
+            setActiveSection(item.id);
             break;
           }
         }
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  // Navbar Visibility Animation
   useEffect(() => {
-    if (navRef.current) {
-      gsap.to(navRef.current, {
-        y: visible ? 0 : -100,
-        opacity: visible ? 1 : 0,
-        duration: 0.3,
-        ease: "power2.inOut"
-      });
-    }
-  }, [visible]);
+    gsap.to(navRef.current, {
+      y: isVisible ? 0 : -100,
+      duration: 0.4,
+      ease: "power3.out",
+    });
+  }, [isVisible]);
 
-  // Mobile Menu Animation
   useEffect(() => {
+    if (!menuRef.current) return;
+
     if (isMenuOpen) {
-      // Open animation
-      gsap.to(mobileMenuOverlayRef.current, {
-        opacity: 1,
-        duration: 0.3,
-        display: "block",
+      document.body.style.overflow = "hidden";
+      gsap.to(menuRef.current, {
+        clipPath: "circle(150% at calc(100% - 2rem) 2rem)",
+        duration: 0.8,
+        ease: "power4.inOut",
       });
-      gsap.to(mobileMenuRef.current, {
-        x: 0,
-        duration: 0.4,
-        ease: "power3.out",
-        display: "block",
-      });
-
-      // Stagger menu items
-      gsap.fromTo(".mobile-nav-item",
-        { x: 20, opacity: 0 },
-        { x: 0, opacity: 1, stagger: 0.1, duration: 0.3, delay: 0.2 }
+      gsap.fromTo(".menu-item",
+        { y: 60, opacity: 0, rotateX: -45 },
+        { y: 0, opacity: 1, rotateX: 0, stagger: 0.08, duration: 0.6, delay: 0.3, ease: "power3.out" }
+      );
+      gsap.fromTo(".menu-line",
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.8, delay: 0.5, ease: "power3.inOut" }
       );
     } else {
-      // Close animation
-      gsap.to(mobileMenuOverlayRef.current, {
-        opacity: 0,
-        duration: 0.3,
-        onComplete: () => {
-          if (mobileMenuOverlayRef.current) mobileMenuOverlayRef.current.style.display = "none";
-        }
-      });
-      gsap.to(mobileMenuRef.current, {
-        x: "100%",
-        duration: 0.3,
-        ease: "power3.in",
-        onComplete: () => {
-          if (mobileMenuRef.current) mobileMenuRef.current.style.display = "none";
-        }
+      document.body.style.overflow = "";
+      gsap.to(menuRef.current, {
+        clipPath: "circle(0% at calc(100% - 2rem) 2rem)",
+        duration: 0.6,
+        ease: "power3.inOut",
       });
     }
   }, [isMenuOpen]);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-      setIsMenuOpen(false);
+  const scrollTo = (id: string) => {
+    setIsMenuOpen(false);
+    const target = id === "hero" ? "#hero" : `#${id}`;
+    
+    if (lenis) {
+      lenis.scrollTo(target, { offset: -80, duration: 1.2 });
+    } else {
+      const el = document.querySelector(target);
+      if (el) {
+        const y = el.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
     }
   };
 
@@ -131,102 +103,117 @@ const Navigation: React.FC = () => {
     <>
       <nav
         ref={navRef}
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          isScrolled 
+            ? "py-4 bg-[#050505]/80 backdrop-blur-xl border-b border-white/5" 
+            : "py-6"
+        }`}
       >
-        <div className={`max-w-xl mx-auto px-4 transition-all duration-300 ${scrolled ? "mt-2" : "mt-3"}`}>
-          <div className="relative">
-            {/* Apple-style pill navbar */}
-            <div className="relative bg-black/40 backdrop-blur-xl border border-white/10 rounded-full shadow-lg">
-              <div className="flex items-center justify-between px-5 py-2">
-                {/* Logo - Compact */}
-                <div
-                  className="relative cursor-pointer hover:scale-105 active:scale-95 transition-transform flex-shrink-0"
-                  onClick={() => scrollToSection("hero")}
-                >
-                  <div className="w-7 h-7 rounded-full overflow-hidden border border-white/20 bg-black/20">
-                    <img
-                      src="/icon_portfolio.jpg"
-                      alt="Logo"
-                      className="w-full h-full object-cover object-center"
-                    />
-                  </div>
-                </div>
+        <div className="container">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <button
+              onClick={() => scrollTo("hero")}
+              className="relative group"
+            >
+              <span className="text-xl font-semibold text-white transition-colors">
+                AL<span className="text-white/50 group-hover:text-white transition-colors duration-300">.</span>
+              </span>
+            </button>
 
-                {/* Desktop Navigation - Apple style */}
-                <div className="hidden md:flex items-center gap-0.5">
-                  {navItems.slice(1).map((item) => (
-                    <button
-                      key={item.id}
-                      onClick={() => scrollToSection(item.id)}
-                      className={`relative px-3.5 py-2 rounded-full text-base font-medium transition-all duration-200 ${activeSection === item.id
-                        ? "text-white bg-white/15"
-                        : "text-white/70 hover:text-white hover:bg-white/5"
-                        }`}
-                    >
-                      {item.label}
-                    </button>
-                  ))}
-                </div>
-
-                {/* Mobile Menu Button - Minimal */}
+            {/* Desktop Nav */}
+            <div className="hidden md:flex items-center gap-1">
+              {navItems.map((item) => (
                 <button
-                  onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className="md:hidden relative p-1.5 rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all active:scale-95 flex-shrink-0"
-                  aria-label="Toggle menu"
+                  key={item.id}
+                  onClick={() => scrollTo(item.id)}
+                  className={`relative px-4 py-2 text-sm transition-all duration-300 group ${
+                    activeSection === item.id
+                      ? "text-white"
+                      : "text-white/40 hover:text-white/80"
+                  }`}
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    {isMenuOpen ? (
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    ) : (
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                    )}
-                  </svg>
+                  <span className="relative z-10">{item.label}</span>
+                  
+                  {/* Active indicator */}
+                  {activeSection === item.id && (
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-white" />
+                  )}
+                  
+                  {/* Hover background */}
+                  <span className="absolute inset-0 bg-white/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </button>
-              </div>
+              ))}
             </div>
+
+            {/* Mobile Menu Toggle */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden w-12 h-12 flex items-center justify-center rounded-full hover:bg-white/5 transition-colors duration-300"
+              aria-label="Menu"
+            >
+              <div className="relative w-5 h-3">
+                <span className={`absolute left-0 w-full h-[1.5px] bg-white transition-all duration-300 ${
+                  isMenuOpen ? "top-1/2 -translate-y-1/2 rotate-45" : "top-0"
+                }`} />
+                <span className={`absolute left-0 w-full h-[1.5px] bg-white transition-all duration-300 ${
+                  isMenuOpen ? "top-1/2 -translate-y-1/2 -rotate-45" : "bottom-0"
+                }`} />
+              </div>
+            </button>
           </div>
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu */}
       <div
-        ref={mobileMenuOverlayRef}
-        onClick={() => setIsMenuOpen(false)}
-        className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 hidden md:hidden"
-        style={{ opacity: 0 }}
-      />
-
-      {/* Mobile Menu Sidebar */}
-      <div
-        ref={mobileMenuRef}
-        className="fixed top-0 right-0 bottom-0 w-[300px] bg-black/90 backdrop-blur-xl border-l border-white/10 z-50 hidden md:hidden"
-        style={{ transform: "translateX(100%)" }}
+        ref={menuRef}
+        className="fixed inset-0 z-40 bg-[#050505] flex items-center justify-center md:hidden"
+        style={{ clipPath: "circle(0% at calc(100% - 2rem) 2rem)" }}
       >
-        <div className="p-6">
-          <div className="flex justify-end mb-8">
+        {/* Background grid */}
+        <div 
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)
+            `,
+            backgroundSize: '60px 60px',
+          }}
+        />
+
+        <nav className="relative flex flex-col items-center gap-2">
+          {navItems.map((item, i) => (
             <button
-              onClick={() => setIsMenuOpen(false)}
-              className="p-2 rounded-lg bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all hover:rotate-90 active:scale-90"
+              key={item.id}
+              onClick={() => scrollTo(item.id)}
+              className="menu-item group relative py-4 overflow-hidden"
+              style={{ perspective: "1000px" }}
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-          <nav className="space-y-2">
-            {navItems.slice(1).map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`mobile-nav-item w-full text-left px-5 py-3.5 rounded-xl text-base font-medium transition-all ${activeSection === item.id
-                  ? "bg-white/10 text-white"
-                  : "text-white/60 hover:text-white hover:bg-white/5"
-                  }`}
-              >
+              <span className={`block text-4xl font-medium transition-colors duration-300 ${
+                activeSection === item.id 
+                  ? "text-white" 
+                  : "text-white/30 group-hover:text-white"
+              }`}>
                 {item.label}
-              </button>
-            ))}
-          </nav>
+              </span>
+              <span className="absolute -left-8 top-1/2 -translate-y-1/2 text-mono text-xs text-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {item.num}
+              </span>
+            </button>
+          ))}
+          
+          {/* Decorative line */}
+          <div className="menu-line w-32 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mt-8 origin-center" />
+        </nav>
+
+        {/* Corner decorations */}
+        <div className="absolute bottom-12 left-8 text-mono text-xs text-white/20">
+          ÁLVARO LANGA
+        </div>
+        <div className="absolute bottom-12 right-8 text-mono text-xs text-white/20">
+          © {new Date().getFullYear()}
         </div>
       </div>
     </>

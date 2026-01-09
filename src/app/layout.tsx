@@ -3,21 +3,23 @@
 import React from "react";
 import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import ThreeBackground from "../components/ThreeBackground";
+import SectionBackgrounds from "../components/SectionBackgrounds";
+import PremiumBackground from "../components/PremiumBackground";
+import CustomCursor from "../components/CustomCursor";
 import ScrollProgress from "../components/ScrollProgress";
+import SmoothScroll from "../components/SmoothScroll";
 import { LanguageProvider } from "../i18n/LanguageContext";
-import LanguageSwitcher from "../components/LanguageSwitcher";
 import { useDocumentLanguage } from "../i18n/useDocumentLanguage";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
 
 const spaceGrotesk = Space_Grotesk({
-  variable: "--font-geist-sans",
+  variable: "--font-space",
   subsets: ["latin"],
   display: "swap",
 });
 
-const jetbrains = JetBrains_Mono({
-  variable: "--font-geist-mono",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
   display: "swap",
 });
@@ -26,13 +28,15 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
   useDocumentLanguage();
 
   return (
-    <>
-      <ThreeBackground />
+    <SmoothScroll>
+      <SectionBackgrounds />
+      <PremiumBackground />
+      <CustomCursor />
       <ScrollProgress />
-      <LanguageSwitcher />
+      <div className="noise" />
       {children}
       <Analytics />
-    </>
+    </SmoothScroll>
   );
 }
 
@@ -44,12 +48,14 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        <title>Álvaro Langa - Portfolio Dev</title>
-        <meta name="description" content="Portfolio profesional de Álvaro Langa - Desarrollador Software especializado en React, Next.js y tecnologías modernas." />
+        <title>Álvaro Langa — Software Developer</title>
+        <meta 
+          name="description" 
+          content="Portfolio de Álvaro Langa - Desarrollador Software especializado en React, Next.js y tecnologías modernas." 
+        />
+        <link rel="icon" href="/favicon-transparent.svg" type="image/svg+xml" />
       </head>
-      <body
-        className={`${spaceGrotesk.variable} ${jetbrains.variable} antialiased bg-black text-white`}
-      >
+      <body className={`${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
         <LanguageProvider>
           <LayoutContent>{children}</LayoutContent>
         </LanguageProvider>

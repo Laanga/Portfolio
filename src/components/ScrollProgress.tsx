@@ -12,27 +12,28 @@ const ScrollProgress: React.FC = () => {
   const progressRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const element = progressRef.current;
-    if (!element) return;
+    if (!progressRef.current) return;
 
-    gsap.to(element, {
+    gsap.to(progressRef.current, {
       scaleX: 1,
       ease: "none",
       scrollTrigger: {
         trigger: document.body,
         start: "top top",
         end: "bottom bottom",
-        scrub: 0.1,
+        scrub: 0.3,
       },
     });
   }, []);
 
   return (
-    <div
-      ref={progressRef}
-      className="fixed top-0 left-0 right-0 h-1 bg-white origin-left z-[60]"
-      style={{ transform: "scaleX(0)" }}
-    />
+    <div className="fixed top-0 left-0 right-0 h-[2px] z-[100] bg-transparent">
+      <div
+        ref={progressRef}
+        className="h-full bg-gradient-to-r from-white/80 via-white/50 to-white/80 origin-left"
+        style={{ transform: "scaleX(0)" }}
+      />
+    </div>
   );
 };
 

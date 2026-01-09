@@ -2,207 +2,302 @@
 
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { LinkedIn, GitHub, Download, MapPin } from "./icons";
 import { useLanguage } from "../i18n/LanguageContext";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const HeroSection: React.FC = () => {
   const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-
-  // Refs para los botones magnéticos
-  const btnRef1 = useRef<HTMLAnchorElement>(null);
-  const btnRef2 = useRef<HTMLAnchorElement>(null);
+  const hasAnimated = useRef(false);
 
   const socialLinks = [
-    {
-      icon: LinkedIn,
-      href: "https://www.linkedin.com/in/%C3%A1lvaro-langa-dev/",
-      label: "LinkedIn",
-    },
+    { icon: LinkedIn, href: "https://www.linkedin.com/in/%C3%A1lvaro-langa-dev/", label: "LinkedIn" },
     { icon: GitHub, href: "https://github.com/Laanga", label: "GitHub" },
   ];
 
   useEffect(() => {
+    if (hasAnimated.current) return;
+    hasAnimated.current = true;
+
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      // Initial states
+      gsap.set(".hero-line-h", { scaleX: 0, transformOrigin: "left" });
+      gsap.set(".hero-line-v", { scaleY: 0, transformOrigin: "top" });
+      gsap.set(".first-name .char", { yPercent: 110, opacity: 0 });
+      gsap.set(".last-name .char", { yPercent: 110, opacity: 0 });
+      gsap.set(".hero-fade", { y: 40, opacity: 0 });
+      gsap.set(".hero-stagger", { y: 30, opacity: 0 });
+      gsap.set(".scroll-indicator", { opacity: 0, y: -20 });
+      gsap.set(".corner-frame", { opacity: 0, scale: 0.8 });
 
-      // Letras individuales del nombre (parten ocultas en CSS)
-      const letters = gsap.utils.toArray<HTMLElement>(".hero-letter");
-      tl.to(letters, {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        stagger: 0.05,
-        ease: "power3.out",
+      // Master timeline
+      const tl = gsap.timeline({ 
+        defaults: { ease: "power4.out" }, 
+        delay: 0.3 
       });
 
-      // Job Title (parte oculto en CSS)
-      tl.to(
-        ".hero-job-title",
-        { y: 0, opacity: 1, duration: 0.8 },
-        "-=0.3"
-      );
+      // Sequence
+      tl
+        // Corner frames
+        .to(".corner-frame", {
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "power2.out",
+        })
+        
+        // Lines draw in
+        .to(".hero-line-h", {
+          scaleX: 1,
+          duration: 1.2,
+          ease: "power3.inOut",
+        }, "-=0.5")
+        .to(".hero-line-v", {
+          scaleY: 1,
+          duration: 0.8,
+          ease: "power3.inOut",
+        }, "-=0.8")
+        
+        // Role text fades in
+        .to(".hero-role", {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+        }, "-=0.4")
+        
+        // First name letters - más dramático
+        .to(".first-name .char", {
+          yPercent: 0,
+          opacity: 1,
+          duration: 1.2,
+          stagger: 0.05,
+          ease: "power4.out",
+        }, "-=0.5")
+        
+        // Last name letters
+        .to(".last-name .char", {
+          yPercent: 0,
+          opacity: 1,
+          duration: 1.2,
+          stagger: 0.05,
+          ease: "power4.out",
+        }, "-=0.9")
+        
+        // Description and location
+        .to(".hero-fade", {
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          stagger: 0.12,
+        }, "-=0.5")
+        
+        // CTAs and social
+        .to(".hero-stagger", {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          stagger: 0.08,
+        }, "-=0.4")
+        
+        // Scroll indicator
+        .to(".scroll-indicator", {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+        }, "-=0.3");
 
-      // Ubicación (parte oculta en CSS)
-      tl.to(
-        ".hero-location",
-        { y: 0, opacity: 1, duration: 0.8 },
-        "-=0.5"
-      );
-
-      // Botones (parten ocultos en CSS)
-      tl.to(
-        ".hero-btn",
-        { y: 0, opacity: 1, stagger: 0.1, duration: 0.8 },
-        "-=0.5"
-      );
-
-      // Iconos sociales (parten ocultos en CSS)
-      tl.to(
-        ".social-icon",
-        { y: 0, opacity: 1, stagger: 0.1, duration: 0.8 },
-        "-=0.5"
-      );
-
-      // Animación del degradado del título
-      gsap.to(".gradient-text", {
-        backgroundPosition: "200% center",
-        duration: 5,
+      // Continuous scroll indicator animation
+      gsap.to(".scroll-dot", {
+        y: 24,
+        duration: 1.5,
         repeat: -1,
-        ease: "linear",
+        ease: "power1.inOut",
+        delay: 3,
       });
+
+      // Parallax effect on name
+      gsap.to(".hero-name", {
+        yPercent: 20,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1,
+        },
+      });
+
+      // Re-animate on scroll back to hero
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top 50%",
+        onEnterBack: () => {
+          // Reset and replay animations when scrolling back to hero
+          gsap.fromTo(".first-name .char", 
+            { yPercent: 30, opacity: 0.5 },
+            { yPercent: 0, opacity: 1, duration: 0.8, stagger: 0.03, ease: "power3.out" }
+          );
+          gsap.fromTo(".last-name .char", 
+            { yPercent: 30, opacity: 0.5 },
+            { yPercent: 0, opacity: 1, duration: 0.8, stagger: 0.03, ease: "power3.out" }
+          );
+        }
+      });
+
     }, sectionRef);
 
-    // Efecto magnético de los botones
-    const setupMagnetic = (ref: React.RefObject<HTMLElement>) => {
-      const el = ref.current;
-      if (!el) return;
-
-      const xTo = gsap.quickTo(el, "x", { duration: 0.5, ease: "power3" });
-      const yTo = gsap.quickTo(el, "y", { duration: 0.5, ease: "power3" });
-
-      const handleMouseMove = (e: MouseEvent) => {
-        const rect = el.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        xTo(x * 0.3);
-        yTo(y * 0.3);
-      };
-
-      const handleMouseLeave = () => {
-        xTo(0);
-        yTo(0);
-      };
-
-      el.addEventListener("mousemove", handleMouseMove);
-      el.addEventListener("mouseleave", handleMouseLeave);
-
-      return () => {
-        el.removeEventListener("mousemove", handleMouseMove);
-        el.removeEventListener("mouseleave", handleMouseLeave);
-      };
-    };
-
-    const cleanup1 = setupMagnetic(btnRef1 as React.RefObject<HTMLElement>);
-    const cleanup2 = setupMagnetic(btnRef2 as React.RefObject<HTMLElement>);
-
-    return () => {
-      ctx.revert();
-      if (cleanup1) cleanup1();
-      if (cleanup2) cleanup2();
-    };
+    return () => ctx.revert();
   }, []);
+
+  const firstName = "Álvaro";
+  const lastName = "Langa";
 
   return (
     <section
       id="hero"
       ref={sectionRef}
-      className="min-h-screen flex items-center justify-center px-4 py-16 md:py-20 relative overflow-hidden"
+      className="relative min-h-screen flex items-center overflow-hidden"
     >
-      {/* Fondo limpio sin orbes ni foto */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none" />
+      {/* Decorative lines */}
+      <div className="absolute top-0 left-[10%] w-px h-[30vh] hero-line-v bg-gradient-to-b from-white/20 to-transparent" />
+      <div className="absolute bottom-[20%] left-0 w-[40%] h-px hero-line-h bg-gradient-to-r from-white/15 to-transparent" />
+      
+      {/* Ambient orbs */}
+      <div className="orb w-[700px] h-[700px] -top-[300px] -left-[200px]" />
+      <div className="orb w-[500px] h-[500px] top-[40%] -right-[150px]" />
 
-      <div className="max-w-4xl mx-auto text-center relative z-10">
-        <div>
-          <h1
-            ref={titleRef}
-            className="gradient-text text-5xl md:text-7xl lg:text-8xl font-bold mb-4 tracking-tight text-white"
-          >
-            {"Álvaro Langa".split("").map((char, index) => (
-              <span
-                key={index}
-                className="hero-letter inline-block opacity-0 translate-y-4"
-              >
-                {char === " " ? "\u00A0" : char}
+      <div className="container relative z-10 py-20">
+        <div className="max-w-5xl">
+          {/* Role */}
+          <div className="overflow-hidden mb-8">
+            <p className="hero-role hero-fade text-mono flex items-center gap-3">
+              <span className="w-8 h-px bg-white/30" />
+              {t.profile.jobTitle}
+            </p>
+          </div>
+
+          {/* Name */}
+          <div className="hero-name mb-8">
+            <h1 className="text-display">
+              {/* First Name - White */}
+              <span className="first-name block overflow-hidden text-white">
+                {firstName.split("").map((char, i) => (
+                  <span 
+                    key={i} 
+                    className="char inline-block"
+                  >
+                    {char}
+                  </span>
+                ))}
               </span>
-            ))}
-          </h1>
+              
+              {/* Last Name - Outlined/Stroke effect */}
+              <span 
+                className="last-name block overflow-hidden"
+                style={{
+                  WebkitTextStroke: '1px rgba(255,255,255,0.8)',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                {lastName.split("").map((char, i) => (
+                  <span 
+                    key={i} 
+                    className="char inline-block"
+                  >
+                    {char}
+                  </span>
+                ))}
+              </span>
+            </h1>
+          </div>
 
-          <p className="hero-job-title text-lg md:text-xl text-white/70 font-medium mb-4 md:mb-6 opacity-0 translate-y-4">
-            {t.profile.jobTitle}
+          {/* Horizontal line */}
+          <div className="hero-line-h w-32 h-px bg-gradient-to-r from-white/20 to-transparent mb-10 origin-left" />
+
+          {/* Description */}
+          <p className="hero-fade text-body-lg max-w-lg mb-4">
+            {t.hero.description}
           </p>
 
-          <div className="hero-location flex items-center justify-center gap-2 text-white/50 text-sm md:text-base mb-6 md:mb-8 opacity-0 translate-y-4">
-            <MapPin size={16} className="text-white/40" />
-            <span>{t.profile.location}</span>
+          {/* Location */}
+          <p className="hero-fade flex items-center gap-2 text-sm text-white/40" style={{ marginBottom: '64px' }}>
+            <MapPin size={14} className="text-white/50" />
+            {t.profile.location}
+          </p>
+
+          {/* CTAs */}
+          <div className="flex flex-wrap items-center gap-4" style={{ marginBottom: '40px' }}>
+            <a
+              href="/CV-alvaro-langa-2.0.pdf"
+              download
+              className="hero-stagger btn btn-primary group"
+            >
+              <Download size={16} className="transition-transform group-hover:-translate-y-0.5" />
+              {t.profile.downloadCV}
+            </a>
+            <a
+              href={`mailto:${t.profile.email}`}
+              className="hero-stagger btn btn-ghost group"
+            >
+              {t.hero.contact}
+              <svg 
+                width="14" 
+                height="14" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2"
+                className="transition-transform group-hover:translate-x-1"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+
+          {/* Social */}
+          <div className="flex items-center gap-6">
+            {socialLinks.map((social, i) => {
+              const Icon = social.icon;
+              return (
+                <a
+                  key={i}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hero-stagger text-white/30 hover:text-white transition-all duration-300 hover:scale-110"
+                  aria-label={social.label}
+                >
+                  <Icon size={22} />
+                </a>
+              );
+            })}
+            <span className="hero-stagger text-white/10 text-sm">·</span>
+            <span className="hero-stagger text-mono text-xs text-white/30">
+              Available for work
+            </span>
           </div>
         </div>
+      </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 mb-8 md:mb-10">
-          <a
-            ref={btnRef1}
-            href="/CV-Alvaro-Langa-2.0.pdf"
-            download="CV-Álvaro-Langa-2.0.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hero-btn group w-full sm:w-auto px-6 md:px-8 py-3 md:py-3.5 bg-white hover:bg-white/90 text-black rounded-xl text-sm md:text-base font-semibold transition-all duration-300 flex items-center justify-center gap-2.5 md:gap-3 shadow-xl opacity-0 translate-y-4"
-          >
-            <Download size={16} />
-            <span>{t.profile.downloadCV}</span>
-          </a>
-
-          <a
-            ref={btnRef2}
-            href={`mailto:${t.profile.email}`}
-            className="hero-btn group w-full sm:w-auto px-6 md:px-8 py-3 md:py-3.5 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/30 text-white rounded-xl text-sm md:text-base font-semibold transition-all duration-300 flex items-center justify-center gap-2.5 md:gap-3 opacity-0 translate-y-4"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              className="relative z-10"
-            >
-              <rect width="20" height="16" x="2" y="4" rx="2" />
-              <path d="m22 7-10 5L2 7" />
-            </svg>
-            <span className="relative z-10">
-              {t.profile.email.split("@")[0]}
-            </span>
-          </a>
-        </div>
-
-        <div className="flex items-center justify-center gap-4 md:gap-6">
-          {socialLinks.map((social, index) => {
-            const IconComponent = social.icon;
-            return (
-              <a
-                key={index}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-icon group w-12 h-12 md:w-14 md:h-14 flex items-center justify-center bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl text-white/60 hover:text-white transition-all duration-300 hover:scale-110 active:scale-95 opacity-0 translate-y-4"
-                aria-label={social.label}
-              >
-                <IconComponent size={20} />
-              </a>
-            );
-          })}
+      {/* Scroll Indicator */}
+      <div className="scroll-indicator absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center">
+        <span className="text-mono text-[10px] text-white/30 mb-4 tracking-widest">SCROLL</span>
+        <div className="w-px h-16 bg-white/10 rounded-full overflow-hidden relative">
+          <div className="scroll-dot absolute top-0 left-0 w-full h-4 bg-white/50 rounded-full" />
         </div>
       </div>
+
+      {/* Frame corners - decorative */}
+      <div className="corner-frame absolute top-8 left-8 w-16 h-16 border-l border-t border-white/10" />
+      <div className="corner-frame absolute top-8 right-8 w-16 h-16 border-r border-t border-white/10" />
+      <div className="corner-frame absolute bottom-8 left-8 w-16 h-16 border-l border-b border-white/10" />
+      <div className="corner-frame absolute bottom-8 right-8 w-16 h-16 border-r border-b border-white/10" />
     </section>
   );
 };

@@ -1,136 +1,213 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { LinkedIn, GitHub } from "./icons";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLanguage } from "../i18n/LanguageContext";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const Footer: React.FC = () => {
   const { t } = useLanguage();
+  const footerRef = useRef<HTMLElement>(null);
 
-  const socialLinks = [
-    { icon: LinkedIn, href: "https://www.linkedin.com/in/%C3%A1lvaro-langa-dev/", label: "LinkedIn" },
-    { icon: GitHub, href: "https://github.com/Laanga", label: "GitHub" },
-  ];
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Label - empieza antes
+      gsap.fromTo(".footer-label", 
+        { x: -100, opacity: 0 },
+        {
+          x: 0, opacity: 1, duration: 1,
+          ease: "power3.out",
+          scrollTrigger: { 
+            trigger: ".footer-label", 
+            start: "top 100%",
+            toggleActions: "restart none restart none"
+          }
+        }
+      );
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+      // CTA text
+      gsap.fromTo(".footer-char",
+        { yPercent: 120, opacity: 0 },
+        {
+          yPercent: 0, opacity: 1, duration: 1, stagger: 0.03,
+          ease: "power4.out",
+          scrollTrigger: { 
+            trigger: ".footer-cta", 
+            start: "top 100%",
+            toggleActions: "restart none restart none"
+          }
+        }
+      );
 
-  const handleHover = (e: React.MouseEvent<HTMLElement>, scale = 1.05, x = 0, y = 0) => {
-    gsap.to(e.currentTarget, {
-      scale: scale,
-      x: x,
-      y: y,
-      duration: 0.3,
-      ease: "power2.out"
-    });
-  };
+      // Descripción y botón
+      gsap.fromTo(".footer-fade",
+        { y: 50, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: 1, stagger: 0.2,
+          ease: "power3.out",
+          scrollTrigger: { 
+            trigger: ".footer-content", 
+            start: "top 100%",
+            toggleActions: "restart none restart none"
+          }
+        }
+      );
 
-  const handleHoverExit = (e: React.MouseEvent<HTMLElement>) => {
-    gsap.to(e.currentTarget, {
-      scale: 1,
-      x: 0,
-      y: 0,
-      duration: 0.3,
-      ease: "power2.out"
-    });
-  };
+      // Bottom section
+      gsap.fromTo(".footer-bottom-item",
+        { y: 30, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: 0.8, stagger: 0.15,
+          ease: "power2.out",
+          scrollTrigger: { 
+            trigger: ".footer-bottom", 
+            start: "top 100%",
+            toggleActions: "restart none restart none"
+          }
+        }
+      );
+
+      // Línea decorativa
+      gsap.fromTo(".footer-line",
+        { scaleX: 0 },
+        {
+          scaleX: 1, duration: 1.5,
+          ease: "power3.inOut",
+          scrollTrigger: { 
+            trigger: ".footer-line", 
+            start: "top 100%",
+            toggleActions: "restart none restart none"
+          }
+        }
+      );
+
+      // LANGA grande
+      gsap.fromTo(".footer-big-text",
+        { yPercent: 50, opacity: 0, scale: 0.9 },
+        {
+          yPercent: 0, opacity: 1, scale: 1, duration: 1.5,
+          ease: "power3.out",
+          scrollTrigger: { 
+            trigger: ".footer-big-text", 
+            start: "top 100%",
+            toggleActions: "restart none restart none"
+          }
+        }
+      );
+
+    }, footerRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  const ctaText = t.footer.title;
 
   return (
-    <footer className="relative py-12 md:py-14 px-4 border-t border-white/10 mt-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 mb-8 md:mb-10">
-          <div>
-            <h3
-              className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4 inline-block cursor-default"
-              onMouseEnter={(e) => handleHover(e, 1.05)}
-              onMouseLeave={handleHoverExit}
-            >
-              Álvaro Langa
-            </h3>
-            <p className="text-white/60 text-xs md:text-sm leading-relaxed">
-              {t.profile.jobTitle}
-            </p>
-          </div>
+    <footer id="footer" ref={footerRef} className="section relative overflow-hidden">
+      <div className="orb w-[600px] h-[600px] bottom-0 left-1/2 -translate-x-1/2 opacity-5" />
+      
+      <div className="footer-line absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent origin-center" />
 
-          <div>
-            <h4 className="text-base md:text-lg font-semibold text-white mb-3 md:mb-4">Links</h4>
-            <nav className="space-y-2 md:space-y-2.5">
-              {[
-                { id: "about", label: t.navigation.about },
-                { id: "experience", label: t.navigation.experience },
-                { id: "education", label: t.navigation.education },
-                { id: "projects", label: t.navigation.projects },
-              ].map((link) => (
-                <button
-                  key={link.id}
-                  onClick={() => {
-                    const element = document.getElementById(link.id);
-                    if (element) {
-                      const offset = 80;
-                      const elementPosition = element.getBoundingClientRect().top;
-                      const offsetPosition = elementPosition + window.pageYOffset - offset;
-                      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
-                    }
-                  }}
-                  className="block text-white/60 hover:text-white text-xs md:text-sm transition-colors text-left"
-                  onMouseEnter={(e) => handleHover(e, 1, 5)}
-                  onMouseLeave={handleHoverExit}
+      <div className="container relative z-10">
+        <div className="footer-label flex items-center gap-4 mb-8">
+          <span className="text-mono">05</span>
+          <span className="w-12 h-px bg-white/20" />
+          <span className="text-mono text-white/40">Contacto</span>
+        </div>
+
+        <div className="text-center" style={{ paddingTop: '64px', paddingBottom: '96px' }}>
+          <h2 className="footer-cta text-heading md:text-display mb-8 overflow-hidden">
+            <span className="inline-block">
+              {ctaText.split("").map((char, i) => (
+                <span 
+                  key={i} 
+                  className="footer-char inline-block"
                 >
-                  {link.label}
-                </button>
+                  {char === " " ? "\u00A0" : char}
+                </span>
               ))}
-            </nav>
-          </div>
+            </span>
+          </h2>
 
-          <div>
-            <h4 className="text-base md:text-lg font-semibold text-white mb-3 md:mb-4">Contact</h4>
-            <a
-              href={`mailto:${t.profile.email}`}
-              className="block text-white/60 hover:text-white text-xs md:text-sm mb-3 md:mb-4 transition-colors break-all"
+          <div className="footer-content">
+            <p className="footer-fade text-body-lg max-w-lg mx-auto text-white/45" style={{ marginBottom: '56px' }}>
+              {t.footer.description}
+            </p>
+
+            <a 
+              href={`mailto:${t.footer.email}`} 
+              className="footer-fade btn btn-primary group inline-flex"
             >
-              {t.profile.email}
+              <svg 
+                width="18" 
+                height="18" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2"
+                className="transition-transform group-hover:scale-110"
+              >
+                <rect width="20" height="16" x="2" y="4" rx="2"/>
+                <path d="m22 7-10 5L2 7"/>
+              </svg>
+              <span>{t.footer.email}</span>
             </a>
+          </div>
+        </div>
 
-            <div className="flex gap-3 md:gap-4">
-              {socialLinks.map((social, index) => {
-                const IconComponent = social.icon;
-                return (
-                  <a
-                    key={index}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-9 h-9 md:w-10 md:h-10 flex items-center justify-center bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg text-white/60 hover:text-white transition-all"
-                    onMouseEnter={(e) => handleHover(e, 1.1, 0, -2)}
-                    onMouseLeave={handleHoverExit}
-                    aria-label={social.label}
-                  >
-                    <IconComponent size={18} />
-                  </a>
-                );
-              })}
+        <div className="footer-bottom pt-10 border-t border-white/5">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="footer-bottom-item flex items-center gap-3">
+              <span className="text-lg font-semibold text-white">AL<span className="text-white/50">.</span></span>
+              <span className="w-px h-4 bg-white/10" />
+              <span className="text-sm text-white/40">Software Developer</span>
+            </div>
+
+            <div className="footer-bottom-item flex items-center gap-8">
+              <a
+                href="https://www.linkedin.com/in/%C3%A1lvaro-langa-dev/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-white/40 hover:text-white transition-colors duration-300 link-hover"
+              >
+                LinkedIn
+              </a>
+              <a
+                href="https://github.com/Laanga"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-white/40 hover:text-white transition-colors duration-300 link-hover"
+              >
+                GitHub
+              </a>
+              <a
+                href={`mailto:${t.footer.email}`}
+                className="text-sm text-white/40 hover:text-white transition-colors duration-300 link-hover"
+              >
+                Email
+              </a>
+            </div>
+
+            <div className="footer-bottom-item text-xs text-white/25">
+              © {new Date().getFullYear()} Álvaro Langa
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-between pt-6 md:pt-8 border-t border-white/10 gap-3 md:gap-4">
-          <p className="text-white/40 text-[10px] md:text-xs text-center md:text-left">
-            © {new Date().getFullYear()} Álvaro Langa. All rights reserved.
-          </p>
-
-          <button
-            onClick={scrollToTop}
-            className="flex items-center gap-1.5 md:gap-2 text-white/60 hover:text-white text-xs md:text-sm transition-colors"
-            onMouseEnter={(e) => handleHover(e, 1, 0, -2)}
-            onMouseLeave={handleHoverExit}
+        <div className="footer-big-text mt-16 overflow-hidden pointer-events-none select-none">
+          <span 
+            className="block text-[18vw] font-bold leading-none tracking-tighter text-center"
+            style={{
+              WebkitTextStroke: '2px rgba(255,255,255,0.2)',
+              WebkitTextFillColor: 'transparent',
+            }}
           >
-            <span>Back to top</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M12 19V5M5 12l7-7 7 7" />
-            </svg>
-          </button>
+            LANGA
+          </span>
         </div>
       </div>
     </footer>
