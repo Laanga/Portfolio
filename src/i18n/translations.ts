@@ -1,11 +1,5 @@
 // Spanish translations
 export const es = {
-  // Layout
-  layout: {
-    title: "Álvaro-Langa-PortfolioDev",
-    description: "Portfolio profesional de Álvaro Langa - Desarrollador Software especializado en React, Next.js y tecnologías modernas.",
-  },
-  
   // Navigation
   navigation: {
     about: "Sobre mí",
@@ -29,15 +23,6 @@ export const es = {
       "Control de versiones",
       "Testing y debugging",
       "APIs"
-    ],
-    additionalSkills: [
-      "Gestión de proyectos",
-      "Comunicación efectiva",
-      "Trabajo en equipo",
-      "Resolución de problemas",
-      "Aprendizaje autodidacta",
-      "Mentoring y liderazgo",
-      "Deployment básico"
     ]
   },
 
@@ -62,73 +47,39 @@ export const es = {
   // Education section
   education: {
     title: "Formación",
-    degreeTitle: "Título",
-    certificationsTitle: "Certificaciones",
     degree: {
       title: "Grado Superior Desarrollo de Aplicaciones Web",
       institution: "I.E.S GASPAR MELCHOR DE JOVELLANOS",
       date: "2023 - 2025"
-    },
-    certifications: [
-      {
-        title: "React - The Complete Guide",
-        institution: "Udemy",
-        date: "2023"
-      },
-      {
-        title: "AWS Cloud Practitioner", 
-        institution: "Amazon Web Services",
-        date: "2023"
-      },
-      {
-        title: "Full Stack Web Development",
-        institution: "FreeCodeCamp", 
-        date: "2022"
-      },
-      {
-        title: "Agile Project Management",
-        institution: "LinkedIn Learning",
-        date: "2022"
-      }
-    ]
+    }
   },
 
   // Projects section
   projects: {
     title: "Proyectos",
-    visitButton: "Visitar",
-    status: {
-      completed: "Completado",
-      inProgress: "En progreso"
-    },
     projectsList: [
       {
         title: "GridRush",
-        description: "Aplicación web para gestión de Torneos y carreras de karting. Permite crear torneos, gestionar participantes y realizar seguimiento de carreras.",
-        status: "completed"
+        description: "Aplicación web para gestión de Torneos y carreras de karting. Permite crear torneos, gestionar participantes y realizar seguimiento de carreras."
       },
       {
         title: "F1 Data",
-        description: "F1 Data es una web hecha con React y Vite para explorar la temporada de F1: clasificaciones de pilotos y equipos, calendario de carreras y estadísticas con gráficos interactivos. UI moderna con Tailwind, GSAP y Framer Motion, y datos desde OpenF1 y Ergast.",
-        status: "completed"
+        description: "F1 Data es una web hecha con React y Vite para explorar la temporada de F1: clasificaciones de pilotos y equipos, calendario de carreras y estadísticas con gráficos interactivos. UI moderna con Tailwind, GSAP y Framer Motion, y datos desde OpenF1 y Ergast."
       }
     ]
   },
 
-  // Sidebar Profile
+  // Profile
   profile: {
     jobTitle: "Desarrollador de Software",
     location: "Madrid, España",
     downloadCV: "Descargar CV",
-    followMe: "Sígueme",
-    email: "alvarolangadev@gmail.com"
+    email: "alvarolanga04@gmail.com"
   },
 
   // Hero section
   hero: {
-    title: "Construyo experiencias web limpias, rápidas y accesibles",
     description: "Desarrollador Front‑End especializado en React, Next.js y UI modernas. Inspirado por interfaces minimalistas, tipografía fuerte y animaciones sutiles.",
-    viewProjects: "Ver proyectos",
     contact: "Contacto"
   },
 
@@ -136,20 +87,12 @@ export const es = {
   footer: {
     title: "¿Hablamos?",
     description: "Abierto a colaboraciones y proyectos freelance.",
-    email: "alvarolangadev@gmail.com",
-    linkedIn: "LinkedIn",
-    copyright: "Mi Portafolio"
+    email: "alvarolanga04@gmail.com"
   }
 } as const;
 
 // English translations
 export const en = {
-  // Layout
-  layout: {
-    title: "Álvaro-Langa-PortfolioDev",
-    description: "Professional portfolio of Álvaro Langa - Software Developer specialized in React, Next.js and modern technologies.",
-  },
-  
   // Navigation
   navigation: {
     about: "About",
@@ -173,15 +116,6 @@ export const en = {
       "Version Control",
       "Testing & Debugging",
       "APIs"
-    ],
-    additionalSkills: [
-      "Project Management",
-      "Effective Communication",
-      "Teamwork",
-      "Problem Solving",
-      "Self-directed Learning", 
-      "Mentoring & Leadership",
-      "Basic Deployment"
     ]
   },
 
@@ -206,73 +140,39 @@ export const en = {
   // Education section
   education: {
     title: "Education",
-    degreeTitle: "Degree",
-    certificationsTitle: "Certifications",
     degree: {
       title: "Higher Degree in Web Application Development",
       institution: "I.E.S GASPAR MELCHOR DE JOVELLANOS", 
       date: "2023 - 2025"
-    },
-    certifications: [
-      {
-        title: "React - The Complete Guide",
-        institution: "Udemy",
-        date: "2023"
-      },
-      {
-        title: "AWS Cloud Practitioner",
-        institution: "Amazon Web Services", 
-        date: "2023"
-      },
-      {
-        title: "Full Stack Web Development",
-        institution: "FreeCodeCamp",
-        date: "2022"
-      },
-      {
-        title: "Agile Project Management",
-        institution: "LinkedIn Learning",
-        date: "2022"
-      }
-    ]
+    }
   },
 
   // Projects section
   projects: {
     title: "Projects",
-    visitButton: "Visit",
-    status: {
-      completed: "Completed",
-      inProgress: "In Progress"
-    },
     projectsList: [
       {
         title: "GridRush",
-        description: "Web application for managing karting tournaments and races. Allows creating tournaments, managing participants, and tracking races.",
-        status: "completed"
+        description: "Web application for managing karting tournaments and races. Allows creating tournaments, managing participants, and tracking races."
       },
       {
         title: "F1 Data",
-        description: "F1 Data is a web app built with React and Vite to explore the F1 season: driver and team standings, race calendar, and statistics with interactive charts. Modern UI with Tailwind, GSAP, and Framer Motion, and data from OpenF1 and Ergast.",
-        status: "completed"
+        description: "F1 Data is a web app built with React and Vite to explore the F1 season: driver and team standings, race calendar, and statistics with interactive charts. Modern UI with Tailwind, GSAP, and Framer Motion, and data from OpenF1 and Ergast."
       }
     ]
   },
 
-  // Sidebar Profile
+  // Profile
   profile: {
     jobTitle: "Software Developer",
     location: "Madrid, Spain", 
     downloadCV: "Download CV",
-    followMe: "Follow me",
-    email: "alvarolangadev@gmail.com"
+    email: "alvarolanga04@gmail.com"
   },
 
   // Hero section
   hero: {
-    title: "I build clean, fast and accessible web experiences",
     description: "Front‑End Developer specialized in React, Next.js and modern UI. Inspired by minimalist interfaces, strong typography and subtle animations.",
-    viewProjects: "View projects",
     contact: "Contact"
   },
 
@@ -280,9 +180,7 @@ export const en = {
   footer: {
     title: "Let's talk?",
     description: "Open to collaborations and freelance projects.",
-    email: "alvarolangadev@gmail.com",
-    linkedIn: "LinkedIn", 
-    copyright: "My Portfolio"
+    email: "alvarolanga04@gmail.com"
   }
 } as const;
 

@@ -1,0 +1,10 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" fill="#050505"/>
+  
+  <!-- L shape - bold geometric -->
+  <path d="M112 96 L112 416 L400 416 L400 352 L176 352 L176 96 Z" fill="none" stroke="white" stroke-width="28"/>
+  
+  <!-- A crossbar integrated -->
+  <line x1="144" y1="256" x2="320" y2="256" stroke="white" stroke-width="28"/>
+</svg>

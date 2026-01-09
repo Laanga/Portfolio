@@ -5,38 +5,59 @@ import { es, en, Language, TranslationKeys } from './translations';
 
 interface LanguageContextType {
   language: Language;
-  setLanguage: (lang: Language) => void;
   t: TranslationKeys;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+// Detecta el idioma del navegador
+function detectBrowserLanguage(): Language {
+  if (typeof window === 'undefined') return 'es'; // SSR fallback
+  
+  // navigator.language devuelve cosas como "es-ES", "en-US", "en-GB", etc.
+  const browserLang = navigator.language || (navigator as any).userLanguage || 'es';
+  
+  // Extraer el código de idioma principal (es, en, fr, etc.)
+  const langCode = browserLang.split('-')[0].toLowerCase();
+  
+  // Solo soportamos español e inglés, cualquier otro idioma → inglés
+  if (langCode === 'es') {
+    return 'es';
+  }
+  
+  // Para cualquier otro idioma (inglés, francés, alemán, etc.) usamos inglés
+  return 'en';
+}
+
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<Language>('es');
+  const [isClient, setIsClient] = useState(false);
 
-  // Load saved language from localStorage on mount
+  // Detectar idioma del navegador solo en cliente
   useEffect(() => {
-    const savedLanguage = localStorage.getItem('portfolio-language') as Language;
-    if (savedLanguage && (savedLanguage === 'es' || savedLanguage === 'en')) {
-      setLanguage(savedLanguage);
-    }
+    setIsClient(true);
+    const detectedLanguage = detectBrowserLanguage();
+    setLanguage(detectedLanguage);
   }, []);
-
-  // Save language to localStorage when it changes
-  useEffect(() => {
-    localStorage.setItem('portfolio-language', language);
-  }, [language]);
 
   const translations = language === 'es' ? es : en;
 
-  const value = {
+  const value: LanguageContextType = {
     language,
-    setLanguage,
     t: translations
   };
 
+  // Evitar flash de contenido incorrecto durante SSR
+  if (!isClient) {
+    return (
+      <LanguageContext.Provider value={{ language: 'es', t: es }}>
+        {children}
+      </LanguageContext.Provider>
+    );
+  }
+
   return (
-    <LanguageContext.Provider value={value as any}>
+    <LanguageContext.Provider value={value}>
       {children}
     </LanguageContext.Provider>
   );
