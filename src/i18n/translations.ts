@@ -11,7 +11,7 @@ export const es = {
   // About section
   about: {
     title: "Sobre mí",
-    description1: "Soy un desarrollador apasionado con 2 año de experiencia en el desarrollo de aplicaciones web modernas. Me especializo en tecnologías frontend y backend, creando soluciones eficientes y escalables.",
+    description1: "Soy un desarrollador apasionado con 2 años de experiencia en el desarrollo de aplicaciones web modernas. Me especializo en tecnologías frontend y backend, creando soluciones eficientes y escalables.",
     description2: "Mi enfoque se centra en escribir código limpio, implementar las mejores prácticas y colaborar efectivamente en equipos ágiles. Siempre busco aprender nuevas tecnologías y mantenerme actualizado con las tendencias del desarrollo.",
     professionalSkillsTitle: "Habilidades Profesionales",
     stackTitle: "Stack Tecnológico",
@@ -65,6 +65,10 @@ export const es = {
       {
         title: "F1 Data",
         description: "F1 Data es una web hecha con React y Vite para explorar la temporada de F1: clasificaciones de pilotos y equipos, calendario de carreras y estadísticas con gráficos interactivos. UI moderna con Tailwind, GSAP y Framer Motion, y datos desde OpenF1 y Ergast."
+      },
+      {
+        title: "Kata (型)",
+        description: "Kata es una biblioteca personal multimedia 'Todo en Uno' desarrollada con Next.js 16 y React 19 para unificar el seguimiento de libros, películas, series y videojuegos. Conecta con APIs reales (TMDB, IGDB, Google Books) para automatizar la gestión de metadatos y portadas. Ofrece un dashboard con estadísticas de consumo, sistema de reseñas y una interfaz dark mode fluida con animaciones en GSAP y Tailwind CSS."
       }
     ]
   },
@@ -158,6 +162,10 @@ export const en = {
       {
         title: "F1 Data",
         description: "F1 Data is a web app built with React and Vite to explore the F1 season: driver and team standings, race calendar, and statistics with interactive charts. Modern UI with Tailwind, GSAP, and Framer Motion, and data from OpenF1 and Ergast."
+      },
+      {
+        title: "Kata (型)",
+        description: "Kata is an all-in-one personal multimedia library built with Next.js 16 and React 19 to unify tracking of books, movies, series, and video games. Connects with real APIs (TMDB, IGDB, Google Books) to automate metadata and cover management. Offers a dashboard with consumption statistics, review system, and a fluid dark mode interface with GSAP and Tailwind CSS animations."
       }
     ]
   },
