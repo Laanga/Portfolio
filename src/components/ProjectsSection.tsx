@@ -15,6 +15,13 @@ const ProjectsSection: React.FC = () => {
 
   const projects = [
     {
+      title: t.projects.projectsList[2].title,
+      description: t.projects.projectsList[2].description,
+      tech: "Next.js · Supabase · Tailwind · GSAP · TypeScript",
+      link: "https://katalibrary.vercel.app/",
+      image: "/images/kata-no.png",
+    },
+    {
       title: t.projects.projectsList[1].title,
       description: t.projects.projectsList[1].description,
       tech: "React · Vite · Tailwind · GSAP",
@@ -150,7 +157,7 @@ const ProjectsSection: React.FC = () => {
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="project-img w-full h-full object-cover"
+                  className={`project-img w-full h-full ${i === 0 ? 'object-contain' : 'object-cover'}`}
                 />
                 
                 <div className="image-overlay absolute inset-0 bg-[#050505] origin-right z-10" />
