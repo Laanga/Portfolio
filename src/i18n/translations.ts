@@ -11,18 +11,18 @@ export const es = {
   // About section
   about: {
     title: "Sobre mí",
-    description1: "Soy un desarrollador apasionado con 2 años de experiencia en el desarrollo de aplicaciones web modernas. Me especializo en tecnologías frontend y backend, creando soluciones eficientes y escalables.",
-    description2: "Mi enfoque se centra en escribir código limpio, implementar las mejores prácticas y colaborar efectivamente en equipos ágiles. Siempre busco aprender nuevas tecnologías y mantenerme actualizado con las tendencias del desarrollo.",
+    description1: "Desarrollador Web Full Stack con experiencia en entornos profesionales de publicidad digital y desarrollo de producto. Especializado en React, Next.js y Node.js, con enfoque en crear aplicaciones web de alto rendimiento y experiencias interactivas.",
+    description2: "Mi enfoque se centra en escribir código limpio y entregar soluciones eficientes. Busco seguir creciendo en equipos técnicos donde pueda aportar desde el primer día.",
     professionalSkillsTitle: "Habilidades Profesionales",
     stackTitle: "Stack Tecnológico",
     professionalSkills: [
       "Desarrollo Frontend",
       "Desarrollo Backend", 
       "Bases de datos",
-      "Metodologías ágiles",
+      "APIs e integraciones",
       "Control de versiones",
-      "Testing y debugging",
-      "APIs"
+      "Automatización",
+      "Despliegue y CI/CD"
     ]
   },
 
@@ -35,10 +35,10 @@ export const es = {
         company: "Neural.ONE",
         period: "Marzo 2025 - Presente",
         achievements: [
-          "Trafficking: Asociación de códigos de seguimiento para medición precisa de campañas y recolección de datos",
-          "Desarrollo Creativo: Programación de anuncios interactivos y banners publicitarios usando HTML, CSS y JavaScript",
-          "Desarrollo Web: Creación de landing pages y aplicaciones web de alto rendimiento con tecnologías modernas como React + Node.js",
-          "Desarrollo y Automatización: Actualmente expandiendo habilidades técnicas aprendiendo Python, ya que es la base de nuestra principal herramienta de trafficking, para entender y optimizar flujos de trabajo futuros"
+          "Desarrollo de landing pages y aplicaciones web para clientes del sector publicitario utilizando React y Node.js, entregando proyectos dentro de plazos ajustados",
+          "Programación de anuncios interactivos y banners rich media con HTML, CSS y JavaScript, mejorando la experiencia de las campañas digitales",
+          "Implementación de scripts de automatización en Python para optimizar flujos de trabajo en herramientas de trafficking, reduciendo tareas manuales repetitivas",
+          "Gestión de códigos de seguimiento y tracking para la medición precisa de campañas publicitarias y recolección de datos de rendimiento"
         ]
       }
     ]
@@ -60,15 +60,15 @@ export const es = {
     projectsList: [
       {
         title: "GridRush",
-        description: "Aplicación web para gestión de Torneos y carreras de karting. Permite crear torneos, gestionar participantes y realizar seguimiento de carreras."
+        description: "Plataforma web para la gestión integral de competiciones de karting: inscripción de pilotos, gestión de carreras y clasificaciones en tiempo real. Frontend con React y API REST con Node.js y Express."
       },
       {
-        title: "F1 Data",
-        description: "F1 Data es una web hecha con React y Vite para explorar la temporada de F1: clasificaciones de pilotos y equipos, calendario de carreras y estadísticas con gráficos interactivos. UI moderna con Tailwind, GSAP y Framer Motion, y datos desde OpenF1 y Ergast."
+        title: "F1 Data Explorer",
+        description: "Herramienta interactiva de exploración y visualización de datos de la temporada de Fórmula 1. Análisis de estadísticas de pilotos y equipos con gráficos animados mediante GSAP, interfaz responsive con Tailwind y datos en tiempo real desde OpenF1 y Ergast."
       },
       {
         title: "Kata (型)",
-        description: "Kata es una biblioteca personal multimedia 'Todo en Uno' desarrollada con Next.js 16 y React 19 para unificar el seguimiento de libros, películas, series y videojuegos. Conecta con APIs reales (TMDB, IGDB, Google Books) para automatizar la gestión de metadatos y portadas. Ofrece un dashboard con estadísticas de consumo, sistema de reseñas y una interfaz dark mode fluida con animaciones en GSAP y Tailwind CSS."
+        description: "Plataforma Full Stack que permite organizar libros, videojuegos, películas y series en un único espacio. Integra datos en tiempo real de APIs externas (TMDB, IGDB, Google Books) con autenticación de usuarios, dashboard de estadísticas y una interfaz dark mode con animaciones en GSAP y Tailwind CSS."
       }
     ]
   },
@@ -83,7 +83,7 @@ export const es = {
 
   // Hero section
   hero: {
-    description: "Desarrollador Front‑End especializado en React, Next.js y UI modernas. Inspirado por interfaces minimalistas, tipografía fuerte y animaciones sutiles.",
+    description: "Desarrollador Full Stack especializado en React, Next.js y Node.js. Creo aplicaciones web de alto rendimiento con interfaces limpias y experiencias interactivas.",
     contact: "Contacto"
   },
 
@@ -108,18 +108,18 @@ export const en = {
   // About section
   about: {
     title: "About Me",
-    description1: "I am a passionate developer with 2 year of experience in modern web application development. I specialize in frontend and backend technologies, creating efficient and scalable solutions.",
-    description2: "My approach focuses on writing clean code, implementing best practices, and collaborating effectively in agile teams. I always seek to learn new technologies and stay updated with development trends.",
+    description1: "Full Stack Web Developer with professional experience in digital advertising and product development. Specialized in React, Next.js and Node.js, focused on building high-performance web applications and interactive experiences.",
+    description2: "My approach focuses on writing clean code and delivering efficient solutions. I'm looking to keep growing in technical teams where I can contribute from day one.",
     professionalSkillsTitle: "Professional Skills",
     stackTitle: "Tech Stack",
     professionalSkills: [
       "Frontend Development",
       "Backend Development",
       "Databases", 
-      "Agile Methodologies",
+      "APIs & Integrations",
       "Version Control",
-      "Testing & Debugging",
-      "APIs"
+      "Automation",
+      "Deployment & CI/CD"
     ]
   },
 
@@ -132,10 +132,10 @@ export const en = {
         company: "Neural.ONE",
         period: "March 2025 - Present",
         achievements: [
-          "Trafficking: Association of tracking codes for accurate campaign measurement and data collection",
-          "Creative Development: Programming interactive ads and advertising banners using HTML, CSS, and JavaScript",
-          "Web Development: Creation of high-performance landing pages and web applications with modern technologies like React + Node.js", 
-          "Development & Automation: Currently expanding technical skills by learning Python, as it's the foundation of our main trafficking tool, to understand and optimize future workflows"
+          "Development of landing pages and web applications for advertising clients using React and Node.js, delivering projects within tight deadlines",
+          "Programming of interactive ads and rich media banners with HTML, CSS and JavaScript, enhancing digital campaign experiences",
+          "Implementation of Python automation scripts to optimize trafficking tool workflows, reducing repetitive manual tasks",
+          "Management of tracking codes for precise measurement of advertising campaigns and performance data collection"
         ]
       }
     ]
@@ -157,15 +157,15 @@ export const en = {
     projectsList: [
       {
         title: "GridRush",
-        description: "Web application for managing karting tournaments and races. Allows creating tournaments, managing participants, and tracking races."
+        description: "Web platform for comprehensive karting competition management: driver registration, race management and real-time standings. React frontend with Node.js and Express REST API."
       },
       {
-        title: "F1 Data",
-        description: "F1 Data is a web app built with React and Vite to explore the F1 season: driver and team standings, race calendar, and statistics with interactive charts. Modern UI with Tailwind, GSAP, and Framer Motion, and data from OpenF1 and Ergast."
+        title: "F1 Data Explorer",
+        description: "Interactive tool for exploring and visualizing Formula 1 season data. Driver and team statistics analysis with GSAP-animated charts, responsive Tailwind interface and real-time data from OpenF1 and Ergast."
       },
       {
         title: "Kata (型)",
-        description: "Kata is an all-in-one personal multimedia library built with Next.js 16 and React 19 to unify tracking of books, movies, series, and video games. Connects with real APIs (TMDB, IGDB, Google Books) to automate metadata and cover management. Offers a dashboard with consumption statistics, review system, and a fluid dark mode interface with GSAP and Tailwind CSS animations."
+        description: "Full Stack platform to organize books, video games, movies and series in a single space. Integrates real-time data from external APIs (TMDB, IGDB, Google Books) with user authentication, statistics dashboard and a dark mode interface with GSAP and Tailwind CSS animations."
       }
     ]
   },
@@ -180,7 +180,7 @@ export const en = {
 
   // Hero section
   hero: {
-    description: "Front‑End Developer specialized in React, Next.js and modern UI. Inspired by minimalist interfaces, strong typography and subtle animations.",
+    description: "Full Stack Developer specialized in React, Next.js and Node.js. I build high-performance web applications with clean interfaces and interactive experiences.",
     contact: "Contact"
   },
 
