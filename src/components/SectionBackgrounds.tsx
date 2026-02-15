@@ -25,12 +25,13 @@ const SectionBackgrounds: React.FC = () => {
     if (!backgroundRef.current) return;
 
     const sections = ["hero", "about", "experience", "projects", "education", "footer"];
+    const triggers: ScrollTrigger[] = [];
     
     sections.forEach((sectionId) => {
       const section = document.getElementById(sectionId);
       if (!section) return;
 
-      ScrollTrigger.create({
+      const trigger = ScrollTrigger.create({
         trigger: section,
         start: "top 50%",
         end: "bottom 50%",
@@ -49,10 +50,12 @@ const SectionBackgrounds: React.FC = () => {
           });
         },
       });
+
+      triggers.push(trigger);
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      triggers.forEach((trigger) => trigger.kill());
     };
   }, []);
 

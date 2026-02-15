@@ -4,27 +4,34 @@ import { createContext, useEffect, useState, ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+type LenisLike = {
+  scrollTo: (target: string, options?: { offset?: number; duration?: number }) => void;
+  on: (event: "scroll", callback: () => void) => void;
+  raf: (time: number) => void;
+  destroy: () => void;
+};
+
 // Registrar el plugin de GSAP
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
 // Context para acceder a Lenis desde cualquier componente
-export const LenisContext = createContext<any>(null);
+export const LenisContext = createContext<LenisLike | null>(null);
 
 interface SmoothScrollProps {
   children: ReactNode;
 }
 
 const SmoothScroll = ({ children }: SmoothScrollProps) => {
-  const [lenis, setLenis] = useState<any>(null);
+  const [lenis, setLenis] = useState<LenisLike | null>(null);
 
   useEffect(() => {
     // Intentar cargar Lenis dinámicamente
     const initLenis = async () => {
       try {
         const Lenis = (await import("lenis")).default;
-        
+
         const lenisInstance = new Lenis({
           duration: 1.2,
           easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -32,7 +39,7 @@ const SmoothScroll = ({ children }: SmoothScrollProps) => {
           gestureOrientation: "vertical",
           smoothWheel: true,
           touchMultiplier: 2,
-        });
+        }) as LenisLike;
 
         setLenis(lenisInstance);
 
@@ -52,7 +59,7 @@ const SmoothScroll = ({ children }: SmoothScrollProps) => {
           lenisInstance.destroy();
           gsap.ticker.remove(rafCallback);
         };
-      } catch (error) {
+      } catch {
         // Lenis no está instalado, continuar sin smooth scroll
         console.log("Lenis not installed, using native scroll");
         return undefined;

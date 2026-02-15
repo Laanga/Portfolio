@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useRef, useContext, useMemo } from "react";
 import gsap from "gsap";
 import { useLanguage } from "../i18n/LanguageContext";
 import { LenisContext } from "./SmoothScroll";
@@ -12,24 +12,26 @@ const Navigation: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const lastScrollYRef = useRef(0);
 
   const navRef = useRef<HTMLElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  const navItems = [
+  const navItems = useMemo(() => [
     { id: "about", label: t.navigation.about, num: "01" },
     { id: "experience", label: t.navigation.experience, num: "02" },
     { id: "projects", label: t.navigation.projects, num: "03" },
     { id: "education", label: t.navigation.education, num: "04" },
-  ];
+  ], [t]);
 
   useEffect(() => {
     const handleScroll = () => {
       const y = window.scrollY;
+      const previousY = lastScrollYRef.current;
+
       setIsScrolled(y > 50);
-      setIsVisible(y < lastScrollY || y < 100);
-      setLastScrollY(y);
+      setIsVisible(y < previousY || y < 100);
+      lastScrollYRef.current = y;
 
       const offset = 200;
       for (const item of navItems) {
@@ -45,8 +47,9 @@ const Navigation: React.FC = () => {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+  }, [navItems]);
 
   useEffect(() => {
     gsap.to(navRef.current, {
@@ -184,7 +187,7 @@ const Navigation: React.FC = () => {
         />
 
         <nav className="relative flex flex-col items-center gap-2">
-          {navItems.map((item, i) => (
+          {navItems.map((item) => (
             <button
               key={item.id}
               onClick={() => scrollTo(item.id)}

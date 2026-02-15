@@ -41,7 +41,7 @@ html.lenis, html.lenis body { height: auto; }
 /* ============================================
    BASE RESET
    ============================================ */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin: 0; box-sizing: border-box; }
 
 html {
   font-size: 16px;
@@ -159,7 +159,7 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.02em;
   border-radius: 100px;
   border: none;
-  cursor: none;
+  cursor: pointer;
   text-decoration: none;
   overflow: hidden;
   transition: all 0.5s var(--ease-out-expo);
@@ -253,14 +253,5 @@ h1, h2, h3, h4, h5, h6 {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-  }
-}
-
-/* ============================================
-   CUSTOM CURSOR - Hide default on desktop
-   ============================================ */
-@media (min-width: 1024px) {
-  * {
-    cursor: none !important;
   }
 }
