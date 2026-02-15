@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { es, en, Language, TranslationKeys } from './translations';
+import { es, en, Language } from './translations';
 
 interface LanguageContextType {
   language: Language;
@@ -15,7 +15,7 @@ function detectBrowserLanguage(): Language {
   if (typeof window === 'undefined') return 'es'; // SSR fallback
   
   // navigator.language devuelve cosas como "es-ES", "en-US", "en-GB", etc.
-  const browserLang = navigator.language || (navigator as any).userLanguage || 'es';
+  const browserLang = navigator.language || 'es';
   
   // Extraer el código de idioma principal (es, en, fr, etc.)
   const langCode = browserLang.split('-')[0].toLowerCase();

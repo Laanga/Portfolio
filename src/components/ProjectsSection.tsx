@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLanguage } from "../i18n/LanguageContext";
@@ -10,7 +11,7 @@ if (typeof window !== "undefined") {
 }
 
 const ProjectsSection: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
 
   const projects = [
@@ -34,168 +35,256 @@ const ProjectsSection: React.FC = () => {
       tech: "React · Node.js · SQLite · Firebase",
       link: "https://github.com/Laanga/GridRush",
       image: "/images/kart.png",
-    }
+    },
   ];
+
+  const [primaryProject, secondaryProject, tertiaryProject] = projects;
+  const featuredLabel =
+    language === "es" ? "Proyectos destacados" : "Featured Work";
+  const viewProjectLabel = language === "es" ? "Ver proyecto" : "View Project";
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Label - empieza antes
-      gsap.fromTo(".proj-label", 
-        { x: -100, opacity: 0 },
+      gsap.fromTo(
+        ".proj-label",
+        { x: -70, autoAlpha: 0 },
         {
-          x: 0, opacity: 1, duration: 1,
+          x: 0,
+          autoAlpha: 1,
+          duration: 0.8,
           ease: "power3.out",
-          scrollTrigger: { 
-            trigger: ".proj-label", 
-            start: "top 100%",
-            toggleActions: "restart none restart none"
-          }
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: ".proj-label",
+            start: "top 92%",
+            end: "top 70%",
+            toggleActions: "play reverse play reverse",
+          },
         }
       );
 
-      // Título
-      gsap.fromTo(".proj-title-wrap",
-        { clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)" },
+      gsap.fromTo(
+        ".proj-title-wrap",
+        { y: 28, autoAlpha: 0 },
         {
-          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-          duration: 1.4,
-          ease: "power4.inOut",
-          scrollTrigger: { 
-            trigger: ".proj-title-wrap", 
-            start: "top 100%",
-            toggleActions: "restart none restart none"
-          }
+          y: 0,
+          autoAlpha: 1,
+          duration: 0.85,
+          ease: "power3.out",
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: ".proj-title-wrap",
+            start: "top 92%",
+            end: "top 70%",
+            toggleActions: "play reverse play reverse",
+          },
         }
       );
 
-      // Proyectos
-      gsap.utils.toArray<HTMLElement>(".project-card").forEach((card) => {
-        const overlay = card.querySelector(".image-overlay");
-        const img = card.querySelector(".project-img");
-        const content = card.querySelector(".project-content");
+      gsap.utils.toArray<HTMLElement>(".bento-card").forEach((card) => {
+        const media = card.querySelector(".bento-media");
+        const copy = card.querySelectorAll(".bento-copy");
 
-        if (overlay) {
-          gsap.fromTo(overlay,
-            { scaleX: 1 },
-            {
-              scaleX: 0,
-              duration: 1.6,
-              ease: "power4.inOut",
-              scrollTrigger: { 
-                trigger: card, 
-                start: "top 100%",
-                toggleActions: "restart none restart none"
-              }
-            }
-          );
-        }
+        const timeline = gsap.timeline({
+          paused: true,
+          defaults: {
+            ease: "power3.out",
+            immediateRender: false,
+          },
+        });
 
-        if (img) {
-          gsap.fromTo(img,
-            { scale: 1.4 },
+        timeline.fromTo(
+          card,
+          {
+            y: 60,
+            autoAlpha: 0,
+            scale: 0.96,
+            rotateX: 7,
+            transformOrigin: "top center",
+          },
+          {
+            y: 0,
+            autoAlpha: 1,
+            scale: 1,
+            rotateX: 0,
+            duration: 0.75,
+          }
+        );
+
+        if (media) {
+          timeline.fromTo(
+            media,
             {
+              clipPath: "inset(20% 0 20% 0 round 14px)",
+              scale: 1.08,
+              autoAlpha: 0,
+            },
+            {
+              clipPath: "inset(0% 0 0% 0 round 14px)",
               scale: 1,
-              duration: 1.8,
-              ease: "power3.out",
-              scrollTrigger: { 
-                trigger: card, 
-                start: "top 100%",
-                toggleActions: "restart none restart none"
-              }
-            }
+              autoAlpha: 1,
+              duration: 0.85,
+            },
+            0.08
           );
         }
 
-        if (content) {
-          gsap.fromTo(content,
-            { y: 60, opacity: 0 },
+        if (copy.length) {
+          timeline.fromTo(
+            copy,
+            { y: 18, autoAlpha: 0 },
             {
-              y: 0, opacity: 1, duration: 1,
-              delay: 0.3,
-              ease: "power3.out",
-              scrollTrigger: { 
-                trigger: card, 
-                start: "top 95%",
-                toggleActions: "restart none restart none"
-              }
-            }
+              y: 0,
+              autoAlpha: 1,
+              duration: 0.52,
+              stagger: 0.07,
+            },
+            0.18
           );
         }
-      });
 
+        ScrollTrigger.create({
+          trigger: card,
+          start: "top 88%",
+          end: "bottom 30%",
+          animation: timeline,
+          toggleActions: "play reverse play reverse",
+        });
+      });
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section id="projects" ref={sectionRef} className="section relative overflow-hidden">
-      <div className="orb w-[600px] h-[600px] bottom-0 -right-[200px]" />
+    <section
+      id="projects"
+      ref={sectionRef}
+      className="relative overflow-hidden py-20 md:py-28"
+    >
+      <div className="orb w-[640px] h-[640px] bottom-0 -right-[250px]" />
 
       <div className="container relative z-10">
-        <div className="proj-label flex items-center gap-4 mb-6">
+        <div className="proj-label flex items-center gap-4 mb-4">
           <span className="text-mono">03</span>
           <span className="w-12 h-px bg-white/20" />
           <span className="text-mono text-white/40">{t.projects.title}</span>
         </div>
-        
-        <div className="proj-title-wrap mb-20">
-          <h2 className="text-heading">
-            Proyectos destacados
-          </h2>
+
+        <div className="proj-title-wrap mb-8 md:mb-10">
+          <h2 className="text-heading">{featuredLabel}</h2>
         </div>
 
-        <div className="space-y-28">
-          {projects.map((project, i) => (
-            <article key={i} className="project-card group">
-              <a 
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block relative aspect-[16/9] md:aspect-[21/9] overflow-hidden rounded-lg mb-8"
-              >
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className={`project-img w-full h-full ${i === 0 ? 'object-contain' : 'object-cover'}`}
-                />
-                
-                <div className="image-overlay absolute inset-0 bg-[#050505] origin-right z-10" />
-                
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 z-20 flex items-end justify-between p-6 md:p-8">
-                  <span className="text-white text-sm font-medium">
-                    {project.title}
-                  </span>
-                  <span className="flex items-center gap-2 text-white/70 text-sm">
-                    Ver proyecto
-                    <svg 
-                      width="18" 
-                      height="18" 
-                      viewBox="0 0 24 24" 
-                      fill="none" 
-                      stroke="currentColor" 
-                      strokeWidth="2"
-                      className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
-                    >
-                      <path d="M7 17L17 7M17 7H7M17 7V17"/>
-                    </svg>
-                  </span>
-                </div>
-              </a>
-
-              <div className="project-content max-w-2xl">
-                <h3 className="text-title text-white mb-3">
-                  {project.title}
+        <div className="projects-bento-grid grid grid-cols-1 gap-4 md:grid-cols-4 md:auto-rows-[340px]">
+          <article className="bento-card group md:col-span-2 md:row-span-2">
+            <a
+              href={primaryProject.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block h-full overflow-hidden rounded-3xl border border-white/14 bg-gradient-to-br from-[#121212] via-[#0d0d0d] to-[#090909] p-7 md:p-8 transition-all duration-500 hover:-translate-y-1.5 hover:border-white/30 hover:shadow-[0_24px_50px_rgba(0,0,0,0.45)]"
+            >
+              <div className="bento-copy mb-4 min-w-0">
+                <h3 className="text-xl md:text-[1.7rem] font-semibold text-white leading-[1.2] break-words [word-break:break-word] [overflow-wrap:anywhere] hyphens-auto">
+                  {primaryProject.title}
                 </h3>
-                <p className="text-sm text-white/45 leading-relaxed mb-4">
-                  {project.description}
+                <p className="bento-copy text-mono text-[10px] md:text-[11px] text-white/55 mt-2">
+                  {primaryProject.tech}
                 </p>
-                <span className="text-mono text-xs text-white/30">
-                  {project.tech}
+              </div>
+
+              <div className="bento-media relative h-52 md:h-[54%] overflow-hidden rounded-2xl">
+                <div className="absolute inset-2 rounded-full bg-white/10 blur-3xl opacity-30" />
+                <Image
+                  src={primaryProject.image}
+                  alt={primaryProject.title}
+                  fill
+                  sizes="(min-width: 768px) 48vw, 96vw"
+                  className="object-contain p-2 md:p-3 drop-shadow-[0_22px_38px_rgba(0,0,0,0.55)] transition-transform duration-700 group-hover:-translate-y-0.5 group-hover:scale-[1.04]"
+                />
+                <span className="pointer-events-none absolute top-3 right-3 z-20 rounded-full border border-white/25 bg-black/50 px-2.5 py-1 text-[10px] text-white/80 opacity-0 transition-opacity duration-300 md:group-hover:opacity-100">
+                  {viewProjectLabel}
                 </span>
               </div>
-            </article>
-          ))}
+
+              <p className="bento-copy mt-4 text-sm md:text-[15px] text-white/82 leading-relaxed break-words [word-break:break-word] [overflow-wrap:anywhere]">
+                {primaryProject.description}
+              </p>
+            </a>
+          </article>
+
+          <article className="bento-card group md:col-span-2">
+            <a
+              href={secondaryProject.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block h-full overflow-hidden rounded-3xl border border-white/12 bg-[#0f0f10] p-6 md:p-7 transition-all duration-500 hover:-translate-y-1 hover:border-white/25 hover:shadow-[0_20px_45px_rgba(0,0,0,0.4)]"
+            >
+              <div className="flex h-full flex-col md:flex-row md:items-center gap-4">
+                <div className="min-w-0 w-full md:w-[58%]">
+                  <p className="bento-copy text-[11px] text-white/55 uppercase tracking-[0.14em] mb-2">
+                    {secondaryProject.tech}
+                  </p>
+                  <h3 className="bento-copy text-lg md:text-xl font-semibold text-white leading-[1.2] mb-2 break-words [word-break:break-word] [overflow-wrap:anywhere] hyphens-auto">
+                    {secondaryProject.title}
+                  </h3>
+                  <p className="bento-copy text-sm md:text-[14px] text-white/82 leading-relaxed break-words [word-break:break-word] [overflow-wrap:anywhere]">
+                    {secondaryProject.description}
+                  </p>
+                </div>
+
+                <div className="bento-media relative w-full md:w-[42%] h-44 md:h-full min-h-[150px] overflow-hidden rounded-2xl">
+                  <div className="absolute inset-2 rounded-full bg-white/10 blur-3xl opacity-25" />
+                  <Image
+                    src={secondaryProject.image}
+                    alt={secondaryProject.title}
+                    fill
+                    sizes="(min-width: 768px) 26vw, 90vw"
+                    className="object-contain p-2 md:p-2.5 drop-shadow-[0_18px_34px_rgba(0,0,0,0.55)] transition-transform duration-700 group-hover:-translate-y-0.5 group-hover:scale-[1.04]"
+                  />
+                  <span className="pointer-events-none absolute top-3 right-3 z-20 rounded-full border border-white/25 bg-black/50 px-2.5 py-1 text-[10px] text-white/80 opacity-0 transition-opacity duration-300 md:group-hover:opacity-100">
+                    {viewProjectLabel}
+                  </span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article className="bento-card group md:col-span-2">
+            <a
+              href={tertiaryProject.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block h-full overflow-hidden rounded-3xl border border-white/12 bg-[#0b0b0c] p-6 md:p-7 transition-all duration-500 hover:-translate-y-1 hover:border-white/30 hover:shadow-[0_20px_45px_rgba(0,0,0,0.35)]"
+            >
+              <div className="flex h-full flex-col md:flex-row md:items-center gap-4">
+                <div className="bento-media relative w-full md:w-[40%] h-44 md:h-full min-h-[150px] overflow-hidden rounded-2xl">
+                  <div className="absolute inset-2 rounded-full bg-white/10 blur-3xl opacity-25" />
+                  <Image
+                    src={tertiaryProject.image}
+                    alt={tertiaryProject.title}
+                    fill
+                    sizes="(min-width: 768px) 24vw, 90vw"
+                    className="object-contain p-2 md:p-2.5 drop-shadow-[0_18px_34px_rgba(0,0,0,0.55)] transition-transform duration-700 group-hover:-translate-y-0.5 group-hover:scale-[1.04]"
+                  />
+                  <span className="pointer-events-none absolute top-3 right-3 z-20 rounded-full border border-white/25 bg-black/50 px-2.5 py-1 text-[10px] text-white/80 opacity-0 transition-opacity duration-300 md:group-hover:opacity-100">
+                    {viewProjectLabel}
+                  </span>
+                </div>
+
+                <div className="min-w-0 w-full md:w-[60%]">
+                  <p className="bento-copy text-[11px] text-white/55 uppercase tracking-[0.14em] mb-2">
+                    {tertiaryProject.tech}
+                  </p>
+                  <h3 className="bento-copy text-lg md:text-xl font-semibold text-white leading-[1.2] mb-2 break-words [word-break:break-word] [overflow-wrap:anywhere] hyphens-auto">
+                    {tertiaryProject.title}
+                  </h3>
+                  <p className="bento-copy text-sm md:text-[14px] text-white/82 leading-relaxed break-words [word-break:break-word] [overflow-wrap:anywhere]">
+                    {tertiaryProject.description}
+                  </p>
+                </div>
+              </div>
+            </a>
+          </article>
         </div>
       </div>
     </section>

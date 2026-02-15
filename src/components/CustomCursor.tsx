@@ -2,126 +2,123 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
+const DESKTOP_BREAKPOINT = 1024;
+const POINTER_SELECTOR =
+  'a, button, [role="button"], input, textarea, select, [data-cursor="pointer"]';
+
 const CustomCursor: React.FC = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
-  const followerRef = useRef<HTMLDivElement>(null);
-  const [isHovering, setIsHovering] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(false);
   const [isHidden, setIsHidden] = useState(true);
-  const [isDesktop, setIsDesktop] = useState(false);
+  const [isHoveringInteractive, setIsHoveringInteractive] = useState(false);
 
   useEffect(() => {
-    // Check if desktop on client only
-    const checkDesktop = () => {
-      setIsDesktop(window.innerWidth >= 1024);
+    const desktopMediaQuery = window.matchMedia(
+      `(min-width: ${DESKTOP_BREAKPOINT}px)`
+    );
+    const reducedMotionMediaQuery = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    );
+
+    const updateCursorAvailability = () => {
+      setIsEnabled(
+        desktopMediaQuery.matches && !reducedMotionMediaQuery.matches
+      );
     };
-    
-    checkDesktop();
-    window.addEventListener("resize", checkDesktop);
-    
-    return () => window.removeEventListener("resize", checkDesktop);
+
+    updateCursorAvailability();
+    desktopMediaQuery.addEventListener("change", updateCursorAvailability);
+    reducedMotionMediaQuery.addEventListener("change", updateCursorAvailability);
+
+    return () => {
+      desktopMediaQuery.removeEventListener("change", updateCursorAvailability);
+      reducedMotionMediaQuery.removeEventListener(
+        "change",
+        updateCursorAvailability
+      );
+    };
   }, []);
 
   useEffect(() => {
-    if (!isDesktop) return;
-
+    if (!isEnabled) {
+      setIsHidden(true);
+      setIsHoveringInteractive(false);
+      return;
+    }
     const cursor = cursorRef.current;
-    const follower = followerRef.current;
-    if (!cursor || !follower) return;
+    if (!cursor) return;
 
-    let mouseX = 0;
-    let mouseY = 0;
-    let cursorX = 0;
-    let cursorY = 0;
-    let followerX = 0;
-    let followerY = 0;
-    let animationId: number;
+    let targetX = window.innerWidth / 2;
+    let targetY = window.innerHeight / 2;
+    let currentX = targetX;
+    let currentY = targetY;
+    let isHovering = false;
+    let isVisible = false;
+    let animationId = 0;
 
-    const onMouseMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
+    const isInteractiveTarget = (target: EventTarget | null): boolean => {
+      if (!(target instanceof Element)) return false;
+      return Boolean(target.closest(POINTER_SELECTOR));
+    };
+
+    const updateHovering = (nextValue: boolean) => {
+      if (isHovering === nextValue) return;
+      isHovering = nextValue;
+      setIsHoveringInteractive(nextValue);
+    };
+
+    const updateVisibility = (nextValue: boolean) => {
+      if (isVisible === nextValue) return;
+      isVisible = nextValue;
+      setIsHidden(!nextValue);
+    };
+
+    const onMouseMove = (event: MouseEvent) => {
+      targetX = event.clientX;
+      targetY = event.clientY;
+      updateVisibility(true);
+      updateHovering(isInteractiveTarget(event.target));
+    };
+
+    const onMouseLeave = () => {
+      updateVisibility(false);
+      updateHovering(false);
     };
 
     const animate = () => {
-      cursorX += (mouseX - cursorX) * 0.5;
-      cursorY += (mouseY - cursorY) * 0.5;
-      
-      followerX += (mouseX - followerX) * 0.15;
-      followerY += (mouseY - followerY) * 0.15;
+      currentX += (targetX - currentX) * 0.2;
+      currentY += (targetY - currentY) * 0.2;
 
-      cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
-      follower.style.transform = `translate(${followerX}px, ${followerY}px)`;
-
-      animationId = requestAnimationFrame(animate);
+      cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate3d(-50%, -50%, 0) scale(${isHovering ? 1.2 : 1})`;
+      animationId = window.requestAnimationFrame(animate);
     };
 
-    const handleMouseEnter = () => setIsHovering(true);
-    const handleMouseLeave = () => setIsHovering(false);
-
-    const updateInteractiveElements = () => {
-      const interactiveElements = document.querySelectorAll('a, button, [data-cursor="pointer"]');
-      interactiveElements.forEach((el) => {
-        el.addEventListener("mouseenter", handleMouseEnter);
-        el.addEventListener("mouseleave", handleMouseLeave);
-      });
-      return interactiveElements;
-    };
-
-    const interactiveElements = updateInteractiveElements();
-
-    const handleMouseEnterWindow = () => setIsHidden(false);
-    const handleMouseLeaveWindow = () => setIsHidden(true);
-
+    animationId = window.requestAnimationFrame(animate);
     document.addEventListener("mousemove", onMouseMove);
-    document.addEventListener("mouseenter", handleMouseEnterWindow);
-    document.addEventListener("mouseleave", handleMouseLeaveWindow);
-
-    animationId = requestAnimationFrame(animate);
+    document.addEventListener("mouseleave", onMouseLeave);
 
     return () => {
-      cancelAnimationFrame(animationId);
+      window.cancelAnimationFrame(animationId);
       document.removeEventListener("mousemove", onMouseMove);
-      document.removeEventListener("mouseenter", handleMouseEnterWindow);
-      document.removeEventListener("mouseleave", handleMouseLeaveWindow);
-      interactiveElements.forEach((el) => {
-        el.removeEventListener("mouseenter", handleMouseEnter);
-        el.removeEventListener("mouseleave", handleMouseLeave);
-      });
+      document.removeEventListener("mouseleave", onMouseLeave);
     };
-  }, [isDesktop]);
+  }, [isEnabled]);
 
-  // Don't render anything until we know if it's desktop
-  if (!isDesktop) {
+  if (!isEnabled) {
     return null;
   }
 
   return (
-    <>
-      {/* Main cursor dot */}
-      <div
-        ref={cursorRef}
-        className={`fixed top-0 left-0 w-2 h-2 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference transition-opacity duration-300 ${
-          isHidden ? "opacity-0" : "opacity-100"
-        }`}
-        style={{ marginLeft: "-4px", marginTop: "-4px" }}
-      />
-      
-      {/* Follower ring */}
-      <div
-        ref={followerRef}
-        className={`fixed top-0 left-0 pointer-events-none z-[9998] transition-all duration-300 ${
-          isHidden ? "opacity-0" : "opacity-100"
-        }`}
-        style={{ marginLeft: "-20px", marginTop: "-20px" }}
-      >
-        <div
-          className={`w-10 h-10 rounded-full border transition-all duration-300 ${
-            isHovering 
-              ? "border-white/60 scale-150 bg-white/5" 
-              : "border-white/20 scale-100"
-          }`}
-        />
-      </div>
-    </>
+    <div
+      ref={cursorRef}
+      className={`fixed top-0 left-0 w-5 h-5 rounded-full border border-white/30 bg-white/10 pointer-events-none z-[9998] transition-opacity duration-200 will-change-transform ${
+        isHidden ? "opacity-0" : "opacity-100"
+      } ${
+        isHoveringInteractive
+          ? "shadow-[0_0_0_10px_rgba(255,255,255,0.08)]"
+          : "shadow-none"
+      }`}
+    />
   );
 };
 
