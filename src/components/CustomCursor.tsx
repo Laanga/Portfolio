@@ -40,6 +40,24 @@ const CustomCursor: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    const root = document.documentElement;
+    const body = document.body;
+
+    if (isEnabled) {
+      root.classList.add("custom-cursor-active");
+      body.classList.add("custom-cursor-active");
+    } else {
+      root.classList.remove("custom-cursor-active");
+      body.classList.remove("custom-cursor-active");
+    }
+
+    return () => {
+      root.classList.remove("custom-cursor-active");
+      body.classList.remove("custom-cursor-active");
+    };
+  }, [isEnabled]);
+
+  useEffect(() => {
     if (!isEnabled) {
       setIsHidden(true);
       setIsHoveringInteractive(false);
