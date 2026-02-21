@@ -15,6 +15,9 @@ export const es = {
     description2: "Mi enfoque se centra en escribir código limpio y entregar soluciones eficientes. Busco seguir creciendo en equipos técnicos donde pueda aportar desde el primer día.",
     professionalSkillsTitle: "Habilidades Profesionales",
     stackTitle: "Stack Tecnológico",
+    frontendStackTitle: "Frontend",
+    backendStackTitle: "Backend",
+    cloudStackTitle: "Cloud / DevOps & Tooling",
     professionalSkills: [
       "Desarrollo Frontend",
       "Desarrollo Backend", 
@@ -112,6 +115,9 @@ export const en = {
     description2: "My approach focuses on writing clean code and delivering efficient solutions. I'm looking to keep growing in technical teams where I can contribute from day one.",
     professionalSkillsTitle: "Professional Skills",
     stackTitle: "Tech Stack",
+    frontendStackTitle: "Frontend",
+    backendStackTitle: "Backend",
+    cloudStackTitle: "Cloud / DevOps & Tooling",
     professionalSkills: [
       "Frontend Development",
       "Backend Development",

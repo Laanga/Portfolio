@@ -4,9 +4,18 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
-  FaReact, FaJava, FaNodeJs, FaPython, FaGithub, FaDocker, FaAws
+  FaReact, FaJava, FaNodeJs, FaPython, FaGithub, FaDocker
 } from "react-icons/fa";
-import { SiTypescript, SiMysql, SiTailwindcss } from "react-icons/si";
+import {
+  SiTypescript,
+  SiMysql,
+  SiTailwindcss,
+  SiNextdotjs,
+  SiHtml5,
+  SiCss3,
+  SiJavascript,
+  SiAmazons3,
+} from "react-icons/si";
 import { useLanguage } from "../i18n/LanguageContext";
 
 if (typeof window !== "undefined") {
@@ -17,16 +26,26 @@ const AboutSection: React.FC = () => {
   const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
 
-  const techStack = [
+  const frontendStack = [
     { name: "React", icon: FaReact },
+    { name: "Next.js", icon: SiNextdotjs },
+    { name: "JavaScript", icon: SiJavascript },
     { name: "TypeScript", icon: SiTypescript },
+    { name: "HTML", icon: SiHtml5 },
+    { name: "CSS", icon: SiCss3 },
+    { name: "Tailwind", icon: SiTailwindcss },
+  ];
+
+  const backendStack = [
     { name: "Node.js", icon: FaNodeJs },
     { name: "Python", icon: FaPython },
     { name: "Java", icon: FaJava },
     { name: "MySQL", icon: SiMysql },
-    { name: "Tailwind", icon: SiTailwindcss },
+  ];
+
+  const cloudStack = [
+    { name: "Amazon S3", icon: SiAmazons3 },
     { name: "Docker", icon: FaDocker },
-    { name: "AWS", icon: FaAws },
     { name: "GitHub", icon: FaGithub },
   ];
 
@@ -89,7 +108,21 @@ const AboutSection: React.FC = () => {
         }
       );
 
-      // Tech stack
+      // Tech stack cards
+      gsap.fromTo(".tech-card",
+        { y: 40, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: 0.9, stagger: 0.15,
+          ease: "power3.out",
+          scrollTrigger: { 
+            trigger: ".tech-stack-grid", 
+            start: "top 95%",
+            toggleActions: "restart none restart none"
+          }
+        }
+      );
+
+      // Tech stack items
       gsap.fromTo(".tech-icon",
         { y: 60, opacity: 0, scale: 0.5, rotation: -10 },
         {
@@ -97,7 +130,7 @@ const AboutSection: React.FC = () => {
           duration: 0.8, stagger: 0.08,
           ease: "back.out(1.7)",
           scrollTrigger: { 
-            trigger: ".tech-list", 
+            trigger: ".tech-stack-grid", 
             start: "top 100%",
             toggleActions: "restart none restart none"
           }
@@ -172,29 +205,46 @@ const AboutSection: React.FC = () => {
             <span className="w-2 h-2 rounded-full bg-white/50" />
             {t.about.stackTitle}
           </h3>
-          
-          <div className="tech-list grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-8 gap-y-10">
-            {techStack.map((tech, i) => {
-              const Icon = tech.icon;
-              return (
-                <div
-                  key={i}
-                  className="tech-icon group flex items-center gap-3 cursor-default"
-                >
-                  <div className="relative">
-                    <Icon 
-                      className="text-2xl md:text-3xl text-white/40 group-hover:text-white transition-all duration-500 group-hover:scale-110" 
-                    />
-                    <div 
-                      className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 bg-white/10"
-                    />
-                  </div>
-                  <span className="text-sm text-white/30 group-hover:text-white/70 transition-colors duration-300">
-                    {tech.name}
-                  </span>
+
+          <div className="tech-stack-grid mt-14 md:mt-20 pt-4 md:pt-6 grid md:grid-cols-3 gap-12 md:gap-16">
+            {[
+              { title: t.about.frontendStackTitle, items: frontendStack },
+              { title: t.about.backendStackTitle, items: backendStack },
+              { title: t.about.cloudStackTitle, items: cloudStack },
+            ].map((group) => (
+              <div
+                key={group.title}
+                className="tech-column"
+              >
+                <h4 className="text-mono mb-10 md:mb-12 flex items-center gap-3 text-white/65">
+                  <span className="w-2 h-2 rounded-full bg-white/35" />
+                  {group.title}
+                </h4>
+                <div className="tech-list space-y-9 md:space-y-10">
+                  {group.items.map((tech, i) => {
+                    const Icon = tech.icon;
+                    return (
+                      <div
+                        key={`${group.title}-${i}`}
+                        className="tech-icon group flex items-center gap-4 cursor-default py-1"
+                      >
+                        <div className="relative">
+                          <Icon
+                            className="text-2xl md:text-3xl text-white/40 group-hover:text-white transition-all duration-500 group-hover:scale-110"
+                          />
+                          <div
+                            className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 bg-white/10"
+                          />
+                        </div>
+                        <span className="text-sm text-white/30 group-hover:text-white/70 transition-colors duration-300">
+                          {tech.name}
+                        </span>
+                      </div>
+                    );
+                  })}
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
       </div>
