@@ -30,7 +30,7 @@ const ScrollProgress: React.FC = () => {
     <div className="fixed top-0 left-0 right-0 h-[2px] z-[100] bg-transparent">
       <div
         ref={progressRef}
-        className="h-full bg-gradient-to-r from-white/80 via-white/50 to-white/80 origin-left"
+        className="h-full bg-gradient-to-r from-black/80 via-black/50 to-black/80 origin-left"
         style={{ transform: "scaleX(0)" }}
       />
     </div>

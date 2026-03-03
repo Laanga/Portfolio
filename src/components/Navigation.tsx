@@ -108,7 +108,7 @@ const Navigation: React.FC = () => {
         ref={navRef}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled 
-            ? "py-4 bg-[#050505]/80 backdrop-blur-xl border-b border-white/5" 
+            ? "py-4 bg-white/85 backdrop-blur-xl border-b border-black/10 shadow-[0_8px_30px_rgba(17,17,17,0.06)]" 
             : "py-6"
         }`}
       >
@@ -119,8 +119,8 @@ const Navigation: React.FC = () => {
               onClick={() => scrollTo("hero")}
               className="relative group"
             >
-              <span className="text-xl font-semibold text-white transition-colors">
-                AL<span className="text-white/50 group-hover:text-white transition-colors duration-300">.</span>
+              <span className="text-xl font-semibold text-black transition-colors">
+                AL<span className="text-black/50 group-hover:text-black transition-colors duration-300">.</span>
               </span>
             </button>
 
@@ -132,19 +132,19 @@ const Navigation: React.FC = () => {
                   onClick={() => scrollTo(item.id)}
                   className={`relative px-4 py-2 text-sm transition-all duration-300 group ${
                     activeSection === item.id
-                      ? "text-white"
-                      : "text-white/40 hover:text-white/80"
+                      ? "text-black"
+                      : "text-black/40 hover:text-black/80"
                   }`}
                 >
                   <span className="relative z-10">{item.label}</span>
                   
                   {/* Active indicator */}
                   {activeSection === item.id && (
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-white" />
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-black" />
                   )}
                   
                   {/* Hover background */}
-                  <span className="absolute inset-0 bg-white/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <span className="absolute inset-0 bg-black/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </button>
               ))}
             </div>
@@ -152,14 +152,14 @@ const Navigation: React.FC = () => {
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden w-12 h-12 flex items-center justify-center rounded-full hover:bg-white/5 transition-colors duration-300"
+              className="md:hidden w-12 h-12 flex items-center justify-center rounded-full hover:bg-black/5 transition-colors duration-300"
               aria-label="Menu"
             >
               <div className="relative w-5 h-3">
-                <span className={`absolute left-0 w-full h-[1.5px] bg-white transition-all duration-300 ${
+                <span className={`absolute left-0 w-full h-[1.5px] bg-black transition-all duration-300 ${
                   isMenuOpen ? "top-1/2 -translate-y-1/2 rotate-45" : "top-0"
                 }`} />
-                <span className={`absolute left-0 w-full h-[1.5px] bg-white transition-all duration-300 ${
+                <span className={`absolute left-0 w-full h-[1.5px] bg-black transition-all duration-300 ${
                   isMenuOpen ? "top-1/2 -translate-y-1/2 -rotate-45" : "bottom-0"
                 }`} />
               </div>
@@ -171,7 +171,7 @@ const Navigation: React.FC = () => {
       {/* Mobile Menu */}
       <div
         ref={menuRef}
-        className="fixed inset-0 z-40 bg-[#050505] flex items-center justify-center md:hidden"
+        className="fixed inset-0 z-40 bg-white flex items-center justify-center md:hidden"
         style={{ clipPath: "circle(0% at calc(100% - 2rem) 2rem)" }}
       >
         {/* Background grid */}
@@ -179,8 +179,8 @@ const Navigation: React.FC = () => {
           className="absolute inset-0 opacity-[0.02]"
           style={{
             backgroundImage: `
-              linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)
+              linear-gradient(rgba(17,17,17,0.06) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(17,17,17,0.06) 1px, transparent 1px)
             `,
             backgroundSize: '60px 60px',
           }}
@@ -196,26 +196,26 @@ const Navigation: React.FC = () => {
             >
               <span className={`block text-4xl font-medium transition-colors duration-300 ${
                 activeSection === item.id 
-                  ? "text-white" 
-                  : "text-white/30 group-hover:text-white"
+                  ? "text-black" 
+                  : "text-black/30 group-hover:text-black"
               }`}>
                 {item.label}
               </span>
-              <span className="absolute -left-8 top-1/2 -translate-y-1/2 text-mono text-xs text-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span className="absolute -left-8 top-1/2 -translate-y-1/2 text-mono text-xs text-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 {item.num}
               </span>
             </button>
           ))}
           
           {/* Decorative line */}
-          <div className="menu-line w-32 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mt-8 origin-center" />
+          <div className="menu-line w-32 h-px bg-gradient-to-r from-transparent via-black/20 to-transparent mt-8 origin-center" />
         </nav>
 
         {/* Corner decorations */}
-        <div className="absolute bottom-12 left-8 text-mono text-xs text-white/20">
+        <div className="absolute bottom-12 left-8 text-mono text-xs text-black/20">
           ÁLVARO LANGA
         </div>
-        <div className="absolute bottom-12 right-8 text-mono text-xs text-white/20">
+        <div className="absolute bottom-12 right-8 text-mono text-xs text-black/20">
           © {new Date().getFullYear()}
         </div>
       </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import SectionBackgrounds from "../components/SectionBackgrounds";
 import PremiumBackground from "../components/PremiumBackground";
@@ -13,15 +13,17 @@ import { LanguageProvider } from "../i18n/LanguageContext";
 import { useDocumentLanguage } from "../i18n/useDocumentLanguage";
 import { Analytics } from "@vercel/analytics/next";
 
-const spaceGrotesk = Space_Grotesk({
+const ibmPlexSans = IBM_Plex_Sans({
   variable: "--font-space",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const ibmPlexMono = IBM_Plex_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
+  weight: ["500"],
   display: "swap",
 });
 
@@ -62,7 +64,7 @@ export default function RootLayout({
         />
         <link rel="icon" href="/favicon-transparent.svg" type="image/svg+xml" />
       </head>
-      <body className={`${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
+      <body className={`${ibmPlexSans.variable} ${ibmPlexMono.variable}`}>
         <LanguageProvider>
           <LayoutContent>{children}</LayoutContent>
         </LanguageProvider>
@@ -70,4 +72,3 @@ export default function RootLayout({
     </html>
   );
 }
-

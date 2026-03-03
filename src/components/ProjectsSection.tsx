@@ -166,9 +166,9 @@ const ProjectsSection: React.FC = () => {
 
       <div className="container relative z-10">
         <div className="proj-label flex items-center gap-4 mb-4">
-          <span className="text-mono">03</span>
-          <span className="w-12 h-px bg-white/20" />
-          <span className="text-mono text-white/40">{t.projects.title}</span>
+          <span className="text-mono text-[10px]">03</span>
+          <span className="w-12 h-px bg-black/20" />
+          <span className="text-mono text-black/40">{t.projects.title}</span>
         </div>
 
         <div className="proj-title-wrap mb-8 md:mb-10">
@@ -181,19 +181,19 @@ const ProjectsSection: React.FC = () => {
               href={primaryProject.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="block h-full overflow-hidden rounded-3xl border border-white/14 bg-gradient-to-br from-[#121212] via-[#0d0d0d] to-[#090909] p-7 md:p-8 transition-all duration-500 hover:-translate-y-1.5 hover:border-white/30 hover:shadow-[0_24px_50px_rgba(0,0,0,0.45)]"
+            className="block h-full overflow-hidden rounded-3xl border border-black/15 bg-white p-7 md:p-8 transition-all duration-500 hover:-translate-y-1.5 hover:border-black/30 hover:shadow-[0_24px_40px_rgba(0,0,0,0.12)]"
             >
               <div className="bento-copy mb-4 min-w-0">
-                <h3 className="text-xl md:text-[1.7rem] font-semibold text-white leading-[1.2] break-words [word-break:break-word] [overflow-wrap:anywhere] hyphens-auto">
+                <h3 className="text-xl md:text-[1.7rem] font-semibold text-black leading-[1.2] break-words [word-break:break-word] [overflow-wrap:anywhere] hyphens-auto">
                   {primaryProject.title}
                 </h3>
-                <p className="bento-copy text-mono text-[10px] md:text-[11px] text-white/55 mt-2">
+                <p className="bento-copy text-mono text-[10px] md:text-[11px] text-black/55 mt-2">
                   {primaryProject.tech}
                 </p>
               </div>
 
               <div className="bento-media relative h-52 md:h-[54%] overflow-hidden rounded-2xl">
-                <div className="absolute inset-2 rounded-full bg-white/10 blur-3xl opacity-30" />
+                <div className="absolute inset-2 rounded-full bg-black/10 blur-3xl opacity-30" />
                 <Image
                   src={primaryProject.image}
                   alt={primaryProject.title}
@@ -201,12 +201,12 @@ const ProjectsSection: React.FC = () => {
                   sizes="(min-width: 768px) 48vw, 96vw"
                   className="object-contain p-2 md:p-3 drop-shadow-[0_22px_38px_rgba(0,0,0,0.55)] transition-transform duration-700 group-hover:-translate-y-0.5 group-hover:scale-[1.04]"
                 />
-                <span className="pointer-events-none absolute top-3 right-3 z-20 rounded-full border border-white/25 bg-black/50 px-2.5 py-1 text-[10px] text-white/80 opacity-0 transition-opacity duration-300 md:group-hover:opacity-100">
+                <span className="pointer-events-none absolute top-3 right-3 z-20 rounded-full border border-black/20 bg-white/90 px-2.5 py-1 text-[10px] text-black/70 shadow-[0_6px_14px_rgba(0,0,0,0.08)] opacity-0 transition-opacity duration-300 md:group-hover:opacity-100">
                   {viewProjectLabel}
                 </span>
               </div>
 
-              <p className="bento-copy mt-4 text-sm md:text-[15px] text-white/82 leading-relaxed break-words [word-break:break-word] [overflow-wrap:anywhere]">
+              <p className="bento-copy mt-4 text-sm md:text-[15px] text-black/82 leading-relaxed break-words [word-break:break-word] [overflow-wrap:anywhere]">
                 {primaryProject.description}
               </p>
             </a>
@@ -217,23 +217,23 @@ const ProjectsSection: React.FC = () => {
               href={secondaryProject.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="block h-full overflow-hidden rounded-3xl border border-white/12 bg-[#0f0f10] p-6 md:p-7 transition-all duration-500 hover:-translate-y-1 hover:border-white/25 hover:shadow-[0_20px_45px_rgba(0,0,0,0.4)]"
+            className="block h-full overflow-hidden rounded-3xl border border-black/12 bg-white p-6 md:p-7 transition-all duration-500 hover:-translate-y-1 hover:border-black/25 hover:shadow-[0_20px_36px_rgba(0,0,0,0.1)]"
             >
               <div className="flex h-full flex-col md:flex-row md:items-center gap-4">
                 <div className="min-w-0 w-full md:w-[58%]">
-                  <p className="bento-copy text-[11px] text-white/55 uppercase tracking-[0.14em] mb-2">
+                  <p className="bento-copy text-[11px] text-black/55 uppercase tracking-[0.14em] mb-2">
                     {secondaryProject.tech}
                   </p>
-                  <h3 className="bento-copy text-lg md:text-xl font-semibold text-white leading-[1.2] mb-2 break-words [word-break:break-word] [overflow-wrap:anywhere] hyphens-auto">
+                  <h3 className="bento-copy text-lg md:text-xl font-semibold text-black leading-[1.2] mb-2 break-words [word-break:break-word] [overflow-wrap:anywhere] hyphens-auto">
                     {secondaryProject.title}
                   </h3>
-                  <p className="bento-copy text-sm md:text-[14px] text-white/82 leading-relaxed break-words [word-break:break-word] [overflow-wrap:anywhere]">
+                  <p className="bento-copy text-sm md:text-[14px] text-black/82 leading-relaxed break-words [word-break:break-word] [overflow-wrap:anywhere]">
                     {secondaryProject.description}
                   </p>
                 </div>
 
                 <div className="bento-media relative w-full md:w-[42%] h-44 md:h-full min-h-[150px] overflow-hidden rounded-2xl">
-                  <div className="absolute inset-2 rounded-full bg-white/10 blur-3xl opacity-25" />
+                  <div className="absolute inset-2 rounded-full bg-black/10 blur-3xl opacity-25" />
                   <Image
                     src={secondaryProject.image}
                     alt={secondaryProject.title}
@@ -241,7 +241,7 @@ const ProjectsSection: React.FC = () => {
                     sizes="(min-width: 768px) 26vw, 90vw"
                     className="object-contain p-2 md:p-2.5 drop-shadow-[0_18px_34px_rgba(0,0,0,0.55)] transition-transform duration-700 group-hover:-translate-y-0.5 group-hover:scale-[1.04]"
                   />
-                  <span className="pointer-events-none absolute top-3 right-3 z-20 rounded-full border border-white/25 bg-black/50 px-2.5 py-1 text-[10px] text-white/80 opacity-0 transition-opacity duration-300 md:group-hover:opacity-100">
+                  <span className="pointer-events-none absolute top-3 right-3 z-20 rounded-full border border-black/20 bg-white/90 px-2.5 py-1 text-[10px] text-black/70 shadow-[0_6px_14px_rgba(0,0,0,0.08)] opacity-0 transition-opacity duration-300 md:group-hover:opacity-100">
                     {viewProjectLabel}
                   </span>
                 </div>
@@ -254,11 +254,11 @@ const ProjectsSection: React.FC = () => {
               href={tertiaryProject.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="block h-full overflow-hidden rounded-3xl border border-white/12 bg-[#0b0b0c] p-6 md:p-7 transition-all duration-500 hover:-translate-y-1 hover:border-white/30 hover:shadow-[0_20px_45px_rgba(0,0,0,0.35)]"
+            className="block h-full overflow-hidden rounded-3xl border border-black/12 bg-white p-6 md:p-7 transition-all duration-500 hover:-translate-y-1 hover:border-black/30 hover:shadow-[0_20px_36px_rgba(0,0,0,0.1)]"
             >
               <div className="flex h-full flex-col md:flex-row md:items-center gap-4">
                 <div className="bento-media relative w-full md:w-[40%] h-44 md:h-full min-h-[150px] overflow-hidden rounded-2xl">
-                  <div className="absolute inset-2 rounded-full bg-white/10 blur-3xl opacity-25" />
+                  <div className="absolute inset-2 rounded-full bg-black/10 blur-3xl opacity-25" />
                   <Image
                     src={tertiaryProject.image}
                     alt={tertiaryProject.title}
@@ -266,19 +266,19 @@ const ProjectsSection: React.FC = () => {
                     sizes="(min-width: 768px) 24vw, 90vw"
                     className="object-contain p-2 md:p-2.5 drop-shadow-[0_18px_34px_rgba(0,0,0,0.55)] transition-transform duration-700 group-hover:-translate-y-0.5 group-hover:scale-[1.04]"
                   />
-                  <span className="pointer-events-none absolute top-3 right-3 z-20 rounded-full border border-white/25 bg-black/50 px-2.5 py-1 text-[10px] text-white/80 opacity-0 transition-opacity duration-300 md:group-hover:opacity-100">
+                  <span className="pointer-events-none absolute top-3 right-3 z-20 rounded-full border border-black/20 bg-white/90 px-2.5 py-1 text-[10px] text-black/70 shadow-[0_6px_14px_rgba(0,0,0,0.08)] opacity-0 transition-opacity duration-300 md:group-hover:opacity-100">
                     {viewProjectLabel}
                   </span>
                 </div>
 
                 <div className="min-w-0 w-full md:w-[60%]">
-                  <p className="bento-copy text-[11px] text-white/55 uppercase tracking-[0.14em] mb-2">
+                  <p className="bento-copy text-[11px] text-black/55 uppercase tracking-[0.14em] mb-2">
                     {tertiaryProject.tech}
                   </p>
-                  <h3 className="bento-copy text-lg md:text-xl font-semibold text-white leading-[1.2] mb-2 break-words [word-break:break-word] [overflow-wrap:anywhere] hyphens-auto">
+                  <h3 className="bento-copy text-lg md:text-xl font-semibold text-black leading-[1.2] mb-2 break-words [word-break:break-word] [overflow-wrap:anywhere] hyphens-auto">
                     {tertiaryProject.title}
                   </h3>
-                  <p className="bento-copy text-sm md:text-[14px] text-white/82 leading-relaxed break-words [word-break:break-word] [overflow-wrap:anywhere]">
+                  <p className="bento-copy text-sm md:text-[14px] text-black/82 leading-relaxed break-words [word-break:break-word] [overflow-wrap:anywhere]">
                     {tertiaryProject.description}
                   </p>
                 </div>

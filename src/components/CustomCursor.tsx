@@ -129,11 +129,11 @@ const CustomCursor: React.FC = () => {
   return (
     <div
       ref={cursorRef}
-      className={`fixed top-0 left-0 w-5 h-5 rounded-full border border-white/30 bg-white/10 pointer-events-none z-[9998] transition-opacity duration-200 will-change-transform ${
+      className={`fixed top-0 left-0 w-5 h-5 rounded-full border border-black/30 bg-black/10 pointer-events-none z-[9998] transition-opacity duration-200 will-change-transform ${
         isHidden ? "opacity-0" : "opacity-100"
       } ${
         isHoveringInteractive
-          ? "shadow-[0_0_0_10px_rgba(255,255,255,0.08)]"
+          ? "shadow-[0_0_0_10px_rgba(17,17,17,0.12)]"
           : "shadow-none"
       }`}
     />

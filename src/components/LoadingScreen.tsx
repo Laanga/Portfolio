@@ -10,9 +10,7 @@ interface LoadingScreenProps {
 const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
-    const progressBarRef = useRef<HTMLDivElement>(null);
-    const curtainLeftRef = useRef<HTMLDivElement>(null);
-    const curtainRightRef = useRef<HTMLDivElement>(null);
+    const numberRef = useRef<HTMLDivElement>(null);
 
     const [progress, setProgress] = useState(0);
     const progressValue = useRef({ value: 0 });
@@ -25,6 +23,9 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
     useEffect(() => {
         if (hasAnimated.current) return;
         hasAnimated.current = true;
+
+        gsap.set(contentRef.current, { perspective: 1200 });
+        gsap.set(numberRef.current, { transformPerspective: 1200, force3D: true });
 
         // Start counter animation immediately - no intro animation
         gsap.to(progressValue.current, {
@@ -41,40 +42,29 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
                 });
 
                 exitTl
-                    .to(contentRef.current, {
-                        scale: 0.9,
-                        opacity: 0,
-                        duration: 0.5,
-                        ease: "power2.in",
+                    .to(numberRef.current, {
+                        z: 560,
+                        scale: 3.7,
+                        rotationX: 7,
+                        filter: "blur(1.5px)",
+                        opacity: 0.22,
+                        duration: 0.58,
+                        ease: "power4.in",
                     })
-                    .to(curtainLeftRef.current, {
-                        xPercent: -100,
-                        duration: 0.8,
-                        ease: "power3.inOut",
-                    }, "-=0.2")
-                    .to(curtainRightRef.current, {
-                        xPercent: 100,
-                        duration: 0.8,
-                        ease: "power3.inOut",
-                    }, "<")
+                    .to(contentRef.current, {
+                        y: -8,
+                        duration: 0.2,
+                        ease: "power2.inOut",
+                    })
                     .to(containerRef.current, {
                         opacity: 0,
-                        duration: 0.3,
-                    }, "-=0.3");
+                        duration: 0.32,
+                        ease: "power2.out",
+                    }, "+=0.03");
             },
         });
 
-        // Progress bar fill synced with counter
-        gsap.to(progressBarRef.current, {
-            scaleX: 1,
-            duration: 2.5,
-            ease: "power2.inOut",
-        });
-
     }, [handleComplete]);
-
-    // Format number with leading zero
-    const formattedProgress = progress.toString().padStart(3, "0");
 
     return (
         <div
@@ -86,7 +76,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                background: "#050505",
+                background: "#ffffff",
             }}
         >
             {/* Content - visible from the start */}
@@ -98,160 +88,25 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    gap: "2rem",
+                    gap: "0",
                 }}
             >
-                {/* Loading text */}
+                {/* Progress number */}
                 <div
+                    ref={numberRef}
                     style={{
-                        fontFamily: "var(--font-mono), monospace",
-                        fontSize: "0.6875rem",
-                        fontWeight: 500,
-                        letterSpacing: "0.2em",
-                        textTransform: "uppercase",
-                        color: "rgba(255, 255, 255, 0.5)",
-                    }}
-                >
-                    Loading
-                </div>
-
-                {/* Big number */}
-                <div
-                    style={{
-                        fontSize: "clamp(6rem, 25vw, 14rem)",
+                        fontSize: "clamp(2.2rem, 8vw, 4rem)",
                         fontWeight: 600,
-                        lineHeight: 0.9,
-                        letterSpacing: "-0.04em",
-                        color: "#fafafa",
+                        lineHeight: 1,
+                        letterSpacing: "-0.025em",
+                        color: "#111111",
                         fontFamily: "var(--font-sans), system-ui, sans-serif",
-                        display: "flex",
-                        alignItems: "baseline",
+                        willChange: "transform, opacity, filter",
                     }}
                 >
-                    <span>{formattedProgress}</span>
-                    <span
-                        style={{
-                            fontSize: "clamp(1.5rem, 6vw, 3.5rem)",
-                            fontWeight: 400,
-                            marginLeft: "0.2em",
-                            opacity: 0.5,
-                        }}
-                    >
-                        %
-                    </span>
+                    <span>{progress}</span>
                 </div>
-
-                {/* Progress bar */}
-                <div
-                    style={{
-                        width: "clamp(200px, 40vw, 400px)",
-                        height: "1px",
-                        background: "rgba(255, 255, 255, 0.1)",
-                        position: "relative",
-                        overflow: "hidden",
-                    }}
-                >
-                    <div
-                        ref={progressBarRef}
-                        style={{
-                            position: "absolute",
-                            top: 0,
-                            left: 0,
-                            width: "100%",
-                            height: "100%",
-                            background: "rgba(255, 255, 255, 0.8)",
-                            transformOrigin: "left",
-                            transform: "scaleX(0)",
-                        }}
-                    />
-                </div>
-
-                {/* Decorative line */}
-                <div
-                    style={{
-                        width: "40px",
-                        height: "1px",
-                        background: "rgba(255, 255, 255, 0.2)",
-                        marginTop: "1rem",
-                    }}
-                />
             </div>
-
-            {/* Curtains for reveal effect */}
-            <div
-                ref={curtainLeftRef}
-                style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "50%",
-                    height: "100%",
-                    background: "#050505",
-                    zIndex: 5,
-                }}
-            />
-            <div
-                ref={curtainRightRef}
-                style={{
-                    position: "absolute",
-                    top: 0,
-                    right: 0,
-                    width: "50%",
-                    height: "100%",
-                    background: "#050505",
-                    zIndex: 5,
-                }}
-            />
-
-            {/* Corner frames */}
-            <div
-                style={{
-                    position: "absolute",
-                    top: "2rem",
-                    left: "2rem",
-                    width: "3rem",
-                    height: "3rem",
-                    borderLeft: "1px solid rgba(255, 255, 255, 0.1)",
-                    borderTop: "1px solid rgba(255, 255, 255, 0.1)",
-                    zIndex: 11,
-                }}
-            />
-            <div
-                style={{
-                    position: "absolute",
-                    top: "2rem",
-                    right: "2rem",
-                    width: "3rem",
-                    height: "3rem",
-                    borderRight: "1px solid rgba(255, 255, 255, 0.1)",
-                    borderTop: "1px solid rgba(255, 255, 255, 0.1)",
-                    zIndex: 11,
-                }}
-            />
-            <div
-                style={{
-                    position: "absolute",
-                    bottom: "2rem",
-                    left: "2rem",
-                    width: "3rem",
-                    height: "3rem",
-                    borderLeft: "1px solid rgba(255, 255, 255, 0.1)",
-                    borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
-                    zIndex: 11,
-                }}
-            />
-            <div
-                style={{
-                    position: "absolute",
-                    bottom: "2rem",
-                    right: "2rem",
-                    width: "3rem",
-                    height: "3rem",
-                    borderRight: "1px solid rgba(255, 255, 255, 0.1)",
-                    borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
-                    zIndex: 11,
-                }}
-            />
         </div>
     );
 };
