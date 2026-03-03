@@ -24,7 +24,7 @@ const EducationSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".edu-label", 
             start: "top 100%",
-            toggleActions: "restart none restart none"
+            toggleActions: "play reverse play reverse"
           }
         }
       );
@@ -39,7 +39,7 @@ const EducationSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".edu-title-wrap", 
             start: "top 100%",
-            toggleActions: "restart none restart none"
+            toggleActions: "play reverse play reverse"
           }
         }
       );
@@ -53,7 +53,7 @@ const EducationSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".edu-content", 
             start: "top 100%",
-            toggleActions: "restart none restart none"
+            toggleActions: "play reverse play reverse"
           }
         }
       );
@@ -67,7 +67,7 @@ const EducationSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".edu-content", 
             start: "top 100%",
-            toggleActions: "restart none restart none"
+            toggleActions: "play reverse play reverse"
           }
         }
       );
@@ -81,7 +81,7 @@ const EducationSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".edu-content", 
             start: "top 100%",
-            toggleActions: "restart none restart none"
+            toggleActions: "play reverse play reverse"
           }
         }
       );
@@ -95,7 +95,7 @@ const EducationSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".edu-line-h", 
             start: "top 100%",
-            toggleActions: "restart none restart none"
+            toggleActions: "play reverse play reverse"
           }
         }
       );
@@ -111,9 +111,9 @@ const EducationSection: React.FC = () => {
 
       <div className="container relative z-10">
         <div className="edu-label flex items-center gap-4 mb-6">
-          <span className="text-mono">04</span>
-          <span className="w-12 h-px bg-white/20" />
-          <span className="text-mono text-white/40">{t.education.title}</span>
+          <span className="text-mono text-[10px]">04</span>
+          <span className="w-12 h-px bg-black/20" />
+          <span className="text-mono text-black/40">{t.education.title}</span>
         </div>
         
         <div className="edu-title-wrap mb-16">
@@ -125,24 +125,24 @@ const EducationSection: React.FC = () => {
         <div className="edu-content max-w-2xl">
           <div className="flex items-start gap-6">
             <div className="relative mt-2">
-              <div className="edu-dot w-3 h-3 rounded-full border-2 border-white/50" />
-              <div className="edu-line-v absolute top-3 left-1/2 -translate-x-1/2 w-px h-16 bg-gradient-to-b from-white/30 to-transparent origin-top" />
+              <div className="edu-dot w-3 h-3 rounded-full border-2 border-black/50" />
+              <div className="edu-line-v absolute top-3 left-1/2 -translate-x-1/2 w-px h-16 bg-gradient-to-b from-black/30 to-transparent origin-top" />
             </div>
             
             <div className="edu-info">
-              <h3 className="text-title text-white mb-2">
+              <h3 className="text-title text-black mb-2">
                 {t.education.degree.title}
               </h3>
-              <p className="text-white/50 text-sm mb-4">
+              <p className="text-black/50 text-sm mb-4">
                 {t.education.degree.institution}
               </p>
-              <span className="text-mono text-xs text-white/40">
+              <span className="text-mono text-xs text-black/40">
                 {t.education.degree.date}
               </span>
             </div>
           </div>
           
-          <div className="edu-line-h mt-12 h-px w-full bg-gradient-to-r from-white/10 via-white/5 to-transparent origin-left" />
+          <div className="edu-line-h mt-12 h-px w-full bg-gradient-to-r from-black/10 via-black/5 to-transparent origin-left" />
         </div>
       </div>
     </section>

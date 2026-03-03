@@ -49,8 +49,8 @@ const PremiumBackground: React.FC = () => {
         className="absolute inset-0 opacity-[0.02]"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)
+            linear-gradient(rgba(17,17,17,0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(17,17,17,0.05) 1px, transparent 1px)
           `,
           backgroundSize: '80px 80px',
         }}
@@ -62,7 +62,7 @@ const PremiumBackground: React.FC = () => {
         style={{
           top: '-20%',
           left: '-10%',
-          background: 'radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(17,17,17,0.08) 0%, transparent 72%)',
           filter: 'blur(80px)',
         }}
       />
@@ -72,7 +72,7 @@ const PremiumBackground: React.FC = () => {
         style={{
           top: '40%',
           right: '-5%',
-          background: 'radial-gradient(circle, rgba(255,255,255,0.025) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(17,17,17,0.065) 0%, transparent 72%)',
           filter: 'blur(80px)',
         }}
       />
@@ -82,7 +82,7 @@ const PremiumBackground: React.FC = () => {
         style={{
           bottom: '-10%',
           left: '30%',
-          background: 'radial-gradient(circle, rgba(255,255,255,0.02) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(17,17,17,0.05) 0%, transparent 75%)',
           filter: 'blur(100px)',
         }}
       />

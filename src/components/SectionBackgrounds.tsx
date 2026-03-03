@@ -8,14 +8,14 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// Variaciones sutiles de negro - sin flashazos
+// Variaciones sutiles de blanco para mantener dinamismo en tema claro
 const sectionColors: Record<string, string> = {
-  hero: "#050505",      // Negro base
-  about: "#0a0a0c",     // Gris con toque azulado
-  experience: "#080808", // Gris neutro
-  projects: "#0c0a0a",   // Gris con toque cálido
-  education: "#0a0c0a",  // Gris con toque verdoso
-  footer: "#050505",     // Volver a negro base
+  hero: "#ffffff",
+  about: "#fdfdfc",
+  experience: "#fafaf9",
+  projects: "#fcfcfb",
+  education: "#f9f9f8",
+  footer: "#ffffff",
 };
 
 const SectionBackgrounds: React.FC = () => {

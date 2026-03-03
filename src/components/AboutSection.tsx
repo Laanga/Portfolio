@@ -60,7 +60,7 @@ const AboutSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".about-label", 
             start: "top 95%",
-            toggleActions: "restart none restart none"
+            toggleActions: "play reverse play reverse"
           }
         }
       );
@@ -75,7 +75,7 @@ const AboutSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".about-title-wrap", 
             start: "top 100%",
-            toggleActions: "restart none restart none"
+            toggleActions: "play reverse play reverse"
           }
         }
       );
@@ -89,7 +89,7 @@ const AboutSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".about-text", 
             start: "top 100%",
-            toggleActions: "restart none restart none"
+            toggleActions: "play reverse play reverse"
           }
         }
       );
@@ -103,7 +103,7 @@ const AboutSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".skills-list", 
             start: "top 100%",
-            toggleActions: "restart none restart none"
+            toggleActions: "play reverse play reverse"
           }
         }
       );
@@ -117,7 +117,7 @@ const AboutSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".tech-stack-grid", 
             start: "top 95%",
-            toggleActions: "restart none restart none"
+            toggleActions: "play reverse play reverse"
           }
         }
       );
@@ -132,7 +132,7 @@ const AboutSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".tech-stack-grid", 
             start: "top 100%",
-            toggleActions: "restart none restart none"
+            toggleActions: "play reverse play reverse"
           }
         }
       );
@@ -146,7 +146,7 @@ const AboutSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".about-line", 
             start: "top 100%",
-            toggleActions: "restart none restart none"
+            toggleActions: "play reverse play reverse"
           }
         }
       );
@@ -159,13 +159,13 @@ const AboutSection: React.FC = () => {
   return (
     <section id="about" ref={sectionRef} className="section relative overflow-hidden">
       <div className="orb w-[500px] h-[500px] top-0 -right-[200px]" />
-      <div className="absolute top-1/2 left-0 w-[1px] h-32 bg-gradient-to-b from-transparent via-white/10 to-transparent" />
+      <div className="absolute top-1/2 left-0 w-[1px] h-32 bg-gradient-to-b from-transparent via-black/10 to-transparent" />
 
       <div className="container relative z-10">
         <div className="about-label flex items-center gap-4 mb-6">
-          <span className="text-mono">01</span>
-          <span className="w-12 h-px bg-white/20" />
-          <span className="text-mono text-white/40">{t.about.title}</span>
+          <span className="text-mono text-[10px]">01</span>
+          <span className="w-12 h-px bg-black/20" />
+          <span className="text-mono text-black/40">{t.about.title}</span>
         </div>
         
         <div className="about-title-wrap mb-20">
@@ -178,21 +178,21 @@ const AboutSection: React.FC = () => {
           <div className="lg:col-span-3 space-y-8">
             <p className="about-text text-body-lg">{t.about.description1}</p>
             <p className="about-text text-body-lg">{t.about.description2}</p>
-            <div className="about-line h-px w-full bg-gradient-to-r from-white/15 via-white/5 to-transparent origin-left" />
+            <div className="about-line h-px w-full bg-gradient-to-r from-black/15 via-black/5 to-transparent origin-left" />
           </div>
 
           <div className="lg:col-span-2">
             <h3 className="text-mono mb-8 flex items-center gap-3">
-              <span className="w-2 h-2 rounded-full bg-white/50" />
+              <span className="w-2 h-2 rounded-full bg-black/50" />
               {t.about.professionalSkillsTitle}
             </h3>
             <ul className="skills-list space-y-4">
               {t.about.professionalSkills.map((skill, i) => (
                 <li 
                   key={i} 
-                  className="skill-item group flex items-center gap-4 text-white/50 hover:text-white transition-all duration-300"
+                  className="skill-item group flex items-center gap-4 text-black/50 hover:text-black transition-all duration-300"
                 >
-                  <span className="w-6 h-px bg-white/20 group-hover:w-10 group-hover:bg-white/50 transition-all duration-300" />
+                  <span className="w-6 h-px bg-black/20 group-hover:w-10 group-hover:bg-black/50 transition-all duration-300" />
                   <span className="text-sm">{skill}</span>
                 </li>
               ))}
@@ -200,9 +200,9 @@ const AboutSection: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-32 pt-16 border-t border-white/5">
+        <div className="mt-32 pt-16 border-t border-black/5">
           <h3 className="text-mono mb-12 flex items-center gap-3">
-            <span className="w-2 h-2 rounded-full bg-white/50" />
+            <span className="w-2 h-2 rounded-full bg-black/50" />
             {t.about.stackTitle}
           </h3>
 
@@ -216,8 +216,8 @@ const AboutSection: React.FC = () => {
                 key={group.title}
                 className="tech-column"
               >
-                <h4 className="text-mono mb-10 md:mb-12 flex items-center gap-3 text-white/65">
-                  <span className="w-2 h-2 rounded-full bg-white/35" />
+                <h4 className="text-mono mb-10 md:mb-12 flex items-center gap-3 text-black/65">
+                  <span className="w-2 h-2 rounded-full bg-black/35" />
                   {group.title}
                 </h4>
                 <div className="tech-list space-y-9 md:space-y-10">
@@ -230,13 +230,13 @@ const AboutSection: React.FC = () => {
                       >
                         <div className="relative">
                           <Icon
-                            className="text-2xl md:text-3xl text-white/40 group-hover:text-white transition-all duration-500 group-hover:scale-110"
+                            className="text-2xl md:text-3xl text-black/40 group-hover:text-black transition-all duration-500 group-hover:scale-110"
                           />
                           <div
-                            className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 bg-white/10"
+                            className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 bg-black/10"
                           />
                         </div>
-                        <span className="text-sm text-white/30 group-hover:text-white/70 transition-colors duration-300">
+                        <span className="text-sm text-black/30 group-hover:text-black/70 transition-colors duration-300">
                           {tech.name}
                         </span>
                       </div>

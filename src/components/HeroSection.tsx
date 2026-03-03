@@ -133,6 +133,18 @@ const HeroSection: React.FC = () => {
         },
       });
 
+      gsap.to(".hero-exit", {
+        yPercent: -10,
+        autoAlpha: 0.3,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "70% top",
+          end: "bottom top",
+          scrub: 1,
+        },
+      });
+
       // Re-animate on scroll back to hero
       ScrollTrigger.create({
         trigger: sectionRef.current,
@@ -165,19 +177,19 @@ const HeroSection: React.FC = () => {
       className="relative min-h-screen flex items-center overflow-hidden"
     >
       {/* Decorative lines */}
-      <div className="absolute top-0 left-[10%] w-px h-[30vh] hero-line-v bg-gradient-to-b from-white/20 to-transparent" />
-      <div className="absolute bottom-[20%] left-0 w-[40%] h-px hero-line-h bg-gradient-to-r from-white/15 to-transparent" />
+      <div className="absolute top-0 left-[10%] w-px h-[30vh] hero-line-v bg-gradient-to-b from-black/20 to-transparent" />
+      <div className="absolute bottom-[20%] left-0 w-[40%] h-px hero-line-h bg-gradient-to-r from-black/15 to-transparent" />
       
       {/* Ambient orbs */}
       <div className="orb w-[700px] h-[700px] -top-[300px] -left-[200px]" />
       <div className="orb w-[500px] h-[500px] top-[40%] -right-[150px]" />
 
-      <div className="container relative z-10 py-20">
+      <div className="hero-exit container relative z-10 py-20">
         <div className="max-w-5xl">
           {/* Role */}
           <div className="overflow-hidden mb-8">
             <p className="hero-role hero-fade text-mono flex items-center gap-3">
-              <span className="w-8 h-px bg-white/30" />
+              <span className="w-8 h-px bg-black/30" />
               {t.profile.jobTitle}
             </p>
           </div>
@@ -185,8 +197,8 @@ const HeroSection: React.FC = () => {
           {/* Name */}
           <div className="hero-name mb-8">
             <h1 className="text-display">
-              {/* First Name - White */}
-              <span className="first-name block overflow-hidden text-white">
+              {/* First Name */}
+              <span className="first-name block overflow-hidden text-black">
                 {firstName.split("").map((char, i) => (
                   <span 
                     key={i} 
@@ -201,7 +213,7 @@ const HeroSection: React.FC = () => {
               <span 
                 className="last-name block overflow-hidden"
                 style={{
-                  WebkitTextStroke: '1px rgba(255,255,255,0.8)',
+                  WebkitTextStroke: "1px rgba(17,17,17,0.62)",
                   WebkitTextFillColor: 'transparent',
                 }}
               >
@@ -218,7 +230,7 @@ const HeroSection: React.FC = () => {
           </div>
 
           {/* Horizontal line */}
-          <div className="hero-line-h w-32 h-px bg-gradient-to-r from-white/20 to-transparent mb-10 origin-left" />
+          <div className="hero-line-h w-32 h-px bg-gradient-to-r from-black/20 to-transparent mb-10 origin-left" />
 
           {/* Description */}
           <p className="hero-fade text-body-lg max-w-lg mb-4">
@@ -226,8 +238,8 @@ const HeroSection: React.FC = () => {
           </p>
 
           {/* Location */}
-          <p className="hero-fade flex items-center gap-2 text-sm text-white/40" style={{ marginBottom: '64px' }}>
-            <MapPin size={14} className="text-white/50" />
+          <p className="hero-fade flex items-center gap-2 text-sm text-black/40" style={{ marginBottom: '64px' }}>
+            <MapPin size={14} className="text-black/50" />
             {t.profile.location}
           </p>
 
@@ -270,15 +282,15 @@ const HeroSection: React.FC = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hero-stagger text-white/30 hover:text-white transition-all duration-300 hover:scale-110"
+                  className="hero-stagger text-black/30 hover:text-black transition-all duration-300 hover:scale-110"
                   aria-label={social.label}
                 >
                   <Icon size={22} />
                 </a>
               );
             })}
-            <span className="hero-stagger text-white/10 text-sm">·</span>
-            <span className="hero-stagger text-mono text-xs text-white/30">
+            <span className="hero-stagger text-black/10 text-sm">·</span>
+            <span className="hero-stagger text-mono text-xs text-black/30">
               Available for work
             </span>
           </div>
@@ -287,17 +299,17 @@ const HeroSection: React.FC = () => {
 
       {/* Scroll Indicator */}
       <div className="scroll-indicator absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center">
-        <span className="text-mono text-[10px] text-white/30 mb-4 tracking-widest">SCROLL</span>
-        <div className="w-px h-16 bg-white/10 rounded-full overflow-hidden relative">
-          <div className="scroll-dot absolute top-0 left-0 w-full h-4 bg-white/50 rounded-full" />
+        <span className="text-mono text-[10px] text-black/30 mb-4 tracking-widest">SCROLL</span>
+        <div className="w-px h-16 bg-black/10 rounded-full overflow-hidden relative">
+          <div className="scroll-dot absolute top-0 left-0 w-full h-4 bg-black/50 rounded-full" />
         </div>
       </div>
 
       {/* Frame corners - decorative */}
-      <div className="corner-frame absolute top-8 left-8 w-16 h-16 border-l border-t border-white/10" />
-      <div className="corner-frame absolute top-8 right-8 w-16 h-16 border-r border-t border-white/10" />
-      <div className="corner-frame absolute bottom-8 left-8 w-16 h-16 border-l border-b border-white/10" />
-      <div className="corner-frame absolute bottom-8 right-8 w-16 h-16 border-r border-b border-white/10" />
+      <div className="corner-frame absolute top-8 left-8 w-16 h-16 border-l border-t border-black/10" />
+      <div className="corner-frame absolute top-8 right-8 w-16 h-16 border-r border-t border-black/10" />
+      <div className="corner-frame absolute bottom-8 left-8 w-16 h-16 border-l border-b border-black/10" />
+      <div className="corner-frame absolute bottom-8 right-8 w-16 h-16 border-r border-b border-black/10" />
     </section>
   );
 };

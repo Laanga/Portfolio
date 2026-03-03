@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
           scrollTrigger: { 
             trigger: ".footer-label", 
             start: "top 100%",
-            toggleActions: "restart none restart none"
+            toggleActions: "play reverse play reverse"
           }
         }
       );
@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
           scrollTrigger: { 
             trigger: ".footer-cta", 
             start: "top 100%",
-            toggleActions: "restart none restart none"
+            toggleActions: "play reverse play reverse"
           }
         }
       );
@@ -52,7 +52,7 @@ const Footer: React.FC = () => {
           scrollTrigger: { 
             trigger: ".footer-content", 
             start: "top 100%",
-            toggleActions: "restart none restart none"
+            toggleActions: "play reverse play reverse"
           }
         }
       );
@@ -66,7 +66,7 @@ const Footer: React.FC = () => {
           scrollTrigger: { 
             trigger: ".footer-bottom", 
             start: "top 100%",
-            toggleActions: "restart none restart none"
+            toggleActions: "play reverse play reverse"
           }
         }
       );
@@ -80,7 +80,7 @@ const Footer: React.FC = () => {
           scrollTrigger: { 
             trigger: ".footer-line", 
             start: "top 100%",
-            toggleActions: "restart none restart none"
+            toggleActions: "play reverse play reverse"
           }
         }
       );
@@ -94,7 +94,7 @@ const Footer: React.FC = () => {
           scrollTrigger: { 
             trigger: ".footer-big-text", 
             start: "top 100%",
-            toggleActions: "restart none restart none"
+            toggleActions: "play reverse play reverse"
           }
         }
       );
@@ -110,13 +110,13 @@ const Footer: React.FC = () => {
     <footer id="footer" ref={footerRef} className="section relative overflow-hidden">
       <div className="orb w-[600px] h-[600px] bottom-0 left-1/2 -translate-x-1/2 opacity-5" />
       
-      <div className="footer-line absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent origin-center" />
+      <div className="footer-line absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-px bg-gradient-to-r from-transparent via-black/10 to-transparent origin-center" />
 
       <div className="container relative z-10">
         <div className="footer-label flex items-center gap-4 mb-8">
-          <span className="text-mono">05</span>
-          <span className="w-12 h-px bg-white/20" />
-          <span className="text-mono text-white/40">Contacto</span>
+          <span className="text-mono text-[10px]">05</span>
+          <span className="w-12 h-px bg-black/20" />
+          <span className="text-mono text-black/40">Contacto</span>
         </div>
 
         <div className="text-center" style={{ paddingTop: '64px', paddingBottom: '96px' }}>
@@ -134,7 +134,7 @@ const Footer: React.FC = () => {
           </h2>
 
           <div className="footer-content">
-            <p className="footer-fade text-body-lg max-w-lg mx-auto text-white/45" style={{ marginBottom: '56px' }}>
+            <p className="footer-fade text-body-lg max-w-lg mx-auto text-black/45" style={{ marginBottom: '56px' }}>
               {t.footer.description}
             </p>
 
@@ -159,12 +159,12 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="footer-bottom pt-10 border-t border-white/5">
+        <div className="footer-bottom pt-10 border-t border-black/5">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="footer-bottom-item flex items-center gap-3">
-              <span className="text-lg font-semibold text-white">AL<span className="text-white/50">.</span></span>
-              <span className="w-px h-4 bg-white/10" />
-              <span className="text-sm text-white/40">Software Developer</span>
+              <span className="text-lg font-semibold text-black">AL<span className="text-black/50">.</span></span>
+              <span className="w-px h-4 bg-black/10" />
+              <span className="text-sm text-black/40">Software Developer</span>
             </div>
 
             <div className="footer-bottom-item flex items-center gap-8">
@@ -172,7 +172,7 @@ const Footer: React.FC = () => {
                 href="https://www.linkedin.com/in/%C3%A1lvaro-langa-dev/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-white/40 hover:text-white transition-colors duration-300 link-hover"
+                className="text-sm text-black/40 hover:text-black transition-colors duration-300 link-hover"
               >
                 LinkedIn
               </a>
@@ -180,29 +180,29 @@ const Footer: React.FC = () => {
                 href="https://github.com/Laanga"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-white/40 hover:text-white transition-colors duration-300 link-hover"
+                className="text-sm text-black/40 hover:text-black transition-colors duration-300 link-hover"
               >
                 GitHub
               </a>
               <a
                 href={`mailto:${t.footer.email}`}
-                className="text-sm text-white/40 hover:text-white transition-colors duration-300 link-hover"
+                className="text-sm text-black/40 hover:text-black transition-colors duration-300 link-hover"
               >
                 Email
               </a>
             </div>
 
-            <div className="footer-bottom-item text-xs text-white/25">
+            <div className="footer-bottom-item text-xs text-black/25">
               © {new Date().getFullYear()} Álvaro Langa
             </div>
           </div>
         </div>
 
-        <div className="footer-big-text mt-16 overflow-hidden pointer-events-none select-none">
+        <div className="footer-big-text mt-16 overflow-hidden px-2 sm:px-4 pointer-events-none select-none">
           <span 
-            className="block text-[18vw] font-bold leading-none tracking-tighter text-center"
+            className="block w-full whitespace-nowrap text-center text-[clamp(5rem,18vw,24rem)] font-bold leading-none tracking-tighter"
             style={{
-              WebkitTextStroke: '2px rgba(255,255,255,0.2)',
+              WebkitTextStroke: "2px rgba(17,17,17,0.18)",
               WebkitTextFillColor: 'transparent',
             }}
           >

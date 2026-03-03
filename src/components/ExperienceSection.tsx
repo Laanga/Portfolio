@@ -24,7 +24,7 @@ const ExperienceSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".exp-label", 
             start: "top 100%",
-            toggleActions: "restart none restart none"
+            toggleActions: "play reverse play reverse"
           }
         }
       );
@@ -39,7 +39,7 @@ const ExperienceSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".exp-title-wrap", 
             start: "top 100%",
-            toggleActions: "restart none restart none"
+            toggleActions: "play reverse play reverse"
           }
         }
       );
@@ -54,7 +54,7 @@ const ExperienceSection: React.FC = () => {
           scrollTrigger: {
             trigger: ".timeline",
             start: "top 95%",
-            toggleActions: "restart none restart none"
+            toggleActions: "play reverse play reverse"
           }
         }
       );
@@ -73,7 +73,7 @@ const ExperienceSection: React.FC = () => {
             scrollTrigger: { 
               trigger: item, 
               start: "top 100%",
-              toggleActions: "restart none restart none"
+              toggleActions: "play reverse play reverse"
             }
           }
         );
@@ -86,7 +86,7 @@ const ExperienceSection: React.FC = () => {
             scrollTrigger: { 
               trigger: item, 
               start: "top 100%",
-              toggleActions: "restart none restart none"
+              toggleActions: "play reverse play reverse"
             }
           }
         );
@@ -99,7 +99,7 @@ const ExperienceSection: React.FC = () => {
             scrollTrigger: { 
               trigger: item, 
               start: "top 95%",
-              toggleActions: "restart none restart none"
+              toggleActions: "play reverse play reverse"
             }
           }
         );
@@ -116,9 +116,9 @@ const ExperienceSection: React.FC = () => {
 
       <div className="container relative z-10">
         <div className="exp-label flex items-center gap-4 mb-6">
-          <span className="text-mono">02</span>
-          <span className="w-12 h-px bg-white/20" />
-          <span className="text-mono text-white/40">{t.experience.title}</span>
+          <span className="text-mono text-[10px]">02</span>
+          <span className="w-12 h-px bg-black/20" />
+          <span className="text-mono text-black/40">{t.experience.title}</span>
         </div>
         
         <div className="exp-title-wrap mb-20">
@@ -129,28 +129,28 @@ const ExperienceSection: React.FC = () => {
 
         <div className="timeline relative max-w-4xl" style={{ marginLeft: '8px' }}>
           <div 
-            className="absolute top-0 bottom-0 w-px bg-white/5"
+            className="absolute top-0 bottom-0 w-px bg-black/5"
             style={{ left: '6px' }}
           >
-            <div className="timeline-progress absolute inset-0 bg-gradient-to-b from-white/60 via-white/30 to-white/10 origin-top" />
+            <div className="timeline-progress absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/10 origin-top" />
           </div>
 
           <div className="space-y-16">
             {t.experience.experiences.map((exp, i) => (
               <div key={i} className="exp-item relative" style={{ paddingLeft: '50px' }}>
                 <div 
-                  className="timeline-dot absolute rounded-full bg-[#050505] border-2 border-white/50 z-10"
+                  className="timeline-dot absolute rounded-full bg-white border-2 border-black/50 z-10"
                   style={{ left: '0', top: '6px', width: '13px', height: '13px' }}
                 />
 
                 <div className="exp-content">
                   <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1 md:gap-4 mb-5">
                     <div>
-                      <h3 className="text-title text-white">{exp.title}</h3>
-                      <p className="text-white/50 text-sm">{exp.company}</p>
+                      <h3 className="text-title text-black">{exp.title}</h3>
+                      <p className="text-black/50 text-sm">{exp.company}</p>
                     </div>
                     {exp.period && (
-                      <span className="text-mono text-xs text-white/40">
+                      <span className="text-mono text-xs text-black/40">
                         {exp.period}
                       </span>
                     )}
@@ -160,7 +160,7 @@ const ExperienceSection: React.FC = () => {
                     {exp.achievements.map((achievement, j) => (
                       <li 
                         key={j} 
-                        className="achievement text-sm text-white/45 leading-relaxed hover:text-white/70 transition-colors duration-300"
+                        className="achievement text-sm text-black/45 leading-relaxed hover:text-black/70 transition-colors duration-300"
                         style={{ paddingLeft: '16px', position: 'relative' }}
                       >
                         <span 
@@ -171,7 +171,7 @@ const ExperienceSection: React.FC = () => {
                             width: '5px', 
                             height: '5px', 
                             borderRadius: '50%', 
-                            backgroundColor: 'rgba(255,255,255,0.3)' 
+                            backgroundColor: "rgba(17,17,17,0.35)" 
                           }} 
                         />
                         {achievement}
