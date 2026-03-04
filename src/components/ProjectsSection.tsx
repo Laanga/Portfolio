@@ -266,7 +266,7 @@ const ProjectsSection: React.FC = () => {
                     sizes="(min-width: 768px) 24vw, 90vw"
                     className="object-contain p-2 md:p-2.5 drop-shadow-[0_18px_34px_rgba(0,0,0,0.55)] transition-transform duration-700 group-hover:-translate-y-0.5 group-hover:scale-[1.04]"
                   />
-                  <span className="pointer-events-none absolute top-3 right-3 z-20 rounded-full border border-black/20 bg-white/90 px-2.5 py-1 text-[10px] text-black/70 shadow-[0_6px_14px_rgba(0,0,0,0.08)] opacity-0 transition-opacity duration-300 md:group-hover:opacity-100">
+                  <span className="pointer-events-none absolute top-3 right-3 z-20 rounded-full border border-black/20 bg-white/90 px-2.5 py-1 text-[10px] text-black shadow-[0_6px_14px_rgba(0,0,0,0.08)] opacity-0 transition-opacity duration-300 md:group-hover:opacity-100">
                     {viewProjectLabel}
                   </span>
                 </div>

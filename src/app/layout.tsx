@@ -62,7 +62,7 @@ export default function RootLayout({
           name="description"
           content="Portfolio de Álvaro Langa - Desarrollador Software especializado en React, Next.js y tecnologías modernas."
         />
-        <link rel="icon" href="/favicon-transparent.svg" type="image/svg+xml" />
+        <link rel="icon" href="/logoPersonal-removebg-preview.png" type="image/png" />
       </head>
       <body className={`${ibmPlexSans.variable} ${ibmPlexMono.variable}`}>
         <LanguageProvider>
