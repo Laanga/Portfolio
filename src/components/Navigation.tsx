@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useContext, useMemo } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { useLanguage } from "../i18n/LanguageContext";
 import { LenisContext } from "./SmoothScroll";
@@ -117,11 +118,17 @@ const Navigation: React.FC = () => {
             {/* Logo */}
             <button
               onClick={() => scrollTo("hero")}
-              className="relative group"
+              className="relative group flex items-center"
+              aria-label="Inicio"
             >
-              <span className="text-xl font-semibold text-black transition-colors">
-                AL<span className="text-black/50 group-hover:text-black transition-colors duration-300">.</span>
-              </span>
+              <Image
+                src="/logoPersonal-removebg-preview.png"
+                alt="Logo Álvaro Langa"
+                width={669}
+                height={373}
+                priority
+                className="h-8 w-auto md:h-9"
+              />
             </button>
 
             {/* Desktop Nav */}
