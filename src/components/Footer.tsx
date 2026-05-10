@@ -198,17 +198,19 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="footer-big-text mt-16 overflow-hidden px-2 sm:px-4 pointer-events-none select-none">
-          <span 
-            className="block w-full whitespace-nowrap text-center text-[clamp(5rem,18vw,24rem)] font-bold leading-none tracking-tighter"
-            style={{
-              WebkitTextStroke: "2px rgba(17,17,17,0.18)",
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
-            LANGA
-          </span>
-        </div>
+      </div>
+
+      <div className="footer-big-text mt-16 overflow-hidden pointer-events-none select-none">
+        <span
+          className="block w-full whitespace-nowrap text-center font-bold leading-none"
+          style={{
+            fontSize: "clamp(3.5rem, 15vw, 20rem)",
+            WebkitTextStroke: "2px rgba(17,17,17,0.18)",
+            WebkitTextFillColor: "transparent",
+          }}
+        >
+          LANGA
+        </span>
       </div>
     </footer>
   );

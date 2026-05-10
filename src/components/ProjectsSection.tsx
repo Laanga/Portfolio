@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -13,6 +13,9 @@ if (typeof window !== "undefined") {
 const ProjectsSection: React.FC = () => {
   const { t, language } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
+  const panelRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const reduceMotionRef = useRef(false);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const projects = [
     {
@@ -20,7 +23,7 @@ const ProjectsSection: React.FC = () => {
       description: t.projects.projectsList[2].description,
       tech: "Next.js · Supabase · Tailwind · GSAP · TypeScript",
       link: "https://katalibrary.vercel.app/",
-      image: "/images/kata-no.png",
+      image: "/images/kata.png",
     },
     {
       title: t.projects.projectsList[1].title,
@@ -38,10 +41,19 @@ const ProjectsSection: React.FC = () => {
     },
   ];
 
-  const [primaryProject, secondaryProject, tertiaryProject] = projects;
   const featuredLabel =
     language === "es" ? "Proyectos destacados" : "Featured Work";
   const viewProjectLabel = language === "es" ? "Ver proyecto" : "View Project";
+
+  useEffect(() => {
+    const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
+    reduceMotionRef.current = mql.matches;
+    const onChange = (e: MediaQueryListEvent) => {
+      reduceMotionRef.current = e.matches;
+    };
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -81,74 +93,54 @@ const ProjectsSection: React.FC = () => {
         }
       );
 
-      gsap.utils.toArray<HTMLElement>(".bento-card").forEach((card) => {
-        const media = card.querySelector(".bento-media");
-        const copy = card.querySelectorAll(".bento-copy");
+      const mm = gsap.matchMedia();
 
-        const timeline = gsap.timeline({
-          paused: true,
-          defaults: {
-            ease: "power3.out",
-            immediateRender: false,
-          },
-        });
+      // Tablet/Mobile (<1024px): reveal de cada tarjeta apilada
+      mm.add("(max-width: 1023px)", () => {
+        gsap.utils.toArray<HTMLElement>(".stack-card").forEach((card) => {
+          const media = card.querySelector(".stack-media");
+          const copy = card.querySelectorAll(".stack-copy");
 
-        timeline.fromTo(
-          card,
-          {
-            y: 60,
-            autoAlpha: 0,
-            scale: 0.96,
-            rotateX: 7,
-            transformOrigin: "top center",
-          },
-          {
-            y: 0,
-            autoAlpha: 1,
-            scale: 1,
-            rotateX: 0,
-            duration: 0.75,
+          const tl = gsap.timeline({
+            paused: true,
+            defaults: { ease: "power3.out", immediateRender: false },
+          });
+
+          tl.fromTo(
+            card,
+            { y: 40, autoAlpha: 0, scale: 0.97 },
+            { y: 0, autoAlpha: 1, scale: 1, duration: 0.65 }
+          );
+
+          if (media) {
+            tl.fromTo(
+              media,
+              { clipPath: "inset(15% 0 15% 0 round 16px)", autoAlpha: 0 },
+              {
+                clipPath: "inset(0% 0 0% 0 round 16px)",
+                autoAlpha: 1,
+                duration: 0.7,
+              },
+              0.05
+            );
           }
-        );
 
-        if (media) {
-          timeline.fromTo(
-            media,
-            {
-              clipPath: "inset(20% 0 20% 0 round 14px)",
-              scale: 1.08,
-              autoAlpha: 0,
-            },
-            {
-              clipPath: "inset(0% 0 0% 0 round 14px)",
-              scale: 1,
-              autoAlpha: 1,
-              duration: 0.85,
-            },
-            0.08
-          );
-        }
+          if (copy.length) {
+            tl.fromTo(
+              copy,
+              { y: 14, autoAlpha: 0 },
+              { y: 0, autoAlpha: 1, duration: 0.45, stagger: 0.06 },
+              0.18
+            );
+          }
 
-        if (copy.length) {
-          timeline.fromTo(
-            copy,
-            { y: 18, autoAlpha: 0 },
-            {
-              y: 0,
-              autoAlpha: 1,
-              duration: 0.52,
-              stagger: 0.07,
-            },
-            0.18
-          );
-        }
-
-        ScrollTrigger.create({
-          trigger: card,
-          start: "top 88%",
-          end: "bottom 30%",
-          animation: timeline,
-          toggleActions: "play reverse play reverse",
+          ScrollTrigger.create({
+            trigger: card,
+            start: "top 88%",
+            end: "bottom 30%",
+            animation: tl,
+            toggleActions: "play reverse play reverse",
+          });
         });
       });
     }, sectionRef);
@@ -156,135 +148,181 @@ const ProjectsSection: React.FC = () => {
     return () => ctx.revert();
   }, []);
 
+  const animatePanel = (panel: HTMLDivElement, open: boolean) => {
+    const reduce = reduceMotionRef.current;
+    gsap.to(panel, {
+      height: open ? "auto" : 0,
+      duration: reduce ? 0 : open ? 0.55 : 0.45,
+      ease: open ? "power3.out" : "power3.in",
+      overwrite: "auto",
+    });
+  };
+
+  const toggle = (i: number) => {
+    setOpenIndex((prev) => {
+      if (prev === i) {
+        const panel = panelRefs.current[i];
+        if (panel) animatePanel(panel, false);
+        return null;
+      }
+      if (prev !== null) {
+        const prevPanel = panelRefs.current[prev];
+        if (prevPanel) animatePanel(prevPanel, false);
+      }
+      const nextPanel = panelRefs.current[i];
+      if (nextPanel) animatePanel(nextPanel, true);
+      return i;
+    });
+  };
+
   return (
     <section
       id="projects"
       ref={sectionRef}
       className="relative overflow-hidden py-20 md:py-28"
     >
-      <div className="orb w-[640px] h-[640px] bottom-0 -right-[250px]" />
+      <div className="orb h-[640px] w-[640px] bottom-0 -right-[250px]" />
 
       <div className="container relative z-10">
-        <div className="proj-label flex items-center gap-4 mb-4">
+        <div className="proj-label mb-4 flex items-center gap-4">
           <span className="text-mono text-[10px]">03</span>
-          <span className="w-12 h-px bg-black/20" />
+          <span className="h-px w-12 bg-black/20" />
           <span className="text-mono text-black/40">{t.projects.title}</span>
         </div>
 
-        <div className="proj-title-wrap mb-8 md:mb-10">
+        <div className="proj-title-wrap mb-10 md:mb-14">
           <h2 className="text-heading">{featuredLabel}</h2>
         </div>
 
-        <div className="projects-bento-grid grid grid-cols-1 gap-4 md:grid-cols-4 md:auto-rows-[340px]">
-          <article className="bento-card group md:col-span-2 md:row-span-2">
-            <a
-              href={primaryProject.link}
-              target="_blank"
-              rel="noopener noreferrer"
-            className="block h-full overflow-hidden rounded-3xl border border-black/15 bg-white p-7 md:p-8 transition-all duration-500 hover:-translate-y-1.5 hover:border-black/30 hover:shadow-[0_24px_40px_rgba(0,0,0,0.12)]"
-            >
-              <div className="bento-copy mb-4 min-w-0">
-                <h3 className="text-xl md:text-[1.7rem] font-semibold text-black leading-[1.2] break-words [word-break:break-word] [overflow-wrap:anywhere] hyphens-auto">
-                  {primaryProject.title}
-                </h3>
-                <p className="bento-copy text-mono text-[10px] md:text-[11px] text-black/55 mt-2">
-                  {primaryProject.tech}
-                </p>
-              </div>
+        {/* Desktop ≥1024px — accordion tipográfico */}
+        <ol className="hidden lg:block list-none border-t border-black/10">
+          {projects.map((p, i) => {
+            const isOpen = openIndex === i;
+            return (
+              <li
+                key={p.link}
+                className="proj-row group border-b border-black/10"
+                data-open={isOpen || undefined}
+              >
+                <button
+                  type="button"
+                  onClick={() => toggle(i)}
+                  aria-expanded={isOpen}
+                  aria-controls={`proj-panel-${i}`}
+                  className="grid w-full cursor-pointer grid-cols-12 items-center gap-6 py-9 text-left xl:py-11"
+                >
+                  <span className="col-span-1 text-mono text-[11px] text-black/40 transition-colors duration-500 group-hover:text-black/70 group-data-[open]:text-black">
+                    0{i + 1}
+                  </span>
 
-              <div className="bento-media relative h-52 md:h-[54%] overflow-hidden rounded-2xl">
-                <div className="absolute inset-2 rounded-full bg-black/10 blur-3xl opacity-30" />
-                <Image
-                  src={primaryProject.image}
-                  alt={primaryProject.title}
-                  fill
-                  sizes="(min-width: 768px) 48vw, 96vw"
-                  className="object-contain p-2 md:p-3 drop-shadow-[0_22px_38px_rgba(0,0,0,0.55)] transition-transform duration-700 group-hover:-translate-y-0.5 group-hover:scale-[1.04]"
-                />
-                <span className="pointer-events-none absolute top-3 right-3 z-20 rounded-full border border-black/20 bg-white/90 px-2.5 py-1 text-[10px] text-black/70 shadow-[0_6px_14px_rgba(0,0,0,0.08)] opacity-0 transition-opacity duration-300 md:group-hover:opacity-100">
-                  {viewProjectLabel}
-                </span>
-              </div>
-
-              <p className="bento-copy mt-4 text-sm md:text-[15px] text-black/82 leading-relaxed break-words [word-break:break-word] [overflow-wrap:anywhere]">
-                {primaryProject.description}
-              </p>
-            </a>
-          </article>
-
-          <article className="bento-card group md:col-span-2">
-            <a
-              href={secondaryProject.link}
-              target="_blank"
-              rel="noopener noreferrer"
-            className="block h-full overflow-hidden rounded-3xl border border-black/12 bg-white p-6 md:p-7 transition-all duration-500 hover:-translate-y-1 hover:border-black/25 hover:shadow-[0_20px_36px_rgba(0,0,0,0.1)]"
-            >
-              <div className="flex h-full flex-col md:flex-row md:items-center gap-4">
-                <div className="min-w-0 w-full md:w-[58%]">
-                  <p className="bento-copy text-[11px] text-black/55 uppercase tracking-[0.14em] mb-2">
-                    {secondaryProject.tech}
-                  </p>
-                  <h3 className="bento-copy text-lg md:text-xl font-semibold text-black leading-[1.2] mb-2 break-words [word-break:break-word] [overflow-wrap:anywhere] hyphens-auto">
-                    {secondaryProject.title}
+                  <h3
+                    id={`proj-title-${i}`}
+                    className="col-span-7 font-semibold leading-[1.05] tracking-[-0.02em] text-black/55 transition-[transform,color] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-3 group-hover:text-black group-data-[open]:translate-x-3 group-data-[open]:text-black"
+                    style={{ fontSize: "clamp(2rem, 5.2vw, 4.25rem)" }}
+                  >
+                    {p.title}
                   </h3>
-                  <p className="bento-copy text-sm md:text-[14px] text-black/82 leading-relaxed break-words [word-break:break-word] [overflow-wrap:anywhere]">
-                    {secondaryProject.description}
-                  </p>
-                </div>
 
-                <div className="bento-media relative w-full md:w-[42%] h-44 md:h-full min-h-[150px] overflow-hidden rounded-2xl">
-                  <div className="absolute inset-2 rounded-full bg-black/10 blur-3xl opacity-25" />
+                  <span className="col-span-3 truncate text-right text-mono text-[11px] text-black/45 transition-colors duration-500 group-hover:text-black/70 group-data-[open]:text-black/70">
+                    {p.tech}
+                  </span>
+
+                  <span
+                    aria-hidden
+                    className="col-span-1 inline-flex items-center justify-end text-2xl text-black/30 transition-[transform,color] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:text-black group-data-[open]:rotate-180 group-data-[open]:text-black"
+                  >
+                    ↓
+                  </span>
+                </button>
+
+                <div
+                  ref={(el) => {
+                    panelRefs.current[i] = el;
+                  }}
+                  id={`proj-panel-${i}`}
+                  role="region"
+                  aria-labelledby={`proj-title-${i}`}
+                  className="proj-panel overflow-hidden"
+                  style={{ height: 0 }}
+                >
+                  <div className="grid grid-cols-12 gap-8 pb-12">
+                    <div className="col-span-5 col-start-2 relative aspect-[16/10] overflow-hidden rounded-2xl border border-black/10 bg-[var(--color-bg-elevated)]">
+                      <Image
+                        src={p.image}
+                        alt={p.title}
+                        fill
+                        sizes="(min-width: 1280px) 40vw, 45vw"
+                        className="object-contain p-6"
+                      />
+                    </div>
+                    <div className="col-span-5 flex flex-col justify-center">
+                      <p className="max-w-[52ch] text-body-lg text-black/75">
+                        {p.description}
+                      </p>
+                      <a
+                        href={p.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-7 inline-flex items-center gap-2 self-start border-b border-black/30 pb-1 text-mono text-[11px] uppercase tracking-[0.14em] text-black transition-colors hover:border-black"
+                      >
+                        {viewProjectLabel}
+                        <span
+                          aria-hidden
+                          className="transition-transform duration-300 group-hover:translate-x-1"
+                        >
+                          →
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+
+        {/* Tablet/Mobile <1024px — stack con imagen inline */}
+        <div className="flex flex-col gap-12 lg:hidden">
+          {projects.map((p, i) => (
+            <article
+              key={p.link}
+              className="stack-card"
+              style={{ opacity: 0 }}
+            >
+              <a
+                href={p.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
+                <div className="stack-media relative aspect-[16/10] overflow-hidden rounded-2xl border border-black/10 bg-[var(--color-bg-elevated)]">
                   <Image
-                    src={secondaryProject.image}
-                    alt={secondaryProject.title}
+                    src={p.image}
+                    alt={p.title}
                     fill
-                    sizes="(min-width: 768px) 26vw, 90vw"
-                    className="object-contain p-2 md:p-2.5 drop-shadow-[0_18px_34px_rgba(0,0,0,0.55)] transition-transform duration-700 group-hover:-translate-y-0.5 group-hover:scale-[1.04]"
+                    sizes="(min-width: 768px) 90vw, 92vw"
+                    priority={i === 0}
+                    className="object-contain p-6 md:p-10"
                   />
-                  <span className="pointer-events-none absolute top-3 right-3 z-20 rounded-full border border-black/20 bg-white/90 px-2.5 py-1 text-[10px] text-black/70 shadow-[0_6px_14px_rgba(0,0,0,0.08)] opacity-0 transition-opacity duration-300 md:group-hover:opacity-100">
+                </div>
+                <div className="mt-5">
+                  <p className="stack-copy text-mono text-[10px] text-black/45">
+                    0{i + 1} · {p.tech}
+                  </p>
+                  <h3 className="stack-copy mt-2 text-2xl md:text-3xl font-semibold text-black leading-[1.15]">
+                    {p.title}
+                  </h3>
+                  <p className="stack-copy mt-3 max-w-[60ch] text-[15px] leading-relaxed text-black/70">
+                    {p.description}
+                  </p>
+                  <span className="stack-copy mt-4 inline-flex items-center gap-2 text-mono text-black/70">
                     {viewProjectLabel}
+                    <span aria-hidden>→</span>
                   </span>
                 </div>
-              </div>
-            </a>
-          </article>
-
-          <article className="bento-card group md:col-span-2">
-            <a
-              href={tertiaryProject.link}
-              target="_blank"
-              rel="noopener noreferrer"
-            className="block h-full overflow-hidden rounded-3xl border border-black/12 bg-white p-6 md:p-7 transition-all duration-500 hover:-translate-y-1 hover:border-black/30 hover:shadow-[0_20px_36px_rgba(0,0,0,0.1)]"
-            >
-              <div className="flex h-full flex-col md:flex-row md:items-center gap-4">
-                <div className="bento-media relative w-full md:w-[40%] h-44 md:h-full min-h-[150px] overflow-hidden rounded-2xl">
-                  <div className="absolute inset-2 rounded-full bg-black/10 blur-3xl opacity-25" />
-                  <Image
-                    src={tertiaryProject.image}
-                    alt={tertiaryProject.title}
-                    fill
-                    sizes="(min-width: 768px) 24vw, 90vw"
-                    className="object-contain p-2 md:p-2.5 drop-shadow-[0_18px_34px_rgba(0,0,0,0.55)] transition-transform duration-700 group-hover:-translate-y-0.5 group-hover:scale-[1.04]"
-                  />
-                  <span className="pointer-events-none absolute top-3 right-3 z-20 rounded-full border border-black/20 bg-white/90 px-2.5 py-1 text-[10px] text-black shadow-[0_6px_14px_rgba(0,0,0,0.08)] opacity-0 transition-opacity duration-300 md:group-hover:opacity-100">
-                    {viewProjectLabel}
-                  </span>
-                </div>
-
-                <div className="min-w-0 w-full md:w-[60%]">
-                  <p className="bento-copy text-[11px] text-black/55 uppercase tracking-[0.14em] mb-2">
-                    {tertiaryProject.tech}
-                  </p>
-                  <h3 className="bento-copy text-lg md:text-xl font-semibold text-black leading-[1.2] mb-2 break-words [word-break:break-word] [overflow-wrap:anywhere] hyphens-auto">
-                    {tertiaryProject.title}
-                  </h3>
-                  <p className="bento-copy text-sm md:text-[14px] text-black/82 leading-relaxed break-words [word-break:break-word] [overflow-wrap:anywhere]">
-                    {tertiaryProject.description}
-                  </p>
-                </div>
-              </div>
-            </a>
-          </article>
+              </a>
+            </article>
+          ))}
         </div>
       </div>
     </section>
