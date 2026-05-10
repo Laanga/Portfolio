@@ -272,10 +272,3 @@ h6 {
   }
 }
 
-/* ============================================
-   CUSTOM CURSOR ACTIVE
-   ============================================ */
-html.custom-cursor-active,
-html.custom-cursor-active * {
-  cursor: none !important;
-}

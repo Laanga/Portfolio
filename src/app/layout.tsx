@@ -5,7 +5,6 @@ import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import SectionBackgrounds from "../components/SectionBackgrounds";
 import PremiumBackground from "../components/PremiumBackground";
-import CustomCursor from "../components/CustomCursor";
 import ScrollProgress from "../components/ScrollProgress";
 import SmoothScroll from "../components/SmoothScroll";
 import LoadingScreen from "../components/LoadingScreen";
@@ -39,7 +38,6 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
       <SmoothScroll>
         <SectionBackgrounds />
         <PremiumBackground />
-        <CustomCursor />
         <ScrollProgress />
         <div className="noise" />
         {children}
