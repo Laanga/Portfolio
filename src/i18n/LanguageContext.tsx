@@ -1,63 +1,95 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { es, en, Language } from './translations';
 
 interface LanguageContextType {
   language: Language;
   t: typeof es | typeof en;
+  setLanguage: (lang: Language) => void;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-// Detecta el idioma del navegador
+const STORAGE_KEY = 'preferred-language';
+const SUPPORTED: readonly Language[] = ['es', 'en'] as const;
+
+function isSupportedLanguage(code: string): code is Language {
+  return (SUPPORTED as readonly string[]).includes(code);
+}
+
+// Recorre la lista completa de idiomas preferidos del navegador (navigator.languages)
+// y devuelve el primero soportado. Si ninguno coincide, cae a inglés.
 function detectBrowserLanguage(): Language {
-  if (typeof window === 'undefined') return 'es'; // SSR fallback
-  
-  // navigator.language devuelve cosas como "es-ES", "en-US", "en-GB", etc.
-  const browserLang = navigator.language || 'es';
-  
-  // Extraer el código de idioma principal (es, en, fr, etc.)
-  const langCode = browserLang.split('-')[0].toLowerCase();
-  
-  // Solo soportamos español e inglés, cualquier otro idioma → inglés
-  if (langCode === 'es') {
-    return 'es';
+  if (typeof navigator === 'undefined') return 'en';
+
+  const candidates: string[] = [];
+  if (Array.isArray(navigator.languages) && navigator.languages.length > 0) {
+    candidates.push(...navigator.languages);
   }
-  
-  // Para cualquier otro idioma (inglés, francés, alemán, etc.) usamos inglés
+  if (navigator.language) {
+    candidates.push(navigator.language);
+  }
+
+  for (const raw of candidates) {
+    if (!raw) continue;
+    const code = raw.split('-')[0].toLowerCase();
+    if (isSupportedLanguage(code)) return code;
+  }
+
   return 'en';
 }
 
+function readStoredLanguage(): Language | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const saved = window.localStorage.getItem(STORAGE_KEY);
+    return saved && isSupportedLanguage(saved) ? saved : null;
+  } catch {
+    return null;
+  }
+}
+
+function writeStoredLanguage(lang: Language): void {
+  if (typeof window === 'undefined') return;
+  try {
+    window.localStorage.setItem(STORAGE_KEY, lang);
+  } catch {
+    // Ignorar errores de storage (modo privado, cuota llena, etc.)
+  }
+}
+
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>('es');
+  const [language, setLanguageState] = useState<Language>('es');
   const [isClient, setIsClient] = useState(false);
 
-  // Detectar idioma del navegador solo en cliente
+  // Sólo en cliente: primero respeta la elección guardada; si no, detecta del navegador.
   useEffect(() => {
     setIsClient(true);
-    const detectedLanguage = detectBrowserLanguage();
-    setLanguage(detectedLanguage);
+    const stored = readStoredLanguage();
+    setLanguageState(stored ?? detectBrowserLanguage());
+  }, []);
+
+  const setLanguage = useCallback((lang: Language) => {
+    setLanguageState(lang);
+    writeStoredLanguage(lang);
   }, []);
 
   const translations = language === 'es' ? es : en;
 
-  const value: LanguageContextType = {
-    language,
-    t: translations
-  };
-
-  // Evitar flash de contenido incorrecto durante SSR
+  // Placeholder SSR coherente para evitar flashes durante la hidratación.
+  // La pantalla de carga (LoadingScreen) cubre la página hasta que el efecto
+  // anterior ya ha aplicado el idioma correcto.
   if (!isClient) {
     return (
-      <LanguageContext.Provider value={{ language: 'es', t: es }}>
+      <LanguageContext.Provider value={{ language: 'es', t: es, setLanguage: () => {} }}>
         {children}
       </LanguageContext.Provider>
     );
   }
 
   return (
-    <LanguageContext.Provider value={value}>
+    <LanguageContext.Provider value={{ language, t: translations, setLanguage }}>
       {children}
     </LanguageContext.Provider>
   );

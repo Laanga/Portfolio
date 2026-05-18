@@ -291,7 +291,7 @@ const HeroSection: React.FC = () => {
             })}
             <span className="hero-stagger text-black/10 text-sm">·</span>
             <span className="hero-stagger text-mono text-xs text-black/30">
-              Available for work
+              {t.hero.availability}
             </span>
           </div>
         </div>

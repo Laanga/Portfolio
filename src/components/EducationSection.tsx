@@ -118,7 +118,7 @@ const EducationSection: React.FC = () => {
         
         <div className="edu-title-wrap mb-16">
           <h2 className="text-heading">
-            Formación académica
+            {t.education.subtitle}
           </h2>
         </div>
 
