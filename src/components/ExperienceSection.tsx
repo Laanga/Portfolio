@@ -123,7 +123,7 @@ const ExperienceSection: React.FC = () => {
         
         <div className="exp-title-wrap mb-20">
           <h2 className="text-heading">
-            Trayectoria profesional
+            {t.experience.subtitle}
           </h2>
         </div>
 

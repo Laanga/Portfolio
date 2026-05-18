@@ -7,7 +7,8 @@ import { useLanguage } from "../i18n/LanguageContext";
 import { LenisContext } from "./SmoothScroll";
 
 const Navigation: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language, setLanguage } = useLanguage();
+  const toggleLanguage = () => setLanguage(language === "es" ? "en" : "es");
   const lenis = useContext(LenisContext);
   const [activeSection, setActiveSection] = useState("hero");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -119,7 +120,7 @@ const Navigation: React.FC = () => {
             <button
               onClick={() => scrollTo("hero")}
               className="relative group flex items-center"
-              aria-label="Inicio"
+              aria-label={t.navigation.homeAriaLabel}
             >
               <Image
                 src="/logoPersonal-removebg-preview.png"
@@ -144,23 +145,33 @@ const Navigation: React.FC = () => {
                   }`}
                 >
                   <span className="relative z-10">{item.label}</span>
-                  
+
                   {/* Active indicator */}
                   {activeSection === item.id && (
                     <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-black" />
                   )}
-                  
+
                   {/* Hover background */}
                   <span className="absolute inset-0 bg-black/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </button>
               ))}
+
+              {/* Language toggle */}
+              <button
+                type="button"
+                onClick={toggleLanguage}
+                aria-label={t.navigation.switchLanguageAriaLabel}
+                className="ml-2 px-3 py-1.5 text-mono text-[11px] tracking-[0.14em] text-black/50 border border-black/10 rounded-full hover:text-black hover:border-black/40 transition-colors duration-300"
+              >
+                {t.navigation.switchLanguageLabel}
+              </button>
             </div>
 
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="md:hidden w-12 h-12 flex items-center justify-center rounded-full hover:bg-black/5 transition-colors duration-300"
-              aria-label="Menu"
+              aria-label={t.navigation.menuAriaLabel}
             >
               <div className="relative w-5 h-3">
                 <span className={`absolute left-0 w-full h-[1.5px] bg-black transition-all duration-300 ${
@@ -216,6 +227,16 @@ const Navigation: React.FC = () => {
           
           {/* Decorative line */}
           <div className="menu-line w-32 h-px bg-gradient-to-r from-transparent via-black/20 to-transparent mt-8 origin-center" />
+
+          {/* Language toggle (mobile) */}
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            aria-label={t.navigation.switchLanguageAriaLabel}
+            className="menu-item mt-6 px-4 py-2 text-mono text-xs tracking-[0.18em] text-black/60 border border-black/15 rounded-full hover:text-black hover:border-black/50 transition-colors duration-300"
+          >
+            {t.navigation.switchLanguageLabel}
+          </button>
         </nav>
 
         {/* Corner decorations */}

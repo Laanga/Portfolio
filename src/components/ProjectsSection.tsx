@@ -11,7 +11,7 @@ if (typeof window !== "undefined") {
 }
 
 const ProjectsSection: React.FC = () => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const panelRefs = useRef<Array<HTMLDivElement | null>>([]);
   const reduceMotionRef = useRef(false);
@@ -41,9 +41,8 @@ const ProjectsSection: React.FC = () => {
     },
   ];
 
-  const featuredLabel =
-    language === "es" ? "Proyectos destacados" : "Featured Work";
-  const viewProjectLabel = language === "es" ? "Ver proyecto" : "View Project";
+  const featuredLabel = t.projects.featuredLabel;
+  const viewProjectLabel = t.projects.viewProject;
 
   useEffect(() => {
     const mql = window.matchMedia("(prefers-reduced-motion: reduce)");

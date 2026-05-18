@@ -3,9 +3,13 @@ export const es = {
   // Navigation
   navigation: {
     about: "Sobre mí",
-    experience: "Experiencia", 
+    experience: "Experiencia",
     education: "Formación",
-    projects: "Proyectos"
+    projects: "Proyectos",
+    homeAriaLabel: "Inicio",
+    menuAriaLabel: "Menú",
+    switchLanguageLabel: "EN",
+    switchLanguageAriaLabel: "Cambiar idioma a inglés"
   },
 
   // About section
@@ -20,7 +24,7 @@ export const es = {
     cloudStackTitle: "Cloud / DevOps & Tooling",
     professionalSkills: [
       "Desarrollo Frontend",
-      "Desarrollo Backend", 
+      "Desarrollo Backend",
       "Bases de datos",
       "APIs e integraciones",
       "Control de versiones",
@@ -32,6 +36,7 @@ export const es = {
   // Experience section
   experience: {
     title: "Experiencia",
+    subtitle: "Trayectoria profesional",
     experiences: [
       {
         title: "Desarrollador de Software",
@@ -50,6 +55,7 @@ export const es = {
   // Education section
   education: {
     title: "Formación",
+    subtitle: "Formación académica",
     degree: {
       title: "Grado Superior Desarrollo de Aplicaciones Web",
       institution: "I.E.S GASPAR MELCHOR DE JOVELLANOS",
@@ -60,6 +66,8 @@ export const es = {
   // Projects section
   projects: {
     title: "Proyectos",
+    featuredLabel: "Proyectos destacados",
+    viewProject: "Ver proyecto",
     projectsList: [
       {
         title: "GridRush",
@@ -87,14 +95,17 @@ export const es = {
   // Hero section
   hero: {
     description: "Desarrollador Full Stack especializado en React, Next.js y Node.js. Creo aplicaciones web de alto rendimiento con interfaces limpias y experiencias interactivas.",
-    contact: "Contacto"
+    contact: "Contacto",
+    availability: "Disponible para trabajar"
   },
 
   // Footer
   footer: {
     title: "¿Hablamos?",
     description: "Abierto a colaboraciones y proyectos freelance.",
-    email: "alvarolanga04@gmail.com"
+    email: "alvarolanga04@gmail.com",
+    contactLabel: "Contacto",
+    role: "Software Developer"
   }
 } as const;
 
@@ -104,8 +115,12 @@ export const en = {
   navigation: {
     about: "About",
     experience: "Experience",
-    education: "Education", 
-    projects: "Projects"
+    education: "Education",
+    projects: "Projects",
+    homeAriaLabel: "Home",
+    menuAriaLabel: "Menu",
+    switchLanguageLabel: "ES",
+    switchLanguageAriaLabel: "Switch language to Spanish"
   },
 
   // About section
@@ -121,7 +136,7 @@ export const en = {
     professionalSkills: [
       "Frontend Development",
       "Backend Development",
-      "Databases", 
+      "Databases",
       "APIs & Integrations",
       "Version Control",
       "Automation",
@@ -132,6 +147,7 @@ export const en = {
   // Experience section
   experience: {
     title: "Experience",
+    subtitle: "Career path",
     experiences: [
       {
         title: "Software Developer",
@@ -150,9 +166,10 @@ export const en = {
   // Education section
   education: {
     title: "Education",
+    subtitle: "Academic background",
     degree: {
       title: "Higher Degree in Web Application Development",
-      institution: "I.E.S GASPAR MELCHOR DE JOVELLANOS", 
+      institution: "I.E.S GASPAR MELCHOR DE JOVELLANOS",
       date: "2023 - 2025"
     }
   },
@@ -160,6 +177,8 @@ export const en = {
   // Projects section
   projects: {
     title: "Projects",
+    featuredLabel: "Featured work",
+    viewProject: "View project",
     projectsList: [
       {
         title: "GridRush",
@@ -179,7 +198,7 @@ export const en = {
   // Profile
   profile: {
     jobTitle: "Software Developer",
-    location: "Madrid, Spain", 
+    location: "Madrid, Spain",
     downloadCV: "Download CV",
     email: "alvarolanga04@gmail.com"
   },
@@ -187,14 +206,17 @@ export const en = {
   // Hero section
   hero: {
     description: "Full Stack Developer specialized in React, Next.js and Node.js. I build high-performance web applications with clean interfaces and interactive experiences.",
-    contact: "Contact"
+    contact: "Contact",
+    availability: "Available for work"
   },
 
   // Footer
   footer: {
     title: "Let's talk?",
     description: "Open to collaborations and freelance projects.",
-    email: "alvarolanga04@gmail.com"
+    email: "alvarolanga04@gmail.com",
+    contactLabel: "Contact",
+    role: "Software Developer"
   }
 } as const;
 

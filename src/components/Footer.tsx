@@ -116,7 +116,7 @@ const Footer: React.FC = () => {
         <div className="footer-label flex items-center gap-4 mb-8">
           <span className="text-mono text-[10px]">05</span>
           <span className="w-12 h-px bg-black/20" />
-          <span className="text-mono text-black/40">Contacto</span>
+          <span className="text-mono text-black/40">{t.footer.contactLabel}</span>
         </div>
 
         <div className="text-center" style={{ paddingTop: '64px', paddingBottom: '96px' }}>
@@ -164,7 +164,7 @@ const Footer: React.FC = () => {
             <div className="footer-bottom-item flex items-center gap-3">
               <span className="text-lg font-semibold text-black">AL<span className="text-black/50">.</span></span>
               <span className="w-px h-4 bg-black/10" />
-              <span className="text-sm text-black/40">Software Developer</span>
+              <span className="text-sm text-black/40">{t.footer.role}</span>
             </div>
 
             <div className="footer-bottom-item flex items-center gap-8">
