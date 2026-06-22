@@ -24,7 +24,7 @@ const EducationSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".edu-label", 
             start: "top 100%",
-            toggleActions: "play reverse play reverse"
+            toggleActions: "play none none reverse"
           }
         }
       );
@@ -39,7 +39,7 @@ const EducationSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".edu-title-wrap", 
             start: "top 100%",
-            toggleActions: "play reverse play reverse"
+            toggleActions: "play none none reverse"
           }
         }
       );
@@ -53,7 +53,7 @@ const EducationSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".edu-content", 
             start: "top 100%",
-            toggleActions: "play reverse play reverse"
+            toggleActions: "play none none reverse"
           }
         }
       );
@@ -67,7 +67,7 @@ const EducationSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".edu-content", 
             start: "top 100%",
-            toggleActions: "play reverse play reverse"
+            toggleActions: "play none none reverse"
           }
         }
       );
@@ -81,7 +81,7 @@ const EducationSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".edu-content", 
             start: "top 100%",
-            toggleActions: "play reverse play reverse"
+            toggleActions: "play none none reverse"
           }
         }
       );
@@ -95,10 +95,25 @@ const EducationSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".edu-line-h", 
             start: "top 100%",
-            toggleActions: "play reverse play reverse"
+            toggleActions: "play none none reverse"
           }
         }
       );
+      // Animación de salida al hacer scroll hacia arriba (exit transition)
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reduceMotion) {
+        gsap.to(".edu-exit-wrap", {
+          opacity: 0,
+          y: -80,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "bottom 90%",
+            end: "bottom 15%",
+            scrub: true,
+          }
+        });
+      }
 
     }, sectionRef);
 
@@ -109,7 +124,7 @@ const EducationSection: React.FC = () => {
     <section id="education" ref={sectionRef} className="section relative overflow-hidden">
       <div className="orb w-[400px] h-[400px] bottom-20 left-1/4 opacity-5" />
 
-      <div className="container relative z-10">
+      <div className="edu-exit-wrap container relative z-10">
         <div className="edu-label flex items-center gap-4 mb-6">
           <span className="text-mono text-[10px]">04</span>
           <span className="w-12 h-px bg-black/20" />

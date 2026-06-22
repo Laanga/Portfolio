@@ -119,7 +119,7 @@ const Navigation: React.FC = () => {
             {/* Logo */}
             <button
               onClick={() => scrollTo("hero")}
-              className="relative group flex items-center"
+              className="flex items-center magnetic-target"
               aria-label={t.navigation.homeAriaLabel}
             >
               <Image
@@ -138,21 +138,21 @@ const Navigation: React.FC = () => {
                 <button
                   key={item.id}
                   onClick={() => scrollTo(item.id)}
-                  className={`relative px-4 py-2 text-sm transition-all duration-300 group ${
+                  className={`relative px-4 py-2 text-sm transition-all duration-300 group magnetic-target ${
                     activeSection === item.id
                       ? "text-black"
                       : "text-black/40 hover:text-black/80"
                   }`}
                 >
-                  <span className="relative z-10">{item.label}</span>
+                  <span className="relative z-10 pointer-events-none">{item.label}</span>
 
                   {/* Active indicator */}
                   {activeSection === item.id && (
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-black" />
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-black pointer-events-none" />
                   )}
 
                   {/* Hover background */}
-                  <span className="absolute inset-0 bg-black/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <span className="absolute inset-0 bg-black/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                 </button>
               ))}
 
@@ -161,19 +161,19 @@ const Navigation: React.FC = () => {
                 type="button"
                 onClick={toggleLanguage}
                 aria-label={t.navigation.switchLanguageAriaLabel}
-                className="ml-2 px-3 py-1.5 text-mono text-[11px] tracking-[0.14em] text-black/50 border border-black/10 rounded-full hover:text-black hover:border-black/40 transition-colors duration-300"
+                className="ml-2 px-3 py-1.5 text-mono text-[11px] tracking-[0.14em] text-black/50 border border-black/10 rounded-full hover:text-black hover:border-black/40 transition-colors duration-300 magnetic-target"
               >
-                {t.navigation.switchLanguageLabel}
+                <span className="pointer-events-none">{t.navigation.switchLanguageLabel}</span>
               </button>
             </div>
 
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden w-12 h-12 flex items-center justify-center rounded-full hover:bg-black/5 transition-colors duration-300"
+              className="md:hidden w-12 h-12 flex items-center justify-center rounded-full hover:bg-black/5 transition-colors duration-300 magnetic-target"
               aria-label={t.navigation.menuAriaLabel}
             >
-              <div className="relative w-5 h-3">
+              <div className="relative w-5 h-3 pointer-events-none">
                 <span className={`absolute left-0 w-full h-[1.5px] bg-black transition-all duration-300 ${
                   isMenuOpen ? "top-1/2 -translate-y-1/2 rotate-45" : "top-0"
                 }`} />

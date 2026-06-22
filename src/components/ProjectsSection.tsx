@@ -16,6 +16,7 @@ const ProjectsSection: React.FC = () => {
   const panelRefs = useRef<Array<HTMLDivElement | null>>([]);
   const reduceMotionRef = useRef(false);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const listRef = useRef<HTMLOListElement>(null);
 
   const projects = [
     {
@@ -28,9 +29,9 @@ const ProjectsSection: React.FC = () => {
     {
       title: t.projects.projectsList[1].title,
       description: t.projects.projectsList[1].description,
-      tech: "React · Vite · Tailwind · GSAP",
-      link: "https://f1-data-explorer.vercel.app/",
-      image: "/images/f1.png",
+      tech: "Next.js · TypeScript · Tailwind · Recharts · GSAP · TanStack Query",
+      link: "https://delta-zero.vercel.app",
+      image: "/images/icon.png",
     },
     {
       title: t.projects.projectsList[0].title,
@@ -44,6 +45,7 @@ const ProjectsSection: React.FC = () => {
   const featuredLabel = t.projects.featuredLabel;
   const viewProjectLabel = t.projects.viewProject;
 
+  // Media Query for reduced motion
   useEffect(() => {
     const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
     reduceMotionRef.current = mql.matches;
@@ -54,6 +56,7 @@ const ProjectsSection: React.FC = () => {
     return () => mql.removeEventListener("change", onChange);
   }, []);
 
+  // Entrance animations for headers
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
@@ -69,7 +72,7 @@ const ProjectsSection: React.FC = () => {
             trigger: ".proj-label",
             start: "top 92%",
             end: "top 70%",
-            toggleActions: "play reverse play reverse",
+            toggleActions: "play none none reverse",
           },
         }
       );
@@ -87,7 +90,7 @@ const ProjectsSection: React.FC = () => {
             trigger: ".proj-title-wrap",
             start: "top 92%",
             end: "top 70%",
-            toggleActions: "play reverse play reverse",
+            toggleActions: "play none none reverse",
           },
         }
       );
@@ -138,10 +141,11 @@ const ProjectsSection: React.FC = () => {
             start: "top 88%",
             end: "bottom 30%",
             animation: tl,
-            toggleActions: "play reverse play reverse",
+            toggleActions: "play none none reverse",
           });
         });
       });
+
     }, sectionRef);
 
     return () => ctx.revert();
@@ -182,7 +186,7 @@ const ProjectsSection: React.FC = () => {
     >
       <div className="orb h-[640px] w-[640px] bottom-0 -right-[250px]" />
 
-      <div className="container relative z-10">
+      <div className="projects-exit-wrap container relative z-10">
         <div className="proj-label mb-4 flex items-center gap-4">
           <span className="text-mono text-[10px]">03</span>
           <span className="h-px w-12 bg-black/20" />
@@ -194,7 +198,10 @@ const ProjectsSection: React.FC = () => {
         </div>
 
         {/* Desktop ≥1024px — accordion tipográfico */}
-        <ol className="hidden lg:block list-none border-t border-black/10">
+        <ol
+          ref={listRef}
+          className="hidden lg:block list-none border-t border-black/10"
+        >
           {projects.map((p, i) => {
             const isOpen = openIndex === i;
             return (
