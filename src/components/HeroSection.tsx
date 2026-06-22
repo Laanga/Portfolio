@@ -246,18 +246,18 @@ const HeroSection: React.FC = () => {
           {/* CTAs */}
           <div className="flex flex-wrap items-center gap-4" style={{ marginBottom: '40px' }}>
             <a
-              href="/CV-alvaro-langa-2.0.pdf"
+              href="/CV-alvaro-langa.pdf"
               download
-              className="hero-stagger btn btn-primary group"
+              className="hero-stagger btn btn-primary group magnetic-target"
             >
-              <Download size={16} className="transition-transform group-hover:-translate-y-0.5" />
-              {t.profile.downloadCV}
+              <Download size={16} className="transition-transform group-hover:-translate-y-0.5 pointer-events-none" />
+              <span className="pointer-events-none">{t.profile.downloadCV}</span>
             </a>
             <a
               href={`mailto:${t.profile.email}`}
-              className="hero-stagger btn btn-ghost group"
+              className="hero-stagger btn btn-ghost group magnetic-target"
             >
-              {t.hero.contact}
+              <span className="pointer-events-none">{t.hero.contact}</span>
               <svg 
                 width="14" 
                 height="14" 
@@ -265,7 +265,7 @@ const HeroSection: React.FC = () => {
                 fill="none" 
                 stroke="currentColor" 
                 strokeWidth="2"
-                className="transition-transform group-hover:translate-x-1"
+                className="transition-transform group-hover:translate-x-1 pointer-events-none"
               >
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
@@ -282,10 +282,10 @@ const HeroSection: React.FC = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hero-stagger text-black/30 hover:text-black transition-all duration-300 hover:scale-110"
+                  className="hero-stagger text-black/30 hover:text-black transition-all duration-300 hover:scale-110 magnetic-target"
                   aria-label={social.label}
                 >
-                  <Icon size={22} />
+                  <Icon size={22} className="pointer-events-none" />
                 </a>
               );
             })}

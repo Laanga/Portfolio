@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
           scrollTrigger: { 
             trigger: ".footer-label", 
             start: "top 100%",
-            toggleActions: "play reverse play reverse"
+            toggleActions: "play none none reverse"
           }
         }
       );
@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
           scrollTrigger: { 
             trigger: ".footer-cta", 
             start: "top 100%",
-            toggleActions: "play reverse play reverse"
+            toggleActions: "play none none reverse"
           }
         }
       );
@@ -52,7 +52,7 @@ const Footer: React.FC = () => {
           scrollTrigger: { 
             trigger: ".footer-content", 
             start: "top 100%",
-            toggleActions: "play reverse play reverse"
+            toggleActions: "play none none reverse"
           }
         }
       );
@@ -66,7 +66,7 @@ const Footer: React.FC = () => {
           scrollTrigger: { 
             trigger: ".footer-bottom", 
             start: "top 100%",
-            toggleActions: "play reverse play reverse"
+            toggleActions: "play none none reverse"
           }
         }
       );
@@ -80,7 +80,7 @@ const Footer: React.FC = () => {
           scrollTrigger: { 
             trigger: ".footer-line", 
             start: "top 100%",
-            toggleActions: "play reverse play reverse"
+            toggleActions: "play none none reverse"
           }
         }
       );
@@ -94,10 +94,25 @@ const Footer: React.FC = () => {
           scrollTrigger: { 
             trigger: ".footer-big-text", 
             start: "top 100%",
-            toggleActions: "play reverse play reverse"
+            toggleActions: "play none none reverse"
           }
         }
       );
+
+      // LANGA grande parallax scroll
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reduceMotion) {
+        gsap.to(".footer-big-text span", {
+          xPercent: -8, // Mover horizontalmente según scroll
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".footer-big-text",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.2,
+          }
+        });
+      }
 
     }, footerRef);
 
@@ -140,7 +155,7 @@ const Footer: React.FC = () => {
 
             <a 
               href={`mailto:${t.footer.email}`} 
-              className="footer-fade btn btn-primary group inline-flex"
+              className="footer-fade btn btn-primary group inline-flex magnetic-target"
             >
               <svg 
                 width="18" 
@@ -149,12 +164,12 @@ const Footer: React.FC = () => {
                 fill="none" 
                 stroke="currentColor" 
                 strokeWidth="2"
-                className="transition-transform group-hover:scale-110"
+                className="transition-transform group-hover:scale-110 pointer-events-none"
               >
                 <rect width="20" height="16" x="2" y="4" rx="2"/>
                 <path d="m22 7-10 5L2 7"/>
               </svg>
-              <span>{t.footer.email}</span>
+              <span className="pointer-events-none">{t.footer.email}</span>
             </a>
           </div>
         </div>
@@ -172,7 +187,7 @@ const Footer: React.FC = () => {
                 href="https://www.linkedin.com/in/%C3%A1lvaro-langa-dev/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-black/40 hover:text-black transition-colors duration-300 link-hover"
+                className="text-sm text-black/40 hover:text-black transition-colors duration-300 link-hover magnetic-target"
               >
                 LinkedIn
               </a>
@@ -180,13 +195,13 @@ const Footer: React.FC = () => {
                 href="https://github.com/Laanga"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-black/40 hover:text-black transition-colors duration-300 link-hover"
+                className="text-sm text-black/40 hover:text-black transition-colors duration-300 link-hover magnetic-target"
               >
                 GitHub
               </a>
               <a
                 href={`mailto:${t.footer.email}`}
-                className="text-sm text-black/40 hover:text-black transition-colors duration-300 link-hover"
+                className="text-sm text-black/40 hover:text-black transition-colors duration-300 link-hover magnetic-target"
               >
                 Email
               </a>
@@ -197,7 +212,6 @@ const Footer: React.FC = () => {
             </div>
           </div>
         </div>
-
       </div>
 
       <div className="footer-big-text mt-16 overflow-hidden pointer-events-none select-none">

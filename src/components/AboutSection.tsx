@@ -60,7 +60,7 @@ const AboutSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".about-label", 
             start: "top 95%",
-            toggleActions: "play reverse play reverse"
+            toggleActions: "play none none reverse"
           }
         }
       );
@@ -75,7 +75,7 @@ const AboutSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".about-title-wrap", 
             start: "top 100%",
-            toggleActions: "play reverse play reverse"
+            toggleActions: "play none none reverse"
           }
         }
       );
@@ -89,7 +89,7 @@ const AboutSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".about-text", 
             start: "top 100%",
-            toggleActions: "play reverse play reverse"
+            toggleActions: "play none none reverse"
           }
         }
       );
@@ -103,7 +103,7 @@ const AboutSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".skills-list", 
             start: "top 100%",
-            toggleActions: "play reverse play reverse"
+            toggleActions: "play none none reverse"
           }
         }
       );
@@ -117,7 +117,7 @@ const AboutSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".tech-stack-grid", 
             start: "top 95%",
-            toggleActions: "play reverse play reverse"
+            toggleActions: "play none none reverse"
           }
         }
       );
@@ -132,7 +132,7 @@ const AboutSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".tech-stack-grid", 
             start: "top 100%",
-            toggleActions: "play reverse play reverse"
+            toggleActions: "play none none reverse"
           }
         }
       );
@@ -146,10 +146,26 @@ const AboutSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".about-line", 
             start: "top 100%",
-            toggleActions: "play reverse play reverse"
+            toggleActions: "play none none reverse"
           }
         }
       );
+
+      // Animación de salida al hacer scroll hacia arriba (exit transition)
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reduceMotion) {
+        gsap.to(".about-exit-wrap", {
+          opacity: 0,
+          y: -80,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "bottom 90%",
+            end: "bottom 15%",
+            scrub: true,
+          }
+        });
+      }
 
     }, sectionRef);
 
@@ -161,7 +177,7 @@ const AboutSection: React.FC = () => {
       <div className="orb w-[500px] h-[500px] top-0 -right-[200px]" />
       <div className="absolute top-1/2 left-0 w-[1px] h-32 bg-gradient-to-b from-transparent via-black/10 to-transparent" />
 
-      <div className="container relative z-10">
+      <div className="about-exit-wrap container relative z-10">
         <div className="about-label flex items-center gap-4 mb-6">
           <span className="text-mono text-[10px]">01</span>
           <span className="w-12 h-px bg-black/20" />

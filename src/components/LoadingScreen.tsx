@@ -11,6 +11,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
     const numberRef = useRef<HTMLDivElement>(null);
+    const pathRef = useRef<SVGPathElement>(null);
 
     const [progress, setProgress] = useState(0);
     const progressValue = useRef({ value: 0 });
@@ -27,7 +28,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
         gsap.set(contentRef.current, { perspective: 1200 });
         gsap.set(numberRef.current, { transformPerspective: 1200, force3D: true });
 
-        // Start counter animation immediately - no intro animation
+        // Start counter animation immediately
         gsap.to(progressValue.current, {
             value: 100,
             duration: 2.5,
@@ -36,31 +37,27 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
                 setProgress(Math.round(progressValue.current.value));
             },
             onComplete: () => {
-                // Exit animation
+                // Exit animation - the panel lifts up like a window, revealing the site
                 const exitTl = gsap.timeline({
                     onComplete: handleComplete,
                 });
 
                 exitTl
                     .to(numberRef.current, {
-                        z: 560,
-                        scale: 3.7,
-                        rotationX: 7,
-                        filter: "blur(1.5px)",
-                        opacity: 0.22,
-                        duration: 0.58,
-                        ease: "power4.in",
-                    })
-                    .to(contentRef.current, {
-                        y: -8,
-                        duration: 0.2,
-                        ease: "power2.inOut",
-                    })
-                    .to(containerRef.current, {
+                        y: -60,
                         opacity: 0,
-                        duration: 0.32,
-                        ease: "power2.out",
-                    }, "+=0.03");
+                        duration: 0.4,
+                        ease: "power3.in",
+                    })
+                    .to(
+                        containerRef.current,
+                        {
+                            yPercent: -100,
+                            duration: 1.05,
+                            ease: "expo.inOut",
+                        },
+                        "-=0.1"
+                    );
             },
         });
 
@@ -76,9 +73,31 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                background: "#ffffff",
+                background: "transparent",
+                pointerEvents: "none",
             }}
         >
+            {/* SVG Liquid Curtain Background */}
+            <svg
+                style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    fill: "#ffffff",
+                    zIndex: 1,
+                    pointerEvents: "auto",
+                }}
+                viewBox="0 0 100 100"
+                preserveAspectRatio="none"
+            >
+                <path
+                    ref={pathRef}
+                    d="M 0 0 L 100 0 L 100 100 Q 50 100 0 100 Z"
+                />
+            </svg>
+
             {/* Content - visible from the start */}
             <div
                 ref={contentRef}
@@ -95,7 +114,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
                 <div
                     ref={numberRef}
                     style={{
-                        fontSize: "clamp(2.2rem, 8vw, 4rem)",
+                        fontSize: "clamp(2.2rem, 8vw, 4.25rem)",
                         fontWeight: 600,
                         lineHeight: 1,
                         letterSpacing: "-0.025em",
@@ -112,3 +131,4 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
 };
 
 export default LoadingScreen;
+

@@ -24,7 +24,7 @@ const ExperienceSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".exp-label", 
             start: "top 100%",
-            toggleActions: "play reverse play reverse"
+            toggleActions: "play none none reverse"
           }
         }
       );
@@ -39,7 +39,7 @@ const ExperienceSection: React.FC = () => {
           scrollTrigger: { 
             trigger: ".exp-title-wrap", 
             start: "top 100%",
-            toggleActions: "play reverse play reverse"
+            toggleActions: "play none none reverse"
           }
         }
       );
@@ -54,7 +54,7 @@ const ExperienceSection: React.FC = () => {
           scrollTrigger: {
             trigger: ".timeline",
             start: "top 95%",
-            toggleActions: "play reverse play reverse"
+            toggleActions: "play none none reverse"
           }
         }
       );
@@ -73,7 +73,7 @@ const ExperienceSection: React.FC = () => {
             scrollTrigger: { 
               trigger: item, 
               start: "top 100%",
-              toggleActions: "play reverse play reverse"
+              toggleActions: "play none none reverse"
             }
           }
         );
@@ -86,7 +86,7 @@ const ExperienceSection: React.FC = () => {
             scrollTrigger: { 
               trigger: item, 
               start: "top 100%",
-              toggleActions: "play reverse play reverse"
+              toggleActions: "play none none reverse"
             }
           }
         );
@@ -99,11 +99,27 @@ const ExperienceSection: React.FC = () => {
             scrollTrigger: { 
               trigger: item, 
               start: "top 95%",
-              toggleActions: "play reverse play reverse"
+              toggleActions: "play none none reverse"
             }
           }
         );
       });
+
+      // Animación de salida al hacer scroll hacia arriba (exit transition)
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reduceMotion) {
+        gsap.to(".exp-exit-wrap", {
+          opacity: 0,
+          y: -80,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "bottom 90%",
+            end: "bottom 15%",
+            scrub: true,
+          }
+        });
+      }
 
     }, sectionRef);
 
@@ -114,7 +130,7 @@ const ExperienceSection: React.FC = () => {
     <section id="experience" ref={sectionRef} className="section relative overflow-hidden">
       <div className="orb w-[600px] h-[600px] top-1/3 -left-[300px]" />
 
-      <div className="container relative z-10">
+      <div className="exp-exit-wrap container relative z-10">
         <div className="exp-label flex items-center gap-4 mb-6">
           <span className="text-mono text-[10px]">02</span>
           <span className="w-12 h-px bg-black/20" />

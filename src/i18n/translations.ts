@@ -74,8 +74,8 @@ export const es = {
         description: "Plataforma web para la gestión integral de competiciones de karting: inscripción de pilotos, gestión de carreras y clasificaciones en tiempo real. Frontend con React y API REST con Node.js y Express."
       },
       {
-        title: "F1 Data Explorer",
-        description: "Herramienta interactiva de exploración y visualización de datos de la temporada de Fórmula 1. Análisis de estadísticas de pilotos y equipos con gráficos animados mediante GSAP, interfaz responsive con Tailwind y datos en tiempo real desde OpenF1 y Ergast."
+        title: "DeltaZero",
+        description: "Panel de análisis de Fórmula 1 con telemetría comparativa de hasta 5 pilotos, mapa interactivo del circuito sincronizado con las gráficas, mapa de calor de degradación de neumáticos, estrategia y mundiales. 100 % frontend sobre las APIs públicas de OpenF1 y Jolpica, con cola de peticiones para respetar el rate limit y gaps/posiciones derivados en el cliente."
       },
       {
         title: "Kata (型)",
@@ -185,8 +185,8 @@ export const en = {
         description: "Web platform for comprehensive karting competition management: driver registration, race management and real-time standings. React frontend with Node.js and Express REST API."
       },
       {
-        title: "F1 Data Explorer",
-        description: "Interactive tool for exploring and visualizing Formula 1 season data. Driver and team statistics analysis with GSAP-animated charts, responsive Tailwind interface and real-time data from OpenF1 and Ergast."
+        title: "DeltaZero",
+        description: "Formula 1 analysis dashboard with comparative telemetry for up to 5 drivers, an interactive circuit map synced to the charts, a tyre-degradation heatmap, strategy and championship standings. 100% static frontend over the public OpenF1 and Jolpica APIs, with a request queue that respects rate limits and gaps/positions derived on the client."
       },
       {
         title: "Kata (型)",

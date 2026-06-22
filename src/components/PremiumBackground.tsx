@@ -10,6 +10,7 @@ const PremiumBackground: React.FC = () => {
     if (!containerRef.current) return;
 
     const ctx = gsap.context(() => {
+      // Animaciones idle de los orbes
       gsap.to(".blob-1", {
         x: 100,
         y: -50,
@@ -37,6 +38,46 @@ const PremiumBackground: React.FC = () => {
         ease: "sine.inOut",
       });
 
+      // Movimiento parallax reactivo al ratón
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reduceMotion) {
+        const handleMouseMove = (e: MouseEvent) => {
+          const { clientX, clientY } = e;
+          const { innerWidth, innerHeight } = window;
+          
+          const pctX = (clientX - innerWidth / 2) / (innerWidth / 2);
+          const pctY = (clientY - innerHeight / 2) / (innerHeight / 2);
+
+          gsap.to(".blob-1-wrap", {
+            x: pctX * -75,
+            y: pctY * -75,
+            duration: 1.6,
+            ease: "power2.out",
+            overwrite: "auto",
+          });
+
+          gsap.to(".blob-2-wrap", {
+            x: pctX * 55,
+            y: pctY * 55,
+            duration: 1.8,
+            ease: "power2.out",
+            overwrite: "auto",
+          });
+
+          gsap.to(".blob-3-wrap", {
+            x: pctX * -45,
+            y: pctY * 45,
+            duration: 1.7,
+            ease: "power2.out",
+            overwrite: "auto",
+          });
+        };
+
+        window.addEventListener("mousemove", handleMouseMove, { passive: true });
+        return () => {
+          window.removeEventListener("mousemove", handleMouseMove);
+        };
+      }
     }, containerRef);
 
     return () => ctx.revert();
@@ -56,36 +97,42 @@ const PremiumBackground: React.FC = () => {
         }}
       />
 
-      {/* Animated gradient blobs */}
-      <div 
-        className="blob-1 absolute w-[800px] h-[800px] rounded-full"
-        style={{
-          top: '-20%',
-          left: '-10%',
-          background: 'radial-gradient(circle, rgba(17,17,17,0.08) 0%, transparent 72%)',
-          filter: 'blur(80px)',
-        }}
-      />
+      {/* Wrappers para interactividad del ratón con animaciones idle dentro */}
+      <div className="blob-1-wrap absolute inset-0 pointer-events-none">
+        <div 
+          className="blob-1 absolute w-[800px] h-[800px] rounded-full"
+          style={{
+            top: '-20%',
+            left: '-10%',
+            background: 'radial-gradient(circle, rgba(17,17,17,0.08) 0%, transparent 72%)',
+            filter: 'blur(80px)',
+          }}
+        />
+      </div>
       
-      <div 
-        className="blob-2 absolute w-[600px] h-[600px] rounded-full"
-        style={{
-          top: '40%',
-          right: '-5%',
-          background: 'radial-gradient(circle, rgba(17,17,17,0.065) 0%, transparent 72%)',
-          filter: 'blur(80px)',
-        }}
-      />
+      <div className="blob-2-wrap absolute inset-0 pointer-events-none">
+        <div 
+          className="blob-2 absolute w-[600px] h-[600px] rounded-full"
+          style={{
+            top: '40%',
+            right: '-5%',
+            background: 'radial-gradient(circle, rgba(17,17,17,0.065) 0%, transparent 72%)',
+            filter: 'blur(80px)',
+          }}
+        />
+      </div>
       
-      <div 
-        className="blob-3 absolute w-[700px] h-[700px] rounded-full"
-        style={{
-          bottom: '-10%',
-          left: '30%',
-          background: 'radial-gradient(circle, rgba(17,17,17,0.05) 0%, transparent 75%)',
-          filter: 'blur(100px)',
-        }}
-      />
+      <div className="blob-3-wrap absolute inset-0 pointer-events-none">
+        <div 
+          className="blob-3 absolute w-[700px] h-[700px] rounded-full"
+          style={{
+            bottom: '-10%',
+            left: '30%',
+            background: 'radial-gradient(circle, rgba(17,17,17,0.05) 0%, transparent 75%)',
+            filter: 'blur(100px)',
+          }}
+        />
+      </div>
 
       {/* Subtle noise texture */}
       <div 
