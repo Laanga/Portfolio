@@ -1,233 +1,24 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React from "react";
 import { useLanguage } from "../i18n/LanguageContext";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
-const Footer: React.FC = () => {
+export default function Footer() {
   const { t } = useLanguage();
-  const footerRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Label - empieza antes
-      gsap.fromTo(".footer-label", 
-        { x: -100, opacity: 0 },
-        {
-          x: 0, opacity: 1, duration: 1,
-          ease: "power3.out",
-          scrollTrigger: { 
-            trigger: ".footer-label", 
-            start: "top 100%",
-            toggleActions: "play none none reverse"
-          }
-        }
-      );
-
-      // CTA text
-      gsap.fromTo(".footer-char",
-        { yPercent: 120, opacity: 0 },
-        {
-          yPercent: 0, opacity: 1, duration: 1, stagger: 0.03,
-          ease: "power4.out",
-          scrollTrigger: { 
-            trigger: ".footer-cta", 
-            start: "top 100%",
-            toggleActions: "play none none reverse"
-          }
-        }
-      );
-
-      // Descripción y botón
-      gsap.fromTo(".footer-fade",
-        { y: 50, opacity: 0 },
-        {
-          y: 0, opacity: 1, duration: 1, stagger: 0.2,
-          ease: "power3.out",
-          scrollTrigger: { 
-            trigger: ".footer-content", 
-            start: "top 100%",
-            toggleActions: "play none none reverse"
-          }
-        }
-      );
-
-      // Bottom section
-      gsap.fromTo(".footer-bottom-item",
-        { y: 30, opacity: 0 },
-        {
-          y: 0, opacity: 1, duration: 0.8, stagger: 0.15,
-          ease: "power2.out",
-          scrollTrigger: { 
-            trigger: ".footer-bottom", 
-            start: "top 100%",
-            toggleActions: "play none none reverse"
-          }
-        }
-      );
-
-      // Línea decorativa
-      gsap.fromTo(".footer-line",
-        { scaleX: 0 },
-        {
-          scaleX: 1, duration: 1.5,
-          ease: "power3.inOut",
-          scrollTrigger: { 
-            trigger: ".footer-line", 
-            start: "top 100%",
-            toggleActions: "play none none reverse"
-          }
-        }
-      );
-
-      // LANGA grande
-      gsap.fromTo(".footer-big-text",
-        { yPercent: 50, opacity: 0, scale: 0.9 },
-        {
-          yPercent: 0, opacity: 1, scale: 1, duration: 1.5,
-          ease: "power3.out",
-          scrollTrigger: { 
-            trigger: ".footer-big-text", 
-            start: "top 100%",
-            toggleActions: "play none none reverse"
-          }
-        }
-      );
-
-      // LANGA grande parallax scroll
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (!reduceMotion) {
-        gsap.to(".footer-big-text span", {
-          xPercent: -8, // Mover horizontalmente según scroll
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".footer-big-text",
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1.2,
-          }
-        });
-      }
-
-    }, footerRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  const ctaText = t.footer.title;
-
   return (
-    <footer id="footer" ref={footerRef} className="section relative overflow-hidden">
-      <div className="orb w-[600px] h-[600px] bottom-0 left-1/2 -translate-x-1/2 opacity-5" />
-      
-      <div className="footer-line absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-px bg-gradient-to-r from-transparent via-black/10 to-transparent origin-center" />
-
-      <div className="container relative z-10">
-        <div className="footer-label flex items-center gap-4 mb-8">
-          <span className="text-mono text-[10px]">05</span>
-          <span className="w-12 h-px bg-black/20" />
-          <span className="text-mono text-black/40">{t.footer.contactLabel}</span>
+    <footer id="footer" className="footer">
+      <div className="footer-scan" aria-hidden="true" />
+      <div className="container">
+        <div className="footer-top"><p className="eyebrow">05 — {t.footer.contactLabel}</p><p className="mono">{t.footer.locationLabel}<br />{t.footer.remoteAvailability}</p></div>
+        <h2 className="footer-title">{t.footer.ctaLine1}<br /><span>{t.footer.ctaLine2}</span></h2>
+        <p className="body-copy footer-description">{t.footer.description}</p>
+        <a href={`mailto:${t.footer.email}`} className="footer-email">{t.footer.email} ↗</a>
+        <div className="footer-bottom">
+          <p className="mono">© {new Date().getFullYear()} ÁLVARO LANGA</p>
+          <div className="footer-links"><a href="https://www.linkedin.com/in/%C3%A1lvaro-langa-dev/" target="_blank" rel="noreferrer">LinkedIn</a><a href="https://github.com/Laanga" target="_blank" rel="noreferrer">GitHub</a></div>
+          <p className="mono">{t.footer.role}</p>
         </div>
-
-        <div className="text-center" style={{ paddingTop: '64px', paddingBottom: '96px' }}>
-          <h2 className="footer-cta text-heading md:text-display mb-8 overflow-hidden">
-            <span className="inline-block">
-              {ctaText.split("").map((char, i) => (
-                <span 
-                  key={i} 
-                  className="footer-char inline-block"
-                >
-                  {char === " " ? "\u00A0" : char}
-                </span>
-              ))}
-            </span>
-          </h2>
-
-          <div className="footer-content">
-            <p className="footer-fade text-body-lg max-w-lg mx-auto text-black/45" style={{ marginBottom: '56px' }}>
-              {t.footer.description}
-            </p>
-
-            <a 
-              href={`mailto:${t.footer.email}`} 
-              className="footer-fade btn btn-primary group inline-flex magnetic-target"
-            >
-              <svg 
-                width="18" 
-                height="18" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2"
-                className="transition-transform group-hover:scale-110 pointer-events-none"
-              >
-                <rect width="20" height="16" x="2" y="4" rx="2"/>
-                <path d="m22 7-10 5L2 7"/>
-              </svg>
-              <span className="pointer-events-none">{t.footer.email}</span>
-            </a>
-          </div>
-        </div>
-
-        <div className="footer-bottom pt-10 border-t border-black/5">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="footer-bottom-item flex items-center gap-3">
-              <span className="text-lg font-semibold text-black">AL<span className="text-black/50">.</span></span>
-              <span className="w-px h-4 bg-black/10" />
-              <span className="text-sm text-black/40">{t.footer.role}</span>
-            </div>
-
-            <div className="footer-bottom-item flex items-center gap-8">
-              <a
-                href="https://www.linkedin.com/in/%C3%A1lvaro-langa-dev/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-black/40 hover:text-black transition-colors duration-300 link-hover magnetic-target"
-              >
-                LinkedIn
-              </a>
-              <a
-                href="https://github.com/Laanga"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-black/40 hover:text-black transition-colors duration-300 link-hover magnetic-target"
-              >
-                GitHub
-              </a>
-              <a
-                href={`mailto:${t.footer.email}`}
-                className="text-sm text-black/40 hover:text-black transition-colors duration-300 link-hover magnetic-target"
-              >
-                Email
-              </a>
-            </div>
-
-            <div className="footer-bottom-item text-xs text-black/25">
-              © {new Date().getFullYear()} Álvaro Langa
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="footer-big-text mt-16 overflow-hidden pointer-events-none select-none">
-        <span
-          className="block w-full whitespace-nowrap text-center font-bold leading-none"
-          style={{
-            fontSize: "clamp(3.5rem, 15vw, 20rem)",
-            WebkitTextStroke: "2px rgba(17,17,17,0.18)",
-            WebkitTextFillColor: "transparent",
-          }}
-        >
-          LANGA
-        </span>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

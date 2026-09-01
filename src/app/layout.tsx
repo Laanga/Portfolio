@@ -1,71 +1,32 @@
-"use client";
-
-import React, { useState } from "react";
-import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import type { ReactNode } from "react";
+import { Barlow_Condensed } from "next/font/google";
 import "./globals.css";
-import SectionBackgrounds from "../components/SectionBackgrounds";
-import PremiumBackground from "../components/PremiumBackground";
-import ScrollProgress from "../components/ScrollProgress";
-import SmoothScroll from "../components/SmoothScroll";
-import LoadingScreen from "../components/LoadingScreen";
-import { LanguageProvider } from "../i18n/LanguageContext";
-import { useDocumentLanguage } from "../i18n/useDocumentLanguage";
-import { Analytics } from "@vercel/analytics/next";
+import AppProviders from "../components/AppProviders";
 
-const ibmPlexSans = IBM_Plex_Sans({
-  variable: "--font-space",
+const hermesDisplay = Barlow_Condensed({
+  variable: "--font-hermes",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "600"],
   display: "swap",
 });
 
-const ibmPlexMono = IBM_Plex_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-  weight: ["500"],
-  display: "swap",
-});
+export const metadata: Metadata = {
+  title: "Álvaro Langa — Full Stack Developer",
+  description:
+    "Portfolio de Álvaro Langa, desarrollador Full Stack especializado en React, Next.js y Node.js.",
+  icons: { icon: "/favicon.svg" },
+};
 
-function LayoutContent({ children }: { children: React.ReactNode }) {
-  const [isLoading, setIsLoading] = useState(true);
-  useDocumentLanguage();
+export const viewport: Viewport = {
+  themeColor: "#f2f5ff",
+};
 
+export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <>
-      {isLoading && (
-        <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />
-      )}
-      <SmoothScroll>
-        <SectionBackgrounds />
-        <PremiumBackground />
-        <ScrollProgress />
-        <div className="noise" />
-        {children}
-        <Analytics />
-      </SmoothScroll>
-    </>
-  );
-}
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="es">
-      <head>
-        <title>Álvaro Langa — Software Developer</title>
-        <meta
-          name="description"
-          content="Portfolio de Álvaro Langa - Desarrollador Software especializado en React, Next.js y tecnologías modernas."
-        />
-        <link rel="icon" href="/logoPersonal-removebg-preview.png" type="image/png" />
-      </head>
-      <body className={`${ibmPlexSans.variable} ${ibmPlexMono.variable}`}>
-        <LanguageProvider>
-          <LayoutContent>{children}</LayoutContent>
-        </LanguageProvider>
+    <html lang="es" className={hermesDisplay.variable}>
+      <body>
+        <AppProviders enableAnalytics={Boolean(process.env.VERCEL)}>{children}</AppProviders>
       </body>
     </html>
   );

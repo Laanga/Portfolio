@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useCallback, useContext, useSyncExternalStore } from 'react';
 import { es, en, Language } from './translations';
 
 interface LanguageContextType {
@@ -13,6 +13,8 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 const STORAGE_KEY = 'preferred-language';
 const SUPPORTED: readonly Language[] = ['es', 'en'] as const;
+const languageListeners = new Set<() => void>();
+let currentLanguage: Language | null = null;
 
 function isSupportedLanguage(code: string): code is Language {
   return (SUPPORTED as readonly string[]).includes(code);
@@ -59,34 +61,53 @@ function writeStoredLanguage(lang: Language): void {
   }
 }
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>('es');
-  const [isClient, setIsClient] = useState(false);
+function getLanguageSnapshot(): Language {
+  if (currentLanguage) return currentLanguage;
+  currentLanguage = readStoredLanguage() ?? detectBrowserLanguage();
+  return currentLanguage;
+}
 
-  // Sólo en cliente: primero respeta la elección guardada; si no, detecta del navegador.
-  useEffect(() => {
-    setIsClient(true);
-    const stored = readStoredLanguage();
-    setLanguageState(stored ?? detectBrowserLanguage());
-  }, []);
+function getServerLanguageSnapshot(): Language {
+  return 'es';
+}
+
+function subscribeToLanguage(listener: () => void): () => void {
+  languageListeners.add(listener);
+
+  const handleStorage = (event: StorageEvent) => {
+    if (event.key !== STORAGE_KEY) return;
+    currentLanguage = event.newValue && isSupportedLanguage(event.newValue)
+      ? event.newValue
+      : detectBrowserLanguage();
+    languageListeners.forEach((notify) => notify());
+  };
+
+  window.addEventListener('storage', handleStorage);
+  return () => {
+    languageListeners.delete(listener);
+    window.removeEventListener('storage', handleStorage);
+  };
+}
+
+function updateLanguage(lang: Language): void {
+  if (currentLanguage === lang) return;
+  currentLanguage = lang;
+  writeStoredLanguage(lang);
+  languageListeners.forEach((notify) => notify());
+}
+
+export function LanguageProvider({ children }: { children: React.ReactNode }) {
+  const language = useSyncExternalStore(
+    subscribeToLanguage,
+    getLanguageSnapshot,
+    getServerLanguageSnapshot,
+  );
 
   const setLanguage = useCallback((lang: Language) => {
-    setLanguageState(lang);
-    writeStoredLanguage(lang);
+    updateLanguage(lang);
   }, []);
 
   const translations = language === 'es' ? es : en;
-
-  // Placeholder SSR coherente para evitar flashes durante la hidratación.
-  // La pantalla de carga (LoadingScreen) cubre la página hasta que el efecto
-  // anterior ya ha aplicado el idioma correcto.
-  if (!isClient) {
-    return (
-      <LanguageContext.Provider value={{ language: 'es', t: es, setLanguage: () => {} }}>
-        {children}
-      </LanguageContext.Provider>
-    );
-  }
 
   return (
     <LanguageContext.Provider value={{ language, t: translations, setLanguage }}>
