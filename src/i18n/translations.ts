@@ -2,12 +2,14 @@
 export const es = {
   // Navigation
   navigation: {
+    mainAriaLabel: "Navegación principal",
     about: "Sobre mí",
     experience: "Experiencia",
     education: "Formación",
     projects: "Proyectos",
     homeAriaLabel: "Inicio",
     menuAriaLabel: "Menú",
+    languageLabel: "IDIOMA",
     switchLanguageLabel: "EN",
     switchLanguageAriaLabel: "Cambiar idioma a inglés"
   },
@@ -19,9 +21,11 @@ export const es = {
     description2: "Mi enfoque se centra en escribir código limpio y entregar soluciones eficientes. Busco seguir creciendo en equipos técnicos donde pueda aportar desde el primer día.",
     professionalSkillsTitle: "Habilidades Profesionales",
     stackTitle: "Stack Tecnológico",
+    stackDescription: "Tecnologías que utilizo para diseñar, construir, automatizar y desplegar productos digitales completos.",
     frontendStackTitle: "Frontend",
     backendStackTitle: "Backend",
     cloudStackTitle: "Cloud / DevOps & Tooling",
+    aiStackTitle: "IA y automatización",
     professionalSkills: [
       "Desarrollo Frontend",
       "Desarrollo Backend",
@@ -37,6 +41,7 @@ export const es = {
   experience: {
     title: "Experiencia",
     subtitle: "Trayectoria profesional",
+    watermark: "TRABAJO",
     experiences: [
       {
         title: "Desarrollador de Software",
@@ -67,6 +72,10 @@ export const es = {
   projects: {
     title: "Proyectos",
     featuredLabel: "Proyectos destacados",
+    selectedLine1: "TRABAJO",
+    selectedLine2: "SELECCIONADO",
+    introDescription: "Productos digitales donde la interfaz, el rendimiento y la ingeniería trabajan como un único sistema.",
+    projectLabel: "PROYECTO",
     viewProject: "Ver proyecto",
     projectsList: [
       {
@@ -96,7 +105,9 @@ export const es = {
   hero: {
     description: "Desarrollador Full Stack especializado en React, Next.js y Node.js. Creo aplicaciones web de alto rendimiento con interfaces limpias y experiencias interactivas.",
     contact: "Contacto",
-    availability: "Disponible para trabajar"
+    availability: "Disponible para trabajar",
+    roleLine1: "DESARROLLADOR",
+    roleLine2: "FULL STACK"
   },
 
   // Footer
@@ -105,7 +116,11 @@ export const es = {
     description: "Abierto a colaboraciones y proyectos freelance.",
     email: "alvarolanga04@gmail.com",
     contactLabel: "Contacto",
-    role: "Software Developer"
+    role: "Desarrollador de Software",
+    locationLabel: "MADRID / ESPAÑA",
+    remoteAvailability: "DISPONIBLE EN REMOTO",
+    ctaLine1: "CONSTRUYAMOS",
+    ctaLine2: "ALGO."
   }
 } as const;
 
@@ -113,12 +128,14 @@ export const es = {
 export const en = {
   // Navigation
   navigation: {
+    mainAriaLabel: "Main navigation",
     about: "About",
     experience: "Experience",
     education: "Education",
     projects: "Projects",
     homeAriaLabel: "Home",
     menuAriaLabel: "Menu",
+    languageLabel: "LANGUAGE",
     switchLanguageLabel: "ES",
     switchLanguageAriaLabel: "Switch language to Spanish"
   },
@@ -130,9 +147,11 @@ export const en = {
     description2: "My approach focuses on writing clean code and delivering efficient solutions. I'm looking to keep growing in technical teams where I can contribute from day one.",
     professionalSkillsTitle: "Professional Skills",
     stackTitle: "Tech Stack",
+    stackDescription: "Technologies I use to design, build, automate and deploy complete digital products.",
     frontendStackTitle: "Frontend",
     backendStackTitle: "Backend",
     cloudStackTitle: "Cloud / DevOps & Tooling",
+    aiStackTitle: "AI & Automation",
     professionalSkills: [
       "Frontend Development",
       "Backend Development",
@@ -148,6 +167,7 @@ export const en = {
   experience: {
     title: "Experience",
     subtitle: "Career path",
+    watermark: "WORK",
     experiences: [
       {
         title: "Software Developer",
@@ -178,6 +198,10 @@ export const en = {
   projects: {
     title: "Projects",
     featuredLabel: "Featured work",
+    selectedLine1: "SELECTED",
+    selectedLine2: "WORK",
+    introDescription: "Digital products where interface, performance and engineering work as a single system.",
+    projectLabel: "PROJECT",
     viewProject: "View project",
     projectsList: [
       {
@@ -207,7 +231,9 @@ export const en = {
   hero: {
     description: "Full Stack Developer specialized in React, Next.js and Node.js. I build high-performance web applications with clean interfaces and interactive experiences.",
     contact: "Contact",
-    availability: "Available for work"
+    availability: "Available for work",
+    roleLine1: "FULL STACK",
+    roleLine2: "DEVELOPER"
   },
 
   // Footer
@@ -216,7 +242,11 @@ export const en = {
     description: "Open to collaborations and freelance projects.",
     email: "alvarolanga04@gmail.com",
     contactLabel: "Contact",
-    role: "Software Developer"
+    role: "Software Developer",
+    locationLabel: "MADRID / SPAIN",
+    remoteAvailability: "AVAILABLE REMOTELY",
+    ctaLine1: "LET’S BUILD",
+    ctaLine2: "SOMETHING."
   }
 } as const;
 

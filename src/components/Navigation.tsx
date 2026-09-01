@@ -1,254 +1,138 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useContext, useMemo } from "react";
-import Image from "next/image";
-import gsap from "gsap";
+import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useLanguage } from "../i18n/LanguageContext";
 import { LenisContext } from "./SmoothScroll";
 
-const Navigation: React.FC = () => {
+export default function Navigation() {
   const { t, language, setLanguage } = useLanguage();
-  const toggleLanguage = () => setLanguage(language === "es" ? "en" : "es");
   const lenis = useContext(LenisContext);
-  const [activeSection, setActiveSection] = useState("hero");
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
-  const lastScrollYRef = useRef(0);
-
-  const navRef = useRef<HTMLElement>(null);
+  const [active, setActive] = useState("hero");
+  const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-
-  const navItems = useMemo(() => [
-    { id: "about", label: t.navigation.about, num: "01" },
-    { id: "experience", label: t.navigation.experience, num: "02" },
-    { id: "projects", label: t.navigation.projects, num: "03" },
-    { id: "education", label: t.navigation.education, num: "04" },
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const items = useMemo(() => [
+    { id: "about", label: t.navigation.about },
+    { id: "experience", label: t.navigation.experience },
+    { id: "projects", label: t.navigation.projects },
+    { id: "education", label: t.navigation.education },
   ], [t]);
+  const leftItems = items.slice(0, 2);
+  const rightItems = items.slice(2);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const y = window.scrollY;
-      const previousY = lastScrollYRef.current;
+    const update = () => {
+      const y = window.scrollY + 180;
+      let next = "hero";
+      items.forEach(({ id }) => {
+        const el = document.getElementById(id);
+        if (el && y >= el.offsetTop) next = id;
+      });
+      setActive(next);
+    };
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+    return () => window.removeEventListener("scroll", update);
+  }, [items]);
 
-      setIsScrolled(y > 50);
-      setIsVisible(y < previousY || y < 100);
-      lastScrollYRef.current = y;
+  useEffect(() => {
+    if (!open) return;
 
-      const offset = 200;
-      for (const item of navItems) {
-        const el = document.getElementById(item.id);
-        if (el) {
-          const { offsetTop, offsetHeight } = el;
-          if (y + offset >= offsetTop && y + offset < offsetTop + offsetHeight) {
-            setActiveSection(item.id);
-            break;
-          }
-        }
+    const previousOverflow = document.body.style.overflow;
+    const previousFocus = document.activeElement instanceof HTMLElement
+      ? document.activeElement
+      : null;
+    const background = [document.querySelector("main"), document.querySelector("footer")]
+      .filter((element): element is HTMLElement => element instanceof HTMLElement);
+
+    document.body.style.overflow = "hidden";
+    background.forEach((element) => { element.inert = true; });
+
+    const focusable = () => Array.from(
+      menuRef.current?.querySelectorAll<HTMLElement>("button, a[href], [tabindex]:not([tabindex='-1'])") ?? []
+    );
+    focusable()[0]?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setOpen(false);
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+      const controls = focusable();
+      if (controls.length === 0) return;
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
       }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [navItems]);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+      background.forEach((element) => { element.inert = false; });
+      previousFocus?.focus();
+    };
+  }, [open]);
 
-  useEffect(() => {
-    gsap.to(navRef.current, {
-      y: isVisible ? 0 : -100,
-      duration: 0.4,
-      ease: "power3.out",
-    });
-  }, [isVisible]);
+  const go = (id: string) => {
+    const target = `#${id}`;
+    const scrollToTarget = () => {
+      if (lenis) lenis.scrollTo(target, { offset: -80, duration: 1.1 });
+      else document.querySelector(target)?.scrollIntoView({ behavior: "smooth" });
+    };
 
-  useEffect(() => {
-    if (!menuRef.current) return;
-
-    if (isMenuOpen) {
-      document.body.style.overflow = "hidden";
-      gsap.to(menuRef.current, {
-        clipPath: "circle(150% at calc(100% - 2rem) 2rem)",
-        duration: 0.8,
-        ease: "power4.inOut",
-      });
-      gsap.fromTo(".menu-item",
-        { y: 60, opacity: 0, rotateX: -45 },
-        { y: 0, opacity: 1, rotateX: 0, stagger: 0.08, duration: 0.6, delay: 0.3, ease: "power3.out" }
-      );
-      gsap.fromTo(".menu-line",
-        { scaleX: 0 },
-        { scaleX: 1, duration: 0.8, delay: 0.5, ease: "power3.inOut" }
-      );
+    if (open) {
+      setOpen(false);
+      window.requestAnimationFrame(scrollToTarget);
     } else {
-      document.body.style.overflow = "";
-      gsap.to(menuRef.current, {
-        clipPath: "circle(0% at calc(100% - 2rem) 2rem)",
-        duration: 0.6,
-        ease: "power3.inOut",
-      });
-    }
-  }, [isMenuOpen]);
-
-  const scrollTo = (id: string) => {
-    setIsMenuOpen(false);
-    const target = id === "hero" ? "#hero" : `#${id}`;
-    
-    if (lenis) {
-      lenis.scrollTo(target, { offset: -80, duration: 1.2 });
-    } else {
-      const el = document.querySelector(target);
-      if (el) {
-        const y = el.getBoundingClientRect().top + window.scrollY - 80;
-        window.scrollTo({ top: y, behavior: "smooth" });
-      }
+      scrollToTarget();
     }
   };
 
   return (
     <>
-      <nav
-        ref={navRef}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled 
-            ? "py-4 bg-white/85 backdrop-blur-xl border-b border-black/10 shadow-[0_8px_30px_rgba(17,17,17,0.06)]" 
-            : "py-6"
-        }`}
-      >
-        <div className="container">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <button
-              onClick={() => scrollTo("hero")}
-              className="flex items-center magnetic-target"
-              aria-label={t.navigation.homeAriaLabel}
-            >
-              <Image
-                src="/logoPersonal-removebg-preview.png"
-                alt="Logo Álvaro Langa"
-                width={669}
-                height={373}
-                priority
-                className="h-8 w-auto md:h-9"
-              />
-            </button>
-
-            {/* Desktop Nav */}
-            <div className="hidden md:flex items-center gap-1">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollTo(item.id)}
-                  className={`relative px-4 py-2 text-sm transition-all duration-300 group magnetic-target ${
-                    activeSection === item.id
-                      ? "text-black"
-                      : "text-black/40 hover:text-black/80"
-                  }`}
-                >
-                  <span className="relative z-10 pointer-events-none">{item.label}</span>
-
-                  {/* Active indicator */}
-                  {activeSection === item.id && (
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-black pointer-events-none" />
-                  )}
-
-                  {/* Hover background */}
-                  <span className="absolute inset-0 bg-black/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                </button>
-              ))}
-
-              {/* Language toggle */}
-              <button
-                type="button"
-                onClick={toggleLanguage}
-                aria-label={t.navigation.switchLanguageAriaLabel}
-                className="ml-2 px-3 py-1.5 text-mono text-[11px] tracking-[0.14em] text-black/50 border border-black/10 rounded-full hover:text-black hover:border-black/40 transition-colors duration-300 magnetic-target"
-              >
-                <span className="pointer-events-none">{t.navigation.switchLanguageLabel}</span>
-              </button>
-            </div>
-
-            {/* Mobile Menu Toggle */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden w-12 h-12 flex items-center justify-center rounded-full hover:bg-black/5 transition-colors duration-300 magnetic-target"
-              aria-label={t.navigation.menuAriaLabel}
-            >
-              <div className="relative w-5 h-3 pointer-events-none">
-                <span className={`absolute left-0 w-full h-[1.5px] bg-black transition-all duration-300 ${
-                  isMenuOpen ? "top-1/2 -translate-y-1/2 rotate-45" : "top-0"
-                }`} />
-                <span className={`absolute left-0 w-full h-[1.5px] bg-black transition-all duration-300 ${
-                  isMenuOpen ? "top-1/2 -translate-y-1/2 -rotate-45" : "bottom-0"
-                }`} />
-              </div>
-            </button>
+      <nav className="nav-shell" aria-label={t.navigation.mainAriaLabel}>
+        <div className="nav-inner">
+          <div className="nav-group nav-group-left">
+            {leftItems.map((item) => <button type="button" key={item.id} className={`nav-link ${active === item.id ? "active" : ""}`} onClick={() => go(item.id)}>{item.label}</button>)}
           </div>
+          <button type="button" className="nav-logo" onClick={() => go("hero")} aria-label={t.navigation.homeAriaLabel}>
+            <span className="nav-emblem" aria-hidden="true" />
+          </button>
+          <div className="nav-group nav-group-right">
+            {rightItems.map((item) => <button type="button" key={item.id} className={`nav-link ${active === item.id ? "active" : ""}`} onClick={() => go(item.id)}>{item.label}</button>)}
+            <button type="button" className="language" onClick={() => setLanguage(language === "es" ? "en" : "es")} aria-label={t.navigation.switchLanguageAriaLabel}>{t.navigation.switchLanguageLabel}</button>
+          </div>
+          <button
+            ref={toggleRef}
+            type="button"
+            className="menu-toggle"
+            onClick={() => setOpen((current) => !current)}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-haspopup="dialog"
+            aria-label={t.navigation.menuAriaLabel}
+          >
+            {open ? "×" : "＋"}
+          </button>
         </div>
       </nav>
-
-      {/* Mobile Menu */}
-      <div
-        ref={menuRef}
-        className="fixed inset-0 z-40 bg-white flex items-center justify-center md:hidden"
-        style={{ clipPath: "circle(0% at calc(100% - 2rem) 2rem)" }}
-      >
-        {/* Background grid */}
-        <div 
-          className="absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(17,17,17,0.06) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(17,17,17,0.06) 1px, transparent 1px)
-            `,
-            backgroundSize: '60px 60px',
-          }}
-        />
-
-        <nav className="relative flex flex-col items-center gap-2">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => scrollTo(item.id)}
-              className="menu-item group relative py-4 overflow-hidden"
-              style={{ perspective: "1000px" }}
-            >
-              <span className={`block text-4xl font-medium transition-colors duration-300 ${
-                activeSection === item.id 
-                  ? "text-black" 
-                  : "text-black/30 group-hover:text-black"
-              }`}>
-                {item.label}
-              </span>
-              <span className="absolute -left-8 top-1/2 -translate-y-1/2 text-mono text-xs text-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                {item.num}
-              </span>
-            </button>
-          ))}
-          
-          {/* Decorative line */}
-          <div className="menu-line w-32 h-px bg-gradient-to-r from-transparent via-black/20 to-transparent mt-8 origin-center" />
-
-          {/* Language toggle (mobile) */}
-          <button
-            type="button"
-            onClick={toggleLanguage}
-            aria-label={t.navigation.switchLanguageAriaLabel}
-            className="menu-item mt-6 px-4 py-2 text-mono text-xs tracking-[0.18em] text-black/60 border border-black/15 rounded-full hover:text-black hover:border-black/50 transition-colors duration-300"
-          >
-            {t.navigation.switchLanguageLabel}
-          </button>
-        </nav>
-
-        {/* Corner decorations */}
-        <div className="absolute bottom-12 left-8 text-mono text-xs text-black/20">
-          ÁLVARO LANGA
+      {open && (
+        <div ref={menuRef} id="mobile-menu" className="mobile-menu" role="dialog" aria-modal="true" aria-label={t.navigation.menuAriaLabel}>
+          <div>{items.map((item, i) => <button type="button" key={item.id} onClick={() => go(item.id)}><small>0{i + 1}</small>{item.label}</button>)}</div>
+          <button type="button" className="mobile-language" onClick={() => setLanguage(language === "es" ? "en" : "es")} aria-label={t.navigation.switchLanguageAriaLabel}>{t.navigation.switchLanguageLabel} — {t.navigation.languageLabel}</button>
         </div>
-        <div className="absolute bottom-12 right-8 text-mono text-xs text-black/20">
-          © {new Date().getFullYear()}
-        </div>
-      </div>
+      )}
     </>
   );
-};
-
-export default Navigation;
+}

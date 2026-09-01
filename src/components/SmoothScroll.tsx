@@ -23,6 +23,11 @@ const SmoothScroll = ({ children }: SmoothScrollProps) => {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reduceMotion.matches) {
+      return;
+    }
+
     const lenisInstance = new Lenis({
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -32,7 +37,7 @@ const SmoothScroll = ({ children }: SmoothScrollProps) => {
       touchMultiplier: 2,
     });
 
-    setLenis(lenisInstance);
+    const contextFrame = window.requestAnimationFrame(() => setLenis(lenisInstance));
 
     // Integración con GSAP ScrollTrigger
     lenisInstance.on("scroll", ScrollTrigger.update);
@@ -45,6 +50,7 @@ const SmoothScroll = ({ children }: SmoothScrollProps) => {
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      window.cancelAnimationFrame(contextFrame);
       lenisInstance.destroy();
       gsap.ticker.remove(rafCallback);
     };
