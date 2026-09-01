@@ -58,7 +58,7 @@ button { font: inherit; }
 .nav-group-left { justify-content: flex-start; }
 .nav-group-right { justify-content: flex-end; }
 .nav-logo { grid-column: 2; display: grid; place-items: center; width: 112px; height: 72px; border: 0; background: transparent; cursor: pointer; }
-.nav-emblem { display: block; width: 100px; height: 60px; background: var(--blue); -webkit-mask: url("/logoPersonal-removebg-preview.png") center / 170% auto no-repeat; mask: url("/logoPersonal-removebg-preview.png") center / 170% auto no-repeat; transition: transform .35s var(--ease), opacity .35s; }
+.nav-emblem { display: block; width: 52px; height: 52px; background: url("/logo-al.svg") center / contain no-repeat; transition: transform .35s var(--ease), opacity .35s; }
 .nav-logo:hover .nav-emblem { transform: scale(1.07) rotate(-1.5deg); }
 .nav-link { position: relative; border: 0; border-radius: 0; background: transparent; padding: 0 clamp(14px,1.6vw,24px); color: rgba(0,0,180,.68); cursor: pointer; font-family: var(--font-hermes), "Arial Narrow", sans-serif; font-size: clamp(1.05rem,1.35vw,1.35rem); font-weight: 600; letter-spacing: .015em; }
 .nav-link::after { content: ""; position: absolute; right: clamp(14px,1.6vw,24px); bottom: 0; left: clamp(14px,1.6vw,24px); height: 2px; background: var(--blue); transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease); }
@@ -76,8 +76,9 @@ button { font: inherit; }
 .hero-stage::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 50% 42%, rgba(0,0,242,.1), transparent 29%), radial-gradient(circle at 88% 70%, rgba(102,122,255,.08), transparent 25%), linear-gradient(115deg, rgba(255,255,255,.58), transparent 48%); }
 .hero-stage::after { content: none; }
 .hero-content { position: relative; z-index: 2; min-height: inherit; width: min(calc(100% - 48px), 1240px); margin: auto; }
-.hero-title-wrap { position: absolute; top: 46%; left: 50%; width: min(64vw, 790px); transform: translate(-50%,-50%); text-align: center; }
-.hero-name { overflow: visible; font-family: var(--font-sans); font-size: clamp(5.25rem,10.8vw,10.8rem); font-weight: 700; line-height: .78; letter-spacing: -.075em; }
+.hero-title-wrap { position: absolute; top: 45%; left: 50%; width: min(64vw, 790px); transform: translate(-50%,-50%); display: grid; justify-items: center; gap: clamp(.8rem,1.6vh,1.2rem); text-align: center; }
+.hero-mark { display: block; width: clamp(88px,8.5vw,122px); aspect-ratio: 1; background: url("/logo-al.svg") center / contain no-repeat; filter: drop-shadow(0 14px 28px rgba(0,0,150,.08)); }
+.hero-name { overflow: visible; font-family: var(--font-sans); font-size: clamp(4.8rem,9.2vw,9.2rem); font-weight: 700; line-height: .78; letter-spacing: -.075em; }
 .hero-name > span { display: block; overflow: visible; }
 .hero-name .hero-outline { color: rgba(0,0,242,.07); -webkit-text-stroke: 1.8px rgba(0,0,242,.88); }
 .hero-side { position: absolute; top: 46%; z-index: 3; width: clamp(145px,16vw,190px); }
@@ -193,11 +194,13 @@ button { font: inherit; }
   .container { width: min(100% - 28px, 1240px); }
   .nav-inner { width: calc(100% - 28px); }
   .nav-logo { width: 92px; }
-  .nav-emblem { width: 82px; height: 50px; }
+  .nav-emblem { width: 46px; height: 46px; }
   .hero { padding: 84px 0 0; }
   .hero-stage { min-height: calc(100svh - 84px); }
   .hero-content { width: calc(100% - 34px); }
-  .hero-name { font-size: clamp(5.4rem,27vw,8rem); }
+  .hero-title-wrap { gap: .7rem; }
+  .hero-mark { width: clamp(68px,20vw,86px); }
+  .hero-name { font-size: clamp(4.8rem,24vw,7rem); }
   .hero-side-left { align-items: flex-start; }
   .hero-side-left .availability { max-width: 130px; justify-content: flex-end; text-align: right; line-height: 1.35; }
   .hero-side-right { grid-template-columns: 1fr; align-items: start; }
