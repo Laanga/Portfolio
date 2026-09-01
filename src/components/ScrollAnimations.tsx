@@ -23,11 +23,11 @@ export default function ScrollAnimations({ enabled = true }: { enabled?: boolean
         .fromTo(".hero-summary", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, "-=0.5")
         .fromTo(".hero-actions > *", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.1 }, "-=0.42");
 
-      gsap.to(".hero-name", {
-        yPercent: 7,
-        opacity: 0.38,
+      gsap.to(".hero-content", {
+        yPercent: -5,
+        opacity: 0,
         ease: "none",
-        scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: 1 },
+        scrollTrigger: { trigger: "#hero", start: "top top", end: "75% top", scrub: 1 },
       });
 
       const reveal = (
