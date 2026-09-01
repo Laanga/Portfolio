@@ -16,7 +16,6 @@ export default function HeroSection() {
           </aside>
 
           <div className="hero-title-wrap">
-            <span className="hero-mark" aria-hidden="true" />
             <h1 className="hero-name display reveal reveal-delay"><span>ÁLVARO</span><span className="hero-outline">LANGA</span></h1>
           </div>
 

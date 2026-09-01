@@ -18,8 +18,7 @@ export default function ScrollAnimations({ enabled = true }: { enabled?: boolean
         .fromTo(".nav-shell", { y: -26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.75 })
         .fromTo(".nav-emblem", { scale: 0.78, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.7 }, "-=0.48")
         .fromTo(".hero-side-left > *", { x: -28, opacity: 0 }, { x: 0, opacity: 1, duration: 0.7, stagger: 0.1 }, "-=0.35")
-        .fromTo(".hero-mark", { scale: 0.72, rotate: -5, opacity: 0 }, { scale: 1, rotate: 0, opacity: 1, duration: 0.9, ease: "power4.out" }, "-=0.5")
-        .fromTo(".hero-name > span", { yPercent: 105, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 1.05, stagger: 0.11, ease: "power4.out" }, "-=0.68")
+        .fromTo(".hero-name > span", { yPercent: 105, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 1.05, stagger: 0.11, ease: "power4.out" }, "-=0.5")
         .fromTo(".hero-side-right", { x: 28, opacity: 0 }, { x: 0, opacity: 1, duration: 0.75 }, "-=0.65")
         .fromTo(".hero-summary", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, "-=0.5")
         .fromTo(".hero-actions > *", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.1 }, "-=0.42");
