@@ -15,7 +15,7 @@ export default function Footer() {
         <a href={`mailto:${t.footer.email}`} className="footer-email">{t.footer.email} ↗</a>
         <div className="footer-bottom">
           <p className="mono">© {new Date().getFullYear()} ÁLVARO LANGA</p>
-          <div className="footer-links"><a href="https://www.linkedin.com/in/%C3%A1lvaro-langa-dev/" target="_blank" rel="noreferrer">LinkedIn</a><a href="https://github.com/Laanga" target="_blank" rel="noreferrer">GitHub</a></div>
+          <div className="footer-links"><a href="https://www.linkedin.com/in/alvaro-langa-dev/" target="_blank" rel="noreferrer">LinkedIn</a><a href="https://github.com/Laanga" target="_blank" rel="noreferrer">GitHub</a></div>
           <p className="mono">{t.footer.role}</p>
         </div>
       </div>

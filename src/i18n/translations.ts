@@ -17,8 +17,9 @@ export const es = {
   // About section
   about: {
     title: "Sobre mí",
-    description1: "Desarrollador Web Full Stack con experiencia en entornos profesionales de publicidad digital y desarrollo de producto. Especializado en React, Next.js y Node.js, con enfoque en crear aplicaciones web de alto rendimiento y experiencias interactivas.",
-    description2: "Mi enfoque se centra en escribir código limpio y entregar soluciones eficientes. Busco seguir creciendo en equipos técnicos donde pueda aportar desde el primer día.",
+    statement: "Convierto necesidades reales en productos web listos para producción",
+    description1: "Actualmente trabajo como Desarrollador de Software en Neural.ONE, desarrollando landing pages, aplicaciones web y formatos interactivos para clientes del sector publicitario.",
+    description2: "Trabajo principalmente con React, Next.js, Node.js y Python. Combino frontend, backend y automatización para entregar con rapidez, manteniendo el control técnico y la calidad del código.",
     professionalSkillsTitle: "Habilidades Profesionales",
     stackTitle: "Stack Tecnológico",
     stackDescription: "Tecnologías que utilizo para diseñar, construir, automatizar y desplegar productos digitales completos.",
@@ -27,10 +28,10 @@ export const es = {
     cloudStackTitle: "Cloud / DevOps & Tooling",
     aiStackTitle: "IA y automatización",
     professionalSkills: [
-      "Desarrollo Frontend",
-      "Desarrollo Backend",
-      "Bases de datos",
-      "APIs e integraciones",
+      "Interfaces con React y Next.js",
+      "APIs REST con Node.js",
+      "Automatización con Python",
+      "Tracking y analítica digital",
       "Control de versiones",
       "Automatización",
       "Despliegue y CI/CD"
@@ -40,18 +41,18 @@ export const es = {
   // Experience section
   experience: {
     title: "Experiencia",
-    subtitle: "Trayectoria profesional",
+    subtitle: "Experiencia profesional",
     watermark: "TRABAJO",
     experiences: [
       {
         title: "Desarrollador de Software",
         company: "Neural.ONE",
-        period: "Marzo 2025 - Presente",
+        period: "Marzo 2025 - Actualidad",
         achievements: [
-          "Desarrollo de landing pages y aplicaciones web para clientes del sector publicitario utilizando React y Node.js, entregando proyectos dentro de plazos ajustados",
-          "Programación de anuncios interactivos y banners rich media con HTML, CSS y JavaScript, mejorando la experiencia de las campañas digitales",
-          "Implementación de scripts de automatización en Python para optimizar flujos de trabajo en herramientas de trafficking, reduciendo tareas manuales repetitivas",
-          "Gestión de códigos de seguimiento y tracking para la medición precisa de campañas publicitarias y recolección de datos de rendimiento"
+          "Desarrollo de landing pages y aplicaciones web con React y Node.js, entregadas en ciclos de 1 a 2 semanas con revisión directa del cliente",
+          "Estandarización de la estructura base de banners rich media, reduciendo aproximadamente un 60 % los errores de renderizado",
+          "Automatización de tareas de trafficking mediante scripts de Python, ahorrando aproximadamente 5 horas semanales de trabajo manual",
+          "Implementación de tracking y analítica para medir conversión y rendimiento de campañas digitales"
         ]
       }
     ]
@@ -62,10 +63,13 @@ export const es = {
     title: "Formación",
     subtitle: "Formación académica",
     degree: {
-      title: "Grado Superior Desarrollo de Aplicaciones Web",
+      title: "Grado Superior en Desarrollo de Aplicaciones Web",
       institution: "I.E.S GASPAR MELCHOR DE JOVELLANOS",
-      date: "2023 - 2025"
-    }
+      date: "Septiembre 2023 - Junio 2025",
+      location: "Fuenlabrada, Madrid"
+    },
+    languagesLabel: "Idiomas",
+    languages: "Español nativo · Inglés B2"
   },
 
   // Projects section
@@ -74,21 +78,22 @@ export const es = {
     featuredLabel: "Proyectos destacados",
     selectedLine1: "TRABAJO",
     selectedLine2: "SELECCIONADO",
-    introDescription: "Productos digitales donde la interfaz, el rendimiento y la ingeniería trabajan como un único sistema.",
+    introDescription: "Tres productos que muestran cómo resuelvo retos de interfaz, datos, APIs y arquitectura.",
     projectLabel: "PROYECTO",
-    viewProject: "Ver proyecto",
+    viewDemo: "Ver demo",
+    viewCode: "Ver código",
     projectsList: [
       {
         title: "GridRush",
-        description: "Plataforma web para la gestión integral de competiciones de karting: inscripción de pilotos, gestión de carreras y clasificaciones en tiempo real. Frontend con React y API REST con Node.js y Express."
+        description: "Plataforma web para gestionar competiciones de karting, desde la inscripción de pilotos y las carreras hasta las clasificaciones en tiempo real. Arquitectura cliente-servidor con React y una API REST en Node.js y Express."
       },
       {
         title: "DeltaZero",
-        description: "Panel de análisis de Fórmula 1 con telemetría comparativa de hasta 5 pilotos, mapa interactivo del circuito sincronizado con las gráficas, mapa de calor de degradación de neumáticos, estrategia y mundiales. 100 % frontend sobre las APIs públicas de OpenF1 y Jolpica, con cola de peticiones para respetar el rate limit y gaps/posiciones derivados en el cliente."
+        description: "Panel de análisis de Fórmula 1 con telemetría comparativa de hasta cinco pilotos, mapa de circuito sincronizado y análisis de degradación y estrategia. Arquitectura frontend estática sobre OpenF1 y Jolpica, con cola de peticiones, carga paralela tolerante a fallos y cálculos derivados en el cliente."
       },
       {
         title: "Kata (型)",
-        description: "Plataforma Full Stack que permite organizar libros, videojuegos, películas y series en un único espacio. Integra datos en tiempo real de APIs externas (TMDB, IGDB, Google Books) con autenticación de usuarios, dashboard de estadísticas y una interfaz dark mode con animaciones en GSAP y Tailwind CSS."
+        description: "Plataforma Full Stack para organizar libros, videojuegos, películas y series con autenticación y datos persistidos en Supabase (PostgreSQL). Integra TMDB, IGDB y Google Books y ofrece búsqueda y filtrado inmediato desde el cliente."
       }
     ]
   },
@@ -103,9 +108,9 @@ export const es = {
 
   // Hero section
   hero: {
-    description: "Desarrollador Full Stack especializado en React, Next.js y Node.js. Creo aplicaciones web de alto rendimiento con interfaces limpias y experiencias interactivas.",
+    description: "Desarrollador Full Stack con experiencia profesional en publicidad digital y proyectos propios en producción. Construyo aplicaciones con React, Next.js y Node.js, desde la interfaz hasta APIs y automatizaciones.",
     contact: "Contacto",
-    availability: "Disponible para trabajar",
+    availability: "Abierto a nuevas oportunidades",
     roleLine1: "DESARROLLADOR",
     roleLine2: "FULL STACK"
   },
@@ -113,7 +118,7 @@ export const es = {
   // Footer
   footer: {
     title: "¿Hablamos?",
-    description: "Abierto a colaboraciones y proyectos freelance.",
+    description: "Abierto a nuevas oportunidades en equipos de producto y desarrollo.",
     email: "alvarolanga04@gmail.com",
     contactLabel: "Contacto",
     role: "Desarrollador de Software",
@@ -143,8 +148,9 @@ export const en = {
   // About section
   about: {
     title: "About Me",
-    description1: "Full Stack Web Developer with professional experience in digital advertising and product development. Specialized in React, Next.js and Node.js, focused on building high-performance web applications and interactive experiences.",
-    description2: "My approach focuses on writing clean code and delivering efficient solutions. I'm looking to keep growing in technical teams where I can contribute from day one.",
+    statement: "I turn real-world needs into production-ready web products",
+    description1: "I currently work as a Software Developer at Neural.ONE, building landing pages, web applications and interactive formats for clients in the advertising industry.",
+    description2: "I work primarily with React, Next.js, Node.js and Python. I combine frontend, backend and automation to deliver quickly while maintaining technical control and code quality.",
     professionalSkillsTitle: "Professional Skills",
     stackTitle: "Tech Stack",
     stackDescription: "Technologies I use to design, build, automate and deploy complete digital products.",
@@ -153,10 +159,10 @@ export const en = {
     cloudStackTitle: "Cloud / DevOps & Tooling",
     aiStackTitle: "AI & Automation",
     professionalSkills: [
-      "Frontend Development",
-      "Backend Development",
-      "Databases",
-      "APIs & Integrations",
+      "React & Next.js Interfaces",
+      "REST APIs with Node.js",
+      "Python Automation",
+      "Tracking & Digital Analytics",
       "Version Control",
       "Automation",
       "Deployment & CI/CD"
@@ -166,7 +172,7 @@ export const en = {
   // Experience section
   experience: {
     title: "Experience",
-    subtitle: "Career path",
+    subtitle: "Professional experience",
     watermark: "WORK",
     experiences: [
       {
@@ -174,10 +180,10 @@ export const en = {
         company: "Neural.ONE",
         period: "March 2025 - Present",
         achievements: [
-          "Development of landing pages and web applications for advertising clients using React and Node.js, delivering projects within tight deadlines",
-          "Programming of interactive ads and rich media banners with HTML, CSS and JavaScript, enhancing digital campaign experiences",
-          "Implementation of Python automation scripts to optimize trafficking tool workflows, reducing repetitive manual tasks",
-          "Management of tracking codes for precise measurement of advertising campaigns and performance data collection"
+          "Built landing pages and web applications with React and Node.js, delivering in 1 to 2-week cycles with direct client reviews",
+          "Standardized the base structure for rich media banners, reducing rendering issues by approximately 60%",
+          "Automated trafficking workflows with Python scripts, saving approximately 5 hours of manual work per week",
+          "Implemented tracking and analytics to measure conversion and digital campaign performance"
         ]
       }
     ]
@@ -190,8 +196,11 @@ export const en = {
     degree: {
       title: "Higher Degree in Web Application Development",
       institution: "I.E.S GASPAR MELCHOR DE JOVELLANOS",
-      date: "2023 - 2025"
-    }
+      date: "September 2023 - June 2025",
+      location: "Fuenlabrada, Madrid"
+    },
+    languagesLabel: "Languages",
+    languages: "Native Spanish · English B2"
   },
 
   // Projects section
@@ -200,21 +209,22 @@ export const en = {
     featuredLabel: "Featured work",
     selectedLine1: "SELECTED",
     selectedLine2: "WORK",
-    introDescription: "Digital products where interface, performance and engineering work as a single system.",
+    introDescription: "Three products that show how I solve challenges across interfaces, data, APIs and architecture.",
     projectLabel: "PROJECT",
-    viewProject: "View project",
+    viewDemo: "View demo",
+    viewCode: "View code",
     projectsList: [
       {
         title: "GridRush",
-        description: "Web platform for comprehensive karting competition management: driver registration, race management and real-time standings. React frontend with Node.js and Express REST API."
+        description: "Web platform for managing karting competitions, from driver registration and race operations to real-time standings. Client-server architecture with React and a REST API built with Node.js and Express."
       },
       {
         title: "DeltaZero",
-        description: "Formula 1 analysis dashboard with comparative telemetry for up to 5 drivers, an interactive circuit map synced to the charts, a tyre-degradation heatmap, strategy and championship standings. 100% static frontend over the public OpenF1 and Jolpica APIs, with a request queue that respects rate limits and gaps/positions derived on the client."
+        description: "Formula 1 analysis dashboard with comparative telemetry for up to five drivers, a synchronized circuit map, and tyre degradation and strategy analysis. Static frontend architecture over OpenF1 and Jolpica, with request queuing, fault-tolerant parallel loading and client-side derived calculations."
       },
       {
         title: "Kata (型)",
-        description: "Full Stack platform to organize books, video games, movies and series in a single space. Integrates real-time data from external APIs (TMDB, IGDB, Google Books) with user authentication, statistics dashboard and a dark mode interface with GSAP and Tailwind CSS animations."
+        description: "Full Stack platform for organizing books, video games, movies and series, with authentication and data persisted in Supabase (PostgreSQL). It integrates TMDB, IGDB and Google Books and provides instant client-side search and filtering."
       }
     ]
   },
@@ -229,9 +239,9 @@ export const en = {
 
   // Hero section
   hero: {
-    description: "Full Stack Developer specialized in React, Next.js and Node.js. I build high-performance web applications with clean interfaces and interactive experiences.",
+    description: "Full Stack Developer with professional experience in digital advertising and personal projects running in production. I build React, Next.js and Node.js applications across interfaces, APIs and automation.",
     contact: "Contact",
-    availability: "Available for work",
+    availability: "Open to new opportunities",
     roleLine1: "FULL STACK",
     roleLine2: "DEVELOPER"
   },
@@ -239,7 +249,7 @@ export const en = {
   // Footer
   footer: {
     title: "Let's talk?",
-    description: "Open to collaborations and freelance projects.",
+    description: "Open to new opportunities in product and engineering teams.",
     email: "alvarolanga04@gmail.com",
     contactLabel: "Contact",
     role: "Software Developer",

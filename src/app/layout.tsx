@@ -12,9 +12,9 @@ const hermesDisplay = Barlow_Condensed({
 });
 
 export const metadata: Metadata = {
-  title: "Álvaro Langa — Full Stack Developer",
+  title: "Álvaro Langa | Full Stack Developer en Madrid",
   description:
-    "Portfolio de Álvaro Langa, desarrollador Full Stack especializado en React, Next.js y Node.js.",
+    "Portfolio de Álvaro Langa, desarrollador Full Stack en Madrid especializado en React, Next.js, Node.js y automatización con Python.",
   icons: { icon: "/favicon.svg" },
 };
 
