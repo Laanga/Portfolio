@@ -16,14 +16,18 @@ import {
   SiNextdotjs,
   SiNodedotjs,
   SiOpenjdk,
+  SiPostgresql,
   SiPython,
   SiReact,
+  SiReactquery,
+  SiExpress,
+  SiSupabase,
   SiTailwindcss,
   SiTypescript,
   SiVercel,
 } from "react-icons/si";
 import { FaAws } from "react-icons/fa6";
-import { TbApi, TbBrandOpenai } from "react-icons/tb";
+import { TbApi, TbBrandOpenai, TbStack2 } from "react-icons/tb";
 import { useLanguage } from "../i18n/LanguageContext";
 
 type Technology = {
@@ -39,13 +43,18 @@ const frontend: Technology[] = [
   { name: "HTML", icon: SiHtml5 },
   { name: "CSS", icon: SiCss },
   { name: "Tailwind CSS", icon: SiTailwindcss },
+  { name: "TanStack Query", icon: SiReactquery },
+  { name: "Zustand", icon: TbStack2 },
 ];
 
 const backend: Technology[] = [
   { name: "Node.js", icon: SiNodedotjs },
+  { name: "Express", icon: SiExpress },
   { name: "Python", icon: SiPython },
   { name: "Java", icon: SiOpenjdk },
   { name: "MySQL", icon: SiMysql },
+  { name: "PostgreSQL", icon: SiPostgresql },
+  { name: "Supabase", icon: SiSupabase },
   { name: "REST APIs", icon: TbApi },
 ];
 
@@ -67,14 +76,13 @@ const artificialIntelligence: Technology[] = [
 export default function AboutSection() {
   const { t } = useLanguage();
   const highlights = t.about.professionalSkills.slice(0, 4);
-  const statement = t.about.description1.split(".")[0];
   return (
     <section id="about" className="section about">
       <div className="container">
         <div className="about-layout">
           <div>
             <p className="eyebrow">01 — {t.about.title}</p>
-            <h2 className="section-title about-statement">{statement}<em>.</em></h2>
+            <h2 className="section-title about-statement">{t.about.statement}<em>.</em></h2>
           </div>
           <div className="about-copy body-copy">
             <p>{t.about.description1}</p>

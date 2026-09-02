@@ -56,7 +56,7 @@ button { font: inherit; }
 .nav-inner { width: min(calc(100% - 40px),1240px); height: 84px; margin-inline: auto; padding: 0; display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); align-items: center; }
 .nav-group { display: flex; align-items: stretch; height: 100%; }
 .nav-group-left { justify-content: flex-start; }
-.nav-group-right { justify-content: flex-end; }
+.nav-group-right { justify-content: flex-end; padding-right: 72px; }
 .nav-logo { grid-column: 2; display: grid; place-items: center; width: 112px; height: 72px; border: 0; background: transparent; cursor: pointer; }
 .nav-emblem { display: block; width: 52px; height: 52px; background: url("/logo-al.svg") center / contain no-repeat; transition: transform .35s var(--ease), opacity .35s; }
 .nav-logo:hover .nav-emblem { transform: scale(1.07) rotate(-1.5deg); }
@@ -64,7 +64,11 @@ button { font: inherit; }
 .nav-link::after { content: ""; position: absolute; right: clamp(14px,1.6vw,24px); bottom: 0; left: clamp(14px,1.6vw,24px); height: 2px; background: var(--blue); transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease); }
 .nav-link:hover, .nav-link.active { color: var(--blue); background: transparent; }
 .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
-.language { margin-left: 10px; padding-left: 22px; border: 0; border-radius: 0; background: transparent; color: var(--blue); width: 62px; cursor: pointer; font: 600 .84rem var(--font-mono); }
+.nav-link-content, .mobile-nav-content { display: inline-flex; align-items: baseline; transform-origin: 50% 50%; will-change: transform; }
+.language { position: absolute; top: 0; right: 24px; display: grid; place-items: center; width: 48px; height: 84px; padding: 0; border: 0; border-radius: 0; background: transparent; color: var(--blue); cursor: pointer; font: 600 .84rem var(--font-mono); }
+.language-content { display: inline-block; transform-origin: 50% 50%; will-change: transform; }
+.language:disabled, .mobile-language:disabled { cursor: default; }
+.language-transition { position: fixed; z-index: 80; inset: 84px 0 0; visibility: hidden; opacity: 0; pointer-events: none; background: rgba(242,245,255,.78); backdrop-filter: blur(2px); }
 .menu-toggle { display: none; border: 0; border-radius: 0; background: transparent; color: var(--ink); width: 52px; height: 40px; font-size: 1.1rem; cursor: pointer; }
 .mobile-menu { position: fixed; inset: 0; z-index: 90; border-radius: 0; background: var(--paper); color: var(--blue); padding: 104px 28px 35px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: none; }
 .mobile-menu button { display: block; width: 100%; border: 0; border-bottom: 1px solid rgba(0,0,242,.2); background: transparent; color: var(--blue); text-align: left; padding: 15px 0; font-size: clamp(2.2rem, 10vw, 4rem); font-weight: 700; letter-spacing: -.05em; }
@@ -145,13 +149,18 @@ button { font: inherit; }
 .project-row:hover .project-visual img { transform: scale(1.045); }
 .project-copy { align-self: stretch; display: flex; flex-direction: column; justify-content: space-between; gap: 2rem; }
 .project-desc { max-width: 45ch; color: rgba(0,0,150,.68); font-size: .96rem; line-height: 1.58; }
-.project-visit { display: flex; align-items: center; justify-content: space-between; padding-top: 1rem; border-top: 1px solid rgba(0,0,242,.2); font: 600 .66rem var(--font-mono); letter-spacing: .09em; text-transform: uppercase; }
-.project-visit span { font-size: 1rem; }
+.project-actions { display: grid; gap: .25rem; margin-top: auto; padding-top: .35rem; border-top: 1px solid rgba(0,0,242,.2); }
+.project-action { display: flex; align-items: center; min-height: 44px; padding: .95rem .15rem; border-bottom: 1px solid rgba(0,0,242,.12); color: var(--blue); text-decoration: none; font: 600 .66rem var(--font-mono); letter-spacing: .09em; text-transform: uppercase; transition: padding-left .3s var(--ease), background .3s var(--ease); }
+.project-action:last-child { border-bottom: 0; }
+.project-action:hover { padding-left: .55rem; background: rgba(0,0,242,.035); }
 
 .education { padding: clamp(5rem, 9vw, 8rem) 0; border-top: 1px solid rgba(0,0,242,.22); }
 .education-row { display: grid; grid-template-columns: 1fr 2fr auto; gap: 2rem; align-items: start; }
 .education-row h2 { font-size: clamp(2rem, 5vw, 4.7rem); line-height: .95; letter-spacing: -.055em; max-width: 700px; }
 .education-row time { background: var(--blue); color: white; padding: 11px 16px; border: 1px solid var(--blue); border-radius: 999px; box-shadow: 0 12px 28px rgba(0,0,120,.14); }
+.education-meta { display: grid; justify-items: end; gap: 1.25rem; }
+.education-languages { color: rgba(0,0,150,.72); text-align: right; line-height: 1.6; }
+.education-languages span { display: block; color: var(--blue); font-weight: 700; }
 
 .footer { position: relative; background: radial-gradient(circle at 80% 25%, #7487ff 0, transparent 24%), var(--blue); color: white; padding: clamp(5rem, 10vw, 8rem) 0 2rem; overflow: hidden; }
 .footer-top { display: flex; justify-content: space-between; gap: 2rem; align-items: start; }
@@ -165,6 +174,7 @@ button { font: inherit; }
 
 @media (max-width: 900px) {
   .nav-group { display: none; }
+  .language { display: none; }
   .nav-logo { grid-column: 2; }
   .menu-toggle { display: block; grid-column: 3; justify-self: end; }
   .hero-content { min-height: inherit; padding: clamp(2.75rem,7vh,5rem) 0 2rem; display: flex; flex-direction: column; justify-content: center; gap: 1.8rem; }
@@ -185,9 +195,11 @@ button { font: inherit; }
   .tech-group { grid-template-columns: 1fr; }
   .project-row { grid-template-columns: minmax(180px,.75fr) minmax(300px,1.25fr); min-height: 340px; }
   .project-copy { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr auto; align-items: end; }
-  .project-visit { min-width: 180px; }
+  .project-actions { min-width: 180px; }
   .projects-head p { justify-self: start; margin-top: 1.5rem; }
   .education-row { grid-template-columns: 1fr; }
+  .education-meta { justify-items: start; }
+  .education-languages { text-align: left; }
 }
 @media (max-width: 560px) {
   .container { width: min(100% - 28px, 1240px); }
@@ -216,6 +228,7 @@ button { font: inherit; }
   .project-row { grid-template-columns: 1fr; gap: 1.5rem; min-height: 0; padding: 2rem 0; }
   .project-main { min-height: 150px; }
   .project-copy { grid-column: auto; display: flex; }
+  .project-actions { width: 100%; min-width: 0; }
   .project-visual { border-radius: 24px; }
   .education-row time { justify-self: start; }
   .footer-top, .footer-bottom { flex-direction: column; }

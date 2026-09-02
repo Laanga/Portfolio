@@ -7,9 +7,9 @@ import { useLanguage } from "../i18n/LanguageContext";
 export default function ProjectsSection() {
   const { t } = useLanguage();
   const projects = [
-    { ...t.projects.projectsList[2], tech: "NEXT.JS / SUPABASE / GSAP", link: "https://katalibrary.vercel.app/", image: "/images/kata.png", fit: "cover" },
-    { ...t.projects.projectsList[1], tech: "NEXT.JS / TYPESCRIPT / RECHARTS", link: "https://delta-zero.vercel.app", image: "/images/icon.png", fit: "contain" },
-    { ...t.projects.projectsList[0], tech: "REACT / NODE.JS / SQLITE", link: "https://github.com/Laanga/GridRush", image: "/images/kart.png", fit: "contain" },
+    { ...t.projects.projectsList[2], tech: "NEXT.JS / SUPABASE / POSTGRESQL", demoUrl: "https://katalibrary.vercel.app/", codeUrl: "https://github.com/Laanga/kata", image: "/images/kata.png", fit: "cover" },
+    { ...t.projects.projectsList[1], tech: "NEXT.JS / TYPESCRIPT / RECHARTS", demoUrl: "https://delta-zero.vercel.app", codeUrl: "https://github.com/Laanga/DeltaZero", image: "/images/icon.png", fit: "contain" },
+    { ...t.projects.projectsList[0], tech: "REACT / NODE.JS / EXPRESS", demoUrl: null, codeUrl: "https://github.com/Laanga/GridRush", image: "/images/kart.png", fit: "contain" },
   ];
   return (
     <section id="projects" className="section projects">
@@ -20,7 +20,7 @@ export default function ProjectsSection() {
         </div>
         <div className="project-list">
           {projects.map((project, i) => (
-            <a className="project-row" href={project.link} target="_blank" rel="noreferrer" key={project.title}>
+            <article className="project-row" key={project.title}>
               <div className="project-main">
                 <div className="project-top"><span className="mono">{t.projects.projectLabel} / 0{i + 1}</span></div>
                 <h3>{project.title}</h3>
@@ -31,9 +31,12 @@ export default function ProjectsSection() {
               </div>
               <div className="project-copy">
                 <p className="project-desc">{project.description}</p>
-                <span className="project-visit">{t.projects.viewProject}<span>↗</span></span>
+                <div className="project-actions">
+                  {project.demoUrl && <a className="project-action" href={project.demoUrl} target="_blank" rel="noreferrer">{t.projects.viewDemo}</a>}
+                  <a className="project-action" href={project.codeUrl} target="_blank" rel="noreferrer">{t.projects.viewCode}</a>
+                </div>
               </div>
-            </a>
+            </article>
           ))}
         </div>
       </div>
