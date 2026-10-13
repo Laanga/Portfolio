@@ -89,7 +89,8 @@ button { font: inherit; }
 .theme-light .education-languages span { color: var(--blue); }
 
 /* Navigation */
-.nav-shell { position: fixed; z-index: 100; inset: 0 0 auto; width: 100%; border-bottom: 1px solid rgba(255,255,255,.14); background: rgba(0,0,242,.74); color: white; backdrop-filter: blur(18px) saturate(140%); }
+.nav-shell { position: fixed; z-index: 100; inset: 0 0 auto; width: 100%; border-bottom: 1px solid rgba(255,255,255,.14); background: rgba(0,0,242,.74); color: white; backdrop-filter: blur(18px) saturate(140%); transition: translate .5s var(--ease); }
+.nav-shell.nav-hidden { translate: 0 -100%; }
 .nav-inner { width: var(--container); height: 84px; margin-inline: auto; display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); align-items: center; }
 .nav-group { display: flex; align-items: stretch; height: 100%; }
 .nav-group-left { justify-content: flex-start; }
@@ -178,7 +179,7 @@ button { font: inherit; }
 .experience-art .frag-anvil { right: 0; bottom: 6%; width: 40%; }
 .experience-list { padding: 0; list-style: none; }
 .experience-list li { position: relative; margin-bottom: 1.5rem; padding: 0 0 1.5rem 2.1rem; border-bottom: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.78); line-height: 1.6; }
-.experience-list li::before { content: "↳"; position: absolute; left: 0; color: white; }
+.experience-list li::before { content: ""; position: absolute; top: .62em; left: .2rem; width: 7px; height: 7px; background: white; }
 
 /* Projects */
 .projects-head { display: grid; grid-template-columns: 1fr 1fr; align-items: end; }

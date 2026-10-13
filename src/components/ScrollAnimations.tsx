@@ -15,7 +15,7 @@ export default function ScrollAnimations({ enabled = true }: { enabled?: boolean
       const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
 
       intro
-        .fromTo(".nav-shell", { y: -26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.75 })
+        .fromTo(".nav-shell", { y: -26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.75, clearProps: "transform,translate" })
         .fromTo(".nav-emblem", { scale: 0.78, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.7 }, "-=0.48")
         .fromTo(".hero-meta > *", { y: -14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.08 }, "-=0.35")
         .fromTo(".hero-chapter", { x: -24, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6 }, "-=0.3")

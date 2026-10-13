@@ -10,6 +10,7 @@ export default function Navigation() {
   const lenis = useContext(LenisContext);
   const [active, setActive] = useState("hero");
   const [open, setOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const desktopLanguageRef = useRef<HTMLSpanElement>(null);
@@ -41,6 +42,20 @@ export default function Navigation() {
     update();
     return () => window.removeEventListener("scroll", update);
   }, [items]);
+
+  // Hide the header while scrolling down, bring it back as soon as the user scrolls up
+  useEffect(() => {
+    let lastY = window.scrollY;
+    const handle = (y: number) => {
+      if (Math.abs(y - lastY) < 6) return;
+      setHidden(y > lastY && y > 120);
+      lastY = y;
+    };
+    if (lenis) return lenis.on("scroll", ({ scroll }: { scroll: number }) => handle(scroll));
+    const onScroll = () => handle(window.scrollY);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [lenis]);
 
   useEffect(() => {
     if (!open) return;
@@ -221,7 +236,7 @@ export default function Navigation() {
 
   return (
     <>
-      <nav className="nav-shell" aria-label={t.navigation.mainAriaLabel}>
+      <nav className={`nav-shell ${hidden && !open ? "nav-hidden" : ""}`} aria-label={t.navigation.mainAriaLabel}>
         <div className="nav-inner">
           <div className="nav-group nav-group-left">
             {leftItems.map((item) => <button type="button" key={item.id} className={`nav-link ${active === item.id ? "active" : ""}`} onClick={(event) => {

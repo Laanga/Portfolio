@@ -58,7 +58,7 @@ export default function Footer() {
               <i className="footer-cursor" aria-hidden="true" />
             </div>
             <div className="footer-actions">
-              <a href={`mailto:${t.footer.email}`} className="btn btn-primary">{t.footer.writeMe}<span>↗</span></a>
+              <a href={`mailto:${t.footer.email}`} className="btn btn-primary">{t.footer.writeMe}</a>
               <button type="button" className="btn btn-outline" onClick={copyEmail} aria-live="polite">
                 {copied ? `${t.footer.copied} ✓` : t.footer.copyEmail}
               </button>
@@ -92,8 +92,8 @@ export default function Footer() {
             <h3 className="mono">{t.footer.contactTitle}</h3>
             <ul>
               <li><a href={`mailto:${t.footer.email}`}>Email</a></li>
-              <li><a href="https://www.linkedin.com/in/alvaro-langa-dev/" target="_blank" rel="noreferrer">LinkedIn ↗</a></li>
-              <li><a href="https://github.com/Laanga" target="_blank" rel="noreferrer">GitHub ↗</a></li>
+              <li><a href="https://www.linkedin.com/in/alvaro-langa-dev/" target="_blank" rel="noreferrer">LinkedIn</a></li>
+              <li><a href="https://github.com/Laanga" target="_blank" rel="noreferrer">GitHub</a></li>
               <li><a href="/CV-Alvaro-Langa.pdf" download>{t.profile.downloadCV}</a></li>
             </ul>
           </div>
@@ -112,7 +112,7 @@ export default function Footer() {
         <div className="footer-bottom">
           <p className="mono">© {new Date().getFullYear()} ÁLVARO LANGA</p>
           <p className="mono">{t.footer.role} · {t.footer.madeIn}</p>
-          <button type="button" className="mono footer-top-link" onClick={() => scrollToSection("hero")}>{t.footer.backToTop} ↑</button>
+          <button type="button" className="mono footer-top-link" onClick={() => scrollToSection("hero")}>{t.footer.backToTop}</button>
         </div>
       </div>
     </footer>

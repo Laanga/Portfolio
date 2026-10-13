@@ -30,8 +30,8 @@ export default function ProjectsSection() {
                 <p className="project-desc">{project.description}</p>
                 <ul className="project-tags">{project.tech.map((tech) => <li key={tech}>{tech}</li>)}</ul>
                 <div className="project-links">
-                  {project.demoUrl && <a className="btn btn-primary" href={project.demoUrl} target="_blank" rel="noreferrer">{t.projects.viewDemo}<span>↗</span></a>}
-                  <a className="btn btn-outline" href={project.codeUrl} target="_blank" rel="noreferrer">{t.projects.viewCode}<span>↗</span></a>
+                  {project.demoUrl && <a className="btn btn-primary" href={project.demoUrl} target="_blank" rel="noreferrer">{t.projects.viewDemo}</a>}
+                  <a className="btn btn-outline" href={project.codeUrl} target="_blank" rel="noreferrer">{t.projects.viewCode}</a>
                 </div>
               </div>
             </article>
