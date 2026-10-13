@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import MythArt from "./MythArt";
 import { useLanguage } from "../i18n/LanguageContext";
 
 export default function ExperienceSection() {
@@ -11,7 +12,7 @@ export default function ExperienceSection() {
       <div className="experience-watermark" aria-hidden="true">{t.experience.watermark}</div>
       <div className="container">
         <div className="experience-head">
-          <div><p className="eyebrow">02 — {t.experience.title}</p><h2 className="section-title">{t.experience.subtitle}</h2></div>
+          <div><p className="eyebrow">III — {t.experience.title}</p><h2 className="section-title">{t.experience.subtitle}</h2></div>
           <div className="experience-index">01</div>
         </div>
         <article className="experience-card">
@@ -19,6 +20,12 @@ export default function ExperienceSection() {
             <p className="mono">{exp.period}</p>
             <h3>{exp.title}</h3>
             <p className="mono">@ {exp.company}</p>
+            <MythArt
+              art="forge"
+              className="experience-art"
+              sizes="(max-width: 900px) 100vw, 36vw"
+              fragments={[{ className: "frag-anvil", at: "48% 40%" }]}
+            />
           </div>
           <ul className="experience-list">{exp.achievements.map((achievement) => <li key={achievement}>{achievement}</li>)}</ul>
         </article>

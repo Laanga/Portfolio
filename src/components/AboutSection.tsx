@@ -28,6 +28,7 @@ import {
 } from "react-icons/si";
 import { FaAws } from "react-icons/fa6";
 import { TbApi, TbBrandOpenai, TbStack2 } from "react-icons/tb";
+import MythArt from "./MythArt";
 import { useLanguage } from "../i18n/LanguageContext";
 
 type Technology = {
@@ -78,38 +79,49 @@ export default function AboutSection() {
   const highlights = t.about.professionalSkills.slice(0, 4);
   return (
     <section id="about" className="section about">
+      <MythArt
+        art="daedalus"
+        className="about-art"
+        sizes="(max-width: 900px) 100vw, 46vw"
+        fragments={[
+          { className: "frag-wing", at: "80% 6%" },
+          { className: "frag-hand", at: "28% 36%" },
+        ]}
+      />
       <div className="container">
         <div className="about-layout">
-          <div>
-            <p className="eyebrow">01 — {t.about.title}</p>
+          <div className="about-main">
+            <p className="eyebrow">II — {t.about.title}</p>
             <h2 className="section-title about-statement">{t.about.statement}<em>.</em></h2>
-          </div>
-          <div className="about-copy body-copy">
-            <p>{t.about.description1}</p>
-            <p>{t.about.description2}</p>
+            <div className="about-copy body-copy">
+              <p>{t.about.description1}</p>
+              <p>{t.about.description2}</p>
+            </div>
           </div>
         </div>
         <div className="skills-grid">
           {highlights.map((skill, i) => <article className="skill" key={skill}><span className="mono">0{i + 1}</span><strong>{skill}</strong></article>)}
         </div>
       </div>
-      <div className="container tech-catalog" aria-label={t.about.stackTitle}>
-        <div className="tech-catalog-head">
-          <p className="eyebrow">{t.about.stackTitle}</p>
-          <p className="body-copy">{t.about.stackDescription}</p>
-        </div>
-        <div className="tech-groups">
-          {[
-            { title: t.about.frontendStackTitle, items: frontend },
-            { title: t.about.backendStackTitle, items: backend },
-            { title: t.about.cloudStackTitle, items: cloud },
-            { title: t.about.aiStackTitle, items: artificialIntelligence },
-          ].map((group, index) => (
-            <section className="tech-group" key={group.title}>
-              <div className="tech-group-title"><span className="mono">0{index + 1}</span><h3>{group.title}</h3></div>
-              <ul>{group.items.map(({ name, icon: Icon }) => <li key={name}><Icon className="tech-icon" aria-hidden="true" /><span>{name}</span></li>)}</ul>
-            </section>
-          ))}
+      <div className="tech-band theme-light">
+        <div className="container tech-catalog" aria-label={t.about.stackTitle}>
+          <div className="tech-catalog-head">
+            <p className="eyebrow">{t.about.stackTitle}</p>
+            <p className="body-copy">{t.about.stackDescription}</p>
+          </div>
+          <div className="tech-groups">
+            {[
+              { title: t.about.frontendStackTitle, items: frontend },
+              { title: t.about.backendStackTitle, items: backend },
+              { title: t.about.cloudStackTitle, items: cloud },
+              { title: t.about.aiStackTitle, items: artificialIntelligence },
+            ].map((group, index) => (
+              <section className="tech-group" key={group.title}>
+                <div className="tech-group-title"><span className="mono">0{index + 1}</span><h3>{group.title}</h3></div>
+                <ul>{group.items.map(({ name, icon: Icon }) => <li key={name}><Icon className="tech-icon" aria-hidden="true" /><span>{name}</span></li>)}</ul>
+              </section>
+            ))}
+          </div>
         </div>
       </div>
     </section>

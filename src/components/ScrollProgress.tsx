@@ -35,7 +35,7 @@ const ScrollProgress: React.FC = () => {
       <div
         ref={progressRef}
         className="h-full origin-left"
-        style={{ transform: "scaleX(0)", background: "var(--blue)" }}
+        style={{ transform: "scaleX(0)", background: "#fff" }}
       />
     </div>
   );

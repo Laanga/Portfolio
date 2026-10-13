@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Download, MapPin } from "./icons";
+import MythArt from "./MythArt";
 import { useLanguage } from "../i18n/LanguageContext";
 
 export default function HeroSection() {
@@ -9,25 +10,34 @@ export default function HeroSection() {
   return (
     <section id="hero" className="hero">
       <div className="hero-stage">
+        <MythArt
+          art="icarus"
+          className="hero-art"
+          priority
+          sizes="(max-width: 900px) 100vw, 60vw"
+          fragments={[
+            { className: "frag-face", at: "22% 24%" },
+            { className: "frag-foot", at: "78% 4%" },
+          ]}
+        />
         <div className="hero-content">
-          <aside className="hero-side hero-side-left" aria-label={t.hero.availability}>
-            <p className="hero-kicker eyebrow reveal">Portfolio / 2026</p>
-            <div className="availability reveal"><i />{t.hero.availability}</div>
-          </aside>
-
-          <div className="hero-title-wrap">
-            <h1 className="hero-name display reveal reveal-delay"><span>ÁLVARO</span><span className="hero-outline">LANGA</span></h1>
+          <div className="hero-meta">
+            <p className="hero-kicker eyebrow">Portfolio / 2026</p>
+            <div className="availability"><i />{t.hero.availability}</div>
+            <p className="hero-location"><MapPin size={13} />{t.profile.location}</p>
           </div>
 
-          <aside className="hero-side hero-side-right reveal reveal-delay-2">
-            <p className="hero-location"><MapPin size={13} />{t.profile.location}</p>
-            <strong>{t.hero.roleLine1}<br />{t.hero.roleLine2}</strong>
-            <p className="mono">React · Next.js · Node.js</p>
-          </aside>
-
-          <div className="hero-bottom">
-            <p className="hero-summary body-copy reveal reveal-delay-2">{t.hero.description}</p>
-            <div className="hero-actions reveal reveal-delay-2">
+          <div className="hero-copy">
+            <p className="hero-chapter mono">I — {t.myth.chapter}</p>
+            <h1 className="hero-name display"><span>ÁLVARO</span><span className="hero-outline">LANGA</span></h1>
+            <div className="hero-terminal">
+              <span className="terminal-prompt" aria-hidden="true">$</span>
+              <span className="terminal-command" aria-hidden="true">{t.hero.terminal}</span>
+              <strong>{t.hero.roleLine1} {t.hero.roleLine2}</strong>
+              <span className="terminal-stack">React · Next.js · Node.js</span>
+            </div>
+            <p className="hero-summary body-copy">{t.hero.description}</p>
+            <div className="hero-actions">
               <a href="/CV-Alvaro-Langa.pdf" download className="btn btn-primary"><Download size={15} />{t.profile.downloadCV}</a>
               <a href={`mailto:${t.profile.email}`} className="btn btn-outline">{t.hero.contact}<span>↗</span></a>
             </div>

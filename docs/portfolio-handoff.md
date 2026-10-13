@@ -82,7 +82,7 @@ My approach focuses on writing clean code and delivering efficient solutions. I'
 ### 8.1 Kata (型)
 - Link: https://katalibrary.vercel.app/
 - Tecnologías: Next.js, Supabase, Tailwind, GSAP, TypeScript
-- Imagen principal (portfolio actual): /images/kata-no.png
+- Imagen principal (portfolio actual): /images/kata.png
 
 #### Descripción ES
 Plataforma Full Stack que permite organizar libros, videojuegos, películas y series en un único espacio. Integra datos en tiempo real de APIs externas (TMDB, IGDB, Google Books) con autenticación de usuarios, dashboard de estadísticas y una interfaz dark mode con animaciones en GSAP y Tailwind CSS.
@@ -143,11 +143,10 @@ Web platform for comprehensive karting competition management: driver registrati
 - Text: Open to collaborations and freelance projects.
 
 ## 11. Recursos descargables y assets
-- CV ES principal: /CV-alvaro-langa-2.0.pdf
-- CV EN: /CV-alvaro-langa-2.0-EN.pdf
-- CV adicional: /CV-Alvaro-Langa.pdf
-- Favicon: /favicon-transparent.svg
-- Imagen de icono portfolio: /icon_portfolio.jpg
+- CV público (sin teléfono): /CV-Alvaro-Langa.pdf
+- Favicon: /favicon.svg (monograma AL)
+- Logo de navegación: /logo-al.svg
+- Ilustraciones: /images/myth/ (ver docs/illustrations.md)
 
 ## 12. Estructura de secciones en el portfolio actual
 1. Hero

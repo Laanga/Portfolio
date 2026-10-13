@@ -17,18 +17,21 @@ export default function ScrollAnimations({ enabled = true }: { enabled?: boolean
       intro
         .fromTo(".nav-shell", { y: -26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.75 })
         .fromTo(".nav-emblem", { scale: 0.78, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.7 }, "-=0.48")
-        .fromTo(".hero-side-left > *", { x: -28, opacity: 0 }, { x: 0, opacity: 1, duration: 0.7, stagger: 0.1 }, "-=0.35")
-        .fromTo(".hero-name > span", { yPercent: 105, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 1.05, stagger: 0.11, ease: "power4.out" }, "-=0.5")
-        .fromTo(".hero-side-right", { x: 28, opacity: 0 }, { x: 0, opacity: 1, duration: 0.75 }, "-=0.65")
-        .fromTo(".hero-summary", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, "-=0.5")
-        .fromTo(".hero-actions > *", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.1 }, "-=0.42");
+        .fromTo(".hero-meta > *", { y: -14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.08 }, "-=0.35")
+        .fromTo(".hero-chapter", { x: -24, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6 }, "-=0.3")
+        .fromTo(".hero-name > span", { yPercent: 105, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 1.05, stagger: 0.11, ease: "power4.out" }, "-=0.45")
+        .fromTo(".hero-terminal, .hero-summary", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, stagger: 0.08 }, "-=0.6")
+        .fromTo(".hero-actions > *", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.1 }, "-=0.5");
 
-      gsap.to(".hero-content", {
-        yPercent: -5,
-        opacity: 0,
-        ease: "none",
-        scrollTrigger: { trigger: "#hero", start: "top top", end: "75% top", scrub: 1 },
-      });
+      // On mobile the Icarus plate sits below the fold, so only fade the hero out on desktop
+      if (window.matchMedia("(min-width: 901px)").matches) {
+        gsap.to(".hero-content", {
+          yPercent: -5,
+          opacity: 0,
+          ease: "none",
+          scrollTrigger: { trigger: "#hero", start: "top top", end: "75% top", scrub: 1 },
+        });
+      }
 
       const reveal = (
         trigger: string,
@@ -58,9 +61,25 @@ export default function ScrollAnimations({ enabled = true }: { enabled?: boolean
       reveal("#experience", ".experience-head > *", { stagger: 0.14 });
       reveal(".experience-card", ".experience-role, .experience-list li", { fromY: 40, stagger: 0.1 });
       reveal("#projects", ".projects-head > *", { stagger: 0.16 });
-      reveal(".project-list", ".project-row", { fromY: 70, stagger: 0.12, duration: 1.05 });
+      reveal(".project-list", ".project", { fromY: 70, stagger: 0.12, duration: 1.05 });
       reveal("#education", ".education-row > *", { fromY: 36, stagger: 0.12 });
-      reveal("#footer", ".footer-top > *, .footer-title, .footer-description, .footer-email", { fromY: 48, stagger: 0.1 });
+      reveal("#footer", ".footer-top > *, .footer-title, .footer-epigraph, .footer-terminal, .footer-actions", { fromY: 48, stagger: 0.1 });
+      reveal(".footer-columns", ".footer-columns > *", { fromY: 32, stagger: 0.08 });
+
+      // Illustrations stay put; they only drift slightly for depth
+      gsap.utils.toArray<HTMLElement>(".about-art, .experience-art, .footer-art").forEach((art) => {
+        gsap.fromTo(art, { yPercent: -4 }, {
+          yPercent: 4,
+          ease: "none",
+          scrollTrigger: { trigger: art, start: "top bottom", end: "bottom top", scrub: 1.2 },
+        });
+      });
+      gsap.fromTo(".footer-wordmark", { yPercent: 40, opacity: 0 }, {
+        yPercent: 0,
+        opacity: 1,
+        ease: "none",
+        scrollTrigger: { trigger: ".footer-wordmark", start: "top bottom", end: "bottom 85%", scrub: 1 },
+      });
 
       gsap.to(".experience-watermark", {
         xPercent: -10,
@@ -68,11 +87,11 @@ export default function ScrollAnimations({ enabled = true }: { enabled?: boolean
         scrollTrigger: { trigger: "#experience", start: "top bottom", end: "bottom top", scrub: 1.2 },
       });
 
-      gsap.utils.toArray<HTMLElement>(".project-visual img").forEach((image) => {
+      gsap.utils.toArray<HTMLElement>(".project-media img").forEach((image) => {
         gsap.fromTo(image, { yPercent: -4 }, {
           yPercent: 5,
           ease: "none",
-          scrollTrigger: { trigger: image.closest(".project-row"), start: "top bottom", end: "bottom top", scrub: 1.1 },
+          scrollTrigger: { trigger: image.closest(".project"), start: "top bottom", end: "bottom top", scrub: 1.1 },
         });
       });
     }, document.body);

@@ -1,5 +1,8 @@
-<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="7" y="7" width="114" height="114" stroke="#0000F2" stroke-width="6"/>
-  <path fill-rule="evenodd" clip-rule="evenodd" d="M42 29H72V99H57V76H38L31.5 99H17L42 29ZM42 62H57V42H49L42 62Z" fill="#0000F2"/>
-  <path d="M68 29H84V84H109V99H68V29Z" fill="#0000F2"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="10.6 10.5 42 42" fill="#0000F2">
+  <!-- AL monogram, Roman-inscription style: a thin diagonal, and a thick stem that turns into the L -->
+  <polygon points="28.6,13 31.8,13 19.4,50 15.2,50"/>
+  <polygon points="28.6,13 36.4,13 36.4,45 49,45 49,41.5 51.4,41.5 51.4,50 28.6,50"/>
+  <polygon points="23.2,36.6 28.6,36.6 28.6,39.8 22.2,39.8"/>
+  <polygon points="11.8,48.4 22.2,48.4 22.2,50 11.8,50"/>
+  <polygon points="25.4,48.4 28.6,48.4 28.6,50 25.4,50"/>
 </svg>

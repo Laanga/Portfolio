@@ -5,37 +5,29 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 - `npm run dev` — Start Next.js dev server at http://localhost:3000
-- `npm run build` — Production build (Next.js 15, React 19)
+- `npm run build` — Production build (Next.js 16, React 19)
 - `npm run start` — Run the built app
 - `npm run lint` — ESLint with `next/core-web-vitals` + `next/typescript`
 
-Note: `next.config.ts` sets `eslint.ignoreDuringBuilds: true`, so `npm run build` will not catch lint regressions — run `npm run lint` separately.
+Note: `npm run build` does not run ESLint — run `npm run lint` separately.
 
 TypeScript path alias: `@/*` → `./src/*`.
 
 ## Architecture
 
-Single-page bilingual (ES/EN) portfolio built on the Next.js App Router. The whole app is client-side: `src/app/layout.tsx` and `src/app/page.tsx` are both `"use client"`, and there is no `metadata` export — title and meta description are set imperatively in `<head>` and then live-updated by `useDocumentLanguage` based on the active language.
+Single-page bilingual (ES/EN) portfolio built on the Next.js App Router. `src/app/layout.tsx` is a server component that exports the default `metadata` and loads the `Barlow_Condensed` font (`--font-hermes`); everything below it is client-side, and `useDocumentLanguage` live-updates `<html lang>`, `<title>` and the meta description when the language changes.
 
 ### Page composition
 
 `src/app/page.tsx` renders the section sequence: `Navigation` → `HeroSection` → `AboutSection` → `ExperienceSection` → `ProjectsSection` → `EducationSection` → `Footer`. Each section is a self-contained component under `src/components/` that pulls its copy from the i18n layer.
 
-### Global chrome (mounted in `layout.tsx`)
+### Global chrome
 
-`LayoutContent` wraps `children` with several siblings that must remain in this order to layer correctly:
-
-1. `LoadingScreen` (conditional, dismisses via `onLoadingComplete`)
-2. `SmoothScroll` provides Lenis + GSAP integration via `LenisContext`
-3. Inside `SmoothScroll`: `SectionBackgrounds` (animated page bg), `PremiumBackground`, `CustomCursor`, `ScrollProgress`, a `.noise` overlay, then the page content, then `<Analytics />` from `@vercel/analytics/next`
-
-`LanguageProvider` wraps `LayoutContent` so language is available everywhere, and `useDocumentLanguage` (called inside `LayoutContent`) syncs `<html lang>`, `<title>` and meta description on every language change.
+`AppProviders` (mounted in `layout.tsx`) wraps everything in `LanguageProvider`, then `SmoothScroll` (Lenis + GSAP via `LenisContext`), `ScrollProgress`, a `.noise` overlay, the page, and `<Analytics />` on Vercel. `page.tsx` shows `LoadingScreen` (0→100 counter over the Creation of Adam hands) and keeps the site `inert` until it finishes; `ScrollAnimations` owns every GSAP intro, reveal and parallax.
 
 ### Smooth scroll + animation system
 
-`SmoothScroll` dynamically imports `lenis` (graceful fallback to native scroll if import fails), and wires Lenis's `scroll` event to `ScrollTrigger.update` plus its `raf` into `gsap.ticker`. Components that animate on scroll must `gsap.registerPlugin(ScrollTrigger)` inside a `typeof window !== "undefined"` guard at module scope — this pattern is repeated in every animated component (e.g. `SmoothScroll.tsx`, `SectionBackgrounds.tsx`, `ProjectsSection.tsx`). Inside components, wrap GSAP setup in `gsap.context(() => { ... })` and return cleanup that kills ScrollTriggers — otherwise scroll triggers leak across re-renders.
-
-`SectionBackgrounds` is the source of truth for the page background color per section: it looks up DOM IDs (`hero`, `about`, `experience`, `projects`, `education`, `footer`) and tweens the fixed bg between values in its `sectionColors` map. If you add a new section, give it one of those IDs (or extend the map) or the background will not transition into it.
+`SmoothScroll` dynamically imports `lenis` (graceful fallback to native scroll if import fails), and wires Lenis's `scroll` event to `ScrollTrigger.update` plus its `raf` into `gsap.ticker`. Components that animate on scroll must `gsap.registerPlugin(ScrollTrigger)` inside a `typeof window !== "undefined"` guard at module scope — this pattern is used in `SmoothScroll.tsx` and `ScrollAnimations.tsx`. Inside components, wrap GSAP setup in `gsap.context(() => { ... })` and return cleanup that kills ScrollTriggers — otherwise scroll triggers leak across re-renders.
 
 ### Internationalization
 
@@ -51,20 +43,25 @@ All user-facing text must come from `translations.ts` — never hardcode Spanish
 
 ### Styling
 
-- Tailwind v4 via `@tailwindcss/postcss` (no `tailwind.config`; configuration lives in `globals.css`).
-- `src/app/globals.css` defines all design tokens as CSS custom properties (`--color-*`, `--ease-*`, etc.) and utility classes (`.container`, `.section`, `.btn`, `.btn-primary`, `.btn-ghost`, `.link-hover`, `.text-display`, `.text-heading`, `.text-mono`, `.noise`, `.orb`).
-- Theme is light. `prefers-reduced-motion: reduce` is globally honored (animation durations clamped to 0.01ms).
-- The custom cursor toggles `html.custom-cursor-active` to set `cursor: none` everywhere — only enable on desktop and when reduced motion is not requested (logic already in `CustomCursor.tsx`).
+- Tailwind v4 via `@tailwindcss/postcss` (no `tailwind.config`); almost all styling is hand-written CSS in `src/app/globals.css`.
+- Visual direction: Hermes-like electric blue (`--blue: #0000f2`) with white type. Sections that carry an illustration are blue; sections without one (tech stack, projects, education) use `.theme-light`, which swaps to `--paper` with blue type by redefining `--line`/`--muted`/`--faint`.
+- Fluid sizing: the root font size and `--container` grow with the viewport, so the layout fills large monitors — size things in `rem`, not `px`.
+- `prefers-reduced-motion: reduce` is globally honored (animation durations clamped to 0.01ms).
+
+### Illustrations
+
+Greek-mythology art (public-domain engravings and sculptures) dithered to white pixels on transparent PNGs in `public/images/myth/`, rendered with `MythArt` (image + scanlines + floating "FRAG" zoom windows). They are generated by `scripts/illustrations/treat.py` from `scripts/illustrations/jobs.json`; sources and licences are listed in `docs/illustrations.md`. Logo and favicon are hand-written SVGs (`public/logo-al.svg`, `public/favicon.svg`); the nav uses the logo as a CSS mask so it takes the text colour.
 
 ### Assets
 
-Public assets used by the app: `/CV-alvaro-langa-2.0.pdf`, `/CV-alvaro-langa-2.0-EN.pdf`, `/logoPersonal-removebg-preview.png` (favicon), project images under `/public/images/` (`kata-no.png`, `f1.png`, `kart.png`, etc.). Project URLs and image paths are hard-coded inside `ProjectsSection.tsx` rather than in translations.
+`/CV-Alvaro-Langa.pdf` (public CV, served with `X-Robots-Tag: noindex`), project images under `/public/images/` (`kata.png`, `icon.png`, `kart.png`). Project URLs and image paths are hard-coded inside `ProjectsSection.tsx` rather than in translations.
 
 ## Reference docs in the repo
 
 - `docs/portfolio-handoff.md` — canonical content source (profile, bio, project descriptions, stack); update this in sync with `translations.ts`.
 - `docs/performance-audit.md` — performance notes.
-- `DESIGN.md` — design system reference (Apple-inspired light theme tokens, type scale, spacing).
+- `docs/illustrations.md` — illustration sources, licences and how to regenerate them.
+- `DESIGN.md` — earlier design-system notes (predates the blue Hermes-style redesign).
 
 <!-- BEGIN:nextjs-agent-rules -->
 

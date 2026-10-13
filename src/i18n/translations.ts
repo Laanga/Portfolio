@@ -112,7 +112,8 @@ export const es = {
     contact: "Contacto",
     availability: "Abierto a nuevas oportunidades",
     roleLine1: "DESARROLLADOR",
-    roleLine2: "FULL STACK"
+    roleLine2: "FULL STACK",
+    terminal: "whoami"
   },
 
   // Footer
@@ -125,7 +126,29 @@ export const es = {
     locationLabel: "MADRID / ESPAÑA",
     remoteAvailability: "DISPONIBLE EN REMOTO",
     ctaLine1: "CONSTRUYAMOS",
-    ctaLine2: "ALGO."
+    ctaLine2: "ALGO.",
+    writeMe: "Escríbeme",
+    copyEmail: "Copiar email",
+    copied: "Copiado",
+    terminalCommand: "mail --to",
+    indexTitle: "Índice",
+    contactTitle: "Contacto",
+    statusTitle: "Estado",
+    home: "Inicio",
+    backToTop: "Volver arriba",
+    epigraph: "Dédalo construyó unas alas para salir del laberinto. Yo construyo productos para salir de los tuyos.",
+    madeIn: "Hecho en Madrid"
+  },
+
+  // Greek mythology illustrations
+  myth: {
+    chapter: "El oficio de Dédalo",
+    art: {
+      icarus: "Grabado de Ícaro cayendo del cielo, de Hendrick Goltzius (1588)",
+      daedalus: "Grabado de Dédalo ajustando las alas a Ícaro antes de enseñarle a volar",
+      forge: "Grabado de la fragua de Vulcano, con herreros golpeando el yunque, de Francesco Primaticcio",
+      apollo: "Cabeza esculpida del Apolo de Belvedere"
+    }
   }
 } as const;
 
@@ -243,7 +266,8 @@ export const en = {
     contact: "Contact",
     availability: "Open to new opportunities",
     roleLine1: "FULL STACK",
-    roleLine2: "DEVELOPER"
+    roleLine2: "DEVELOPER",
+    terminal: "whoami"
   },
 
   // Footer
@@ -256,7 +280,29 @@ export const en = {
     locationLabel: "MADRID / SPAIN",
     remoteAvailability: "AVAILABLE REMOTELY",
     ctaLine1: "LET’S BUILD",
-    ctaLine2: "SOMETHING."
+    ctaLine2: "SOMETHING.",
+    writeMe: "Write to me",
+    copyEmail: "Copy email",
+    copied: "Copied",
+    terminalCommand: "mail --to",
+    indexTitle: "Index",
+    contactTitle: "Contact",
+    statusTitle: "Status",
+    home: "Home",
+    backToTop: "Back to top",
+    epigraph: "Daedalus built wings to escape the labyrinth. I build products to get you out of yours.",
+    madeIn: "Made in Madrid"
+  },
+
+  // Greek mythology illustrations
+  myth: {
+    chapter: "The craft of Daedalus",
+    art: {
+      icarus: "Engraving of Icarus falling from the sky, by Hendrick Goltzius (1588)",
+      daedalus: "Engraving of Daedalus fitting wings to Icarus before teaching him to fly",
+      forge: "Engraving of Vulcan's forge, with smiths striking the anvil, by Francesco Primaticcio",
+      apollo: "Sculpted head of the Apollo Belvedere"
+    }
   }
 } as const;
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { memo, useEffect, useRef } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 
 interface LoadingScreenProps {
@@ -93,6 +94,9 @@ function LoadingScreen({ onReveal, onComplete }: LoadingScreenProps) {
       aria-valuemax={100}
       aria-valuenow={0}
     >
+      <div className="loading-art" aria-hidden="true">
+        <Image src="/images/myth/hands.png" alt="" width={1600} height={518} sizes="96vw" unoptimized preload />
+      </div>
       <div className="loading-top mono">
         <span>ÁLVARO LANGA</span>
         <span>PORTFOLIO / 2026</span>
