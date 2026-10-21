@@ -28,19 +28,25 @@ export default function Navigation() {
   const leftItems = items.slice(0, 2);
   const rightItems = items.slice(2);
 
+  // A 1px observer line 180px below the top marks the active section, without reading layout on every scroll frame
   useEffect(() => {
-    const update = () => {
-      const y = window.scrollY + 180;
-      let next = "hero";
-      items.forEach(({ id }) => {
-        const el = document.getElementById(id);
-        if (el && y >= el.offsetTop) next = id;
-      });
-      setActive(next);
+    const sections = ["hero", ...items.map(({ id }) => id)]
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+    let observer: IntersectionObserver | null = null;
+    const observe = () => {
+      observer?.disconnect();
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => { if (entry.isIntersecting) setActive(entry.target.id); });
+      }, { rootMargin: `-180px 0px -${Math.max(0, window.innerHeight - 181)}px 0px` });
+      sections.forEach((section) => observer?.observe(section));
     };
-    window.addEventListener("scroll", update, { passive: true });
-    update();
-    return () => window.removeEventListener("scroll", update);
+    observe();
+    window.addEventListener("resize", observe);
+    return () => {
+      window.removeEventListener("resize", observe);
+      observer?.disconnect();
+    };
   }, [items]);
 
   // Hide the header while scrolling down, bring it back as soon as the user scrolls up

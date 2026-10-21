@@ -96,14 +96,11 @@ export default function ScrollAnimations({ enabled = true }: { enabled?: boolean
       });
     }, document.body);
 
-    const syncScroll = () => ScrollTrigger.update();
-    window.addEventListener("scroll", syncScroll, { passive: true });
     const refresh = window.setTimeout(() => {
       ScrollTrigger.refresh();
       ScrollTrigger.update();
     }, 250);
     return () => {
-      window.removeEventListener("scroll", syncScroll);
       window.clearTimeout(refresh);
       ctx.revert();
     };

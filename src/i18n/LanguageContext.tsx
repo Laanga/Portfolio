@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useCallback, useContext, useSyncExternalStore } from 'react';
+import React, { createContext, useCallback, useContext, useMemo, useSyncExternalStore } from 'react';
 import { es, en, Language } from './translations';
 
 interface LanguageContextType {
@@ -107,10 +107,13 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     updateLanguage(lang);
   }, []);
 
-  const translations = language === 'es' ? es : en;
+  const value = useMemo(
+    () => ({ language, t: language === 'es' ? es : en, setLanguage }),
+    [language, setLanguage],
+  );
 
   return (
-    <LanguageContext.Provider value={{ language, t: translations, setLanguage }}>
+    <LanguageContext.Provider value={value}>
       {children}
     </LanguageContext.Provider>
   );

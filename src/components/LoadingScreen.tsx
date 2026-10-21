@@ -32,7 +32,7 @@ function LoadingScreen({ onReveal, onComplete }: LoadingScreenProps) {
 
     const duration = 2150;
     const startedAt = performance.now();
-    let intervalId = 0;
+    let frameId = 0;
     let exitFallback = 0;
     let exitTimeline: gsap.core.Timeline | null = null;
     let hasRevealed = false;
@@ -55,7 +55,7 @@ function LoadingScreen({ onReveal, onComplete }: LoadingScreenProps) {
     const revealAndExit = () => {
       if (hasRevealed) return;
       hasRevealed = true;
-      window.clearInterval(intervalId);
+      window.cancelAnimationFrame(frameId);
       renderProgress(1);
       onReveal();
 
@@ -71,13 +71,13 @@ function LoadingScreen({ onReveal, onComplete }: LoadingScreenProps) {
       const eased = linear * linear * (3 - 2 * linear);
       renderProgress(eased);
       if (linear >= 1) revealAndExit();
+      else frameId = window.requestAnimationFrame(tick);
     };
 
     tick();
-    intervalId = window.setInterval(tick, 32);
 
     return () => {
-      window.clearInterval(intervalId);
+      window.cancelAnimationFrame(frameId);
       window.clearTimeout(exitFallback);
       exitTimeline?.kill();
       document.body.style.overflow = previousOverflow;

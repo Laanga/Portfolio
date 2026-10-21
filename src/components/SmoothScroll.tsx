@@ -8,6 +8,7 @@ import Lenis from "lenis";
 // Registrar el plugin de GSAP
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({ ignoreMobileResize: true });
 }
 
 // Context para acceder a Lenis desde cualquier componente
