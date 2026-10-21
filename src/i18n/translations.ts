@@ -17,23 +17,22 @@ export const es = {
   // About section
   about: {
     title: "Sobre mí",
-    statement: "Convierto necesidades reales en productos web listos para producción",
+    statement: "Construyo productos web reales, con la IA trabajando a mi lado",
     description1: "Actualmente trabajo como Desarrollador de Software en Neural.ONE, desarrollando landing pages, aplicaciones web y formatos interactivos para clientes del sector publicitario.",
-    description2: "Trabajo principalmente con React, Next.js, Node.js y Python. Combino frontend, backend y automatización para entregar con rapidez, manteniendo el control técnico y la calidad del código.",
+    description2: "Mi día a día es React, Next.js, Node.js y Python, con la IA integrada en todo el proceso: uso Claude Code y Codex para planificar, programar, revisar y refactorizar, y he creado skills propias que automatizan el trabajo repetitivo. La IA acelera; las decisiones técnicas y la calidad las sigo controlando yo.",
     professionalSkillsTitle: "Habilidades Profesionales",
     stackTitle: "Stack Tecnológico",
-    stackDescription: "Tecnologías que utilizo para diseñar, construir, automatizar y desplegar productos digitales completos.",
+    stackDescription: "Tecnologías con las que diseño, construyo, automatizo y despliego productos digitales completos, con agentes de IA en todo el ciclo.",
     frontendStackTitle: "Frontend",
     backendStackTitle: "Backend",
     cloudStackTitle: "Cloud / DevOps & Tooling",
-    aiStackTitle: "IA y automatización",
+    aiStackTitle: "IA y agentes",
     professionalSkills: [
       "Interfaces con React y Next.js",
-      "APIs REST con Node.js",
+      "APIs y backend con Node.js",
+      "Desarrollo con agentes de IA",
       "Automatización con Python",
       "Tracking y analítica digital",
-      "Control de versiones",
-      "Automatización",
       "Despliegue y CI/CD"
     ]
   },
@@ -51,7 +50,7 @@ export const es = {
         achievements: [
           "Desarrollo de landing pages y aplicaciones web con React y Node.js, entregadas en ciclos de 1 a 2 semanas con revisión directa del cliente",
           "Estandarización de la estructura base de banners rich media, reduciendo aproximadamente un 60 % los errores de renderizado",
-          "Automatización de tareas de trafficking mediante scripts de Python, ahorrando aproximadamente 5 horas semanales de trabajo manual",
+          "Automatización del trafficking de campañas con scripts de Python y skills propias de Claude Code (subida de creatividades a S3, montaje de VAST y validación de configuraciones), ahorrando aproximadamente 5 horas semanales de trabajo manual",
           "Implementación de tracking y analítica para medir conversión y rendimiento de campañas digitales"
         ]
       }
@@ -108,7 +107,7 @@ export const es = {
 
   // Hero section
   hero: {
-    description: "Desarrollador Full Stack con experiencia profesional en publicidad digital y proyectos propios en producción. Construyo aplicaciones con React, Next.js y Node.js, desde la interfaz hasta APIs y automatizaciones.",
+    description: "Desarrollador Full Stack que trabaja con agentes de IA a diario. Construyo con React, Next.js y Node.js, y uso Claude Code y Codex para llevar ideas a producción más rápido, sin perder el control del código.",
     contact: "Contacto",
     availability: "Abierto a nuevas oportunidades",
     roleLine1: "DESARROLLADOR",
@@ -171,23 +170,22 @@ export const en = {
   // About section
   about: {
     title: "About Me",
-    statement: "I turn real-world needs into production-ready web products",
+    statement: "I build real web products, with AI working alongside me",
     description1: "I currently work as a Software Developer at Neural.ONE, building landing pages, web applications and interactive formats for clients in the advertising industry.",
-    description2: "I work primarily with React, Next.js, Node.js and Python. I combine frontend, backend and automation to deliver quickly while maintaining technical control and code quality.",
+    description2: "My day-to-day is React, Next.js, Node.js and Python, with AI built into the whole process: I use Claude Code and Codex to plan, write, review and refactor code, and I have built my own skills that automate repetitive work. AI speeds things up; technical decisions and quality stay with me.",
     professionalSkillsTitle: "Professional Skills",
     stackTitle: "Tech Stack",
-    stackDescription: "Technologies I use to design, build, automate and deploy complete digital products.",
+    stackDescription: "Technologies I use to design, build, automate and deploy complete digital products, with AI agents across the whole cycle.",
     frontendStackTitle: "Frontend",
     backendStackTitle: "Backend",
     cloudStackTitle: "Cloud / DevOps & Tooling",
-    aiStackTitle: "AI & Automation",
+    aiStackTitle: "AI & Agents",
     professionalSkills: [
       "React & Next.js Interfaces",
-      "REST APIs with Node.js",
+      "APIs & Backend with Node.js",
+      "AI Agent-Driven Development",
       "Python Automation",
       "Tracking & Digital Analytics",
-      "Version Control",
-      "Automation",
       "Deployment & CI/CD"
     ]
   },
@@ -205,7 +203,7 @@ export const en = {
         achievements: [
           "Built landing pages and web applications with React and Node.js, delivering in 1 to 2-week cycles with direct client reviews",
           "Standardized the base structure for rich media banners, reducing rendering issues by approximately 60%",
-          "Automated trafficking workflows with Python scripts, saving approximately 5 hours of manual work per week",
+          "Automated campaign trafficking with Python scripts and custom Claude Code skills (uploading creatives to S3, building VAST tags and validating configurations), saving approximately 5 hours of manual work per week",
           "Implemented tracking and analytics to measure conversion and digital campaign performance"
         ]
       }
@@ -262,7 +260,7 @@ export const en = {
 
   // Hero section
   hero: {
-    description: "Full Stack Developer with professional experience in digital advertising and personal projects running in production. I build React, Next.js and Node.js applications across interfaces, APIs and automation.",
+    description: "Full Stack Developer who works with AI agents every day. I build with React, Next.js and Node.js, and use Claude Code and Codex to take ideas to production faster without losing control of the code.",
     contact: "Contact",
     availability: "Open to new opportunities",
     roleLine1: "FULL STACK",

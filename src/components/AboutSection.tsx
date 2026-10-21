@@ -68,10 +68,10 @@ const cloud: Technology[] = [
 ];
 
 const artificialIntelligence: Technology[] = [
-  { name: "Codex", icon: TbBrandOpenai },
   { name: "Claude Code", icon: SiClaude },
-  { name: "n8n", icon: SiN8N },
+  { name: "Codex", icon: TbBrandOpenai },
   { name: "GitHub Copilot", icon: SiGithubcopilot },
+  { name: "n8n", icon: SiN8N },
 ];
 
 export default function AboutSection() {
