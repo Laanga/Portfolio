@@ -222,7 +222,11 @@ export default function Navigation() {
 
   const scrollToSection = (id: string) => {
     const target = `#${id}`;
-    if (lenis) lenis.scrollTo(target, { offset: -80, duration: 1.1 });
+    // Longer trips get more time (1.4s–2.8s) and an ease-in-out curve so the jump never feels abrupt
+    const distance = Math.abs(document.querySelector<HTMLElement>(target)?.getBoundingClientRect().top ?? 0);
+    const duration = Math.min(2.8, Math.max(1.4, distance / 2000));
+    const easeInOutCubic = (x: number) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+    if (lenis) lenis.scrollTo(target, { offset: -80, duration, easing: easeInOutCubic });
     else document.querySelector(target)?.scrollIntoView({ behavior: "smooth" });
   };
 
