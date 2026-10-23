@@ -94,7 +94,7 @@ export default function Footer() {
               <li><a href={`mailto:${t.footer.email}`}>Email</a></li>
               <li><a href="https://www.linkedin.com/in/alvaro-langa-dev/" target="_blank" rel="noreferrer">LinkedIn</a></li>
               <li><a href="https://github.com/Laanga" target="_blank" rel="noreferrer">GitHub</a></li>
-              <li><a href="/CV-Alvaro-Langa.pdf" download>{t.profile.downloadCV}</a></li>
+              <li><a href={t.profile.cvPath} download>{t.profile.downloadCV}</a></li>
             </ul>
           </div>
           <div>

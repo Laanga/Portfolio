@@ -151,7 +151,7 @@ Web platform for comprehensive karting competition management: driver registrati
 - Text: Open to collaborations and freelance projects.
 
 ## 11. Recursos descargables y assets
-- CV público (sin teléfono): /CV-Alvaro-Langa.pdf
+- CV público (sin teléfono): /CV-Alvaro-Langa.pdf (ES) y /CV-Alvaro-Langa-EN.pdf (EN). Se generan desde las fuentes LaTeX en ~/CV con ~/CV/build.sh
 - Favicon: /favicon.svg (monograma AL)
 - Logo de navegación: /logo-al.svg
 - Ilustraciones: /images/myth/ (ver docs/illustrations.md)

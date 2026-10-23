@@ -102,6 +102,7 @@ export const es = {
     jobTitle: "Desarrollador de Software",
     location: "Madrid, España",
     downloadCV: "Descargar CV",
+    cvPath: "/CV-Alvaro-Langa.pdf",
     email: "alvarolanga04@gmail.com"
   },
 
@@ -255,6 +256,7 @@ export const en = {
     jobTitle: "Software Developer",
     location: "Madrid, Spain",
     downloadCV: "Download CV",
+    cvPath: "/CV-Alvaro-Langa-EN.pdf",
     email: "alvarolanga04@gmail.com"
   },
 

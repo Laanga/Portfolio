@@ -39,11 +39,11 @@ const nextConfig: NextConfig = {
         source: "/:path*",
         headers: securityHeaders,
       },
-      {
-        // Keep the CV out of search engine indexes
-        source: "/CV-Alvaro-Langa.pdf",
+      // Keep the CVs (ES / EN) out of search engine indexes
+      ...["/CV-Alvaro-Langa.pdf", "/CV-Alvaro-Langa-EN.pdf"].map((source) => ({
+        source,
         headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" }],
-      },
+      })),
     ];
   },
 };

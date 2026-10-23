@@ -58,7 +58,7 @@ Production domain is `https://www.laanga.xyz` (apex redirects to `www`); it live
 
 ### Assets
 
-`/CV-Alvaro-Langa.pdf` (public CV, served with `X-Robots-Tag: noindex`), project images under `/public/images/` (`kata.png`, `icon.png`, `kart.png`). Project URLs and image paths are hard-coded inside `ProjectsSection.tsx` rather than in translations.
+`/CV-Alvaro-Langa.pdf` and `/CV-Alvaro-Langa-EN.pdf` (public CVs without phone number, served with `X-Robots-Tag: noindex`; the download buttons pick one via `t.profile.cvPath`). They are built from LaTeX sources outside this repo (`~/CV`, `~/CV/build.sh`) — don't hand-edit the PDFs, project images under `/public/images/` (`kata.png`, `icon.png`, `kart.png`). Project URLs and image paths are hard-coded inside `ProjectsSection.tsx` rather than in translations.
 
 ## Reference docs in the repo
 

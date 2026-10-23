@@ -38,7 +38,7 @@ export default function HeroSection() {
             </div>
             <p className="hero-summary body-copy">{t.hero.description}</p>
             <div className="hero-actions">
-              <a href="/CV-Alvaro-Langa.pdf" download className="btn btn-primary"><Download size={15} />{t.profile.downloadCV}</a>
+              <a href={t.profile.cvPath} download className="btn btn-primary"><Download size={15} />{t.profile.downloadCV}</a>
               <a href={`mailto:${t.profile.email}`} className="btn btn-outline">{t.hero.contact}</a>
             </div>
           </div>
