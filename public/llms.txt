@@ -1,0 +1,34 @@
+# Álvaro Langa
+
+> Full Stack Developer based in Madrid, Spain. Builds web products with React, Next.js, Node.js and Python, and works with AI coding agents (Claude Code, Codex) every day. Currently Software Developer at Neural.ONE. Open to new opportunities, including remote roles.
+
+This site (https://www.laanga.xyz) is Álvaro's bilingual (Spanish / English) portfolio. Spanish: desarrollador Full Stack en Madrid.
+
+## Contact
+
+- Email: alvarolanga04@gmail.com
+- LinkedIn: https://www.linkedin.com/in/alvaro-langa-dev/
+- GitHub: https://github.com/Laanga
+- Location: Madrid, Spain (available for remote work)
+- Languages: Spanish (native), English (B2)
+
+## Experience
+
+- Software Developer at Neural.ONE (March 2025 - present). Landing pages and web applications with React and Node.js delivered in 1-2 week cycles; standardized rich media banner structure (~60% fewer rendering issues); automated campaign trafficking with Python scripts and custom Claude Code skills (S3 uploads, VAST tags, config validation), saving ~5 hours of manual work per week; tracking and analytics for conversion and campaign performance.
+
+## Projects
+
+- [Kata (型)](https://katalibrary.vercel.app/): Full Stack platform for organizing books, video games, movies and series, with authentication and Supabase (PostgreSQL). Integrates TMDB, IGDB and Google Books. Code: https://github.com/Laanga/kata
+- [DeltaZero](https://delta-zero.vercel.app): Formula 1 analysis dashboard with comparative telemetry for up to five drivers, synchronized circuit map and tyre strategy analysis, built on OpenF1 and Jolpica with Next.js and TypeScript. Code: https://github.com/Laanga/DeltaZero
+- [GridRush](https://github.com/Laanga/GridRush): Web platform for managing karting competitions (registration, races, real-time standings). React frontend with a Node.js + Express REST API.
+
+## Skills
+
+- Frontend: React, Next.js, TypeScript, JavaScript, HTML, CSS, Tailwind CSS, TanStack Query, Zustand
+- Backend: Node.js, Express, Python, Java, MySQL, PostgreSQL, Supabase, REST APIs
+- Cloud / DevOps: Docker, Amazon S3, GitHub, GitHub Actions, Vercel
+- AI & agents: Claude Code, Codex, GitHub Copilot, n8n
+
+## Education
+
+- Higher Degree in Web Application Development (Grado Superior DAW), IES Gaspar Melchor de Jovellanos, Fuenlabrada, Madrid (2023 - 2025)
