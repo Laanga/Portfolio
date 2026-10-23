@@ -65,7 +65,7 @@ export const es = {
       title: "Grado Superior en Desarrollo de Aplicaciones Web",
       institution: "I.E.S GASPAR MELCHOR DE JOVELLANOS",
       date: "Septiembre 2023 - Junio 2025",
-      location: "Fuenlabrada, Madrid"
+      location: "Madrid"
     },
     languagesLabel: "Idiomas",
     languages: "Español nativo · Inglés B2"
@@ -218,7 +218,7 @@ export const en = {
       title: "Higher Degree in Web Application Development",
       institution: "I.E.S GASPAR MELCHOR DE JOVELLANOS",
       date: "September 2023 - June 2025",
-      location: "Fuenlabrada, Madrid"
+      location: "Madrid"
     },
     languagesLabel: "Languages",
     languages: "Native Spanish · English B2"

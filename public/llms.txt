@@ -31,4 +31,4 @@ This site (https://www.laanga.xyz) is Álvaro's bilingual (Spanish / English) po
 
 ## Education
 
-- Higher Degree in Web Application Development (Grado Superior DAW), IES Gaspar Melchor de Jovellanos, Fuenlabrada, Madrid (2023 - 2025)
+- Higher Degree in Web Application Development (Grado Superior DAW), IES Gaspar Melchor de Jovellanos, Madrid (2023 - 2025)
