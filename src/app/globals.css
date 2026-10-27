@@ -123,8 +123,9 @@ button { font: inherit; }
 
 /* Hero */
 .hero { position: relative; min-height: 100svh; padding: 84px 0 0; overflow: hidden; background: radial-gradient(circle at 74% 46%, var(--glow) 0, transparent 34%); }
-/* Minimal contact links in the top-right corner, level with the floating nav; they scroll away with the hero */
-.hero-social { position: absolute; z-index: 3; top: 14px; right: calc((100% - var(--container)) / 2); height: 52px; display: flex; align-items: center; gap: clamp(1rem,1.6vw,1.6rem); margin: 0; padding: 0; list-style: none; }
+/* Minimal contact links in one row, pinned to the top-right corner level with the floating nav; they scroll away with the hero */
+.hero-social { position: absolute; z-index: 3; top: 14px; right: clamp(16px,2vw,2.5rem); height: 52px; display: flex; flex-direction: row; align-items: center; gap: clamp(1rem,1.6vw,1.6rem); margin: 0; padding: 0; list-style: none; white-space: nowrap; }
+.hero-social li { display: block; }
 .hero-stage { position: relative; min-height: calc(100svh - 84px); }
 .hero-art { position: absolute; z-index: 1; top: 50%; right: -4vw; width: min(60vw, 56.25rem); transform: translateY(-48%); }
 .hero-art .myth-art-image { -webkit-mask-image: radial-gradient(closest-side, #000 74%, transparent 100%); mask-image: radial-gradient(closest-side, #000 74%, transparent 100%); }
