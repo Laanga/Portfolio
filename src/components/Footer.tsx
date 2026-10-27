@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { useLanguage } from "../i18n/LanguageContext";
 import { LenisContext } from "./SmoothScroll";
 import MythArt from "./MythArt";
+import { SOCIAL_LINKS } from "@/lib/site";
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -92,8 +93,9 @@ export default function Footer() {
             <h3 className="mono">{t.footer.contactTitle}</h3>
             <ul>
               <li><a href={`mailto:${t.footer.email}`}>Email</a></li>
-              <li><a href="https://www.linkedin.com/in/alvaro-langa-dev/" target="_blank" rel="noreferrer">LinkedIn</a></li>
-              <li><a href="https://github.com/Laanga" target="_blank" rel="noreferrer">GitHub</a></li>
+              <li><a href={SOCIAL_LINKS.x} target="_blank" rel="me noreferrer">X</a></li>
+              <li><a href={SOCIAL_LINKS.linkedin} target="_blank" rel="me noreferrer">LinkedIn</a></li>
+              <li><a href={SOCIAL_LINKS.github} target="_blank" rel="me noreferrer">GitHub</a></li>
               <li><a href={t.profile.cvPath} download>{t.profile.downloadCV}</a></li>
             </ul>
           </div>

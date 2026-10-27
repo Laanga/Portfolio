@@ -11,6 +11,7 @@ Documento de referencia para migrar contenido del portfolio actual a un nuevo di
 - Email: alvarolanga04@gmail.com
 
 ## 2. Enlaces principales
+- X (Twitter): https://x.com/laanga_xyz (@laanga_xyz)
 - LinkedIn: https://www.linkedin.com/in/alvaro-langa-dev/
 - GitHub: https://github.com/Laanga
 

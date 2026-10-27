@@ -7,6 +7,7 @@ This site (https://www.laanga.xyz) is Álvaro's bilingual (Spanish / English) po
 ## Contact
 
 - Email: alvarolanga04@gmail.com
+- X (Twitter): https://x.com/laanga_xyz (@laanga_xyz)
 - LinkedIn: https://www.linkedin.com/in/alvaro-langa-dev/
 - GitHub: https://github.com/Laanga
 - Location: Madrid, Spain (available for remote work)

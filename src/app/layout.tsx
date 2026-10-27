@@ -10,6 +10,7 @@ import {
   SITE_TITLE,
   SITE_URL,
   SOCIAL_LINKS,
+  X_HANDLE,
 } from "@/lib/site";
 
 const hermesDisplay = Barlow_Condensed({
@@ -55,6 +56,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    site: X_HANDLE,
+    creator: X_HANDLE,
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
   },
@@ -95,7 +98,7 @@ const jsonLd = {
         "AI-assisted software development",
         "Claude Code",
       ],
-      sameAs: [SOCIAL_LINKS.linkedin, SOCIAL_LINKS.github],
+      sameAs: [SOCIAL_LINKS.x, SOCIAL_LINKS.linkedin, SOCIAL_LINKS.github],
     },
     {
       "@type": "ProfilePage",
