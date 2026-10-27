@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
 import { useLanguage } from "../i18n/LanguageContext";
 import { LenisContext } from "./SmoothScroll";
+import { CONTACT_EMAIL, SOCIAL_LINKS } from "@/lib/site";
 
 export default function Navigation() {
   const { t, language, setLanguage } = useLanguage();
@@ -290,6 +291,11 @@ export default function Navigation() {
       {open && (
         <div ref={menuRef} id="mobile-menu" className="mobile-menu" role="dialog" aria-modal="true" aria-label={t.navigation.menuAriaLabel}>
           <div>{items.map((item, i) => <button type="button" key={item.id} onClick={(event) => animateMobileNavigation(event.currentTarget, item.id)}><span className="mobile-nav-content"><small>0{i + 1}</small><span>{item.label}</span></span></button>)}</div>
+          <ul className="mobile-social" aria-label={t.footer.contactTitle}>
+            <li><a href={SOCIAL_LINKS.x} target="_blank" rel="me noreferrer">X</a></li>
+            <li><a href={SOCIAL_LINKS.linkedin} target="_blank" rel="me noreferrer">LinkedIn</a></li>
+            <li><a href={`mailto:${CONTACT_EMAIL}`}>Email</a></li>
+          </ul>
           <button type="button" className="mobile-language" onClick={(event) => animateLanguageChange(event.currentTarget, mobileLanguageRef.current, 10)} aria-label={t.navigation.switchLanguageAriaLabel}>
             <span ref={mobileLanguageRef} className="language-content">{t.navigation.switchLanguageLabel} — {t.navigation.languageLabel}</span>
           </button>

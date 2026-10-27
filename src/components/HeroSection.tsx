@@ -4,11 +4,17 @@ import React from "react";
 import { Download, MapPin } from "./icons";
 import MythArt from "./MythArt";
 import { useLanguage } from "../i18n/LanguageContext";
+import { CONTACT_EMAIL, SOCIAL_LINKS } from "@/lib/site";
 
 export default function HeroSection() {
   const { t } = useLanguage();
   return (
     <section id="hero" className="hero">
+      <ul className="hero-social" aria-label={t.footer.contactTitle}>
+        <li><a href={SOCIAL_LINKS.x} target="_blank" rel="me noreferrer">X</a></li>
+        <li><a href={SOCIAL_LINKS.linkedin} target="_blank" rel="me noreferrer">LinkedIn</a></li>
+        <li><a href={`mailto:${CONTACT_EMAIL}`}>Email</a></li>
+      </ul>
       <div className="hero-stage">
         <MythArt
           art="icarus"
