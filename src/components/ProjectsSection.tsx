@@ -7,9 +7,9 @@ import { useLanguage } from "../i18n/LanguageContext";
 export default function ProjectsSection() {
   const { t } = useLanguage();
   const projects = [
-    { ...t.projects.projectsList[0], tech: ["JavaScript", "GSAP", "Cloudflare Pages"], demoUrl: "https://historiadeldakar.pages.dev/", codeUrl: null, image: "/images/dakar.jpg", fit: "cover" },
+    { ...t.projects.projectsList[0], tech: ["JavaScript", "GSAP", "Cloudflare Pages"], demoUrl: "/proyectos/dakar/", codeUrl: null, image: "/images/dakar.jpg", fit: "cover" },
     { ...t.projects.projectsList[2], tech: ["Next.js", "Supabase", "PostgreSQL"], demoUrl: "https://katalibrary.vercel.app/", codeUrl: "https://github.com/Laanga/kata", image: "/images/kata.png", fit: "cover" },
-    { ...t.projects.projectsList[1], tech: ["Next.js", "TypeScript", "Recharts"], demoUrl: "https://delta-zero.vercel.app", codeUrl: "https://github.com/Laanga/DeltaZero", image: "/images/icon.png", fit: "contain" },
+    { ...t.projects.projectsList[1], tech: ["Next.js", "TypeScript", "Recharts"], demoUrl: "/proyectos/deltazero", codeUrl: "https://github.com/Laanga/DeltaZero", image: "/images/icon.png", fit: "contain" },
   ];
   return (
     <section id="projects" className="section projects theme-light">

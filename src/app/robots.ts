@@ -5,7 +5,8 @@ import { SITE_URL } from "@/lib/site";
 // ClaudeBot, PerplexityBot, Google-Extended...): the whole point is to be found.
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: { userAgent: "*", allow: "/" },
+    // DeltaZero's /lab is an internal component showcase.
+    rules: { userAgent: "*", allow: "/", disallow: "/proyectos/deltazero/lab" },
     sitemap: `${SITE_URL}/sitemap.xml`,
     host: SITE_URL,
   };

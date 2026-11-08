@@ -19,9 +19,9 @@ This site (https://www.laanga.xyz) is Álvaro's bilingual (Spanish / English) po
 
 ## Projects
 
-- [Historia del Dakar](https://historiadeldakar.pages.dev/): Interactive documentary on fifty years of the Dakar Rally in Spanish, English and German: text and photos advance together as you scroll, with an auto-play documentary mode, route map, full winners list and timeline.
+- [Historia del Dakar](https://www.laanga.xyz/proyectos/dakar/): Interactive documentary on fifty years of the Dakar Rally in Spanish, English and German: text and photos advance together as you scroll, with an auto-play documentary mode, route map, full winners list and timeline.
 - [Kata (型)](https://katalibrary.vercel.app/): Full Stack platform for organizing books, video games, movies and series, with authentication and Supabase (PostgreSQL). Integrates TMDB, IGDB and Google Books. Code: https://github.com/Laanga/kata
-- [DeltaZero](https://delta-zero.vercel.app): Formula 1 analysis dashboard with comparative telemetry for up to five drivers, synchronized circuit map and tyre strategy analysis, built on OpenF1 and Jolpica with Next.js and TypeScript. Code: https://github.com/Laanga/DeltaZero
+- [DeltaZero](https://www.laanga.xyz/proyectos/deltazero): Formula 1 analysis dashboard with comparative telemetry for up to five drivers, synchronized circuit map and tyre strategy analysis, built on OpenF1 and Jolpica with Next.js and TypeScript. Code: https://github.com/Laanga/DeltaZero
 
 ## Skills
 

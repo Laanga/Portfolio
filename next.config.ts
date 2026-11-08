@@ -30,13 +30,33 @@ const securityHeaders = [
   { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
 ];
 
+// Projects served from this domain under /proyectos/<name>, each deployed on its own:
+// - Historia del Dakar: static site on Cloudflare Pages. Its HTML uses relative
+//   paths, so it must load from /proyectos/dakar/ (src/proxy.ts adds the slash).
+// - DeltaZero: Next.js app on Vercel with basePath "/proyectos/deltazero".
+const DAKAR_ORIGIN = process.env.DAKAR_ORIGIN ?? "https://historiadeldakar.pages.dev";
+const DELTAZERO_ORIGIN = process.env.DELTAZERO_ORIGIN ?? "https://delta-zero.vercel.app";
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  skipTrailingSlashRedirect: true,
+  async redirects() {
+    return [{ source: "/proyectos", destination: "/#projects", permanent: false }];
+  },
+  async rewrites() {
+    return [
+      { source: "/proyectos/dakar/", destination: `${DAKAR_ORIGIN}/` },
+      { source: "/proyectos/dakar/:path+", destination: `${DAKAR_ORIGIN}/:path+` },
+      { source: "/proyectos/deltazero", destination: `${DELTAZERO_ORIGIN}/proyectos/deltazero` },
+      { source: "/proyectos/deltazero/:path*", destination: `${DELTAZERO_ORIGIN}/proyectos/deltazero/:path*` },
+    ];
+  },
   async headers() {
     return [
       {
-        source: "/:path*",
+        // Every route except the proxied projects, which bring their own headers.
+        source: "/((?!proyectos/(?:dakar|deltazero)(?:/|$)).*)",
         headers: securityHeaders,
       },
       // Keep the CVs (ES / EN) out of search engine indexes

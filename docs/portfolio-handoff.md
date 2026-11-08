@@ -105,7 +105,7 @@ Herramienta interactiva de exploración y visualización de datos de la temporad
 Interactive tool for exploring and visualizing Formula 1 season data. Driver and team statistics analysis with GSAP-animated charts, responsive Tailwind interface and real-time data from OpenF1 and Ergast.
 
 ### 8.3 Historia del Dakar
-- Link (web): https://historiadeldakar.pages.dev/ (repo privado: Laanga/dakar-historia, sin enlace a código)
+- Link (web): https://www.laanga.xyz/proyectos/dakar/ (el portfolio la sirve en esa ruta desde https://historiadeldakar.pages.dev; repo privado Laanga/dakar-historia, sin enlace a código)
 - Tecnologías: JavaScript, GSAP, Cloudflare Pages
 - Imagen principal (portfolio actual): /images/dakar.jpg
 - Orden en el portfolio: Proyecto 01 (después Kata y DeltaZero)
