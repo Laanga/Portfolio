@@ -7,9 +7,9 @@ import { useLanguage } from "../i18n/LanguageContext";
 export default function ProjectsSection() {
   const { t } = useLanguage();
   const projects = [
+    { ...t.projects.projectsList[0], tech: ["JavaScript", "GSAP", "Cloudflare Pages"], demoUrl: "https://historiadeldakar.pages.dev/", codeUrl: null, image: "/images/dakar.jpg", fit: "cover" },
     { ...t.projects.projectsList[2], tech: ["Next.js", "Supabase", "PostgreSQL"], demoUrl: "https://katalibrary.vercel.app/", codeUrl: "https://github.com/Laanga/kata", image: "/images/kata.png", fit: "cover" },
     { ...t.projects.projectsList[1], tech: ["Next.js", "TypeScript", "Recharts"], demoUrl: "https://delta-zero.vercel.app", codeUrl: "https://github.com/Laanga/DeltaZero", image: "/images/icon.png", fit: "contain" },
-    { ...t.projects.projectsList[0], tech: ["React", "Node.js", "Express"], demoUrl: null, codeUrl: "https://github.com/Laanga/GridRush", image: "/images/kart.png", fit: "contain" },
   ];
   return (
     <section id="projects" className="section projects theme-light">
@@ -31,7 +31,7 @@ export default function ProjectsSection() {
                 <ul className="project-tags">{project.tech.map((tech) => <li key={tech}>{tech}</li>)}</ul>
                 <div className="project-links">
                   {project.demoUrl && <a className="btn btn-primary" href={project.demoUrl} target="_blank" rel="noreferrer">{t.projects.viewDemo}</a>}
-                  <a className="btn btn-outline" href={project.codeUrl} target="_blank" rel="noreferrer">{t.projects.viewCode}</a>
+                  {project.codeUrl && <a className="btn btn-outline" href={project.codeUrl} target="_blank" rel="noreferrer">{t.projects.viewCode}</a>}
                 </div>
               </div>
             </article>

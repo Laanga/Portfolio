@@ -79,12 +79,12 @@ export const es = {
     selectedLine2: "SELECCIONADO",
     introDescription: "Tres productos que muestran cómo resuelvo retos de interfaz, datos, APIs y arquitectura.",
     projectLabel: "PROYECTO",
-    viewDemo: "Ver demo",
+    viewDemo: "Ver web",
     viewCode: "Ver código",
     projectsList: [
       {
-        title: "GridRush",
-        description: "Plataforma web para gestionar competiciones de karting, desde la inscripción de pilotos y las carreras hasta las clasificaciones en tiempo real. Arquitectura cliente-servidor con React y una API REST en Node.js y Express."
+        title: "Historia del Dakar",
+        description: "Documental interactivo sobre cincuenta años del Rally Dakar en español, inglés y alemán: el texto y las fotos avanzan juntos al hacer scroll, con modo documental automático, mapa de rutas, palmarés completo y línea de tiempo."
       },
       {
         title: "DeltaZero",
@@ -233,12 +233,12 @@ export const en = {
     selectedLine2: "WORK",
     introDescription: "Three products that show how I solve challenges across interfaces, data, APIs and architecture.",
     projectLabel: "PROJECT",
-    viewDemo: "View demo",
+    viewDemo: "View website",
     viewCode: "View code",
     projectsList: [
       {
-        title: "GridRush",
-        description: "Web platform for managing karting competitions, from driver registration and race operations to real-time standings. Client-server architecture with React and a REST API built with Node.js and Express."
+        title: "Historia del Dakar",
+        description: "Interactive documentary on fifty years of the Dakar Rally in Spanish, English and German: text and photos advance together as you scroll, with an auto-play documentary mode, route map, full winners list and timeline."
       },
       {
         title: "DeltaZero",

@@ -104,16 +104,17 @@ Herramienta interactiva de exploración y visualización de datos de la temporad
 #### Description EN
 Interactive tool for exploring and visualizing Formula 1 season data. Driver and team statistics analysis with GSAP-animated charts, responsive Tailwind interface and real-time data from OpenF1 and Ergast.
 
-### 8.3 GridRush
-- Link (repo): https://github.com/Laanga/GridRush
-- Tecnologías: React, Node.js, SQLite, Firebase
-- Imagen principal (portfolio actual): /images/kart.png
+### 8.3 Historia del Dakar
+- Link (web): https://historiadeldakar.pages.dev/ (repo privado: Laanga/dakar-historia, sin enlace a código)
+- Tecnologías: JavaScript, GSAP, Cloudflare Pages
+- Imagen principal (portfolio actual): /images/dakar.jpg
+- Orden en el portfolio: Proyecto 01 (después Kata y DeltaZero)
 
 #### Descripción ES
-Plataforma web para la gestión integral de competiciones de karting: inscripción de pilotos, gestión de carreras y clasificaciones en tiempo real. Frontend con React y API REST con Node.js y Express.
+Documental interactivo sobre cincuenta años del Rally Dakar en español, inglés y alemán: el texto y las fotos avanzan juntos al hacer scroll, con modo documental automático, mapa de rutas, palmarés completo y línea de tiempo.
 
 #### Description EN
-Web platform for comprehensive karting competition management: driver registration, race management and real-time standings. React frontend with Node.js and Express REST API.
+Interactive documentary on fifty years of the Dakar Rally in Spanish, English and German: text and photos advance together as you scroll, with an auto-play documentary mode, route map, full winners list and timeline.
 
 ## 9. Stack tecnológico actual (agrupado)
 ### Frontend
