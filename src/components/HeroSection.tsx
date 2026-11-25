@@ -40,7 +40,6 @@ export default function HeroSection() {
               <span className="terminal-prompt" aria-hidden="true">$</span>
               <span className="terminal-command" aria-hidden="true">{t.hero.terminal}</span>
               <strong>{t.hero.roleLine1} {t.hero.roleLine2}</strong>
-              <span className="terminal-stack">React · Next.js · Node.js</span>
             </div>
             <p className="hero-summary body-copy">{t.hero.description}</p>
             <div className="hero-actions">

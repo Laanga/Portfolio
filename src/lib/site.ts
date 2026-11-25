@@ -3,10 +3,10 @@ export const SITE_URL = "https://www.laanga.xyz";
 
 export const SITE_NAME = "Álvaro Langa";
 
-export const SITE_TITLE = "Álvaro Langa | Full Stack Developer en Madrid";
+export const SITE_TITLE = "Álvaro Langa | AI Product Engineer en Madrid";
 
 export const SITE_DESCRIPTION =
-  "Portfolio de Álvaro Langa, desarrollador Full Stack en Madrid especializado en React, Next.js, Node.js y automatización con Python, trabajando a diario con agentes de IA.";
+  "Portfolio de Álvaro Langa, AI Product Engineer y desarrollador Full Stack en Madrid especializado en React, Next.js, Node.js y automatización con Python, trabajando a diario con agentes de IA.";
 
 export const X_HANDLE = "@laanga_xyz";
 

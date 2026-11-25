@@ -111,8 +111,8 @@ export const es = {
     description: "Desarrollador Full Stack que trabaja con agentes de IA a diario. Construyo con React, Next.js y Node.js, y uso Claude Code y Codex para llevar ideas a producción más rápido, sin perder el control del código.",
     contact: "Contacto",
     availability: "Abierto a nuevas oportunidades",
-    roleLine1: "DESARROLLADOR",
-    roleLine2: "FULL STACK",
+    roleLine1: "AI PRODUCT",
+    roleLine2: "ENGINEER",
     terminal: "whoami"
   },
 
@@ -265,8 +265,8 @@ export const en = {
     description: "Full Stack Developer who works with AI agents every day. I build with React, Next.js and Node.js, and use Claude Code and Codex to take ideas to production faster without losing control of the code.",
     contact: "Contact",
     availability: "Open to new opportunities",
-    roleLine1: "FULL STACK",
-    roleLine2: "DEVELOPER",
+    roleLine1: "AI PRODUCT",
+    roleLine2: "ENGINEER",
     terminal: "whoami"
   },
 

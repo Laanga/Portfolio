@@ -1,8 +1,8 @@
 # Álvaro Langa
 
-> Full Stack Developer based in Madrid, Spain. Builds web products with React, Next.js, Node.js and Python, and works with AI coding agents (Claude Code, Codex) every day. Currently Software Developer at Neural.ONE. Open to new opportunities, including remote roles.
+> AI Product Engineer (full stack) based in Madrid, Spain. Builds web products with React, Next.js, Node.js and Python, and works with AI coding agents (Claude Code, Codex) every day. Currently Software Developer at Neural.ONE. Open to new opportunities, including remote roles.
 
-This site (https://www.laanga.xyz) is Álvaro's bilingual (Spanish / English) portfolio. Spanish: desarrollador Full Stack en Madrid.
+This site (https://www.laanga.xyz) is Álvaro's bilingual (Spanish / English) portfolio. Spanish: AI Product Engineer y desarrollador Full Stack en Madrid.
 
 ## Contact
 

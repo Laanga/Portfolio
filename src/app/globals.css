@@ -144,7 +144,6 @@ button { font: inherit; }
 .hero-name .hero-outline { color: transparent; -webkit-text-stroke: 1.8px white; }
 .hero-terminal { margin-top: 2.2rem; }
 .hero-terminal strong { font: 700 clamp(1rem,1.4vw,1.2rem) var(--font-sans); letter-spacing: -.02em; }
-.terminal-stack { color: var(--faint); }
 .hero-summary { max-width: 35rem; margin-top: 1.4rem; color: var(--muted); line-height: 1.5; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 1.8rem; }
 

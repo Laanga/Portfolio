@@ -169,5 +169,5 @@ Interactive documentary on fifty years of the Dakar Rally in Spanish, English an
 ## 13. Notas para migración a otro diseño
 - El portfolio actual es bilingüe (ES/EN).
 - Mantener nombre del proyecto Kata con caracteres: `Kata (型)`.
-- Mantener foco de perfil: Full Stack con especialidad en React, Next.js y Node.js.
+- Foco de perfil: AI Product Engineer (titular visible en hero e imagen OG), con base Full Stack en React, Next.js y Node.js. Mantener "Full Stack" en descripciones y keywords por SEO.
 - Priorizar claridad de descripciones de proyecto y stack por bloques (Frontend, Backend, Cloud/DevOps & Tooling).

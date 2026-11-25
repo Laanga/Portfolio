@@ -29,6 +29,8 @@ export const metadata: Metadata = {
   creator: SITE_NAME,
   keywords: [
     "Álvaro Langa",
+    "AI Product Engineer",
+    "AI Engineer",
     "Full Stack Developer",
     "Desarrollador Full Stack",
     "Software Developer Madrid",
@@ -81,7 +83,7 @@ const jsonLd = {
       url: SITE_URL,
       image: `${SITE_URL}/opengraph-image`,
       email: `mailto:${CONTACT_EMAIL}`,
-      jobTitle: "Full Stack Developer",
+      jobTitle: "AI Product Engineer",
       worksFor: { "@type": "Organization", name: "Neural.ONE" },
       address: { "@type": "PostalAddress", addressLocality: "Madrid", addressCountry: "ES" },
       alumniOf: { "@type": "EducationalOrganization", name: "IES Gaspar Melchor de Jovellanos" },

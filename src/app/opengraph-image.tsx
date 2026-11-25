@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
-export const alt = "Álvaro Langa — Full Stack Developer en Madrid";
+export const alt = "Álvaro Langa — AI Product Engineer en Madrid";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -31,11 +31,9 @@ export default async function OpengraphImage() {
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ fontSize: 112, fontWeight: 700, lineHeight: 0.95, letterSpacing: -2 }}>ÁLVARO</div>
             <div style={{ fontSize: 112, fontWeight: 700, lineHeight: 0.95, letterSpacing: -2 }}>LANGA</div>
-            <div style={{ fontSize: 36, marginTop: 28, letterSpacing: 3 }}>FULL STACK DEVELOPER</div>
+            <div style={{ fontSize: 36, marginTop: 28, letterSpacing: 3 }}>AI PRODUCT ENGINEER</div>
           </div>
-          <div style={{ display: "flex", fontSize: 26, opacity: 0.8 }}>
-            React · Next.js · Node.js · AI agents — Madrid
-          </div>
+          <div style={{ display: "flex", fontSize: 26, letterSpacing: 4, opacity: 0.8 }}>MADRID</div>
         </div>
         <img src={icarusSrc} width={440} height={443} alt="" style={{ alignSelf: "center" }} />
       </div>
